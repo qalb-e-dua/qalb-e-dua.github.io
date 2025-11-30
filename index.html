@@ -303,3 +303,16 @@
         function openPage(id) { 
             // 1. Hide all pages first
             var pages = document.querySelectorAll('.page');
+            for(var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+            // 2. Show the specific page requested
+            document.getElementById(id).style.display = 'block'; 
+        }
+        
+        function closePage(id) { 
+            document.getElementById(id).style.display = 'none'; 
+        }
+    </script>
+</body>
+</html>
