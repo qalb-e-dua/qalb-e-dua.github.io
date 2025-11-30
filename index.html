@@ -14,154 +14,155 @@
     <style>
         /* --- GENERAL APP STYLING --- */
         body {
-            font-family: sans-serif; /* For English Menu */
-            background-color: #FCFBF4; /* Cream Background */
-            color: #333;
+            font-family: sans-serif;
+            background-color: #FCFBF4; 
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- MENU STYLING --- */
+        /* --- BLUE & GOLD MENU THEME (Restored) --- */
         .header {
-            background-color: #2e7d32; /* Dark Green */
-            color: white;
-            padding: 20px;
+            background-color: #0B1E3F; /* Navy Blue */
+            color: #D4AF37;            /* Gold Text */
+            padding: 25px 0;
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            font-family: 'Amiri', serif;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-family: sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .container {
-            padding: 15px;
+            padding: 20px;
+            padding-bottom: 100px;
             max-width: 600px;
             margin: 0 auto;
         }
 
         .menu-btn {
-            background-color: white;
-            border: 1px solid #ccc;
-            border-left: 5px solid #2e7d32; /* Green accent */
+            background-color: #E8E0C5; /* Light Beige/Gold Button */
+            color: #0B1E3F;            /* Navy Blue Text */
             width: 100%;
-            padding: 15px;
-            margin-bottom: 10px;
-            text-align: left;
-            font-size: 18px;
-            border-radius: 8px;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 19px;
+            font-weight: bold;
             cursor: pointer;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .menu-btn:active {
-            background-color: #e8f5e9;
+            background-color: #d4cba8;
         }
 
         /* --- PAGE STYLING --- */
         .page {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: #FCFBF4;
-            overflow-y: auto; /* Scrollable */
+            overflow-y: auto; 
             z-index: 200;
         }
 
+        /* Blue Header for Pages */
         .page-header {
-            background-color: #2e7d32;
+            background-color: #0B1E3F; /* Navy Blue */
             color: white;
-            padding: 15px;
+            padding: 20px;
             font-size: 20px;
             display: flex;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 201;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .back-btn {
             background: none;
             border: none;
-            color: white;
-            font-size: 24px;
+            color: #D4AF37; /* Gold Arrow */
+            font-size: 28px;
             margin-right: 15px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .content {
             padding: 20px;
-            padding-bottom: 80px; /* Space at bottom */
+            padding-bottom: 80px; 
             max-width: 600px;
             margin: 0 auto;
         }
 
         /* --- TEXT STYLING --- */
         
-        /* 1. Arabic Text (Straight & Big) */
+        /* Arabic Text (Straight & Big) */
         .arabic, .arabic-green {
             font-family: 'Amiri', serif;
-            font-size: 28px;       /* Big Text */
-            line-height: 2.5;      /* High lines to make it look straight */
-            text-align: center;    /* Centered */
-            direction: rtl;        /* Right to Left */
+            font-size: 28px;
+            line-height: 2.5;      
+            text-align: center;    
+            direction: rtl;        
             color: #000;
             margin-bottom: 20px;
             margin-top: 10px;
         }
 
-        /* 2. English Text (FIXED: No Italics) */
+        /* English Text (Normal, Not Italic) */
         .english {
-            font-size: 17px;
+            font-size: 18px;
             line-height: 1.6;
-            color: #444;
-            margin-bottom: 25px;
+            color: #111;
+            margin-bottom: 30px;
             text-align: left;
             direction: ltr;
-            font-style: normal; /* Ensures it is NOT italic */
+            font-style: normal; 
         }
 
-        .red-text {
-            color: #d32f2f;
-            font-weight: bold;
-        }
+        .red-text { color: #8B0000; font-weight: bold; }
+        
+        .dua-block { display: flex; margin-bottom: 25px; }
+        .num { color: #8B0000; font-weight: bold; font-size: 20px; margin-right: 10px; min-width: 25px; }
+        .text { width: 100%; }
 
+        hr { border: 0; border-top: 1px solid #ccc; margin: 30px 0; }
+        
         .section-title {
-            background-color: #e8f5e9;
-            color: #2e7d32;
+            background-color: #E8E0C5;
+            color: #0B1E3F;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
+            text-align: center;
             margin-top: 30px;
             margin-bottom: 15px;
-            text-align: center;
-            border: 1px solid #c8e6c9;
         }
 
-        hr {
-            border: 0;
-            border-top: 1px solid #ccc;
-            margin: 25px 0;
-        }
-
-        /* --- SPECIAL BOX STYLING (For Victory & Protection) --- */
+        /* --- SPECIAL BOX STYLING (Only for Victory Page) --- */
         .green-border-box {
-            border: 3px double #2e7d32; /* Fancy Green Border */
-            border-radius: 12px;
-            padding: 15px;
+            border: 4px double #2e7d32; /* Green Border */
+            border-radius: 15px;
+            padding: 20px;
             margin-top: 15px;
             background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .green-title {
-            color: #2e7d32;
+            color: #d63384; /* Pink/Red Title */
             font-size: 28px;
             text-align: center;
             font-family: 'Amiri', serif;
@@ -170,29 +171,18 @@
         }
 
         .green-subtitle {
-            color: #555;
-            font-size: 18px;
+            color: #000;
+            font-size: 20px;
             text-align: center;
             font-family: 'Amiri', serif;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .flower-icon {
             text-align: center;
             color: #2e7d32;
-            font-size: 20px;
-            margin: 15px 0;
-        }
-
-        .dua-block {
-            margin-bottom: 20px;
-        }
-
-        .num {
-            font-weight: bold;
-            color: #2e7d32;
-            margin-right: 5px;
-            float: left; 
+            font-size: 22px;
+            margin: 20px 0;
         }
 
     </style>
@@ -216,12 +206,16 @@
         </div>
     </div>
 
-    <!-- P1, P2, P3 -->
+    <!-- P1: Opening Dua (Placeholder) -->
     <div id="p1" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p1')">←</button> Opening Dua</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
+    
+    <!-- P2: Names of Allah (Placeholder) -->
     <div id="p2" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p2')">←</button> Names of Allah</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
+    
+    <!-- P3: Names of Prophet (Placeholder) -->
     <div id="p3" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p3')">←</button> Names of Prophet</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
 
-    <!-- P4: Prayers after Salah -->
+    <!-- P4: Prayers after Salah (CONTENT ADDED) -->
     <div id="p4" class="page">
         <div class="page-header"><button class="back-btn" onclick="closePage('p4')">←</button> Prayers after Salah</div>
         <div class="content">
@@ -230,40 +224,43 @@
             <div class="english">“Al-hamdu li’llahi Rabbil-alamin. As-salatu was-salamu ala Rasulina Muhammadin wa Alihi wa Sahbihi ajmain.</div>
             
             <div class="dua-block">
-                <span class="num">1.</span> 
-                <span class="red-text">Oh my Rabb!</span> Accept the ritual prayer I’ve performed. Make my end and fate good. Make me say kalimat at-tawhid at my last breath. Forgive and hide the sins of my dead relatives. Allahum-maghfir warham wa anta khayrur-rahimin. Tawaffani Musliman wa al-hiqni bis-salihin. Allahum-maghfirli wa li-walidayya wa li-ustadhiyya wa lil-Muminina wal-Muminat yawma yakumul-hisab.
+                <div class="num">1.</div>
+                <div class="text"><span class="red-text">Oh my Rabb!</span> Accept the ritual prayer I’ve performed. Make my end and fate good. Make me say kalimat at-tawhid at my last breath. Forgive and hide the sins of my dead relatives. Allahum-maghfir warham wa anta khayrur-rahimin. Tawaffani Musliman wa al-hiqni bis-salihin. Allahum-maghfirli wa li-walidayya wa li-ustadhiyya wa lil-Muminina wal-Muminat yawma yakumul-hisab.</div>
             </div>
             
             <div class="dua-block">
-                <span class="num">2.</span> 
-                <span class="red-text">Oh my Rabb!</span> Protect me from the evil of Satan, the evil of enemies and the evil of my nafs al-ammara! Grant goodness, halal and beneficial sustenance to our home! Grant peace over all Muslims! Overwhelm and ruin the enemies of Muslims! With Your Divine Help, help the Muslims engaged in jihad against unbelievers!
+                <div class="num">2.</div>
+                <div class="text"><span class="red-text">Oh my Rabb!</span> Protect me from the evil of Satan, the evil of enemies and the evil of my nafs al-ammara! Grant goodness, halal and beneficial sustenance to our home! Grant peace over all Muslims! Overwhelm and ruin the enemies of Muslims! With Your Divine Help, help the Muslims engaged in jihad against unbelievers!</div>
             </div>
             
             <div class="dua-block">
-                <span class="num">3.</span> 
-                <span class="red-text">Allahumma</span> innaka afuwwun karimun tuhibbul-afwa fafu anni. <span class="red-text">Oh my Rabb!</span> Grant recovery to the ill among us, grant relief to those in difficulty among us! Allahumma inni asalukas-sihhata wal-afiyata wal-amanata wa husn al-khulqi war-ridaa bil-qadari bi-rahmatika ya arhamar-rahimin.
+                <div class="num">3.</div>
+                <div class="text"><span class="red-text">Allahumma</span> innaka afuwwun karimun tuhibbul-afwa fafu anni. <span class="red-text">Oh my Rabb!</span> Grant recovery to the ill among us, grant relief to those in difficulty among us! Allahumma inni asalukas-sihhata wal-afiyata wal-amanata wa husn al-khulqi war-ridaa bil-qadari bi-rahmatika ya arhamar-rahimin.</div>
             </div>
             
             <div class="dua-block">
-                <span class="num">4.</span> 
-                <span class="red-text">Oh my Rabb!</span> Grant a beneficial life, good morals, good sense, good health, afiya (not sinning) and istiqama (following the path Allahu Taala likes) to my parents, children, relatives, friends and to all my brothers-in-Islam.”
+                <div class="num">4.</div>
+                <div class="text"><span class="red-text">Oh my Rabb!</span> Grant a beneficial life, good morals, good sense, good health, afiya (not sinning) and istiqama (following the path Allahu Taala likes) to my parents, children, relatives, friends and to all my brothers-in-Islam.”</div>
             </div>
             <hr>
             
             <div class="dua-block">
-                <span class="num">5.</span> 
-                <span class="red-text" style="display:block; margin-bottom:5px;">Prayer of Salah</span>
-                <span class="red-text">Oh my Allah!</span> I do regret and I am sorry for all wrong, faulty beliefs I might have as a result of getting deceived by enemies of Islam or by heretical people, and for all the heretical or sinful things I might have said, listened to, seen or committed since the beginning of my puberty until this moment; and I am strongly resolute and determined to not believe or act in that wrongful manner. I believe in the first prophet Adam (alayhis-salam) and the last one, our beloved prophet Muhammad (alayhis-salam), and all the prophets who lived between them. All of them were righteous and faithful. What they revealed were true. Amantu billah wa bi-ma jaa min indillah, ala muradillah, wa amantu bi-Rasulillah wa bi-ma jaa min indi Rasulillah ala muradi Rasulillah, amantu billahi wa Malaikatihi wa kutubihi wa Rusulihi wal-yawmil-akhiri wa bil-qadari khayrihi wa sharrihi min-Allahi taala wal-bathu badal-mawti haqqun ashhadu an la ilaha illa’llah wa ashhadu anna Muhammadan abduhu wa rasuluh.
+                <div class="num">5.</div>
+                <div class="text"><span class="red-text" style="display:block; margin-bottom:5px;">Prayer of Salah</span><span class="red-text">Oh my Allah!</span> I do regret and I am sorry for all wrong, faulty beliefs I might have as a result of getting deceived by enemies of Islam or by heretical people, and for all the heretical or sinful things I might have said, listened to, seen or committed since the beginning of my puberty until this moment; and I am strongly resolute and determined to not believe or act in that wrongful manner. I believe in the first prophet Adam (alayhis-salam) and the last one, our beloved prophet Muhammad (alayhis-salam), and all the prophets who lived between them. All of them were righteous and faithful. What they revealed were true. Amantu billah wa bi-ma jaa min indillah, ala muradillah, wa amantu bi-Rasulillah wa bi-ma jaa min indi Rasulillah ala muradi Rasulillah, amantu billahi wa Malaikatihi wa kutubihi wa Rusulihi wal-yawmil-akhiri wa bil-qadari khayrihi wa sharrihi min-Allahi taala wal-bathu badal-mawti haqqun ashhadu an la ilaha illa’llah wa ashhadu anna Muhammadan abduhu wa rasuluh.</div>
             </div>
         </div>
     </div>
 
-    <!-- P5, P6, P7 -->
+    <!-- P5: Prayer in Grave (Placeholder) -->
     <div id="p5" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p5')">←</button> Prayer in Grave</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
+    
+    <!-- P6: Prayer Dorood (Placeholder) -->
     <div id="p6" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p6')">←</button> Prayer Dorood</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
+    
+    <!-- P7: Du'a for Shifa (Placeholder) -->
     <div id="p7" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p7')">←</button> Du'a for Shifa</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
 
-    <!-- P8: VICTORY & PROTECTION (Hizb an-Nasr - FIXED GREEN BORDER) -->
+    <!-- P8: VICTORY & PROTECTION (CONTENT ADDED + Green Border) -->
     <div id="p8" class="page">
         <div class="page-header"><button class="back-btn" onclick="closePage('p8')">←</button> Victory & Protection</div>
         <div class="content">
@@ -293,4 +290,51 @@
                 <div class="flower-icon">❁ ❁ ❁</div>
 
                 <div class="arabic-green">
-                    اللَّهُمَّ قِنَا شَرَّ الْأَسْوَا ۞ وَلَا تَجْعَلْنَا مَحَلًّا لِلْبَلْوَى ۞ اللَّهُمَّ أَعْطِنَا أَمَلَ الرَّجَاءِ وَفَوْقَ الْأَمَلِ ۞ يَا هُو يَا هُو يَا هُو ۞ يَا مَنْ بِفَضْلِهِ لِفَضْلِهِ ۞ نَسْأَلُكَ الْعَجَلَ الْعَجَلَ ۞ إِلَهِي الْإِجَابَةَ ۞ إِلَهِي الْإِجَابَةَ ۞ يَا مَنْ أَجَابَ نُوحًا فِي قَوْمِهِ ۞ يَا مَنْ نَصَرَ إِبْرَاهِيمَ عَلَى أَعْدَائِهِ ۞ يَا مَنْ رَدَّ يُوسُفَ عَلَى يَعْقُوبَ ۞ يَا مَنْ كَشَفَ ضُرَّ أَيُّوبَ ۞ يَا مَنْ أَجَابَ دَعْوَةَ زَكَرِيَا ۞ يَا مَنْ قَبِلَ تَسْبِيحَ يُونُسَ بْنَ مَتَّى ۞ نَسْأَلُكَ بِأَسْرَارِ أَصْحَابِ هَذِهِ الدَّعَوَاتِ ۞ أَنْ تَتَقَبَّلَ مَا بِهِ دَعَوْنَاكَ ۞ وَأَنْ تُعْطِيَنَا مَا سَأَلْنَاكَ ۞ أَنْجِزْ لَنَا وَعْدَكَ الَّذِي وَعَدْتَهُ لِعِبَادِكَ الْمُؤْمِنِينَ ۞ لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ ۞ انْقَطَعَتْ آمَالُنَا وَعِزَّتِكَ إِلَّا مِنْكَ ۞ وَخَابَ رَجَاؤُنَا وَحَقِّك
+                    اللَّهُمَّ قِنَا شَرَّ الْأَسْوَا ۞ وَلَا تَجْعَلْنَا مَحَلًّا لِلْبَلْوَى ۞ اللَّهُمَّ أَعْطِنَا أَمَلَ الرَّجَاءِ وَفَوْقَ الْأَمَلِ ۞ يَا هُو يَا هُو يَا هُو ۞ يَا مَنْ بِفَضْلِهِ لِفَضْلِهِ ۞ نَسْأَلُكَ الْعَجَلَ الْعَجَلَ ۞ إِلَهِي الْإِجَابَةَ ۞ إِلَهِي الْإِجَابَةَ ۞ يَا مَنْ أَجَابَ نُوحًا فِي قَوْمِهِ ۞ يَا مَنْ نَصَرَ إِبْرَاهِيمَ عَلَى أَعْدَائِهِ ۞ يَا مَنْ رَدَّ يُوسُفَ عَلَى يَعْقُوبَ ۞ يَا مَنْ كَشَفَ ضُرَّ أَيُّوبَ ۞ يَا مَنْ أَجَابَ دَعْوَةَ زَكَرِيَا ۞ يَا مَنْ قَبِلَ تَسْبِيحَ يُونُسَ بْنَ مَتَّى ۞ نَسْأَلُكَ بِأَسْرَارِ أَصْحَابِ هَذِهِ الدَّعَوَاتِ ۞ أَنْ تَتَقَبَّلَ مَا بِهِ دَعَوْنَاكَ ۞ وَأَنْ تُعْطِيَنَا مَا سَأَلْنَاكَ ۞ أَنْجِزْ لَنَا وَعْدَكَ الَّذِي وَعَدْتَهُ لِعِبَادِكَ الْمُؤْمِنِينَ ۞ لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ ۞ انْقَطَعَتْ آمَالُنَا وَعِزَّتِكَ إِلَّا مِنْكَ ۞ وَخَابَ رَجَاؤُنَا وَحَقِّكَ إِلَّا فِيكَ ۞ إِنْ أَبْطَأَتْ غَارَةُ الْأَرْحَامِ وَابْتَعَدَتْ فَأَقْرَبُ الشَيْءِ مِنَّا غَارَةُ اللَّهِ
+                </div>
+
+                <div class="flower-icon">❁ ❁ ❁</div>
+
+                <div class="arabic-green">
+                    يَا غَارَةَ اللَّهِ جِدِّي السَّيْرَ مُسْرِعَةً فِي حَلِّ عُقْدَتِنَا يَا غَارَةَ اللَّهِ ۞ عَدَتِ الْعَادُونَ وَجَارُوا ۞ وَرَجَوْنَا اللَّهَ مُجِيرًا ۞ وَكَفَى بِاللَّهِ وَلِيًّا ۞ وَكَفَى بِاللَّهِ نَصِيرًا ۞ حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ ۞ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ ۞ اسْتَجِبْ لَنَا ۞ آمِينَ ۞ فَقُطِعَ دَابِرُ الْقَوْمِ الَّذِينَ ظَلَمُوا ۞ وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۞ حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ (450)
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- P9: Dhikr (Placeholder) -->
+    <div id="p9" class="page"><div class="page-header"><button class="back-btn" onclick="closePage('p9')">←</button> Dhikr</div><div class="content"><div class="arabic">PASTE YOUR DUA HERE</div></div></div>
+
+    <!-- P10: Morning & Evening (CONTENT ADDED + Fixed Italics) -->
+    <div id="p10" class="page">
+        <div class="page-header"><button class="back-btn" onclick="closePage('p10')">←</button> Morning & Evening</div>
+        <div class="content">
+            <div class="section-title">Protects one from all calamities</div>
+            <div class="arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ <br> قُلْ هُوَ ٱللَّهُ أَحَدٌ ﴿١﴾ ٱللَّهُ ٱلصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ ﴿٤﴾</div>
+            <div class="english">1. Say you, He is Allah, the One. 2. Allah the Independent, Care free. 3. He begot none nor was He begotten. 4. And nor anyone is equal to Him.</div>
+            <hr>
+            <div class="arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ <br> قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾</div>
+            <div class="english">1. Say you, I take refuge with the Lord of Daybreak. 2. From the evil of all creatures; 3. And from the evil of the darkening one when it sets. 4. And from the evil of those women who blow in the knots. 5. And from the evil of the envier when he envies me.</div>
+            <hr>
+            <div class="arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ <br> قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ ﴿١﴾ مَلِكِ ٱلنَّاسِ ﴿٢﴾ إِلَٰهِ ٱلنَّاسِ ﴿٣﴾ مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ ﴿٤﴾ ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ ﴿٥﴾ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ ﴿٦﴾</div>
+            <div class="english">1. Say you, I came in the refuge of the Lord of all mankind; 2. King of all, 3. God of all, 4. From the evil of him who whispers evil designs in the heart and slinks away. 5. Those who whisper in the hearts of mankind. 6. Jinn and men.</div>
+            <hr>
+            <div class="section-title">Protects from ills during day & night</div>
+            <div class="arabic">فَسُبْحَانَ اللَّهِ حِينَ تُمْسُونَ وَحِينَ تُصْبِحُونَ وَلَهُ الْحَمْدُ فِي السَّمَاوَاتِ وَالْأَرْضِ وَعَشِيًّا وَحِينَ تُظْهِرُونَ. يُخْرِجُ الْحَيَّ مِنَ الْمَيِّتِ وَيُخْرِجُ الْمَيِّتَ مِنَ الْحَيِّ وَيُحْيِي الْأَرْضَ بَعْدَ مَوْتِهَا وَكَذَلِكَ تُخْرَجُونَ</div>
+            <div class="english">Therefore, glorify Allah when you enter the evening and when you enter the morning. And His is praise in the heavens and in the earth, and at little before the setting of sun and when you enter the noon. He brings forth the living from the dead and brings forth the dead from the living, and gives life to the earth after its death. And in like manner you shall be brought forth.</div>
+            <hr>
+            <div class="section-title">Protection from Shaytaan and evil Jinn</div>
+            <div class="arabic">أَفَحَسِبْتُمْ أَنَّمَا خَلَقْنَاكُمْ عَبَثًا وَأَنَّكُمْ إِلَيْنَا لَا تُرْجَعُونَ. فَتَعَالَى اللَّهُ الْمَلِكُ الْحَقُّ لَا إِلَهَ إِلَّا هُوَ رَبُّ الْعَرْشِ الْكَرِيمِ. وَمَنْ يَدْعُ مَعَ اللَّهِ إِلَهًا آَخَرَ لَا بُرْهَانَ لَهُ بِهِ فَإِنَّمَا حِسَابُهُ عِنْدَ رَبِّهِ إِنَّهُ لَا يُفْلِحُ الْكَافِرُونَ. وَقُلْ رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ</div>
+            <div class="english">Do you then think that We made you in vain and you are not to return to Us? Then exalted high is Allah, the True King; there is no god except He the Lord of Honoured Throne. And whosoever worships any other god beside Allah, for which he has no proof, then his account is with his Lord. Undoubtedly, the infidels have no rescue. And you submit, 'O my Lord forgive and have mercy and You are the best of merciful.</div>
+            <hr>
+            <div class="section-title">Protection from snakes and reptiles</div>
+            <div class="arabic">أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ</div>
+            <div class="english">I seek refuge in the perfect (complete) words of Allah from the evil in what He created. (3 Times)</div>
+            <hr>
+            <div class="section-title">Protection against any poison</div>
+            <div class="arabic">بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ</div>
+            <div class="english">In the name of Allah by whose Name nothing harms on earth or in the heavens and He is All-Hearing All-Knowing. (3 Times)</div>
+            <hr>
+            <div class="section-title">To please Allah on Day of Judgement</div>
+            <div class="arabic">رَضِيتُ بِاللهِ رَبًّا وَبِالْإِسْلَامِ دِينًا وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَس
