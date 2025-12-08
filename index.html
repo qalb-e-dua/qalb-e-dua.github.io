@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Qalb-e-Dua</title>
     
-    <!-- APP ICON (SVG Data URI based on your logo) -->
+    <!-- APP ICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%2348C9B0' stroke-width='3'%3E%3Cpath d='M15 30 Q 50 45 85 30 V 80 Q 50 95 15 80 Z' /%3E%3Cpath d='M50 45 V 95' /%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='white' stroke='%2348C9B0' stroke-width='3'%3E%3Crect width='100' height='100' fill='%230B1E3F'/%3E%3Cpath d='M15 30 Q 50 45 85 30 V 80 Q 50 95 15 80 Z' /%3E%3Cpath d='M50 45 V 95' /%3E%3C/svg%3E">
 
@@ -21,9 +21,6 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- ICONS -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
       body {
@@ -36,7 +33,7 @@
       /* Custom Scrollbar */
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb { background: #48C9B0; border-radius: 3px; }
       
       /* Animation Utilities */
       .animate-in { animation: fadeIn 0.3s ease-out; }
@@ -58,9 +55,26 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
-        const { Settings, X, ChevronLeft, Minus, Plus } = lucide;
+
+        // --- ICONS (Embedded to prevent loading errors) ---
+        const IconSettings = ({ size = 24, color = "currentColor" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        );
+        const IconChevronLeft = ({ size = 24, color = "currentColor" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        );
+        const IconX = ({ size = 24, color = "currentColor" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        );
+        const IconMinus = ({ size = 24, color = "currentColor" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        );
+        const IconPlus = ({ size = 24, color = "currentColor" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        );
         
         // --- DATA ---
+        
         const MENU_ITEMS = [
           { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
           { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
@@ -75,8 +89,13 @@
           { id: 'm11', label: '40 Rabbana Duas', pageId: 'p11', subtext: 'Quranic' },
         ];
 
-        const createNameEntry = (num, arabic, english) => [ { type: 'allah-name', number: num, arabic: arabic, english: english } ];
-        const createProphetName = (num, arabic, english) => [ { type: 'allah-name', number: num, arabic: arabic, english: english } ];
+        const createNameEntry = (num, arabic, english) => [
+          { type: 'allah-name', number: num, arabic: arabic, english: english }
+        ];
+        
+        const createProphetName = (num, arabic, english) => [
+          { type: 'allah-name', number: num, arabic: arabic, english: english }
+        ];
 
         const PAGES_DATA = {
           'p1': {
@@ -101,7 +120,10 @@
             ]
           },
           'p2': {
-            id: 'p2', title: 'Names of Allah', cards: [{ variant: 'default', content: [
+            id: 'p2', title: 'Names of Allah', cards: [
+              {
+                variant: 'default',
+                content: [
                   ...createNameEntry('1', 'ٱللَّهُ', 'Allah'), ...createNameEntry('2', 'ٱلرَّحْمَـٰنُ', 'The Beneficent'), ...createNameEntry('3', 'ٱلرَّحِيمُ', 'The Merciful'), ...createNameEntry('4', 'ٱلْمَلِكُ', 'The King'), ...createNameEntry('5', 'ٱلْقُدُّوسُ', 'The Most Sacred'), ...createNameEntry('6', 'ٱلسَّلَـٰمُ', 'The Source of Peace'), ...createNameEntry('7', 'ٱلْمُؤْمِنُ', 'The Faithful'), ...createNameEntry('8', 'ٱلْمُهَيْمِنُ', 'The Guardian'), ...createNameEntry('9', 'ٱلْعَزِيزُ', 'The Almighty'), ...createNameEntry('10', 'ٱلْجَبَّارُ', 'The Compeller'),
                   ...createNameEntry('11', 'ٱلْمُتَكَبِّرُ', 'The Supreme'), ...createNameEntry('12', 'ٱلْخَـٰلِقُ', 'The Creator'), ...createNameEntry('13', 'ٱلْبَارِئُ', 'The Originator'), ...createNameEntry('14', 'ٱلْمُصَوِّرُ', 'The Fashioner'), ...createNameEntry('15', 'ٱلْغَفَّارُ', 'The All-Forgiving'), ...createNameEntry('16', 'ٱلْقَهَّارُ', 'The All-Victorious'), ...createNameEntry('17', 'ٱلْوَهَّابُ', 'The Giver'), ...createNameEntry('18', 'ٱلرَّزَّاقُ', 'The Provider'), ...createNameEntry('19', 'ٱلْفَتَّاحُ', 'The Opener'), ...createNameEntry('20', 'ٱلْعَلِيمُ', 'The All-Knowing'),
                   ...createNameEntry('21', 'ٱلْقَابِضُ', 'The Withholder'), ...createNameEntry('22', 'ٱلْبَاسِطُ', 'The Expander'), ...createNameEntry('23', 'ٱلْخَافِضُ', 'The Humbler'), ...createNameEntry('24', 'ٱلرَّافِعُ', 'The Elevator'), ...createNameEntry('25', 'ٱلْمُعِزُّ', 'The Honourer'), ...createNameEntry('26', 'ٱلْمُذِلُّ', 'The Dishonourer'), ...createNameEntry('27', 'ٱلسَّمِيعُ', 'The All-Hearing'), ...createNameEntry('28', 'ٱلْبَصِيرُ', 'The All-Seeing'), ...createNameEntry('29', 'ٱلْحَكَمُ', 'The Judge'), ...createNameEntry('30', 'ٱلْعَدْلُ', 'The Just'),
@@ -112,7 +134,10 @@
                   ...createNameEntry('71', 'ٱلْمُقَدِّمُ', 'The Advancer'), ...createNameEntry('72', 'ٱلْمُؤَخِّرُ', 'The Deferrer'), ...createNameEntry('73', 'ٱلْأَوَّلُ', 'The First'), ...createNameEntry('74', 'ٱلْآخِرُ', 'The Last'), ...createNameEntry('75', 'ٱلظَّاهِرُ', 'The Manifest'), ...createNameEntry('76', 'ٱلْبَاطِنُ', 'The Hidden'), ...createNameEntry('77', 'ٱلْوَالِى', 'The Patron'), ...createNameEntry('78', 'ٱلْمُتَعَالِى', 'The Self-Exalted'), ...createNameEntry('79', 'ٱلْبَرُّ', 'The Benign'), ...createNameEntry('80', 'ٱلتَّوَّابُ', 'The Acceptor of Repentance'),
                   ...createNameEntry('81', 'ٱلْمُنتَقِمُ', 'The Avenger'), ...createNameEntry('82', 'ٱلْعَفُوُّ', 'The Pardoner'), ...createNameEntry('83', 'ٱلرَّءُوفُ', 'The Compassionate'), ...createNameEntry('84', 'مَالِكُ ٱلْمُلْكِ', 'The Possessor of the Kingdom'), ...createNameEntry('85', 'ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ', 'Lord of Majesty and Honour'), ...createNameEntry('86', 'ٱلْمُقْسِطُ', 'The Equitable'), ...createNameEntry('87', 'ٱلْجَامِعُ', 'The Gatherer'), ...createNameEntry('88', 'ٱلْغَنِىُّ', 'The Rich'), ...createNameEntry('89', 'ٱلْمُغْنِى', 'The Enricher'),
                   ...createNameEntry('90', 'ٱلْمَانِعُ', 'The Withholder'), ...createNameEntry('91', 'ٱلضَّارُّ', 'The Afflicter'), ...createNameEntry('92', 'ٱلنَّافِعُ', 'The Benefactor'), ...createNameEntry('93', 'ٱلنُّورُ', 'The Light'), ...createNameEntry('94', 'ٱلْهَادِى', 'The Guide'), ...createNameEntry('95', 'ٱلْبَدِيعُ', 'The Originator'), ...createNameEntry('96', 'ٱلْبَاقِى', 'The Everlasting'), ...createNameEntry('97', 'ٱلْوَارِثُ', 'The Heir'), ...createNameEntry('98', 'ٱلرَّشِيدُ', 'The Guide to the Right Path'), ...createNameEntry('99', 'ٱلصَّبُورُ', 'The Patient')
-            ]}] },
+                ]
+              }
+            ]
+          },
           'p3': {
             id: 'p3', title: 'Names of Prophet ﷺ', cards: [{ variant: 'default', content: [
                    ...createProphetName('1', 'مُحَمَّدٌ', 'Muhammad (Praiseworthy)'), ...createProphetName('2', 'أَحْمَدُ', 'Ahmad (Most Commendable)'), ...createProphetName('3', 'حَامِدٌ', 'Hamid (Praiser)'), ...createProphetName('4', 'مَحْمُودٌ', 'Mahmud (Praised)'), ...createProphetName('5', 'قَاسِمٌ', 'Qasim (Distributor)'), ...createProphetName('6', 'عَاقِبٌ', 'Aqib (The Last in Succession)'), ...createProphetName('7', 'فَاتِحٌ', 'Fatih (The Opener)'), ...createProphetName('8', 'شَاهِدٌ', 'Shahid (Witness)'), ...createProphetName('9', 'حَاشِرٌ', 'Hashir (Gatherer)'), ...createProphetName('10', 'رَشِيدٌ', 'Rashid (Guide)'),
@@ -223,9 +248,9 @@
               <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
                 {page.backgroundImage && <div className="fixed inset-0 z-0 bg-cover bg-center blur-[3px]" style={{ backgroundImage: `url(${page.backgroundImage})` }} />}
                 <div className="sticky top-0 z-20 flex items-center p-4 shadow-md backdrop-blur-md bg-opacity-95" style={{ backgroundColor: theme.headerBg, color: '#fff' }}>
-                  <button onClick={() => setActivePageId(null)} className="mr-4 text-[#48C9B0] hover:text-white transition-colors"><ChevronLeft size={28}/></button>
+                  <button onClick={() => setActivePageId(null)} className="mr-4 text-[#48C9B0] hover:text-white transition-colors"><IconChevronLeft size={28}/></button>
                   <h1 className="font-bold text-xl flex-1 text-center font-heading tracking-wider">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="text-[#48C9B0] hover:text-white transition-colors"><Settings size={24}/></button>
+                  <button onClick={() => setShowSettings(true)} className="text-[#48C9B0] hover:text-white transition-colors"><IconSettings size={24}/></button>
                 </div>
                 <div className="relative z-10 max-w-2xl mx-auto p-5 pb-32">
                   {page.cards.map((card, idx) => (
@@ -246,7 +271,7 @@
           const renderMenu = () => (
             <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
               <div className="p-8 pb-12 flex flex-col items-center justify-center bg-gradient-to-b from-[#0B1E3F] to-[#0F2650]">
-                 <div className="absolute top-4 right-4"><button onClick={() => setShowSettings(true)} className="text-[#48C9B0] hover:text-white transition-colors"><Settings size={24}/></button></div>
+                 <div className="absolute top-4 right-4"><button onClick={() => setShowSettings(true)} className="text-[#48C9B0] hover:text-white transition-colors"><IconSettings size={24}/></button></div>
                  <Logo />
                  <p className="text-[#48C9B0] text-sm opacity-80 mt-2 font-serif italic">Supplications for the Heart</p>
               </div>
@@ -266,7 +291,7 @@
               {showSettings && (
                 <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
                   <div className="w-full max-w-sm bg-white rounded-t-2xl sm:rounded-xl p-6 shadow-2xl animate-in" onClick={e => e.stopPropagation()} style={{ backgroundColor: theme.bg, color: theme.text }}>
-                    <div className="flex justify-between items-center mb-6"><h3 className="font-bold text-lg">Settings</h3><button onClick={() => setShowSettings(false)}><X size={24}/></button></div>
+                    <div className="flex justify-between items-center mb-6"><h3 className="font-bold text-lg">Settings</h3><button onClick={() => setShowSettings(false)}><IconX size={24}/></button></div>
                     <div className="mb-6"><p className="font-bold mb-3 text-sm uppercase text-gray-500">Theme</p>
                       <div className="flex justify-center gap-4">
                         {['cream', 'white', 'dark'].map(t => (
@@ -276,9 +301,9 @@
                     </div>
                     <div className="mb-8"><p className="font-bold mb-3 text-sm uppercase text-gray-500">Text Size</p>
                       <div className="flex items-center justify-center gap-6 bg-gray-100 dark:bg-gray-800 rounded-xl p-4">
-                         <button onClick={() => setFontScale(s => Math.max(s-2, -4))} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><Minus size={20}/></button>
+                         <button onClick={() => setFontScale(s => Math.max(s-2, -4))} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><IconMinus size={20}/></button>
                          <span className="font-serif text-xl">Aa</span>
-                         <button onClick={() => setFontScale(s => Math.min(s+2, 8))} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><Plus size={20}/></button>
+                         <button onClick={() => setFontScale(s => Math.min(s+2, 8))} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><IconPlus size={20}/></button>
                       </div>
                     </div>
                     <button onClick={() => setShowSettings(false)} className="w-full py-4 rounded-xl font-bold text-white shadow-lg transition-transform active:scale-[0.98]" style={{ backgroundColor: '#48C9B0' }}>Save Changes</button>
