@@ -53,3 +53,21 @@
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>
+const Logo = () => (
+  <div className="flex flex-col items-center justify-center mb-10">
+    <div className="w-24 h-24 rounded-3xl mb-4 bg-gradient-to-b from-[#26C6DA] to-[#006064] flex items-center justify-center shadow-lg relative overflow-hidden">
+        <svg viewBox="0 0 512 512" className="w-full h-full p-2">
+            <path d="M 256 80 Q 136 240 136 330 A 120 120 0 0 0 376 330 Q 376 240 256 80 Z" fill="none" stroke="white" strokeWidth="15" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M 256 180 L 256 300" stroke="white" strokeWidth="12" strokeLinecap="round"/>
+            <path d="M 256 300 Q 200 300 200 250 Q 200 220 230 220" stroke="white" strokeWidth="10" fill="none" strokeLinecap="round"/>
+            <circle cx="215" cy="205" r="10" fill="white"/>
+            <circle cy="205" cx="245" r="10" fill="white"/>
+            <path d="M 256 280 Q 310 280 310 230" stroke="white" strokeWidth="10" fill="none" strokeLinecap="round"/>
+            <path d="M 180 360 Q 256 390 332 360" stroke="white" strokeWidth="8" fill="none" strokeLinecap="round" opacity="0.8"/>
+        </svg>
+    </div>
+    <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md">
+      Qalb-e-Dua
+    </h1>
+  </div>
+);
