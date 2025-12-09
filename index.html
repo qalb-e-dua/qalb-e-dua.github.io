@@ -1,310 +1,55 @@
-import React, { useState } from 'react';
-import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
-import { MenuCard } from './components/MenuCard';
-import { MENU_ITEMS, PAGES_DATA } from './data';
-import { Theme, ContentBlock, CardData } from './types';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Qalb-e-Dua">
+    <title>Qalb-e-Dua</title>
+    
+    <!-- APP ICON (Teardrop Calligraphy Design 2) -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
 
-const THEMES: Record<string, Theme> = {
-  cream: {
-    id: 'cream',
-    bg: '#FCFBF4',
-    text: '#000000',
-    headerBg: '#0B1E3F',
-    cardBg: '#FFF',
-    cardBorder: '#D4AF37',
-    accent: '#D4AF37',
-    nameRed: '#8B0000'
-  },
-  white: {
-    id: 'white',
-    bg: '#FFFFFF',
-    text: '#000000',
-    headerBg: '#0B1E3F',
-    cardBg: '#FFFFFF',
-    cardBorder: '#D4AF37',
-    accent: '#D4AF37',
-    nameRed: '#8B0000'
-  },
-  dark: {
-    id: 'dark',
-    bg: '#121212',
-    text: '#E0E0E0',
-    headerBg: '#1E1E1E',
-    cardBg: '#2b2b2b',
-    cardBorder: '#D4AF37',
-    accent: '#D4AF37',
-    nameRed: '#EF5350'
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+      body {
+        transition: background-color 0.3s, color 0.3s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .font-heading { font-family: 'Cinzel', serif; }
+      .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.4; }
+      
+      /* Custom Scrollbar (Reverted to Gold) */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+      
+      /* Animation Utilities */
+      .animate-in { animation: fadeIn 0.3s ease-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0"
   }
-};
-
-const Logo = () => (
-  <div className="flex flex-col items-center justify-center mb-10">
-    <div className="w-24 h-24 rounded-3xl mb-4 bg-gradient-to-b from-[#26C6DA] to-[#006064] flex items-center justify-center shadow-lg relative overflow-hidden">
-        <svg viewBox="0 0 512 512" className="w-full h-full p-2">
-            <path d="M 256 80 Q 136 240 136 330 A 120 120 0 0 0 376 330 Q 376 240 256 80 Z" fill="none" stroke="white" strokeWidth="15" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M 256 180 L 256 300" stroke="white" strokeWidth="12" strokeLinecap="round"/>
-            <path d="M 256 300 Q 200 300 200 250 Q 200 220 230 220" stroke="white" strokeWidth="10" fill="none" strokeLinecap="round"/>
-            <circle cx="215" cy="205" r="10" fill="white"/>
-            <circle cy="205" cx="245" r="10" fill="white"/>
-            <path d="M 256 280 Q 310 280 310 230" stroke="white" strokeWidth="10" fill="none" strokeLinecap="round"/>
-            <path d="M 180 360 Q 256 390 332 360" stroke="white" strokeWidth="8" fill="none" strokeLinecap="round" opacity="0.8"/>
-        </svg>
-    </div>
-    <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md">
-      Qalb-e-Dua
-    </h1>
-  </div>
-);
-
-const App = () => {
-  const [activePageId, setActivePageId] = useState<string | null>(null);
-  const [showSettings, setShowSettings] = useState(false);
-  const [currentThemeId, setCurrentThemeId] = useState<'cream' | 'white' | 'dark'>('cream');
-  const [fontScale, setFontScale] = useState(0);
-
-  const theme = THEMES[currentThemeId];
-  
-  const arabicSize = 32 + (fontScale * 2);
-  const englishSize = 18 + (fontScale * 1);
-
-  const handleOpenPage = (id: string) => {
-    setActivePageId(id);
-    window.scrollTo(0,0);
-  };
-
-  const handleClosePage = () => {
-    setActivePageId(null);
-  };
-
-  const renderContentBlock = (block: ContentBlock, idx: number) => {
-    const commonStyle = { color: block.textColor || theme.text };
-
-    switch (block.type) {
-      case 'allah-name':
-        return (
-          <div key={idx} className="mb-6">
-            <div className="flex justify-between items-start mb-2">
-              <span className="font-bold text-lg" style={{ color: theme.nameRed }}>{block.number}</span>
-              <span className="font-arabic font-bold" style={{ fontSize: `${arabicSize + 4}px`, color: currentThemeId === 'dark' ? '#90CAF9' : '#1a237e' }}>
-                {block.arabic}
-              </span>
-            </div>
-            <div className="text-lg leading-relaxed mb-4" style={{ fontSize: `${englishSize}px` }}>
-              <span className="font-bold" style={{ color: theme.nameRed }}>{block.english}</span>
-              <span style={{ color: theme.text }}>, He is exalted!</span>
-            </div>
-            <hr className="border-t border-gray-300 opacity-50" />
-          </div>
-        );
-      case 'arabic':
-      case 'arabic-green':
-      case 'arabic-indopak':
-        const color = block.type === 'arabic-green' ? '#2e7d32' : (block.textColor || theme.text);
-        return (
-          <p key={idx} className={`font-arabic text-center mb-4 leading-[2.4]`} style={{ color: color, fontSize: `${arabicSize}px`, fontWeight: 'bold' }}>
-            {block.text}
-          </p>
-        );
-      case 'text':
-        return (
-          <p key={idx} className={`font-sans mb-3 leading-relaxed ${block.style || ''}`} style={{ ...commonStyle, fontSize: `${englishSize}px` }}>
-            {block.text}
-          </p>
-        );
-      case 'section-title':
-        return (
-          <h3 key={idx} className="text-center font-bold text-lg mb-4 pb-1 border-b border-gray-300" style={{ color: theme.headerBg }}>
-            {block.text}
-          </h3>
-        );
-      case 'title-green':
-        return (
-          <h2 key={idx} className="font-arabic font-bold text-center mb-2" style={{ color: '#d63384', fontSize: '34px' }}>
-             {block.text}
-          </h2>
-        );
-      case 'subtitle-green':
-        return (
-          <p key={idx} className="text-center mb-4 text-gray-500 font-serif text-lg">
-             {block.text}
-          </p>
-        );
-      case 'flower-icon':
-        return (
-          <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">
-            {block.text}
-          </div>
-        );
-      case 'hr':
-        return <hr key={idx} className="my-5 border-t border-gray-300 opacity-50" />;
-      case 'count-badge':
-        return (
-          <div key={idx} className="text-center mb-4">
-             <span className="inline-block px-3 py-1 rounded-full text-sm font-bold bg-[#0B1E3F] text-[#D4AF37]">
-                {block.text}
-             </span>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
-  const renderCard = (card: CardData, idx: number) => {
-    let cardStyle: React.CSSProperties = {
-        marginBottom: '25px',
-        padding: '20px',
-        borderRadius: '12px',
-        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)'
-    };
-
-    if (card.variant === 'green') {
-        cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32', color: '#000' };
-    } else if (card.variant === 'rabbana') {
-        cardStyle = { 
-            ...cardStyle, 
-            backgroundColor: 'rgba(0, 0, 0, 0.7)', 
-            border: '2px solid #D4AF37',
-            color: '#ffffff'
-        };
-    } else {
-        // Default Option 1: Double Gold Border
-        cardStyle = { 
-            ...cardStyle, 
-            backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', 
-            border: `4px double ${theme.accent}`,
-            color: theme.text
-        };
-    }
-
-    return (
-      <div key={idx} style={cardStyle} className="relative overflow-hidden">
-        {card.content.map((block, bIdx) => renderContentBlock(block, bIdx))}
-      </div>
-    );
-  };
-
-  const renderPage = () => {
-    if (!activePageId) return null;
-    const page = PAGES_DATA[activePageId];
-    if (!page) return <div>Page not found</div>;
-
-    return (
-      <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
-        
-        {page.backgroundImage && (
-             <div 
-                className="fixed inset-0 z-0 bg-cover bg-center blur-[3px]"
-                style={{ backgroundImage: `url(${page.backgroundImage})` }}
-             />
-        )}
-
-        <div 
-            className="sticky top-0 z-20 flex items-center p-4 shadow-md bg-opacity-95"
-            style={{ backgroundColor: theme.headerBg, color: '#fff', borderBottom: `2px solid ${theme.accent}` }}
-        >
-            <button onClick={handleClosePage} className="mr-4 hover:text-white transition-colors" style={{ color: theme.accent }}>
-                <ChevronLeft size={28} />
-            </button>
-            <h1 className="font-bold text-xl flex-1 text-center font-heading tracking-wider">{page.title}</h1>
-            <button onClick={() => setShowSettings(true)} className="hover:text-white transition-colors" style={{ color: theme.accent }}>
-                <Settings size={24} />
-            </button>
-        </div>
-
-        <div className="relative z-10 max-w-2xl mx-auto p-5 pb-32">
-            {page.cards.map((card, idx) => renderCard(card, idx))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderMenu = () => (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
-      <div className="p-10 pb-14 flex flex-col items-center justify-center">
-         <div className="absolute top-4 right-4"><button onClick={() => setShowSettings(true)} style={{ color: theme.accent }} className="hover:text-white transition-colors"><Settings size={24}/></button></div>
-         <Logo />
-      </div>
-
-      <div className="flex-1 rounded-t-[2.5rem] -mt-8 p-6 pb-20 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] overflow-y-auto relative z-10" style={{ backgroundColor: theme.bg }}>
-        <div className="max-w-md mx-auto pt-4">
-          {MENU_ITEMS.map((item) => (
-              <MenuCard 
-                  key={item.id}
-                  label={item.label}
-                  subtext={item.subtext}
-                  onClick={() => handleOpenPage(item.pageId)}
-                  theme={theme}
-              />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <>
-      {activePageId ? renderPage() : renderMenu()}
-      {showSettings && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
-            <div 
-                className="w-full max-w-sm bg-white rounded-t-2xl sm:rounded-xl p-6 shadow-2xl animate-in"
-                style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#fff', color: currentThemeId === 'dark' ? '#fff' : '#000', borderTop: `4px solid ${theme.accent}` }}
-                onClick={(e) => e.stopPropagation()}
-            >
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="font-bold text-lg">Settings</h3>
-                    <button onClick={() => setShowSettings(false)}><X size={24}/></button>
-                </div>
-                <div className="mb-6">
-                    <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Theme</p>
-                    <div className="flex justify-center gap-4">
-                        <button 
-                            onClick={() => setCurrentThemeId('cream')}
-                            className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'cream' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                            style={{ backgroundColor: '#FCFBF4' }}
-                            title="Cream"
-                        />
-                        <button 
-                            onClick={() => setCurrentThemeId('white')}
-                            className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'white' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                            style={{ backgroundColor: '#FFFFFF' }}
-                            title="White"
-                        />
-                        <button 
-                            onClick={() => setCurrentThemeId('dark')}
-                            className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'dark' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                            style={{ backgroundColor: '#1E293B' }}
-                            title="Dark"
-                        />
-                    </div>
-                </div>
-
-                <div>
-                    <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Text Size</p>
-                    <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2" style={{ backgroundColor: currentThemeId === 'dark' ? '#475569' : '#F1F5F9' }}>
-                        <button 
-                            onClick={() => setFontScale(prev => Math.max(prev - 2, -4))}
-                            className="p-2 rounded hover:bg-black/5 active:bg-black/10 transition-colors"
-                        >
-                            <Minus size={20} />
-                        </button>
-                        <span className="font-bold font-arabic px-4 text-xl">
-                            بِسْمِ
-                        </span>
-                        <button 
-                            onClick={() => setFontScale(prev => Math.min(prev + 4, 12))}
-                            className="p-2 rounded hover:bg-black/5 active:bg-black/10 transition-colors"
-                        >
-                            <Plus size={20} />
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-      )}
-    </>
-  );
-};
-
-export default App;
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
