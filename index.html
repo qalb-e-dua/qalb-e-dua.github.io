@@ -177,14 +177,6 @@
           dark: { bg: '#121212', text: '#E0E0E0', headerBg: '#1E1E1E', cardBg: '#2b2b2b', accent: '#D4AF37', nameRed: '#EF5350' }
         };
 
-        const Logo = () => (
-          <div className="flex flex-col items-center justify-center mb-10">
-            <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md">
-              Qalb-e-Dua
-            </h1>
-          </div>
-        );
-
         const App = () => {
           const [activePageId, setActivePageId] = useState(null);
           const [showSettings, setShowSettings] = useState(false);
@@ -268,7 +260,6 @@
                 <button onClick={() => setShowSettings(true)} className="text-[#D4AF37]"><SettingsIcon/></button>
               </div>
               <div className="max-w-md mx-auto p-5 pt-10 pb-20">
-                <Logo />
                 {MENU_ITEMS.map(item => (
                   <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => { setActivePageId(item.pageId); window.scrollTo(0,0); }} theme={theme} />
                 ))}
