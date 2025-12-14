@@ -30,7 +30,7 @@
         padding: 0;
       }
       .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.4; }
+      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
       
       /* Custom Scrollbar (Gold) */
       ::-webkit-scrollbar { width: 6px; }
@@ -42,6 +42,7 @@
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 
+    <!-- FIXED IMPORT MAP: Cleaned up to use only React 18 -->
     <script type="importmap">
 {
   "imports": {
@@ -76,69 +77,10 @@
       import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
 
       // ==========================================
-      // TYPES
-      // ==========================================
-      
-      export type CardVariant = 'default' | 'green' | 'rabbana';
-      export type ContentType = 
-        | 'text' 
-        | 'arabic' 
-        | 'arabic-green' 
-        | 'arabic-indopak'
-        | 'section-title' 
-        | 'title-green' 
-        | 'subtitle-green'
-        | 'hr' 
-        | 'flower-icon' 
-        | 'count-badge'
-        | 'allah-name';
-
-      export interface ContentBlock {
-        type: ContentType;
-        text?: string;
-        style?: string; 
-        textColor?: string; 
-        number?: string;
-        arabic?: string;
-        english?: string;
-      }
-
-      export interface CardData {
-        variant: CardVariant;
-        content: ContentBlock[];
-      }
-
-      export interface PageData {
-        id: string;
-        title: string;
-        category?: string;
-        backgroundImage?: string;
-        cards: CardData[];
-      }
-
-      export interface MenuItem {
-        id: string;
-        label: string;
-        pageId: string;
-        subtext?: string;
-      }
-
-      export interface Theme {
-        bg: string;
-        text: string;
-        headerBg: string;
-        cardBg: string;
-        cardBorder: string;
-        accent: string;
-        nameRed: string;
-        id: 'cream' | 'white' | 'dark';
-      }
-
-      // ==========================================
-      // DATA
+      // DATA & CONFIGURATION
       // ==========================================
 
-      const MENU_ITEMS: MenuItem[] = [
+      const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
         { id: 'm3', label: 'Names of Prophet ﷺ', pageId: 'p3' },
@@ -152,12 +94,12 @@
         { id: 'm11', label: '40 Rabbana Duas', pageId: 'p11', subtext: 'Quranic' },
       ];
 
-      const createNameEntry = (num: string, arabic: string, english: string) => [
-        { type: 'allah-name', number: num, arabic: arabic, english: english } as const
+      const createNameEntry = (num, arabic, english) => [
+        { type: 'allah-name', number: num, arabic: arabic, english: english }
       ];
 
-      const createProphetName = (num: string, arabic: string, english: string) => [
-        { type: 'allah-name', number: num, arabic: arabic, english: english } as const
+      const createProphetName = (num, arabic, english) => [
+        { type: 'allah-name', number: num, arabic: arabic, english: english }
       ];
 
       const SURAH_YASIN_DATA = [
@@ -289,7 +231,7 @@
           { a: "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا ۖ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ", e: "Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.", r: "Surah At-Tahrim - 66:8" }
       ];
 
-      const PAGES_DATA: Record<string, PageData> = {
+      const PAGES_DATA = {
         'p1': {
           id: 'p1',
           title: 'Opening Dua',
@@ -436,12 +378,12 @@
                      { 
                        type: 'arabic-indopak', 
                        text: verse.a,
-                       number: (idx + 1).toString(), // Pass verse number separately
+                       number: (idx + 1).toString(),
                        style: 'text-center text-2xl leading-loose mt-4' 
                      },
                      { 
                        type: 'text', 
-                       text: verse.e, // Clean English text
+                       text: verse.e,
                        style: 'text-center text-sm opacity-80 leading-relaxed mb-6' 
                      },
                      { type: 'hr' }
@@ -1094,14 +1036,7 @@
       // COMPONENTS
       // ==========================================
 
-      interface MenuCardProps {
-        label: string;
-        subtext?: string;
-        onClick: () => void;
-        theme: Theme;
-      }
-
-      const MenuCard: React.FC<MenuCardProps> = ({ label, subtext, onClick, theme }) => {
+      const MenuCard = ({ label, subtext, onClick, theme }) => {
         return (
           <button
             onClick={onClick}
