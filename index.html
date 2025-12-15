@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- BABEL -->
+    <!-- BABEL FOR IN-BROWSER JSX/TSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -32,20 +32,26 @@
       }
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
+      
+      /* Custom Scrollbar (Gold) */
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: transparent; }
       ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+      
+      /* Animation Utilities */
       .animate-in { animation: fadeIn 0.3s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 
-    <!-- IMPORT MAP -->
+    <!-- FIXED IMPORT MAP: Cleaned up to use only React 18 -->
     <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.292.0"
+    "lucide-react": "https://esm.sh/lucide-react@0.292.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
@@ -53,23 +59,26 @@
 <body>
     <div id="root"></div>
     
+    <!-- ERROR HANDLER -->
+    <div id="error-container" style="display:none; position:fixed; top:0; left:0; right:0; padding:20px; background:rgba(255,0,0,0.9); color:white; z-index:9999; font-family:sans-serif;"></div>
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        const container = document.getElementById('error-container');
+        if(container) {
+          container.style.display = 'block';
+          container.innerHTML = '<strong>Error:</strong> ' + message + '<br><small>' + source + ':' + lineno + '</small>';
+        }
+        console.error(error);
+      };
+    </script>
+
     <script type="text/babel" data-type="module" data-presets="typescript,react">
       import React, { useState } from 'react';
       import ReactDOM from 'react-dom/client';
       import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
 
       // ==========================================
-      // HELPER (Kept for Names of Allah/Prophet)
-      // ==========================================
-      const createNameEntry = (num, arabic, english) => [
-        { type: 'allah-name', number: num, arabic: arabic, english: english }
-      ];
-      const createProphetName = (num, arabic, english) => [
-        { type: 'allah-name', number: num, arabic: arabic, english: english }
-      ];
-
-      // ==========================================
-      // DATA CONFIGURATION
+      // DATA & CONFIGURATION
       // ==========================================
 
       const MENU_ITEMS = [
@@ -86,6 +95,143 @@
         { id: 'm11', label: '40 Rabbana Duas', pageId: 'p11', subtext: 'Quranic' },
       ];
 
+      const createNameEntry = (num, arabic, english) => [
+        { type: 'allah-name', number: num, arabic: arabic, english: english }
+      ];
+
+      const createProphetName = (num, arabic, english) => [
+        { type: 'allah-name', number: num, arabic: arabic, english: english }
+      ];
+
+      const SURAH_YASIN_DATA = [
+        { a: "يٰسٓ", e: "Yaa-Seen (Alphabets of Arabic language - Allah and to whomever He reveals, know their precise meanings.)" },
+        { a: "وَالۡقُرۡاٰنِ الۡحَكِيۡمِ", e: "By oath of the wise Qur’an." },
+        { a: "اِنَّكَ لَمِنَ الۡمُرۡسَلِيۡنَ", e: "You (O dear Prophet Mohammed – peace and blessings be upon him) are indeed one of the Noble Messengers." },
+        { a: "عَلٰى صِرَاطٍ مُّسۡتَقِيۡمٍ", e: "On the Straight Path." },
+        { a: "تَنۡزِيۡلَ الۡعَزِيۡزِ الرَّحِيۡمِ", e: "(The Qur’an is) Sent down by the Almighty, the Most Merciful." },
+        { a: "لِتُنۡذِرَ قَوۡمًا مَّاۤ اُنۡذِرَ اٰبَآؤُهُمۡ فَهُمۡ غٰفِلُوۡنَ", e: "So that you may warn these people whose ancestors were not warned, they are therefore unaware." },
+        { a: "لَقَدۡ حَقَّ الۡقَوۡلُ عَلٰٓى اَكۡثَرِهِمۡ فَهُمۡ لَا يُؤۡمِنُوۡنَ", e: "Undoubtedly, it (their disbelief) has proved true for most of them, so they will not believe." },
+        { a: "اِنَّا جَعَلۡنَا فِىۡۤ اَعۡنَاقِهِمۡ اَغۡلٰلًا فَهِىَ اِلَى الۡاَ ذۡقَانِ فَهُمۡ مُّقۡمَحُوۡنَ", e: "We have indeed put shackles around their necks reaching up to the chins, so they remain facing upwards." },
+        { a: "وَجَعَلۡنَا مِنۡۢ بَيۡنِ اَيۡدِيۡهِمۡ سَدًّا وَّمِنۡ خَلۡفِهِمۡ سَدًّا فَاَغۡشَيۡنٰهُمۡ فَهُمۡ لَا يُبۡصِرُوۡنَ", e: "And We have set a wall before them and a wall behind them, and covered the top - so they are unable to see anything." },
+        { a: "وَسَوَآءٌ عَلَيۡهِمۡ ءَاَنۡذَرۡتَهُمۡ اَمۡ لَمۡ تُنۡذِرۡهُمۡ لَا يُؤۡمِنُوۡنَ", e: "And it is the same for them, whether you warn them or do not warn them - they will not believe." },
+        { a: "اِنَّمَا تُنۡذِرُ مَنِ اتَّبَعَ الذِّكۡرَ وَخَشِىَ الرَّحۡمٰنَ بِالۡغَيۡبِۚ فَبَشِّرۡهُ بِمَغۡفِرَةٍ وَّاَجۡرٍ كَرِيۡمٍ", e: "You warn only him who follows the advice and fears the Most Gracious without seeing; therefore give him glad tidings of forgiveness and an honourable reward." },
+        { a: "اِنَّا نَحۡنُ نُحۡىِ الۡمَوۡتٰى وَنَكۡتُبُ مَا قَدَّمُوۡا وَاٰثَارَهُمۡؕؔ وَكُلَّ شَىۡءٍ اَحۡصَيۡنٰهُ فِىۡۤ اِمَامٍ مُّبِيۡنٍ", e: "We will surely bring the dead to life and We record what they send ahead and the signs they will leave behind; and We have accounted all things in a clear Book." },
+        { a: "وَاضۡرِبۡ لَهُمۡ مَّثَلًا اَصۡحٰبَ الۡقَرۡيَةِ ‌ۘ اِذۡ جَآءَهَا الۡمُرۡسَلُوۡنَ", e: "And relate to them the signs of the people of the city - when two emissaries came to them." },
+        { a: "اِذۡ اَرۡسَلۡنَاۤ اِلَيۡهِمُ اثۡنَيۡنِ فَكَذَّبُوۡهُمَا فَعَزَّزۡنَا بِثَالِثٍ فَقَالُـوۡۤا اِنَّاۤ اِلَيۡكُمۡ مُّرۡسَلُوۡنَ", e: "When We had sent two towards them and they denied them both, so We fortified them with a third, and they all said, “Indeed we have been sent to you.”" },
+        { a: "قَالُوۡا مَاۤ اَنۡـتُمۡ اِلَّا بَشَرٌ مِّثۡلُـنَا ۙ وَمَاۤ اَنۡزَلَ الرَّحۡمٰنُ مِنۡ شَىۡءٍۙ اِنۡ اَنۡـتُمۡ اِلَّا تَكۡذِبُوۡنَ", e: "They said, “You are nothing but mortals like us; the Most Gracious has not sent down anything - you are nothing but liars.”" },
+        { a: "قَالُوۡا رَبُّنَا يَعۡلَمُ اِنَّاۤ اِلَيۡكُمۡ لَمُرۡسَلُوۡنَ", e: "They answered, “Our Lord knows that surely, without doubt, we have been sent towards you.”" },
+        { a: "وَمَا عَلَيۡنَاۤ اِلَّا الۡبَلٰغُ الۡمُبِيۡنُ", e: "“And our duty is nothing but to plainly convey (the message).”" },
+        { a: "قَالُـوۡۤا اِنَّا تَطَيَّرۡنَا بِكُمۡۚ لَٮِٕنۡ لَّمۡ تَنۡتَهُوۡا لَنَرۡجُمَنَّكُمۡ وَلَيَمَسَّنَّكُمۡ مِّنَّا عَذَابٌ اَلِيۡمٌ", e: "They (the people of the city) said, “We think you are ominous; indeed, if you do not desist, we shall surely stone you to death, and you will surely face a grievous torture at our hands.”" },
+        { a: "قَالُوۡا طٰۤٮِٕـرُكُمۡ مَّعَكُمۡؕ اَٮِٕنۡ ذُكِّرۡتُمۡ ؕ بَلۡ اَنۡـتُمۡ قَوۡمٌ مُّسۡرِفُوۡنَ", e: "They said, “Your evil omens are with you! What! You get annoyed for being advised? In fact you are a people who transgress the limits!”" },
+        { a: "وَجَآءَ مِنۡ اَقۡصَا الۡمَدِيۡنَةِ رَجُلٌ يَّسۡعٰى قَالَ يٰقَوۡمِ اتَّبِعُوا الۡمُرۡسَلِيۡنَ", e: "And from the outermost part of the city came a man running; he said, “O my people! Obey those who have been sent.”" },
+        { a: "اتَّبِعُوۡا مَنۡ لَّا يَسۡــٴَــلُكُمۡ اَجۡرًا وَّهُمۡ مُّهۡتَدُوۡنَ", e: "“Obey those who do not ask any fee from you, and they are on guidance.”" },
+        { a: "وَمَا لِىَ لَاۤ اَعۡبُدُ الَّذِىۡ فَطَرَنِىۡ وَاِلَيۡهِ تُرۡجَعُوۡنَ", e: "“And what is the matter with me that I should not worship Him Who created me, whereas it is towards Him that you are to return?”" },
+        { a: "ءَاَ تَّخِذُ مِنۡ دُوۡنِهٖۤ اٰلِهَةً اِنۡ يُّرِدۡنِ الرَّحۡمٰنُ بِضُرٍّ لَّا تُغۡنِ عَنِّىۡ شَفَاعَتُهُمۡ شَيۡـــًٔا وَّلَا يُنۡقِذُوۡنِ", e: "“What! Shall I appoint Gods other than Allah? So that if the Most Gracious should wish me any harm, their intercession would be of no use to me, nor would they be able to save me?”" },
+        { a: "اِنِّىۡۤ اِذًا لَّفِىۡ ضَلٰلٍ مُّبِيۡنٍ", e: "“Undoubtedly, I am then in open error.”" },
+        { a: "اِنِّىۡۤ اٰمَنۡتُ بِرَبِّكُمۡ فَاسۡمَعُوۡنِ", e: "“Indeed I have believed in your Lord, so heed me.”" },
+        { a: "قِيۡلَ ادۡخُلِ الۡجَـنَّةَ  ؕ قَالَ يٰلَيۡتَ قَوۡمِىۡ يَعۡلَمُوۡنَ", e: "It was said to him, “Enter Paradise”; he said, “If only my people knew!”" },
+        { a: "بِمَا غَفَرَلِىۡ رَبِّىۡ وَجَعَلَنِىۡ مِنَ الۡمُكۡرَمِيۡنَ", e: "“The manner in which my Lord has pardoned me and made me of the honoured ones!”" },
+        { a: "وَمَاۤ اَنۡزَلۡنَا عَلٰى قَوۡمِهٖ مِنۡۢ بَعۡدِهٖ مِنۡ جُنۡدٍ مِّنَ السَّمَآءِ وَمَا كُـنَّا مُنۡزِلِيۡنَ", e: "And after him, We did not send down any army from heaven against his people, nor did We intend to send down an army." },
+        { a: "اِنۡ كَانَتۡ اِلَّا صَيۡحَةً وَّاحِدَةً فَاِذَا هُمۡ خٰمِدُوۡنَ", e: "It is just one scream, and with it they were extinguished." },
+        { a: "يٰحَسۡرَةً عَلَى الۡعِبَادِ ؔ‌ۚ مَا يَاۡتِيۡهِمۡ مِّنۡ رَّسُوۡلٍ اِلَّا كَانُوۡا بِهٖ يَسۡتَهۡزِءُوۡنَ", e: "And it was said, “Woe to those bondmen - whenever a Noble Messenger comes to them, they mock at him!”" },
+        { a: "اَلَمۡ يَرَوۡا كَمۡ اَهۡلَـكۡنَا قَبۡلَهُمۡ مِّنَ الۡقُرُوۡنِ اَنَّهُمۡ اِلَيۡهِمۡ لَا يَرۡجِعُوۡنَ", e: "Have they not seen how many generations We destroyed before them, which will not return to them?" },
+        { a: "وَاِنۡ كُلٌّ لَّمَّا جَمِيۡعٌ لَّدَيۡنَا مُحۡضَرُوۡنَ", e: "And without exception, all of them will be brought forth before Us." },
+        { a: "وَاٰيَةٌ لَّهُمُ الۡاَرۡضُ الۡمَيۡتَةُ   ۖۚ اَحۡيَيۡنٰهَا وَاَخۡرَجۡنَا مِنۡهَا حَبًّا فَمِنۡهُ يَاۡكُلُوۡنَ", e: "And a sign for them is the dead earth; We gave it life and We produced from it grain, so they eat from it." },
+        { a: "وَجَعَلۡنَا فِيۡهَا جَنّٰتٍ مِّنۡ نَّخِيۡلٍ وَّاَعۡنَابٍ وَّفَجَّرۡنَا فِيۡهَا مِنَ الۡعُيُوۡنِ", e: "And We have placed in it gardens of dates and grapes, and We have made springs of water in it." },
+        { a: "لِيَاۡكُلُوۡا مِنۡ ثَمَرِهٖ ۙ وَمَا عَمِلَـتۡهُ اَيۡدِيۡهِمۡ‌ ؕ اَفَلَا يَشۡكُرُوۡنَ", e: "So that they may eat from its fruits, whereas they are not manufactured by their hands! So will they not be grateful?" },
+        { a: "سُبۡحٰنَ الَّذِىۡ خَلَقَ الۡاَزۡوَاجَ كُلَّهَا مِمَّا تُنۡۢبِتُ الۡاَرۡضُ وَمِنۡ اَنۡفُسِهِمۡ وَمِمَّا لَا يَعۡلَمُوۡنَ", e: "Purity is to Him Who created all pairs, from what the earth grows, and of themselves, and from the things they do not know." },
+        { a: "وَاٰيَةٌ لَّهُمُ الَّيۡلُ  ۖۚ نَسۡلَخُ مِنۡهُ النَّهَارَ فَاِذَا هُمۡ مُّظۡلِمُوۡنَ", e: "And a sign for them is the night; We strip the day out of it, thereupon they are in darkness." },
+        { a: "وَالشَّمۡسُ تَجۡرِىۡ لِمُسۡتَقَرٍّ لَّهَا  ‌ؕ ذٰلِكَ تَقۡدِيۡرُ الۡعَزِيۡزِ الۡعَلِيۡمِ", e: "And the sun runs its course for its final destination; this is a command of the Almighty, the All Knowing." },
+        { a: "وَالۡقَمَرَ قَدَّرۡنٰهُ مَنَازِلَ حَتّٰى عَادَ كَالۡعُرۡجُوۡنِ الۡقَدِيۡمِ", e: "And We have appointed positions for the moon till it returns like an old branch of the date palm." },
+        { a: "لَا الشَّمۡسُ يَنۡۢبَغِىۡ لَهَاۤ اَنۡ تُدۡرِكَ الۡقَمَرَ وَلَا الَّيۡلُ سَابِقُ النَّهَارِ‌ؕ وَكُلٌّ فِىۡ فَلَكٍ يَّسۡبَحُوۡنَ", e: "It is not for the sun to catch up with the moon, nor does the night surpass the day; and each one of them floats in its orbit." },
+        { a: "وَاٰيَةٌ لَّهُمۡ اَنَّا حَمَلۡنَا ذُرِّيَّتَهُمۡ فِى الۡفُلۡكِ الۡمَشۡحُوۡنِ", e: "And a sign for them is that We lodged them in a laden ship, while they were in their forefathers backs." },
+        { a: "وَخَلَقۡنَا لَهُمۡ مِّنۡ مِّثۡلِهٖ مَا يَرۡكَبُوۡنَ", e: "And We have created for them similar ships, in which they now ride." },
+        { a: "وَاِنۡ نَّشَاۡ نُغۡرِقۡهُمۡ فَلَا صَرِيۡخَ لَهُمۡ وَلَا هُمۡ يُنۡقَذُوۡنَ", e: "And if We will, We can drown them, so there would be no help in their distress, nor would they be saved." },
+        { a: "اِلَّا رَحۡمَةً مِّنَّا وَمَتَاعًا اِلٰى حِيۡنٍ", e: "Unless by mercy from Us, and as a comfort for a while." },
+        { a: "وَاِذَا قِيۡلَ لَهُمُ اتَّقُوۡا مَا بَيۡنَ اَيۡدِيۡكُمۡ وَمَا خَلۡفَكُمۡ لَعَلَّكُمۡ تُرۡحَمُوۡنَ", e: "And when it is said to them, “Beware of what is before you and what is behind you, in the hope of your gaining mercy”, the disbelievers say regarding the believers, “Shall we feed these, whom if Allah willed, would have fed? You are not but in open error!”" },
+        { a: "وَمَا تَاۡتِيۡهِمۡ مِّنۡ اٰيَةٍ مِّنۡ اٰيٰتِ رَبِّهِمۡ اِلَّا كَانُوۡا عَنۡهَا مُعۡرِضِيۡنَ", e: "And whenever a sign comes to them from the signs of their Lord, they always turn away from it!" },
+        { a: "وَاِذَا قِيۡلَ لَهُمۡ اَنۡفِقُوۡا مِمَّا رَزَقَكُمُ اللّٰهُ ۙ قَالَ الَّذِيۡنَ كَفَرُوۡا لِلَّذِيۡنَ اٰمَنُوۡۤا اَنُطۡعِمُ مَنۡ لَّوۡ يَشَآءُ اللّٰهُ اَطۡعَمَهٗٓ ۖ  اِنۡ اَنۡـتُمۡ اِلَّا فِىۡ ضَلٰلٍ مُّبِيۡنٍ", e: "And when it is said to them, “Spend in Allah’s cause, from what Allah has provided you”, the disbelievers say regarding the believers, “Shall we feed these, whom if Allah willed, would have fed? You are not but in open error!”" },
+        { a: "وَيَقُوۡلُوۡنَ مَتٰى هٰذَا الۡوَعۡدُ اِنۡ كُنۡتُمۡ صٰدِقِيۡنَ", e: "And they say, “When will this promise be fulfilled, if you are truthful?”" },
+        { a: "مَا يَنۡظُرُوۡنَ اِلَّا صَيۡحَةً وَّاحِدَةً تَاۡخُذُهُمۡ وَهُمۡ يَخِصِّمُوۡنَ", e: "They await just one scream, which will overcome them while they are involved in worldly disputes." },
+        { a: "فَلَا يَسۡتَطِيۡعُوۡنَ تَوۡصِيَةً وَّلَاۤ اِلٰٓى اَهۡلِهِمۡ يَرۡجِعُوۡنَ", e: "Therefore neither able to make a will, nor returning to their homes." },
+        { a: "وَنُفِخَ فِى الصُّوۡرِ فَاِذَا هُمۡ مِّنَ الۡاَجۡدَاثِ اِلٰى رَبِّهِمۡ يَنۡسِلُوۡنَ", e: "And the Trumpet will be blown - so they will come forth from the graves, running towards their Lord." },
+        { a: "قَالُوۡا يٰوَيۡلَنَا مَنۡۢ بَعَثَنَا مِنۡ مَّرۡقَدِنَاۘؔ؄هٰذَا مَا وَعَدَ الرَّحۡمٰنُ وَصَدَقَ الۡمُرۡسَلُوۡنَ", e: "Saying, “O our misfortune! Who has raised us from our sleep? This is what the Most Gracious had promised, and the Noble Messengers had spoken the truth!”" },
+        { a: "اِنۡ كَانَتۡ اِلَّا صَيۡحَةً وَّاحِدَةً فَاِذَا هُمۡ جَمِيۡعٌ لَّدَيۡنَا مُحۡضَرُوۡنَ", e: "It is just one scream, and every one of them will be brought together before Us!" },
+        { a: "فَالۡيَوۡمَ لَا تُظۡلَمُ نَفۡسٌ شَيۡـــًٔا وَّلَا تُجۡزَوۡنَ اِلَّا مَا كُنۡتُمۡ تَعۡمَلُوۡنَ", e: "So this day no soul will be wronged in the least; and you will not be compensated except for your deeds." },
+        { a: "اِنَّ اَصۡحٰبَ الۡجَـنَّةِ الۡيَوۡمَ فِىۡ شُغُلٍ فٰكِهُوۡنَ", e: "Indeed this day the dwellers of Paradise are in comfort, with blissful hearts." },
+        { a: "هُمۡ وَاَزۡوَاجُهُمۡ فِىۡ ظِلٰلٍ عَلَى الۡاَرَآٮِٕكِ مُتَّكِـــُٔوۡنَ", e: "They and their wives are in shades, reclining on thrones." },
+        { a: "لَهُمۡ فِيۡهَا فَاكِهَةٌ وَّلَهُمۡ مَّا يَدَّعُوۡنَ", e: "In it (paradise) are fruits for them and whatever they ask for." },
+        { a: "سَلٰمٌ قَوۡلًا مِّنۡ رَّبٍّ رَّحِيۡمٍ", e: "Upon them will be “Peace” - a Word from their Merciful Lord!" },
+        { a: "وَامۡتَازُوا الۡيَوۡمَ اَيُّهَا الۡمُجۡرِمُوۡنَ", e: "“And be separated (from others) this day, O you criminals!”" },
+        { a: "اَلَمۡ اَعۡهَدۡ اِلَيۡكُمۡ يٰبَنِىۡۤ اٰدَمَ اَنۡ لَّا تَعۡبُدُوا الشَّيۡطٰنَ‌‌ۚ اِنَّهٗ لَـكُمۡ عَدُوٌّ مُّبِيۡنٌ", e: "“O Descendants of Adam! Did I not take a covenant from you that you shall not worship the devil? Undoubtedly, he is your open enemy.”" },
+        { a: "وَّاَنِ اعۡبُدُوۡنِىۡ  ؔ‌ؕ هٰذَا صِرَاطٌ مُّسۡتَقِيۡمٌ", e: "“And that you shall worship Me? This is the Straight Path.”" },
+        { a: "وَلَقَدۡ اَضَلَّ مِنۡكُمۡ جِبِلًّا كَثِيۡرًا‌ ؕ اَفَلَمۡ تَكُوۡنُوۡا تَعۡقِلُوۡنَ", e: "“And he has indeed led a large number of you astray; so did you not have sense?”" },
+        { a: "هٰذِهٖ جَهَنَّمُ الَّتِىۡ كُنۡتُمۡ تُوۡعَدُوۡنَ", e: "“This is hell, which you were promised.”" },
+        { a: "اِصۡلَوۡهَا الۡيَوۡمَ بِمَا كُنۡتُمۡ تَكۡفُرُوۡنَ", e: "“Enter it this day - the recompense of your disbelief.”" },
+        { a: "اَلۡيَوۡمَ نَخۡتِمُ عَلٰٓى اَفۡوَاهِهِمۡ وَتُكَلِّمُنَاۤ اَيۡدِيۡهِمۡ وَتَشۡهَدُ اَرۡجُلُهُمۡ بِمَا كَانُوۡا يَكۡسِبُوۡنَ", e: "This day We will set a seal on their mouths, and their hands will speak out to Us and their feet will bear witness to their deeds." },
+        { a: "وَلَوۡ نَشَآءُ لَـطَمَسۡنَا عَلٰٓى اَعۡيُنِهِمۡ فَاسۡتَبَقُوا الصِّرَاطَ فَاَنّٰى يُبۡصِرُوۡنَ", e: "And had We willed, We could have quenched their eyes so they would rush towards the path, unable to see a thing." },
+        { a: "وَلَوۡ نَشَآءُ لَمَسَخۡنٰهُمۡ عَلٰى مَكَانَتِهِمۡ فَمَا اسۡتَطَاعُوۡا مُضِيًّا وَّلَا يَرۡجِعُوۡنَ", e: "And had We willed, We could have disfigured their faces while they were in their homes, therefore unable to go forward or turn back." },
+        { a: "وَمَنۡ نُّعَمِّرۡهُ نُـنَكِّسۡهُ فِى الۡخَـلۡقِ‌ؕ اَفَلَا يَعۡقِلُوۡنَ", e: "And whomever We bring to an old age, We reverse him in creation; so do they not understand?" },
+        { a: "وَمَا عَلَّمۡنٰهُ الشِّعۡرَ وَمَا يَنۡۢبَغِىۡ لَهٗؕ اِنۡ هُوَ اِلَّا ذِكۡرٌ وَّقُرۡاٰنٌ مُّبِيۡنٌۙ", e: "And We have not taught him (Prophet Mohammed- peace and blessings be upon him) to recite poetry, nor does it befit him; it is nothing but an advice and the bright Qur’an." },
+        { a: "لِّيُنۡذِرَ مَنۡ كَانَ حَيًّا وَّيَحِقَّ الۡقَوۡلُ عَلَى الۡكٰفِرِيۡنَ", e: "To warn the living, and to prove the Word against disbelievers. (Only the believers are deemed alive in Allah’s sight.)" },
+        { a: "اَوَلَمۡ يَرَوۡا اَنَّا خَلَقۡنَا لَهُمۡ مِّمَّا عَمِلَتۡ اَيۡدِيۡنَاۤ اَنۡعَامًا فَهُمۡ لَهَا مٰلِكُوۡنَ", e: "Did they not see that We have created animals for them from Our handiwork, so they are their owners?" },
+        { a: "وَذَلَّـلۡنٰهَا لَهُمۡ فَمِنۡهَا رَكُوۡبُهُمۡ وَمِنۡهَا يَاۡكُلُوۡنَ", e: "And have subjected the animals for them, so they ride some animals and eat some?" },
+        { a: "وَلَهُمۡ فِيۡهَا مَنَافِعُ وَمَشَارِبُ‌ؕ اَفَلَا يَشۡكُرُوۡنَ", e: "And for them in the animals are numerous different benefits and drinks; so will they not be grateful?" },
+        { a: "وَاتَّخَذُوۡا مِنۡ دُوۡنِ اللّٰهِ اٰلِهَةً لَّعَلَّهُمۡ يُنۡصَرُوۡنَ", e: "And they have appointed Gods other than Allah, that perhaps they may be helped!" },
+        { a: "لَا يَسۡتَطِيۡعُوۡنَ نَصۡرَهُمۡۙ وَهُمۡ لَهُمۡ جُنۡدٌ مُّحۡضَرُوۡنَ", e: "They (the appointed Gods) cannot help them; and they and their armies will come (to Us), as captives." },
+        { a: "فَلَا يَحۡزُنۡكَ قَوۡلُهُمۡ‌ۘ اِنَّا نَـعۡلَمُ مَا يُسِرُّوۡنَ وَمَا يُعۡلِنُوۡنَ", e: "Therefore (O dear Prophet Mohammed - peace and blessings be upon him) do not grieve because of what they (the disbelievers) say; indeed We know what they conceal and what they disclose." },
+        { a: "اَوَلَمۡ يَرَ الۡاِنۡسَانُ اَنَّا خَلَقۡنٰهُ مِنۡ نُّطۡفَةٍ فَاِذَا هُوَ خَصِيۡمٌ مُّبِيۡنٌ", e: "And did not man see that We have created him from a drop of semen? Yet he is an open quarreller!" },
+        { a: "وَضَرَبَ لَـنَا مَثَلًا وَّ نَسِىَ خَلۡقَهٗ‌ ؕ قَالَ مَنۡ يُّحۡىِ الۡعِظَامَ وَهِىَ رَمِيۡمٌ", e: "And he invents an example for Us, while forgetting his own creation, saying, “Who is such that can revive the bones when they have completely rotted away?”" },
+        { a: "قُلۡ يُحۡيِيۡهَا الَّذِىۡۤ اَنۡشَاَهَاۤ اَوَّلَ مَرَّةٍ‌ ؕ وَهُوَ بِكُلِّ خَلۡقٍ عَلِيۡمُ", e: "Proclaim (O dear Prophet Mohammed - peace and blessings be upon him), “They will be revived by the One Who created them the first time; and He is the All Knowing of every creation.”" },
+        { a: "اۨلَّذِىۡ جَعَلَ لَـكُمۡ مِّنَ الشَّجَرِ الۡاَخۡضَرِ نَارًا فَاِذَاۤ اَنۡـتُمۡ مِّنۡهُ تُوۡقِدُوۡنَ", e: "“The One Who has created for you fire from the green tree, so you kindle from it.”" },
+        { a: "اَوَلَيۡسَ الَّذِىۡ خَلَقَ السَّمٰوٰتِ وَالۡاَرۡضَ بِقٰدِرٍ عَلٰٓى اَنۡ يَّخۡلُقَ مِثۡلَهُمۡؔؕ بَلٰی وَهُوَ الۡخَـلّٰقُ الۡعَلِيۡمُ", e: "And is it not possible for the One Who created the heavens and the earth to create the likes of them? It is surely possible, why not? And He is the Great Creator, the All Knowing of everything." },
+        { a: "اِنَّمَاۤ اَمۡرُهٗۤ اِذَاۤ اَرَادَ شَیْــٴً۬ــا اَنۡ يَّقُوۡلَ لَهٗ كُنۡ فَيَكُوۡنُ", e: "And His only task when He intends a thing is to command it, “Be” - and it thereupon happens!" },
+        { a: "فَسُبۡحٰنَ الَّذِىۡ بِيَدِهٖ مَلَـكُوۡتُ كُلِّ شَىۡءٍ وَّاِلَيۡهِ تُرۡجَعُوۡنَ", e: "Therefore Purity is to Him in Whose Hand is the control over all things and it is towards Him that you will be returned." }
+      ];
+
+      const RABBANA_DUAS = [
+          { a: "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ", e: "Our Lord, accept [this] from us. Indeed You are the Hearing, the Knowing.", r: "Surah Al-Baqarah - 2:127" },
+          { a: "رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَا أُمَّةً مُّسْلِمَةً لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبْ عَلَيْنَا ۖ إِنَّكَ أَنتَ التَّوَّابُ الرَّحِيمُ", e: "Our Lord, and make us Muslims [in submission] to You and from our descendants a Muslim nation [in submission] to You. And show us our rites and accept our repentance. Indeed, You are the Accepting of repentance, the Merciful.", r: "Surah Al-Baqarah - 2:128" },
+          { a: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", e: "Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.", r: "Surah Al-Baqarah - 2:201" },
+          { a: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", e: "Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.", r: "Surah Al-Baqarah - 2:250" },
+          { a: "رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا", e: "Our Lord, do not impose blame upon us if we have forgotten or erred.", r: "Surah Al-Baqarah - 2:286" },
+          { a: "رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا", e: "Our Lord, and lay not upon us a burden like that which You laid upon those before us.", r: "Surah Al-Baqarah - 2:286" },
+          { a: "رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", e: "Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.", r: "Surah Al-Baqarah - 2:286" },
+          { a: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ", e: "Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower.", r: "Surah Al-Imran - 3:8" },
+          { a: "رَبَّنَا إِنَّكَ جَامِعُ النَّاسِ لِيَوْمٍ لَّا رَيْبَ فِيهِ ۚ إِنَّ اللَّهَ لَا يُخْلِفُ الْمِيعَادَ", e: "Our Lord, surely You will gather the people for a Day about which there is no doubt. Indeed, Allah does not fail in His promise.", r: "Surah Al-Imran - 3:9" },
+          { a: "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ", e: "Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire.", r: "Surah Al-Imran - 3:16" },
+          { a: "رَبَّنَا آمَنَّا بِمَا أَنزَلْتَ وَاتَّبَعْنَا الرَّسُولَ فَاكْتُبْنَا مَعَ الشَّاهِدِينَ", e: "Our Lord, we have believed in what You revealed and have followed the messenger, so register us among the witnesses [to truth].", r: "Surah Al-Imran - 3:53" },
+          { a: "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", e: "Our Lord, forgive us our sins and the excess [committed] in our affairs and plant firmly our feet and give us victory over the disbelieving people.", r: "Surah Al-Imran - 3:147" },
+          { a: "رَبَّنَا مَا خَلَقْتَ هَٰذَا بَاطِلًا سُبْحَانَكَ فَقِنَا عَذَابَ النَّارِ", e: "Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire.", r: "Surah Al-Imran - 3:191" },
+          { a: "رَبَّنَا إِنَّكَ مَن تُدْخِلِ النَّارَ فَقَدْ أَخْزَيْتَهُ ۖ وَمَا لِلظَّالِمِينَ مِنْ أَنصَارٍ", e: "Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers.", r: "Surah Al-Imran - 3:192" },
+          { a: "رَّبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا", e: "Our Lord, indeed we have heard a caller calling to faith, [saying], 'Believe in your Lord,' and we have believed.", r: "Surah Al-Imran - 3:193" },
+          { a: "رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ", e: "Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die with the righteous.", r: "Surah Al-Imran - 3:193" },
+          { a: "رَبَّنَا وَآتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ ۗ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ", e: "Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.", r: "Surah Al-Imran - 3:194" },
+          { a: "رَبَّنَا آمَنَّا فَاكْتُبْنَا مَعَ الشَّاهِدِينَ", e: "Our Lord, we have believed, so register us among the witnesses.", r: "Surah Al-Ma'idah - 5:83" },
+          { a: "رَبَّنَا أَنزَلْ عَلَيْنَا مَائِدَةً مِّنَ السَّمَاءِ تَكُونُ لَنَا عِيدًا لِّأَوَّلِنَا وَآخِرِنَا وَآيَةً مِّنكَ ۖ وَارْزُقْنَا وَأَنتَ خَيْرُ الرَّازِقِينَ", e: "Our Lord, send down to us a table [spread with food] from the heaven to be for us a festival for the first of us and the last of us and a sign from You. And provide for us, and You are the best of providers.", r: "Surah Al-Ma'idah - 5:114" },
+          { a: "رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ", e: "Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.", r: "Surah Al-A'raf - 7:23" },
+          { a: "رَبَّنَا لَا تَجْعَلْنَا مَعَ الْقَوْمِ الظَّالِمِينَ", e: "Our Lord, do not place us with the wrongdoing people.", r: "Surah Al-A'raf - 7:47" },
+          { a: "رَبَّنَا افْتَحْ بَيْنَنَا وَبَيْنَ قَوْمِنَا بِالْحَقِّ وَأَنتَ خَيْرُ الْفَاتِحِينَ", e: "Our Lord, decide between us and our people in truth, and You are the best of those who give decision.", r: "Surah Al-A'raf - 7:89" },
+          { a: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ", e: "Our Lord, pour upon us patience and let us die as Muslims [in submission to You].", r: "Surah Al-A'raf - 7:126" },
+          { a: "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلْقَوْمِ الظَّالِمِينَ", e: "Our Lord, make us not [objects of] trial for the wrongdoing people.", r: "Surah Yunus - 10:85" },
+          { a: "رَبَّنَا إِنَّكَ تَعْلَمُ مَا نُخْفِي وَمَا نُعْلِنُ ۗ وَمَا يَخْفَىٰ عَلَى اللَّهِ مِن شَيْءٍ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ", e: "Our Lord, indeed You know what we conceal and what we declare, and nothing is hidden from Allah on the earth or in the heaven.", r: "Surah Ibrahim - 14:38" },
+          { a: "رَبَّنَا وَتَقَبَّلْ دُعَاءِ", e: "Our Lord, and accept my supplication.", r: "Surah Ibrahim - 14:40" },
+          { a: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ", e: "Our Lord, forgive me and my parents and the believers the Day the account is established.", r: "Surah Ibrahim - 14:41" },
+          { a: "رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا", e: "Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.", r: "Surah Al-Kahf - 18:10" },
+          { a: "رَبَّنَا إِنَّنَا نَخَافُ أَن يَفْرُطَ عَلَيْنَا أَوْ أَن يَطْغَىٰ", e: "Our Lord, indeed we are afraid that he will hasten [punishment] against us or that he will transgress.", r: "Surah Ta-Ha - 20:45" },
+          { a: "رَبَّنَا آمَنَّا فَاغْفِرْ لَنَا وَارْحَمْنَا وَأَنتَ خَيْرُ الرَّاحِمِينَ", e: "Our Lord, we have believed, so forgive us and have mercy upon us, and You are the best of the merciful.", r: "Surah Al-Mu'minun - 23:109" },
+          { a: "رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا", e: "Our Lord, avert from us the punishment of Hell. Indeed, its punishment is ever adhering.", r: "Surah Al-Furqan - 25:65" },
+          { a: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا", e: "Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.", r: "Surah Al-Furqan - 25:74" },
+          { a: "رَبَّنَا وَسِعْتَ كُلَّ شَيْءٍ رَّحْمَةً وَعِلْمًا فَاغْفِرْ لِلَّذِينَ تَابُوا وَاتَّبَعُوا سَبِيلَكَ وَقِهِمْ عَذَابَ الْجَحِيمِ", e: "Our Lord, You have encompassed all things in mercy and knowledge, so forgive those who have repented and followed Your way and protect them from the punishment of Hellfire.", r: "Surah Ghafir - 40:7" },
+          { a: "رَبَّنَا وَأَدْخِلْهُمْ جَنَّاتِ عَدْنٍ الَّتِي وَعَدتَّهُمْ وَمَن صَلَحَ مِنْ آبَائِهِمْ وَأَزْوَاجِهِمْ وَذُرِّيَّاتِهِمْ ۚ إِنَّكَ أَنتَ الْعَزِيزُ الْحَكِيمُ", e: "Our Lord, and admit them to gardens of perpetual residence which You have promised them and whoever was righteous among their fathers, their spouses and their offspring. Indeed, it is You who is the Exalted in Might, the Wise.", r: "Surah Ghafir - 40:8" },
+          { a: "رَبَّنَا اكْشِفْ عَنَّا الْعَذَابَ إِنَّا مُؤْمِنُونَ", e: "Our Lord, remove from us the torment; indeed, we are believers.", r: "Surah Ad-Dukhan - 44:12" },
+          { a: "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِّلَّذِينَ آمَنُوا", e: "Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed.", r: "Surah Al-Hashr - 59:10" },
+          { a: "رَبَّنَا إِنَّكَ رَءُوفٌ رَّحِيمٌ", e: "Our Lord, indeed You are Kind and Merciful.", r: "Surah Al-Hashr - 59:10" },
+          { a: "رَّبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ", e: "Our Lord, upon You we have relied, and to You we have returned, and to You is the destination.", r: "Surah Al-Mumtahanah - 60:4" },
+          { a: "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلَّذِينَ كَفَرُوا وَاغْفِرْ لَنَا رَبَّنَا ۖ إِنَّكَ أَنتَ الْعَزِيزُ الْحَكِيمُ", e: "Our Lord, make us not [objects of] torment for the disbelievers and forgive us, our Lord. Indeed, it is You who is the Exalted in Might, the Wise.", r: "Surah Al-Mumtahanah - 60:5" },
+          { a: "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا ۖ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ", e: "Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.", r: "Surah At-Tahrim - 66:8" }
+      ];
+
       const PAGES_DATA = {
         'p1': {
           id: 'p1',
@@ -98,12 +244,15 @@
                  { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، حَسْبِيَ اللَّهُ وَنِعْمَ الْوَكِيلُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ' },
                  { type: 'text', text: 'In the name of Allah, the Most Gracious, the Most Merciful. Praise be to Allah, Lord of the Worlds. Allah is sufficient for me and He is the best Disposer of affairs. There is no power and no strength except with Allah, the Most High, the Magnificent.' },
                  { type: 'hr' },
+                 
                  { type: 'arabic-indopak', text: 'اللَّهُمَّ إِنِّي أَبْرَأُ مِنْ حَوْلِي وَقُوَّتِي إِلَى حَوْلِكَ وَقُوَّتِكَ' },
                  { type: 'text', text: 'O Allah, I disassociate myself from my own power and strength and turn to Your power and strength.' },
                  { type: 'hr' },
-                 { type: 'arabic-indopak', text: 'اللَّهُمَّ إِنِّي أَتَقَرَّبُ إِلَيْكَ بِالصَّلَاةِ عَلَى سَيِّدِنَا مُحَمَّدٍ، عَبْدِكَ وَنَبِيِّكَ وَرَسُولِكَ سَيِّدِ الْمُرْسَلِينَ' },
-                 { type: 'text', text: 'O Allah, I draw near to You by invoking blessings upon our Master Muhammad, Your servant, Your Prophet, and Your Messenger.' },
+
+                 { type: 'arabic-indopak', text: 'اللَّهُمَّ إِنِّي أَتَقَرَّبُ إِلَيْكَ بِالصَّلَاةِ عَلَى سَيِّدِنَا مُحَمَّدٍ، عَبْدِكَ وَنَبِيِّكَ وَرَسُولِكَ سَيِّدِ الْمُرْسَلِينَ، صَلَّى اللَّهُ تَعَالَى وَسَلَّمَ عَلَيْهِ وَعَلَيْهِمْ أَجْمَعِينَ، امْتِثَالاً لِأَمْرِكَ وَتَصْدِيقاً لَهُ وَمَحَبَّةً فِيهِ وَشَوْقاً إِلَيْهِ وَتَعْظِيماً لِقَدْرِهِ، وَلِكَوْنِهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ أَهْلاً لِذَلِكَ' },
+                 { type: 'text', text: 'O Allah, I draw near to You by invoking blessings upon our Master Muhammad, Your servant, Your Prophet, and Your Messenger, the Master of Messengers—may Allah the Exalted bless him and grant him peace, and upon them all—in obedience to Your command, confirming him, out of love for him, longing for him, and honoring his rank, and because he, may Allah bless him and grant him peace, is worthy of that.' },
                  { type: 'hr' },
+
                  { type: 'arabic-indopak', text: 'فَتَقَبَّلْهَا مِنِّي بِفَضْلِكَ، وَاجْعَلْنِي مِنْ عِبَادِكَ الصَّالِحِينَ، وَوَفِّقْنِي لِقِرَاءَتِهَا عَلَى الدَّوَامِ بِجَاهِهِ عِنْدَكَ، وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
                  { type: 'text', text: 'So accept it from me by Your Grace, and make me among Your righteous servants, and grant me success to recite it constantly, by his rank with You. And may Allah bless our Master Muhammad, his family, and his companions all together.' }
               ]
@@ -117,9 +266,16 @@
             {
               variant: 'default',
               content: [
-                ...createNameEntry('1', 'ٱللَّهُ', 'Allah'), ...createNameEntry('2', 'ٱلرَّحْمَـٰنُ', 'The Beneficent'), ...createNameEntry('3', 'ٱلرَّحِيمُ', 'The Merciful'),
-                // (Names continue here...)
-                ...createNameEntry('99', 'ٱلصَّبُورُ', 'The Patient')
+                ...createNameEntry('1', 'ٱللَّهُ', 'Allah'), ...createNameEntry('2', 'ٱلرَّحْمَـٰنُ', 'The Beneficent'), ...createNameEntry('3', 'ٱلرَّحِيمُ', 'The Merciful'), ...createNameEntry('4', 'ٱلْمَلِكُ', 'The King'), ...createNameEntry('5', 'ٱلْقُدُّوسُ', 'The Most Sacred'), ...createNameEntry('6', 'ٱلسَّلَـٰمُ', 'The Source of Peace'), ...createNameEntry('7', 'ٱلْمُؤْمِنُ', 'The Faithful'), ...createNameEntry('8', 'ٱلْمُهَيْمِنُ', 'The Guardian'), ...createNameEntry('9', 'ٱلْعَزِيزُ', 'The Almighty'), ...createNameEntry('10', 'ٱلْجَبَّارُ', 'The Compeller'),
+                ...createNameEntry('11', 'ٱلْمُتَكَبِّرُ', 'The Supreme'), ...createNameEntry('12', 'ٱلْخَـٰلِقُ', 'The Creator'), ...createNameEntry('13', 'ٱلْبَارِئُ', 'The Originator'), ...createNameEntry('14', 'ٱلْمُصَوِّرُ', 'The Fashioner'), ...createNameEntry('15', 'ٱلْغَفَّارُ', 'The All-Forgiving'), ...createNameEntry('16', 'ٱلْقَهَّارُ', 'The All-Victorious'), ...createNameEntry('17', 'ٱلْوَهَّابُ', 'The Giver'), ...createNameEntry('18', 'ٱلرَّزَّاقُ', 'The Provider'), ...createNameEntry('19', 'ٱلْفَتَّاحُ', 'The Opener'), ...createNameEntry('20', 'ٱلْعَلِيمُ', 'The All-Knowing'),
+                ...createNameEntry('21', 'ٱلْقَابِضُ', 'The Withholder'), ...createNameEntry('22', 'ٱلْبَاسِطُ', 'The Expander'), ...createNameEntry('23', 'ٱلْخَافِضُ', 'The Humbler'), ...createNameEntry('24', 'ٱلرَّافِعُ', 'The Elevator'), ...createNameEntry('25', 'ٱلْمُعِزُّ', 'The Honourer'), ...createNameEntry('26', 'ٱلْمُذِلُّ', 'The Dishonourer'), ...createNameEntry('27', 'ٱلسَّمِيعُ', 'The All-Hearing'), ...createNameEntry('28', 'ٱلْبَصِيرُ', 'The All-Seeing'), ...createNameEntry('29', 'ٱلْحَكَمُ', 'The Judge'), ...createNameEntry('30', 'ٱلْعَدْلُ', 'The Just'),
+                ...createNameEntry('31', 'ٱللَّطِيفُ', 'The Subtle'), ...createNameEntry('32', 'ٱلْخَبِيرُ', 'The All-Aware'), ...createNameEntry('33', 'ٱلْحَلِيمُ', 'The Forbearing'), ...createNameEntry('34', 'ٱلْعَظِيمُ', 'The Magnificent'), ...createNameEntry('35', 'ٱلْغَفُورُ', 'The Forgiving'), ...createNameEntry('36', 'ٱلشَّكُورُ', 'The Grateful'), ...createNameEntry('37', 'ٱلْعَلِىُّ', 'The High'), ...createNameEntry('38', 'ٱلْكَبِيرُ', 'The Great'), ...createNameEntry('39', 'ٱلْحَفِيظُ', 'The Guardian'), ...createNameEntry('40', 'ٱلْمُقِيتُ', 'The Nourisher'),
+                ...createNameEntry('41', 'ٱلْحَسِيبُ', 'The Reckoner'), ...createNameEntry('42', 'ٱلْجَلِيلُ', 'The Majestic'), ...createNameEntry('43', 'ٱلْكَرِيمُ', 'The Generous'), ...createNameEntry('44', 'ٱلرَّقِيبُ', 'The Watcher'), ...createNameEntry('45', 'ٱلْمُجِيبُ', 'The Answerer'), ...createNameEntry('46', 'ٱلْوَاسِعُ', 'The Vast'), ...createNameEntry('47', 'ٱلْحَكِيمُ', 'The Wise'), ...createNameEntry('48', 'ٱلْوَدُودُ', 'The Loving'), ...createNameEntry('49', 'ٱلْمَجِيدُ', 'The Glorious'), ...createNameEntry('50', 'ٱلْبَاعِثُ', 'The Resurrector'),
+                ...createNameEntry('51', 'ٱلشَّهِيدُ', 'The Witness'), ...createNameEntry('52', 'ٱلْحَقُّ', 'The Truth'), ...createNameEntry('53', 'ٱلْوَكِيلُ', 'The Trustee'), ...createNameEntry('54', 'ٱلْقَوِىُّ', 'The Strong'), ...createNameEntry('55', 'ٱلْمَتِينُ', 'The Firm'), ...createNameEntry('56', 'ٱلْوَلِىُّ', 'The Protecting Friend'), ...createNameEntry('57', 'ٱلْحَمِيدُ', 'The Praiseworthy'), ...createNameEntry('58', 'ٱلْمُحْصِى', 'The Counter'), ...createNameEntry('59', 'ٱلْمُبْدِئُ', 'The Originator'), ...createNameEntry('60', 'ٱلْمُعِيدُ', 'The Returner'),
+                ...createNameEntry('61', 'ٱلْمُحْيِى', 'The Reviver'), ...createNameEntry('62', 'ٱلْمُمِيتُ', 'The Giver of Death'), ...createNameEntry('63', 'ٱلْحَىُّ', 'The Living'), ...createNameEntry('64', 'ٱلْقَيُّومُ', 'The Self-Sustaining'), ...createNameEntry('65', 'ٱلْوَاجِدُ', 'The Perceiver'), ...createNameEntry('66', 'ٱلْمَاجِدُ', 'The Illustrious'), ...createNameEntry('67', 'ٱلْوَاحِدُ', 'The One'), ...createNameEntry('68', 'ٱلصَّمَدُ', 'The Eternal'), ...createNameEntry('69', 'ٱلْقَادِرُ', 'The All-Powerful'), ...createNameEntry('70', 'ٱلْمُقْتَدِرُ', 'The Omnipotent'),
+                ...createNameEntry('71', 'ٱلْمُقَدِّمُ', 'The Advancer'), ...createNameEntry('72', 'ٱلْمُؤَخِّرُ', 'The Deferrer'), ...createNameEntry('73', 'ٱلْأَوَّلُ', 'The First'), ...createNameEntry('74', 'ٱلْآخِرُ', 'The Last'), ...createNameEntry('75', 'ٱلظَّاهِرُ', 'The Manifest'), ...createNameEntry('76', 'ٱلْبَاطِنُ', 'The Hidden'), ...createNameEntry('77', 'ٱلْوَالِى', 'The Patron'), ...createNameEntry('78', 'ٱلْمُتَعَالِى', 'The Self-Exalted'), ...createNameEntry('79', 'ٱلْبَرُّ', 'The Benign'), ...createNameEntry('80', 'ٱلتَّوَّابُ', 'The Acceptor of Repentance'),
+                ...createNameEntry('81', 'ٱلْمُنتَقِمُ', 'The Avenger'), ...createNameEntry('82', 'ٱلْعَفُوُّ', 'The Pardoner'), ...createNameEntry('83', 'ٱلرَّءُوفُ', 'The Compassionate'), ...createNameEntry('84', 'مَالِكُ ٱلْمُلْكِ', 'The Possessor of the Kingdom'), ...createNameEntry('85', 'ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ', 'Lord of Majesty and Honour'), ...createNameEntry('86', 'ٱلْمُقْسِطُ', 'The Equitable'), ...createNameEntry('87', 'ٱلْجَامِعُ', 'The Gatherer'), ...createNameEntry('88', 'ٱلْغَنِىُّ', 'The Rich'), ...createNameEntry('89', 'ٱلْمُغْنِى', 'The Enricher'),
+                ...createNameEntry('90', 'ٱلْمَانِعُ', 'The Withholder'), ...createNameEntry('91', 'ٱلضَّارُّ', 'The Afflicter'), ...createNameEntry('92', 'ٱلنَّافِعُ', 'The Benefactor'), ...createNameEntry('93', 'ٱلنُّورُ', 'The Light'), ...createNameEntry('94', 'ٱلْهَادِى', 'The Guide'), ...createNameEntry('95', 'ٱلْبَدِيعُ', 'The Originator'), ...createNameEntry('96', 'ٱلْبَاقِى', 'The Everlasting'), ...createNameEntry('97', 'ٱلْوَارِثُ', 'The Heir'), ...createNameEntry('98', 'ٱلرَّشِيدُ', 'The Guide to the Right Path'), ...createNameEntry('99', 'ٱلصَّبُورُ', 'The Patient')
               ]
             }
           ]
@@ -131,9 +287,16 @@
             {
                variant: 'default',
                content: [
-                 ...createProphetName('1', 'مُحَمَّدٌ', 'Muhammad (Praiseworthy)'), 
-                 // (Names continue here...)
-                 ...createProphetName('99', 'سَيِّدُ الْكَوْنَيْنِ', 'Sayyid al-Kawnayn (Master of Two Worlds)')
+                 ...createProphetName('1', 'مُحَمَّدٌ', 'Muhammad (Praiseworthy)'), ...createProphetName('2', 'أَحْمَدُ', 'Ahmad (Most Commendable)'), ...createProphetName('3', 'حَامِدٌ', 'Hamid (Praiser)'), ...createProphetName('4', 'مَحْمُودٌ', 'Mahmud (Praised)'), ...createProphetName('5', 'قَاسِمٌ', 'Qasim (Distributor)'), ...createProphetName('6', 'عَاقِبٌ', 'Aqib (The Last in Succession)'), ...createProphetName('7', 'فَاتِحٌ', 'Fatih (The Opener)'), ...createProphetName('8', 'شَاهِدٌ', 'Shahid (Witness)'), ...createProphetName('9', 'حَاشِرٌ', 'Hashir (Gatherer)'), ...createProphetName('10', 'رَشِيدٌ', 'Rashid (Guide)'),
+                 ...createProphetName('11', 'مَشْهُودٌ', 'Mashhud (Witnessed)'), ...createProphetName('12', 'بَشِيرٌ', 'Bashir (Bearer of Good News)'), ...createProphetName('13', 'نَذِيرٌ', 'Nadhir (Warner)'), ...createProphetName('14', 'دَاعٍ', 'Da’i (Caller)'), ...createProphetName('15', 'شَافٍ', 'Shafi (Healer)'), ...createProphetName('16', 'هَادٍ', 'Hadi (Guide)'), ...createProphetName('17', 'مَهْدِيٌّ', 'Mahdi (Guided)'), ...createProphetName('18', 'مَاحٍ', 'Mahi (Eraser of Disbelief)'), ...createProphetName('19', 'مُنْجٍ', 'Munji (Saviour)'), ...createProphetName('20', 'نَاهٍ', 'Nahi (Prohibitor)'),
+                 ...createProphetName('21', 'رَسُولٌ', 'Rasul (Messenger)'), ...createProphetName('22', 'نَبِيٌّ', 'Nabi (Prophet)'), ...createProphetName('23', 'أُمِّيٌّ', 'Ummi (Unlettered)'), ...createProphetName('24', 'تِهَامِيٌّ', 'Tihami (Of Tihamah)'), ...createProphetName('25', 'هَاشِمِيٌّ', 'Hashimi (Of Hashim)'), ...createProphetName('26', 'أَبْطَحِيٌّ', 'Abtahi (Of Abtah)'), ...createProphetName('27', 'عَزِيزٌ', 'Aziz (Noble/Dear)'), ...createProphetName('28', 'حَرِيصٌ', 'Haris (Concerned)'), ...createProphetName('29', 'رَءُوفٌ', 'Ra’uf (Compassionate)'), ...createProphetName('30', 'رَحِيمٌ', 'Rahim (Merciful)'),
+                 ...createProphetName('31', 'ثَاقِبٌ', 'Thaqib (Piercing Star)'), ...createProphetName('32', 'مُقْتَفٍ', 'Muqtafi (Follower of Truth)'), ...createProphetName('33', 'مُقَفِّي', 'Muqaffi (The Last Prophet)'), ...createProphetName('34', 'قَائِدٌ', 'Qaid (Leader)'), ...createProphetName('35', 'وَدُودٌ', 'Wadud (Loving)'), ...createProphetName('36', 'مُهَيْمِنٌ', 'Muhaimin (Guardian)'), ...createProphetName('37', 'صَادِقٌ', 'Sadiq (Truthful)'), ...createProphetName('38', 'مُصَدَّقٌ', 'Musaddaq (Confirmed)'), ...createProphetName('39', 'مُجْتَبَى', 'Mujtaba (Chosen)'), ...createProphetName('40', 'مُصْطَفَى', 'Mustafa (Chosen One)'),
+                 ...createProphetName('41', 'مُرْتَضَى', 'Murtada (Pleasing)'), ...createProphetName('42', 'مَنْصُورٌ', 'Mansur (Victorious)'), ...createProphetName('43', 'نَاصِرٌ', 'Nasir (Helper)'), ...createProphetName('44', 'كَلِيمٌ', 'Kalim (Speaker)'), ...createProphetName('45', 'أَمِينٌ', 'Amin (Trustworthy)'), ...createProphetName('46', 'نُورٌ', 'Nur (Light)'), ...createProphetName('47', 'سِرَاجٌ', 'Siraj (Lamp)'), ...createProphetName('48', 'مُنِيرٌ', 'Munir (Illuminating)'), ...createProphetName('49', 'مُبِينٌ', 'Mubin (Clear)'), ...createProphetName('50', 'وَاصِلٌ', 'Wasil (Connector)'),
+                 ...createProphetName('51', 'مُذَكِّرٌ', 'Mudhakkir (Reminder)'), ...createProphetName('52', 'مَكِينٌ', 'Makin (Firm)'), ...createProphetName('53', 'مَتِينٌ', 'Matin (Strong)'), ...createProphetName('54', 'شَاكِرٌ', 'Shakir (Grateful)'), ...createProphetName('55', 'شَكُورٌ', 'Shakur (Most Grateful)'), ...createProphetName('56', 'قَرِيبٌ', 'Qarib (Near)'), ...createProphetName('57', 'بَعِيدٌ', 'Ba’id (Far from Sin)'), ...createProphetName('58', 'شَفِيعٌ', 'Shafi (Intercessor)'), ...createProphetName('59', 'مُشَفَّعٌ', 'Mushaffa (Accepted Intercessor)'), ...createProphetName('60', 'خَلِيلٌ', 'Khalil (Friend)'),
+                 ...createProphetName('61', 'حَقٌّ', 'Haqq (Truth)'), ...createProphetName('62', 'مُخْتَارٌ', 'Mukhtar (Chosen)'), ...createProphetName('63', 'طه', 'Ta-Ha'), ...createProphetName('64', 'يس', 'Ya-Sin'), ...createProphetName('65', 'مُزَّمِّلٌ', 'Muzzammil (Wrapped)'), ...createProphetName('66', 'مُدَّثِّرٌ', 'Muddathir (Covered)'), ...createProphetName('67', 'سَيِّدٌ', 'Sayyid (Master)'), ...createProphetName('68', 'مَاجِدٌ', 'Majid (Noble)'), ...createProphetName('69', 'عَفُوٌّ', 'Afuw (Pardoner)'), ...createProphetName('70', 'وَلِيٌّ', 'Wali (Friend/Protector)'),
+                 ...createProphetName('71', 'صَاحِبٌ', 'Sahib (Companion)'), ...createProphetName('72', 'بُرْهَانٌ', 'Burhan (Proof)'), ...createProphetName('73', 'حُجَّةٌ', 'Hujjah (Evidence)'), ...createProphetName('74', 'مُبَلِّغٌ', 'Muballigh (Conveyer)'), ...createProphetName('75', 'مُطِيعٌ', 'Muti (Obedient)'), ...createProphetName('76', 'مُطَاعٌ', 'Muta (Obeyed)'), ...createProphetName('77', 'عَادِلٌ', 'Adil (Just)'), ...createProphetName('78', 'مُقْتَصِدٌ', 'Muqtasid (Moderate)'), ...createProphetName('79', 'مُهْتَدٍ', 'Muhtad (Guided)'), ...createProphetName('80', 'أَوَّلٌ', 'Awwal (First)'),
+                 ...createProphetName('81', 'آخِرٌ', 'Akhir (Last)'), ...createProphetName('82', 'ظَاهِرٌ', 'Zahir (Manifest)'), ...createProphetName('83', 'بَاطِنٌ', 'Batin (Hidden)'), ...createProphetName('84', 'يَتِيمٌ', 'Yatim (Orphan)'), ...createProphetName('85', 'طَيِّبٌ', 'Tayyib (Good)'), ...createProphetName('86', 'مُصْلِحٌ', 'Muslih (Reformer)'), ...createProphetName('87', 'فَصِيحٌ', 'Fasih (Eloquent)'), ...createProphetName('88', 'خَطِيبٌ', 'Khatib (Orator)'), ...createProphetName('89', 'إِمَامٌ', 'Imam (Leader)'), ...createProphetName('90', 'قَيِّمٌ', 'Qayyim (Guardian)'),
+                 ...createProphetName('91', 'جَوَادٌ', 'Jawad (Generous)'), ...createProphetName('92', 'كَرِيمٌ', 'Karim (Noble)'), ...createProphetName('93', 'مُبَارَكٌ', 'Mubarak (Blessed)'), ...createProphetName('94', 'مُؤَمَّلٌ', 'Mu’ammal (Hoped for)'), ...createProphetName('95', 'زَكِيٌّ', 'Zaki (Pure)'), ...createProphetName('96', 'رَاضٍ', 'Radi (Content)'), ...createProphetName('97', 'عَيْنُ الْغُرِّ', 'Ayn al-Ghurr (Chief of the Noble)'), ...createProphetName('98', 'عَيْنُ النَّعِيمِ', 'Ayn al-Na’im (Source of Bliss)'), ...createProphetName('99', 'سَيِّدُ الْكَوْنَيْنِ', 'Sayyid al-Kawnayn (Master of Two Worlds)')
                ]
             }
           ]
@@ -148,15 +311,41 @@
                 { type: 'section-title', text: 'Supplications Before Salam' }, 
                 { type: 'text', text: 'After the Tashahhud and Salawat, one should make a supplication such as:' }, 
                 { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْلِي وَلِوَالِدَيَّ وَلِمَنْ تَوَالَدَ وَلِجَمِيعِ الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ وَالْمُسْلِمِينَ وَالْمُسْلِمَاتِ الْأَحْيَاءِ مِنْهُمْ وَالْأَمْوَاتِ إِنَّكَ مُجِيبُ الدَّعَوَاتِ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ' }, 
-                { type: 'text', text: '"O Allah, forgive me and my parents and all those who are born and all the believing men and women, those who have submitted from the males and females, those of them who are alive and those who have died. Verily, You are the One Who answers prayers... through Your Mercy, O the Most Merciful of those who show mercy."' } 
+                { type: 'text', text: '"O Allah, forgive me and my parents and all those who are born and all the believing men and women, those who have submitted from the males and females, those of them who are alive and those who have died. Verily, You are the One Who answers prayers... through Your Mercy, O the Most Merciful of those who show mercy."' }, 
+                { type: 'hr' }, 
+                { type: 'text', text: 'Or pray:' }, 
+                { type: 'arabic', text: 'اللَّهُمَّ رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ' }, 
+                { type: 'text', text: '"O Allah, my Lord. Make me establish the prayer, and my offspring; O our Lord! Accept my prayer. O our Lord! Forgive me, and my parents, and all the believers on the Day when Reckoning will take place."' } 
+              ] 
+            }, 
+            { 
+              variant: 'default', 
+              content: [ 
+                { type: 'section-title', text: 'Comprehensive Dua After Salah' }, 
+                { type: 'arabic', text: 'ٱلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ' },
+                { type: 'text', text: 'All praise is due to Allah Taala, Creator of all the worlds.' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'وَٱلصَّلَاةُ وَٱلسَّلَامُ عَلَىٰ رَسُولِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+                { type: 'text', text: 'May peace and blessings be upon Prophet Muhammed ‘alayhis-salam, and on his blessed family and noble companions.' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'ٱللّٰهُمَّ ٱغْفِرْ وَٱرْحَمْ وَأَنْتَ خَيْرُ ٱلرَّاحِمِينَ، تَوَفَّنِي مُسْلِمًا وَأَلْحِقْنِي بِٱلصَّالِحِينَ' },
+                { type: 'text', text: 'Oh Allah! Accept the salat that I have performed! Make my last breath be by saying Kalimat ash-Shahada and my migration to the Hereafter be with iman. Forgive and pardon my relatives that have died. Cause me to die as a Muslim and join the righteous.' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'ٱللّٰهُمَّ ٱغْفِرْ لِي وَلِوَالِدَيَّ وَلِأُسْتَاذِيَّ وَلِلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ يَوْمَ يَقُومُ ٱلْحِسَابُ' },
+                { type: 'text', text: 'Oh Allah! Protect me from the evil of Satan, the evil of enemies and the evil of my nafs! Grant goodness, halal and auspicious sustenance to our home! Grant salvation to Muslims! Make the enemies of Muslims wretched and dispersed! With Your Divine Help, help Muslims that are making jihad against unbelievers!' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'ٱللّٰهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ ٱلْعَفْوَ فَٱعْفُ عَنِّي' },
+                { type: 'text', text: 'Oh Allah! You are the One who pardons and forgives. You love to pardon, pardon me. Grant recovery to the ill among us, grant relief to those who are with difficulties among us!' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'ٱللّٰهُمَّ إِنِّي أَسْأَلُكَ ٱلصِّحَّةَ وَٱلْعَافِيَةَ وَٱلْأَمَانَةَ وَحُسْنَ ٱلْخُلُقِ وَٱلرِّضَاءَ بِٱلْقَدَرِ بِرَحْمَتِكَ يَا أَرْحَمَ ٱلرَّاحِمِينَ، آمِينَ' },
+                { type: 'text', text: 'Oh Allah! Grant a beneficial life, good morals, sound mind, afiyat and istiqama — being on the correct, true path which Allahu Taala likes — to my parents and to my children and to my relatives and to my friends and to all Muslims. Amin!' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'ٱلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، وَٱلصَّلَاةُ وَٱلسَّلَامُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+                { type: 'text', text: 'Closing praise and salawat as you began, repeating Alhamdulillah and Salawat upon the Prophet ﷺ.' }
               ] 
             } 
           ] 
         },
-        
-        // ============================================
-        // PAGE 5: VISITING GRAVES (ALL CONTENT IS HERE)
-        // ============================================
         'p5': {
           id: 'p5',
           title: 'Duas when Visiting Graves',
@@ -165,64 +354,81 @@
               variant: 'default',
               content: [
                 { type: 'section-title', text: 'Manner and Method of Visiting Graves' },
-                { type: 'text', text: '1. One should approach the grave from the feet side...' },
-                { type: 'arabic', text: 'السَّلَامُ عَلَيْكُمْ أَهْلَ دَارِ قَوْمٍ مُؤْمِنِينَ أَنْتُمْ لَنَا سَلَفٌ وَ إِنَّا إِنْ شَاءَ اللهُ بِكُمْ لَاحِقُوْنَ' },
-                { type: 'text', text: '"Peace be upon you, O dwellers of the homes of the believers..."' }
+                { type: 'text', text: '1. One should approach the grave from the feet side and then stand towards the face of the occupant of the grave. One should not approach from the head side, as this is a cause for discomfort to the deceased, as the deceased will have to turn the neck to see who is approaching. [Radd al-Muhtar, Bahar]' },
+                { type: 'text', text: '2. Then one should greet with the following words:' },
+                { type: 'arabic', text: 'السَّلَامُ عَلَيْكُمْ أَهْلَ دَارِ قَوْمٍ مُؤْمِنِينَ أَنْتُمْ لَنَا سَلَفٌ وَ إِنَّا إِنْ شَاءَ اللهُ بِكُمْ لَاحِقُوْنَ نَسْأَلُ اللهَ لَنَا وَلَكُمُ الْعَفْوَ وَالْعَافِيَةَ يَرْحَمُ اللهُ الْمُسْتَقْدِمِيْنَ مِنَّا وَالْمُسْتَأْخِرِيْنَ اللَّهُمَّ رَبَّ الْأَرْوَاحِ الْفَانِيَةِ وَالْأَجْسَادِ وَالْبَالِيَةِ وَالْعِظَامِ النَّخِرَةِ أَدْخِلْ هَذِهِ الْقُبُورِ مِنْكَ رَوْحًا وَرَيْحَانًا وَمِنَّا تَحِيَّةً وَسَلَامًا' },
+                { type: 'text', text: '"Peace be upon you, O dwellers of the homes of the believers, You are our predecessors and Allah-Willing We are to meet with you. We ask Allah for pardon and well-being for us and you. May Allah have Mercy upon those who preceded us (predecessors) and those who will follow (successors). O Allah, the Sustainer of the ending souls, and decomposed bodies and disintegrated bones, from You, fill these graves with freshness and fragrance, and send from us greetings and peace upon them."' }
               ]
             },
             {
               variant: 'default',
               content: [
-                { type: 'text', text: 'Prayer to avoid the torture of the grave...' },
-                { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nاللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشِّرْكِ وَالْكُفْرِ وَالْفَقْرِ...' },
-                { type: 'text', text: '"In the name of Allah... O Allah! I seek refuge in You from polytheism..."' }
+                { type: 'text', text: 'Prayer to avoid the torture of the grave and the slander of the grave, and so that the body is not eaten by the earth while in the grave', style: 'font-bold text-center' },
+                { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nاللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشِّرْكِ وَالْكُفْرِ وَالْفَقْرِ فَاغْفِرْ لِي وَارْحَمْنِي وَأَكْثِرْ أَمْوَالِي وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ وَفِتْنَتِهِ فَحَرِّمْ جَسَدِي عَلَى الْأَرْضِ وَمَا فِيهَا وَأَعُوذُ بِكَ مِنَ الْحِسَابِ وَعَذَابِ النَّارِ فَأَدْخِلْنَا الْجَنَّةَ بِغَيْرِ حِسَابٍ يَا حَيُّ يَا قَيُّومُ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ يَا أَرْحَمَ الرَّاحِمِينَ' },
+                { type: 'hr' },
+                { type: 'text', text: '"In the name of Allah, the Most Gracious, the Most Merciful. O Allah! I seek refuge in You from polytheism, disbelief, and poverty. So forgive me, have mercy on me, and increase my wealth. And I seek refuge in You from the punishment of the grave and its trials. So forbid my body to the earth and whatever is in it. And I seek refuge in You from the Reckoning and the punishment of the Fire. So admit us into Paradise without reckoning. O Ever-Living, O Self-Subsisting, O Possessor of Majesty and Honor, O Most Merciful of the merciful."' }
               ]
             },
-            // SURAH YASIN (Expanded here so you can edit it easily)
             {
               variant: 'default',
               content: [
                  { type: 'section-title', text: 'Surah Yasin (The Heart of Quran)' },
+                 { type: 'text', text: 'Reciting Surah Yasin for the deceased is highly recommended.' },
                  { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ', style: 'text-center text-3xl mb-6' },
-                 { type: 'arabic-indopak', text: "يٰسٓ", number: "1" }, { type: 'text', text: "Yaa-Seen" }, { type: 'hr' },
-                 { type: 'arabic-indopak', text: "وَالۡقُرۡاٰنِ الۡحَكِيۡمِ", number: "2" }, { type: 'text', text: "By oath of the wise Qur’an." }, { type: 'hr' },
-                 { type: 'arabic-indopak', text: "اِنَّكَ لَمِنَ الۡمُرۡسَلِيۡنَ", number: "3" }, { type: 'text', text: "You are indeed one of the Messengers." }, { type: 'hr' },
-                 { type: 'arabic-indopak', text: "عَلٰى صِرَاطٍ مُّسۡتَقِيۡمٍ", number: "4" }, { type: 'text', text: "On the Straight Path." }, { type: 'hr' },
-                 // (You can add more Yasin verses here by copying the lines above)
-                 { type: 'text', text: "... (Recite full Surah Yasin) ...", style: 'text-center italic opacity-70' }
+                 ...SURAH_YASIN_DATA.flatMap((verse, idx) => [
+                     { 
+                       type: 'arabic-indopak', 
+                       text: verse.a,
+                       number: (idx + 1).toString(),
+                       style: 'text-center text-2xl leading-loose mt-4' 
+                     },
+                     { 
+                       type: 'text', 
+                       text: verse.e,
+                       style: 'text-center text-sm opacity-80 leading-relaxed mb-6' 
+                     },
+                     { type: 'hr' }
+                 ])
               ]
             },
-            // NEW SECTION: METHOD OF FATIHA (This is what you wanted added)
             {
               variant: 'default',
               content: [
                 { type: 'section-title', text: 'Method of Fatiha (Isaal-e-Sawaab)' },
-                
+                { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ', style: 'text-center text-2xl mb-6' },
+
                 { type: 'text', text: '1. Recite Durood Sharif (any)', style: 'font-bold' },
                 { type: 'arabic-indopak', text: 'اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَّ عَلَى اٰلِ سَيِّدِنَا مُحَمَّدٍ عَدَدَ مَا فِيْ عِلْمِ اللهِ صَلَوٰةً دَآئِمَةً بِدَوَامِ مُلْكِ اللهِ' },
+                { type: 'text', text: '(You can pray any durood as you wish)', style: 'text-center text-sm opacity-80' },
                 { type: 'hr' },
 
                 { type: 'text', text: '2. Recite Surah Kaafiroon (once)', style: 'font-bold' },
+                { type: 'arabic-indopak', text: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ\nبِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-indopak', text: 'قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ لَكُمْ دِينُكُمْ وَلِيَ دِينِ ۝' },
                 { type: 'hr' },
 
                 { type: 'text', text: '3. Recite Surah Ikhlaas (three times)', style: 'font-bold' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-indopak', text: 'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ۝' },
                 { type: 'hr' },
 
                 { type: 'text', text: '4. Recite Surah Falaq (once)', style: 'font-bold' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-indopak', text: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ۝' },
                 { type: 'hr' },
 
                 { type: 'text', text: '5. Recite Surah Naas (once)', style: 'font-bold' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-indopak', text: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ ۝' },
                 { type: 'hr' },
 
                 { type: 'text', text: '6. Recite Surah Fatiha (once)', style: 'font-bold' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-indopak', text: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ۝' },
                 { type: 'hr' },
 
-                { type: 'text', text: '7. Recite Surah Baqarah verses (once)', style: 'font-bold' },
+                { type: 'text', text: '7. Recite the following verses of Surah Baqarah, (once)', style: 'font-bold' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-indopak', text: 'الم ۝ ذَلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ ۝ الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ ۝ وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ ۝ أُولَئِكَ عَلَى هُدًى مِّن رَّبِّهِمْ وَأُولَئِكَ هُمُ الْمُفْلِحُونَ ۝' },
                 { type: 'hr' },
 
@@ -234,7 +440,7 @@
                 { type: 'arabic-indopak', text: 'اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلَا يَئُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ ۝' },
                 { type: 'hr' },
 
-                { type: 'text', text: '10. Recite Last verses of Baqarah (once)', style: 'font-bold' },
+                { type: 'text', text: '10. Recite Last verses of Surah Baqarah (once)', style: 'font-bold' },
                 { type: 'arabic-indopak', text: 'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ وَقَالُوا سَمِعْنَا وَأَطَعْنَا غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ۝ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ ۝' },
                 { type: 'hr' },
 
@@ -267,11 +473,13 @@
                 { type: 'hr' },
 
                 { type: 'section-title', text: 'Say "Al-Fatiha"' },
-                { type: 'text', text: 'Pray 3 times Durood Sharif, Surah Fatiha and 3 times Durood and then send rewards...' },
+                { type: 'text', text: 'Pray 3 times Durood Sharif, Surah Fatiha and 3 times Durood and then send rewards to Prophet, Sahaba, Ahle Bait, Taba-een, Tabe Tabaeen, Awliya, your family friends and especially whom you are praying Fatiha for.' },
                 { type: 'hr' },
 
                 { type: 'section-title', text: 'Sending Isaal e Sawaab' },
-                { type: 'text', text: '"Oh Allah! Whatever I recited, I did so just for You and to please You..."' },
+                { type: 'text', text: '"Oh Allah! Whatever I recited, I did so just for You and to please You. Accept my supplication in your revered Kingdom. If there has been any mistakes in my recitation, forgive me with Your Mercy. And whatever Reward You have accorded to the recitation, I offer to the soul of our Beloved Prophet Hazrat Muhammad Mustafa (sallAllaahu Alaihi Wassallam), and all the Ambiya, all the Ahle Bayt, the Awliya Allah, the Shohadah, all Muslims and thereafter all relations (taking their names)"' },
+                { type: 'text', text: 'Make duas through Waseela of RasulAllah SalAllahu Alaihe Wasallam and through Sadqa of all the pious. Especially through Sayyadina Shaikh Abdul Qadir Jilani RadiAllahu Anh.', style: 'mt-4' },
+                { type: 'text', text: 'Make plenty of duas, sincere repentance and pray for the entire Ummah etc. and then finish the Fateha reciting the following:', style: 'mt-4' },
                 { type: 'hr' },
 
                 { type: 'text', text: '17. Then, recite following (once)', style: 'font-bold' },
@@ -288,7 +496,6 @@
             }
           ]
         },
-
         'p6': {
           id: 'p6',
           title: 'Prayers of the Prophet ﷺ',
@@ -1071,242 +1278,53 @@
               {
                   variant: 'green',
                   content: [
-                      { type: 'arabic-green', text: "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, accept [this] from us. Indeed You are the Hearing, the Knowing.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:127", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَا أُمَّةً مُّسْلِمَةً لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبْ عَلَيْنَا ۖ إِنَّكَ أَنتَ التَّوَّابُ الرَّحِيمُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, and make us Muslims [in submission] to You and from our descendants a Muslim nation [in submission] to You. And show us our rites and accept our repentance. Indeed, You are the Accepting of repentance, the Merciful.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:128", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:201", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:250", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, do not impose blame upon us if we have forgotten or erred.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:286", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, and lay not upon us a burden like that which You laid upon those before us.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:286", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:286", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:8", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا إِنَّكَ جَامِعُ النَّاسِ لِيَوْمٍ لَّا رَيْبَ فِيهِ ۚ إِنَّ اللَّهَ لَا يُخْلِفُ الْمِيعَادَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, surely You will gather the people for a Day about which there is no doubt. Indeed, Allah does not fail in His promise.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:9", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:16", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا آمَنَّا بِمَا أَنزَلْتَ وَاتَّبَعْنَا الرَّسُولَ فَاكْتُبْنَا مَعَ الشَّاهِدِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, we have believed in what You revealed and have followed the messenger, so register us among the witnesses [to truth].", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:53", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, forgive us our sins and the excess [committed] in our affairs and plant firmly our feet and give us victory over the disbelieving people.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:147", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا مَا خَلَقْتَ هَٰذَا بَاطِلًا سُبْحَانَكَ فَقِنَا عَذَابَ النَّارِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:191", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا إِنَّكَ مَن تُدْخِلِ النَّارَ فَقَدْ أَخْزَيْتَهُ ۖ وَمَا لِلظَّالِمِينَ مِنْ أَنصَارٍ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:192", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَّبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, indeed we have heard a caller calling to faith, [saying], 'Believe in your Lord,' and we have believed.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:193", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die with the righteous.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:193", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَآتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ ۗ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Imran - 3:194", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا آمَنَّا فَاكْتُبْنَا مَعَ الشَّاهِدِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, we have believed, so register us among the witnesses.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Ma'idah - 5:83", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا أَنزَلْ عَلَيْنَا مَائِدَةً مِّنَ السَّمَاءِ تَكُونُ لَنَا عِيدًا لِّأَوَّلِنَا وَآخِرِنَا وَآيَةً مِّنكَ ۖ وَارْزُقْنَا وَأَنتَ خَيْرُ الرَّازِقِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, send down to us a table [spread with food] from the heaven to be for us a festival for the first of us and the last of us and a sign from You. And provide for us, and You are the best of providers.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Ma'idah - 5:114", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-A'raf - 7:23", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا لَا تَجْعَلْنَا مَعَ الْقَوْمِ الظَّالِمِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, do not place us with the wrongdoing people.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-A'raf - 7:47", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا افْتَحْ بَيْنَنَا وَبَيْنَ قَوْمِنَا بِالْحَقِّ وَأَنتَ خَيْرُ الْفَاتِحِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, decide between us and our people in truth, and You are the best of those who give decision.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-A'raf - 7:89", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, pour upon us patience and let us die as Muslims [in submission to You].", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-A'raf - 7:126", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلْقَوْمِ الظَّالِمِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, make us not [objects of] trial for the wrongdoing people.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Yunus - 10:85", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا إِنَّكَ تَعْلَمُ مَا نُخْفِي وَمَا نُعْلِنُ ۗ وَمَا يَخْفَىٰ عَلَى اللَّهِ مِن شَيْءٍ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, indeed You know what we conceal and what we declare, and nothing is hidden from Allah on the earth or in the heaven.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ibrahim - 14:38", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَتَقَبَّلْ دُعَاءِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, and accept my supplication.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ibrahim - 14:40", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, forgive me and my parents and the believers the Day the account is established.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ibrahim - 14:41", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Kahf - 18:10", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا إِنَّنَا نَخَافُ أَن يَفْرُطَ عَلَيْنَا أَوْ أَن يَطْغَىٰ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, indeed we are afraid that he will hasten [punishment] against us or that he will transgress.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ta-Ha - 20:45", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا آمَنَّا فَاغْفِرْ لَنَا وَارْحَمْنَا وَأَنتَ خَيْرُ الرَّاحِمِينَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, we have believed, so forgive us and have mercy upon us, and You are the best of the merciful.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Mu'minun - 23:109", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, avert from us the punishment of Hell. Indeed, its punishment is ever adhering.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Furqan - 25:65", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Furqan - 25:74", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَسِعْتَ كُلَّ شَيْءٍ رَّحْمَةً وَعِلْمًا فَاغْفِرْ لِلَّذِينَ تَابُوا وَاتَّبَعُوا سَبِيلَكَ وَقِهِمْ عَذَابَ الْجَحِيمِ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, You have encompassed all things in mercy and knowledge, so forgive those who have repented and followed Your way and protect them from the punishment of Hellfire.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ghafir - 40:7", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا وَأَدْخِلْهُمْ جَنَّاتِ عَدْنٍ الَّتِي وَعَدتَّهُمْ وَمَن صَلَحَ مِنْ آبَائِهِمْ وَأَزْوَاجِهِمْ وَذُرِّيَّاتِهِمْ ۚ إِنَّكَ أَنتَ الْعَزِيزُ الْحَكِيمُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, and admit them to gardens of perpetual residence which You have promised them and whoever was righteous among their fathers, their spouses and their offspring. Indeed, it is You who is the Exalted in Might, the Wise.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ghafir - 40:8", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا اكْشِفْ عَنَّا الْعَذَابَ إِنَّا مُؤْمِنُونَ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, remove from us the torment; indeed, we are believers.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Ad-Dukhan - 44:12", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِّلَّذِينَ آمَنُوا", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Hashr - 59:10", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا إِنَّكَ رَءُوفٌ رَّحِيمٌ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, indeed You are Kind and Merciful.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Hashr - 59:10", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَّبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, upon You we have relied, and to You we have returned, and to You is the destination.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Mumtahanah - 60:4", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلَّذِينَ كَفَرُوا وَاغْفِرْ لَنَا رَبَّنَا ۖ إِنَّكَ أَنتَ الْعَزِيزُ الْحَكِيمُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, make us not [objects of] torment for the disbelievers and forgive us, our Lord. Indeed, it is You who is the Exalted in Might, the Wise.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Mumtahanah - 60:5", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا ۖ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah At-Tahrim - 66:8", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' }
+                      ...RABBANA_DUAS.flatMap((dua, index) => [
+                          { type: 'arabic-green', text: dua.a, style: 'text-center text-2xl font-bold mb-4 leading-loose' },
+                          { type: 'text', text: dua.e, style: 'text-center text-sm mb-2 opacity-90' },
+                          { type: 'text', text: dua.r, style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
+                          ...(index < RABBANA_DUAS.length - 1 ? [{ type: 'hr' }] : [])
+                      ])
                   ]
               }
           ]
         }
+      };
+
+      // ==========================================
+      // COMPONENTS
+      // ==========================================
+
+      const MenuCard = ({ label, subtext, onClick, theme }) => {
+        return (
+          <button
+            onClick={onClick}
+            style={{ 
+              backgroundColor: theme.cardBg, 
+              color: theme.text,
+              border: `4px double ${theme.accent}`,
+              boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
+            }}
+            className={`
+              w-full p-4 mb-3 rounded-xl
+              flex flex-col items-center justify-center
+              text-lg font-bold transition-all duration-200
+              active:scale-[0.98]
+            `}
+          >
+            <span className="font-heading text-xl">{label}</span>
+            {subtext && (
+                <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">
+                    {subtext}
+                </span>
+            )}
+          </button>
+        );
       };
 
       // ==========================================
       // APP LOGIC
       // ==========================================
 
-      const MenuCard = ({ label, subtext, onClick, theme }) => {
-        return (
-          <button
-            onClick={onClick}
-            style={{ 
-              backgroundColor: theme.cardBg, 
-              color: theme.text,
-              border: `4px double ${theme.accent}`,
-              boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
-            }}
-            className={`
-              w-full p-4 mb-3 rounded-xl
-              flex flex-col items-center justify-center
-              text-lg font-bold transition-all duration-200
-              active:scale-[0.98]
-            `}
-          >
-            <span className="font-heading text-xl">{label}</span>
-            {subtext && (
-                <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">
-                    {subtext}
-                </span>
-            )}
-          </button>
-        );
-      };
-
       const THEMES = {
         cream: {
           id: 'cream',
@@ -1372,7 +1390,7 @@
           let textColor = block.textColor || theme.text;
           
           if (cardVariant === 'rabbana') {
-             if (block.type === 'arabic-indopak' || block.type === 'arabic' || block.type === 'arabic-green') {
+             if (block.type === 'arabic-indopak' || block.type === 'arabic') {
                  textColor = '#D4AF37'; 
              } else {
                  textColor = '#FFFFFF'; 
@@ -1488,8 +1506,8 @@
           } else if (card.variant === 'rabbana') {
               cardStyle = { 
                   ...cardStyle, 
-                  backgroundColor: '#1f2937', 
-                  border: '2px solid #D4AF37', 
+                  backgroundColor: '#1f2937', // Solid Dark Navy
+                  border: '2px solid #D4AF37', // Gold Border
                   color: '#ffffff'
               };
           } else {
@@ -1628,762 +1646,6 @@
                           </div>
                       </div>
 
-                      <div>
-                          <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Text Size</p>
-                          <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2" style={{ backgroundColor: currentThemeId === 'dark' ? '#475569' : '#F1F5F9' }}>
-                              <button 
-                                  onClick={() => setFontScale(prev => Math.max(prev - 2, -4))}
-                                  className="p-2 rounded hover:bg-black/5 active:bg-black/10 transition-colors"
-                              >
-                                  <Minus size={20} />
-                              </button>
-                              <span className="font-bold font-arabic px-4 text-xl">
-                                  بِسْمِ
-                              </span>
-                              <button 
-                                  onClick={() => setFontScale(prev => Math.min(prev + 4, 12))}
-                                  className="p-2 rounded hover:bg-black/5 active:bg-black/10 transition-colors"
-                              >
-                                  <Plus size={20} />
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            )}
-          </>
-        );
-      };
-
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      );
-    </script>
-</body>
-</html>
-``````html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Qalb-e-Dua">
-    <title>Qalb-e-Dua</title>
-    
-    <!-- APP ICON -->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
-
-    <!-- TAILWIND CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- BABEL -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <style>
-      body {
-        transition: background-color 0.3s, color 0.3s;
-        -webkit-tap-highlight-color: transparent;
-        margin: 0;
-        padding: 0;
-      }
-      .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
-      .animate-in { animation: fadeIn 0.3s ease-out; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
-
-    <!-- IMPORT MAP -->
-    <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.292.0"
-  }
-}
-</script>
-</head>
-<body>
-    <div id="root"></div>
-    
-    <script type="text/babel" data-type="module" data-presets="typescript,react">
-      import React, { useState } from 'react';
-      import ReactDOM from 'react-dom/client';
-      import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
-
-      // ==========================================
-      // HELPER (Kept for Names of Allah/Prophet)
-      // ==========================================
-      const createNameEntry = (num, arabic, english) => [
-        { type: 'allah-name', number: num, arabic: arabic, english: english }
-      ];
-      const createProphetName = (num, arabic, english) => [
-        { type: 'allah-name', number: num, arabic: arabic, english: english }
-      ];
-
-      // ==========================================
-      // DATA CONFIGURATION
-      // ==========================================
-
-      const MENU_ITEMS = [
-        { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
-        { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
-        { id: 'm3', label: 'Names of Prophet ﷺ', pageId: 'p3' },
-        { id: 'm4', label: 'Prayers after Salah', pageId: 'p4' },
-        { id: 'm5', label: 'Duas when Visiting Graves', pageId: 'p5' },
-        { id: 'm6', label: 'Prayers of the Prophet ﷺ', pageId: 'p6' },
-        { id: 'm7', label: "Du'a for Shifa", pageId: 'p7' },
-        { id: 'm8', label: 'Victory & Protection', pageId: 'p8' },
-        { id: 'm9', label: 'Dhikr (Remembrance)', pageId: 'p9' },
-        { id: 'm10', label: 'Morning & Evening Adhkar', pageId: 'p10' },
-        { id: 'm11', label: '40 Rabbana Duas', pageId: 'p11', subtext: 'Quranic' },
-      ];
-
-      const PAGES_DATA = {
-        'p1': {
-          id: 'p1',
-          title: 'Opening Dua',
-          cards: [
-            {
-              variant: 'default',
-              content: [
-                 { type: 'section-title', text: 'Intention (Niyyah)' },
-                 { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، حَسْبِيَ اللَّهُ وَنِعْمَ الْوَكِيلُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ' },
-                 { type: 'text', text: 'In the name of Allah, the Most Gracious, the Most Merciful. Praise be to Allah, Lord of the Worlds. Allah is sufficient for me and He is the best Disposer of affairs. There is no power and no strength except with Allah, the Most High, the Magnificent.' },
-                 { type: 'hr' },
-                 { type: 'arabic-indopak', text: 'اللَّهُمَّ إِنِّي أَبْرَأُ مِنْ حَوْلِي وَقُوَّتِي إِلَى حَوْلِكَ وَقُوَّتِكَ' },
-                 { type: 'text', text: 'O Allah, I disassociate myself from my own power and strength and turn to Your power and strength.' },
-                 { type: 'hr' },
-                 { type: 'arabic-indopak', text: 'اللَّهُمَّ إِنِّي أَتَقَرَّبُ إِلَيْكَ بِالصَّلَاةِ عَلَى سَيِّدِنَا مُحَمَّدٍ، عَبْدِكَ وَنَبِيِّكَ وَرَسُولِكَ سَيِّدِ الْمُرْسَلِينَ' },
-                 { type: 'text', text: 'O Allah, I draw near to You by invoking blessings upon our Master Muhammad, Your servant, Your Prophet, and Your Messenger.' },
-                 { type: 'hr' },
-                 { type: 'arabic-indopak', text: 'فَتَقَبَّلْهَا مِنِّي بِفَضْلِكَ، وَاجْعَلْنِي مِنْ عِبَادِكَ الصَّالِحِينَ، وَوَفِّقْنِي لِقِرَاءَتِهَا عَلَى الدَّوَامِ بِجَاهِهِ عِنْدَكَ، وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
-                 { type: 'text', text: 'So accept it from me by Your Grace, and make me among Your righteous servants, and grant me success to recite it constantly, by his rank with You. And may Allah bless our Master Muhammad, his family, and his companions all together.' }
-              ]
-            }
-          ]
-        },
-        'p2': {
-          id: 'p2',
-          title: 'Names of Allah',
-          cards: [
-            {
-              variant: 'default',
-              content: [
-                ...createNameEntry('1', 'ٱللَّهُ', 'Allah'), ...createNameEntry('2', 'ٱلرَّحْمَـٰنُ', 'The Beneficent'), ...createNameEntry('3', 'ٱلرَّحِيمُ', 'The Merciful'),
-                // (Names continue here...)
-                ...createNameEntry('99', 'ٱلصَّبُورُ', 'The Patient')
-              ]
-            }
-          ]
-        },
-        'p3': {
-          id: 'p3',
-          title: 'Names of Prophet ﷺ',
-          cards: [
-            {
-               variant: 'default',
-               content: [
-                 ...createProphetName('1', 'مُحَمَّدٌ', 'Muhammad (Praiseworthy)'), 
-                 // (Names continue here...)
-                 ...createProphetName('99', 'سَيِّدُ الْكَوْنَيْنِ', 'Sayyid al-Kawnayn (Master of Two Worlds)')
-               ]
-            }
-          ]
-        },
-        'p4': { 
-          id: 'p4', 
-          title: 'Prayers after Salah', 
-          cards: [ 
-            { 
-              variant: 'default', 
-              content: [ 
-                { type: 'section-title', text: 'Supplications Before Salam' }, 
-                { type: 'text', text: 'After the Tashahhud and Salawat, one should make a supplication such as:' }, 
-                { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْلِي وَلِوَالِدَيَّ وَلِمَنْ تَوَالَدَ وَلِجَمِيعِ الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ وَالْمُسْلِمِينَ وَالْمُسْلِمَاتِ الْأَحْيَاءِ مِنْهُمْ وَالْأَمْوَاتِ إِنَّكَ مُجِيبُ الدَّعَوَاتِ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ' }, 
-                { type: 'text', text: '"O Allah, forgive me and my parents and all those who are born and all the believing men and women, those who have submitted from the males and females, those of them who are alive and those who have died. Verily, You are the One Who answers prayers... through Your Mercy, O the Most Merciful of those who show mercy."' } 
-              ] 
-            } 
-          ] 
-        },
-        
-        // ============================================
-        // PAGE 5: VISITING GRAVES (ALL CONTENT IS HERE)
-        // ============================================
-        'p5': {
-          id: 'p5',
-          title: 'Duas when Visiting Graves',
-          cards: [
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: 'Manner and Method of Visiting Graves' },
-                { type: 'text', text: '1. One should approach the grave from the feet side...' },
-                { type: 'arabic', text: 'السَّلَامُ عَلَيْكُمْ أَهْلَ دَارِ قَوْمٍ مُؤْمِنِينَ أَنْتُمْ لَنَا سَلَفٌ وَ إِنَّا إِنْ شَاءَ اللهُ بِكُمْ لَاحِقُوْنَ' },
-                { type: 'text', text: '"Peace be upon you, O dwellers of the homes of the believers..."' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'text', text: 'Prayer to avoid the torture of the grave...' },
-                { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nاللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشِّرْكِ وَالْكُفْرِ وَالْفَقْرِ...' },
-                { type: 'text', text: '"In the name of Allah... O Allah! I seek refuge in You from polytheism..."' }
-              ]
-            },
-            // SURAH YASIN (Expanded here so you can edit it easily)
-            {
-              variant: 'default',
-              content: [
-                 { type: 'section-title', text: 'Surah Yasin (The Heart of Quran)' },
-                 { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ', style: 'text-center text-3xl mb-6' },
-                 { type: 'arabic-indopak', text: "يٰسٓ", number: "1" }, { type: 'text', text: "Yaa-Seen" }, { type: 'hr' },
-                 { type: 'arabic-indopak', text: "وَالۡقُرۡاٰنِ الۡحَكِيۡمِ", number: "2" }, { type: 'text', text: "By oath of the wise Qur’an." }, { type: 'hr' },
-                 { type: 'arabic-indopak', text: "اِنَّكَ لَمِنَ الۡمُرۡسَلِيۡنَ", number: "3" }, { type: 'text', text: "You are indeed one of the Messengers." }, { type: 'hr' },
-                 { type: 'arabic-indopak', text: "عَلٰى صِرَاطٍ مُّسۡتَقِيۡمٍ", number: "4" }, { type: 'text', text: "On the Straight Path." }, { type: 'hr' },
-                 // (You can add more Yasin verses here by copying the lines above)
-                 { type: 'text', text: "... (Recite full Surah Yasin) ...", style: 'text-center italic opacity-70' }
-              ]
-            },
-            // NEW SECTION: METHOD OF FATIHA (This is what you wanted added)
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: 'Method of Fatiha (Isaal-e-Sawaab)' },
-                
-                { type: 'text', text: '1. Recite Durood Sharif (any)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَّ عَلَى اٰلِ سَيِّدِنَا مُحَمَّدٍ عَدَدَ مَا فِيْ عِلْمِ اللهِ صَلَوٰةً دَآئِمَةً بِدَوَامِ مُلْكِ اللهِ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '2. Recite Surah Kaafiroon (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '3. Recite Surah Ikhlaas (three times)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '4. Recite Surah Falaq (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '5. Recite Surah Naas (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '6. Recite Surah Fatiha (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَنِ الرَّحِيمِ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '7. Recite Surah Baqarah verses (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'الم ۝ ذَلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '8. Recite Ayatul Kursi (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '9. Recite Last verses of Baqarah (once)', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ' },
-                { type: 'hr' },
-
-                { type: 'text', text: '10. Finish with Durood & Salam', style: 'font-bold' },
-                { type: 'arabic-indopak', text: 'سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ ۝ وَسَلَامٌ عَلَى الْمُرْسَلِينَ ۝ وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝' }
-              ]
-            }
-          ]
-        },
-
-        // --- PAGE 6: PRAYERS OF PROPHET ---
-        'p6': {
-          id: 'p6',
-          title: 'Prayers of the Prophet ﷺ',
-          cards: [
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: 'Refuge from Misery' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ جَهْدِ الْبَلاَءِ وَدَرَكِ الشَّقَاءِ' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from severe trial and reaching wretchedness.' },
-                
-                { type: 'section-title', text: 'Dua for Light' },
-                { type: 'arabic', text: 'اللَّهُمَّ اجْعَلْ لِي فِي قَلْبِي نُورًا' },
-                { type: 'text', text: 'O Allah, place light in my heart.' }
-              ]
-            }
-          ]
-        },
-
-        // --- PAGE 7: SHIFA ---
-        'p7': {
-          id: 'p7',
-          title: "Du'a for Shifa",
-          cards: [
-            {
-              variant: 'default',
-              content: [
-                { type: 'title-green', text: 'آيَاتُ الشِّفَاءِ' },
-                { type: 'arabic', text: 'وَيَشْفِ صُدُورَ قَوْمٍ مُّؤْمِنِينَ' },
-                { type: 'count-badge', text: 'Read 7 Times' },
-                { type: 'hr' },
-                { type: 'arabic', text: 'وَشِفَاءٌ لِّمَا فِي الصُّدُورِ' },
-                { type: 'count-badge', text: 'Read 7 Times' }
-              ]
-            }
-          ]
-        },
-
-        // --- PAGE 8: VICTORY ---
-        'p8': {
-          id: 'p8',
-          title: 'Victory & Protection',
-          cards: [
-            {
-              variant: 'green',
-              content: [
-                { type: 'title-green', text: 'المُسَبِّعَاتُ العَشْرُ' },
-                { type: 'arabic-green', text: 'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ۞ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ' },
-                { type: 'count-badge', text: 'Read 7 Times' }
-              ]
-            }
-          ]
-        },
-
-        // --- PAGE 9: DHIKR ---
-        'p9': {
-          id: 'p9',
-          title: 'Dhikr',
-          cards: [
-              {
-                  variant: 'default',
-                  content: [
-                      { type: 'section-title', text: 'Tasbih Fatimah' },
-                      { type: 'arabic', text: 'سُبْحَانَ اللَّهِ' },
-                      { type: 'text', text: 'SubhanAllah (33 times)' }
-                  ]
-              }
-          ]
-        },
-
-        // --- PAGE 10: MORNING/EVENING ---
-        'p10': {
-          id: 'p10',
-          title: 'Morning & Evening',
-          cards: [
-              {
-                  variant: 'default',
-                  content: [
-                      { type: 'section-title', text: 'Ayatul Kursi' },
-                      { type: 'arabic', text: 'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ' },
-                      { type: 'text', text: 'Read 1 time. Protection from jinns.' }
-                  ]
-              }
-          ]
-        },
-
-        // --- PAGE 11: 40 RABBANA (Linear Style) ---
-        'p11': {
-          id: 'p11',
-          title: '40 Rabbana Duas',
-          cards: [
-              {
-                  variant: 'green',
-                  content: [
-                      // No more loops or external lists. Just add entries here.
-                      { type: 'arabic-green', text: "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, accept [this] from us. Indeed You are the Hearing, the Knowing.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'text', text: "Surah Al-Baqarah - 2:127", style: 'text-center text-xs opacity-60 uppercase tracking-widest font-sans mb-4' },
-                      { type: 'hr' },
-
-                      { type: 'arabic-green', text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً", style: 'text-center text-2xl font-bold mb-4 leading-loose' },
-                      { type: 'text', text: "Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good.", style: 'text-center text-sm mb-2 opacity-90' },
-                      { type: 'hr' }
-                  ]
-              }
-          ]
-        },
-
-        // =========================================================
-        //  HOW TO ADD A NEW PAGE (TEMPLATE)
-        // =========================================================
-        /*
-        'p12': {
-          id: 'p12',
-          title: 'My New Page Title',
-          cards: [
-            {
-              variant: 'default', // or 'green'
-              content: [
-                 { type: 'section-title', text: 'Title of Dua' },
-                 { type: 'arabic', text: 'PASTE ARABIC HERE' },
-                 { type: 'text', text: 'Paste English Translation here' },
-                 { type: 'hr' }
-              ]
-            }
-          ]
-        }
-        */
-        // =========================================================
-
-      };
-
-      // ==========================================
-      // APP LOGIC (DO NOT TOUCH BELOW THIS LINE)
-      // ==========================================
-
-      const MenuCard = ({ label, subtext, onClick, theme }) => {
-        return (
-          <button
-            onClick={onClick}
-            style={{ 
-              backgroundColor: theme.cardBg, 
-              color: theme.text,
-              border: `4px double ${theme.accent}`,
-              boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
-            }}
-            className={`
-              w-full p-4 mb-3 rounded-xl
-              flex flex-col items-center justify-center
-              text-lg font-bold transition-all duration-200
-              active:scale-[0.98]
-            `}
-          >
-            <span className="font-heading text-xl">{label}</span>
-            {subtext && (
-                <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">
-                    {subtext}
-                </span>
-            )}
-          </button>
-        );
-      };
-
-      const THEMES = {
-        cream: {
-          id: 'cream',
-          bg: '#FCFBF4',
-          text: '#000000',
-          headerBg: '#0B1E3F',
-          cardBg: '#FFF',
-          cardBorder: '#D4AF37',
-          accent: '#D4AF37',
-          nameRed: '#8B0000'
-        },
-        white: {
-          id: 'white',
-          bg: '#FFFFFF',
-          text: '#000000',
-          headerBg: '#0B1E3F',
-          cardBg: '#FFFFFF',
-          cardBorder: '#D4AF37',
-          accent: '#D4AF37',
-          nameRed: '#8B0000'
-        },
-        dark: {
-          id: 'dark',
-          bg: '#121212',
-          text: '#E0E0E0',
-          headerBg: '#1E1E1E',
-          cardBg: '#2b2b2b',
-          cardBorder: '#D4AF37',
-          accent: '#D4AF37',
-          nameRed: '#EF5350'
-        }
-      };
-
-      const Logo = () => (
-        <div className="flex flex-col items-center justify-center mb-10">
-          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md">
-            Qalb-e-Dua
-          </h1>
-        </div>
-      );
-
-      const App = () => {
-        const [activePageId, setActivePageId] = useState(null);
-        const [showSettings, setShowSettings] = useState(false);
-        const [currentThemeId, setCurrentThemeId] = useState('cream');
-        const [fontScale, setFontScale] = useState(0);
-
-        const theme = THEMES[currentThemeId];
-        const arabicSize = 32 + (fontScale * 2);
-        const englishSize = 18 + (fontScale * 1);
-
-        const handleOpenPage = (id) => {
-          setActivePageId(id);
-          window.scrollTo(0,0);
-        };
-
-        const handleClosePage = () => {
-          setActivePageId(null);
-        };
-
-        const renderContentBlock = (block, idx, cardVariant) => {
-          let textColor = block.textColor || theme.text;
-          
-          if (cardVariant === 'rabbana') {
-             if (block.type === 'arabic-indopak' || block.type === 'arabic' || block.type === 'arabic-green') {
-                 textColor = '#D4AF37'; 
-             } else {
-                 textColor = '#FFFFFF'; 
-             }
-          } else if (block.type === 'arabic-green') {
-              textColor = '#2e7d32';
-          }
-
-          const commonStyle = { color: textColor };
-
-          switch (block.type) {
-            case 'allah-name':
-              return (
-                <div key={idx} className="mb-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="font-bold text-lg" style={{ color: theme.nameRed }}>{block.number}</span>
-                    <span className="font-arabic font-bold" style={{ fontSize: `${arabicSize + 4}px`, color: currentThemeId === 'dark' ? '#90CAF9' : '#1a237e' }}>
-                      {block.arabic}
-                    </span>
-                  </div>
-                  <div className="text-lg leading-relaxed mb-4" style={{ fontSize: `${englishSize}px` }}>
-                    <span className="font-bold" style={{ color: theme.nameRed }}>{block.english}</span>
-                    <span style={{ color: theme.text }}>, He is exalted!</span>
-                  </div>
-                  <hr className="border-t border-gray-300 opacity-50" />
-                </div>
-              );
-            case 'arabic':
-            case 'arabic-green':
-            case 'arabic-indopak':
-              const isJustified = block.style && (block.style.includes('text-justify') || block.style.includes('text-right'));
-              const alignmentClass = isJustified ? '' : 'text-center';
-              
-              return (
-                <p 
-                  key={idx} 
-                  dir="rtl"
-                  className={`font-arabic mb-4 leading-[2.3] ${alignmentClass} ${block.style || ''}`} 
-                  style={{ color: textColor, fontSize: `${arabicSize}px`, fontWeight: 'bold' }}
-                >
-                  {block.text}
-                  {block.number && (
-                    <span 
-                      className="inline-flex items-center justify-center w-8 h-8 mx-2 border-2 rounded-full align-middle font-sans opacity-80" 
-                      style={{ 
-                        borderColor: 'currentColor', 
-                        fontSize: '0.5em',
-                        lineHeight: 1,
-                        verticalAlign: 'middle',
-                        fontFamily: 'system-ui, -apple-system, sans-serif'
-                      }}
-                    >
-                      {block.number}
-                    </span>
-                  )}
-                </p>
-              );
-            case 'text':
-              return (
-                <p key={idx} className={`font-sans mb-3 leading-relaxed ${block.style || ''}`} style={{ ...commonStyle, fontSize: `${englishSize}px` }}>
-                  {block.text}
-                </p>
-              );
-            case 'section-title':
-              return (
-                <h3 key={idx} className="text-center font-bold text-lg mb-4 pb-1 border-b border-gray-300" style={{ color: theme.headerBg }}>
-                  {block.text}
-                </h3>
-              );
-            case 'title-green':
-              return (
-                <h2 key={idx} className="font-arabic font-bold text-center mb-2" style={{ color: '#d63384', fontSize: '34px' }}>
-                   {block.text}
-                </h2>
-              );
-            case 'subtitle-green':
-              return (
-                <p key={idx} className="text-center mb-4 text-gray-500 font-serif text-lg">
-                   {block.text}
-                </p>
-              );
-            case 'flower-icon':
-              return (
-                <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">
-                  {block.text}
-                </div>
-              );
-            case 'hr':
-              return <hr key={idx} className="my-5 border-t border-gray-300 opacity-50" />;
-            case 'count-badge':
-              return (
-                <div key={idx} className="text-center mb-4">
-                   <span className="inline-block px-3 py-1 rounded-full text-sm font-bold bg-[#0B1E3F] text-[#D4AF37]">
-                      {block.text}
-                   </span>
-                </div>
-              );
-            default:
-              return null;
-          }
-        };
-
-        const renderCard = (card, idx) => {
-          let cardStyle = {
-              marginBottom: '25px',
-              padding: '20px',
-              borderRadius: '12px',
-              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)'
-          };
-
-          if (card.variant === 'green') {
-              cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32', color: '#000' };
-          } else if (card.variant === 'rabbana') {
-              cardStyle = { 
-                  ...cardStyle, 
-                  backgroundColor: '#1f2937', 
-                  border: '2px solid #D4AF37', 
-                  color: '#ffffff'
-              };
-          } else {
-              cardStyle = { 
-                  ...cardStyle, 
-                  backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', 
-                  border: `4px double ${theme.accent}`,
-                  color: theme.text
-              };
-          }
-
-          return (
-            <div key={idx} style={cardStyle} className="relative overflow-hidden">
-              {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant))}
-            </div>
-          );
-        };
-
-        const renderPage = () => {
-          if (!activePageId) return null;
-          const page = PAGES_DATA[activePageId];
-          if (!page) return <div>Page not found</div>;
-
-          return (
-            <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
-              {page.backgroundImage && (
-                   <div 
-                      className="fixed inset-0 z-0 bg-cover bg-center blur-[3px]"
-                      style={{ backgroundImage: `url(${page.backgroundImage})` }}
-                   />
-              )}
-              <div 
-                  className="sticky top-0 z-20 flex items-center justify-between p-4 shadow-md bg-opacity-95 backdrop-blur-sm"
-                  style={{ backgroundColor: theme.headerBg, color: '#fff', borderBottom: `2px solid ${theme.accent}` }}
-              >
-                  <div className="w-10">
-                    <button 
-                      onClick={handleClosePage} 
-                      className="p-2 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors" 
-                      style={{ color: theme.accent }}
-                    >
-                        <ChevronLeft size={28} />
-                    </button>
-                  </div>
-                  <h1 className="font-bold text-xl text-center font-heading tracking-wider truncate flex-1 px-2">
-                    {page.title}
-                  </h1>
-                  <div className="w-10 flex justify-end">
-                    <button 
-                      onClick={() => setShowSettings(true)} 
-                      className="p-2 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors" 
-                      style={{ color: theme.accent }}
-                    >
-                        <Settings size={24} />
-                    </button>
-                  </div>
-              </div>
-              <div className="relative z-10 max-w-2xl mx-auto p-5 pb-32">
-                  {page.cards.map((card, idx) => renderCard(card, idx))}
-              </div>
-            </div>
-          );
-        };
-
-        const renderMenu = () => (
-          <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
-            <div className="p-10 pb-14 flex flex-col items-center justify-center relative">
-               <div className="absolute top-4 right-4">
-                 <button 
-                   onClick={() => setShowSettings(true)} 
-                   style={{ color: theme.accent }} 
-                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                 >
-                   <Settings size={24}/>
-                 </button>
-               </div>
-               <Logo />
-            </div>
-            <div className="flex-1 rounded-t-[2.5rem] -mt-8 p-6 pb-20 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] overflow-y-auto relative z-10" style={{ backgroundColor: theme.bg }}>
-              <div className="max-w-md mx-auto pt-4">
-                {MENU_ITEMS.map((item) => (
-                    <MenuCard 
-                        key={item.id}
-                        label={item.label}
-                        subtext={item.subtext}
-                        onClick={() => handleOpenPage(item.pageId)}
-                        theme={theme}
-                    />
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-        return (
-          <>
-            {activePageId ? renderPage() : renderMenu()}
-            {showSettings && (
-              <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
-                  <div 
-                      className="w-full max-w-sm bg-white rounded-t-2xl sm:rounded-xl p-6 shadow-2xl animate-in"
-                      style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#fff', color: currentThemeId === 'dark' ? '#fff' : '#000', borderTop: `4px solid ${theme.accent}` }}
-                      onClick={(e) => e.stopPropagation()}
-                  >
-                      <div className="flex justify-between items-center mb-6">
-                          <h3 className="font-bold text-lg">Settings</h3>
-                          <button onClick={() => setShowSettings(false)} className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10"><X size={24}/></button>
-                      </div>
-                      <div className="mb-6">
-                          <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Theme</p>
-                          <div className="flex justify-center gap-4">
-                              <button 
-                                  onClick={() => setCurrentThemeId('cream')}
-                                  className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'cream' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                                  style={{ backgroundColor: '#FCFBF4' }}
-                                  title="Cream"
-                              />
-                              <button 
-                                  onClick={() => setCurrentThemeId('white')}
-                                  className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'white' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                                  style={{ backgroundColor: '#FFFFFF' }}
-                                  title="White"
-                              />
-                              <button 
-                                  onClick={() => setCurrentThemeId('dark')}
-                                  className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'dark' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                                  style={{ backgroundColor: '#1E293B' }}
-                                  title="Dark"
-                              />
-                          </div>
-                      </div>
                       <div>
                           <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Text Size</p>
                           <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2" style={{ backgroundColor: currentThemeId === 'dark' ? '#475569' : '#F1F5F9' }}>
