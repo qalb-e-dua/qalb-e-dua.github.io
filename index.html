@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,76 +8,31 @@
     <meta name="apple-mobile-web-app-title" content="Qalb-e-Dua">
     <title>Qalb-e-Dua</title>
     
-    <!-- APP ICON -->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
 
-    <!-- TAILWIND CSS -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- BABEL FOR IN-BROWSER JSX/TSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-      body {
-        transition: background-color 0.3s, color 0.3s;
-        -webkit-tap-highlight-color: transparent;
-        margin: 0;
-        padding: 0;
-      }
+      body { transition: background-color 0.3s; margin: 0; padding: 0; overflow-x: hidden; }
       .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
-      
-      /* Custom Scrollbar (Gold) */
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
-      
-      /* Animation Utilities */
-      .animate-in { animation: fadeIn 0.3s ease-out; }
+      .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .animate-in { animation: fadeIn 0.4s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
-
-    <!-- FIXED IMPORT MAP: Cleaned up to use only React 18 -->
-    <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.292.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
-  }
-}
-</script>
 </head>
 <body>
     <div id="root"></div>
-    
-    <!-- ERROR HANDLER -->
-    <div id="error-container" style="display:none; position:fixed; top:0; left:0; right:0; padding:20px; background:rgba(255,0,0,0.9); color:white; z-index:9999; font-family:sans-serif;"></div>
-    <script>
-      window.onerror = function(message, source, lineno, colno, error) {
-        const container = document.getElementById('error-container');
-        if(container) {
-          container.style.display = 'block';
-          container.innerHTML = '<strong>Error:</strong> ' + message + '<br><small>' + source + ':' + lineno + '</small>';
-        }
-        console.error(error);
-      };
-    </script>
-
-    <script type="text/babel" data-type="module" data-presets="typescript,react">
-      import React, { useState } from 'react';
-      import ReactDOM from 'react-dom/client';
-      import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
+    <script type="text/babel">
+      const { useState, useEffect } = React;
 
       // ==========================================
-      // DATA & CONFIGURATION
+      // DATA SECTION (PASTE YOUR MENU_ITEMS AND PAGES_DATA HERE)
       // ==========================================
 
       const MENU_ITEMS = [
@@ -1806,321 +1760,206 @@
           ]
         }
 
-      };
+     }; // This ends your PAGES_DATA. Keep this bracket.
 
+     // ==========================================
+      // PROFESSIONAL UI LOGIC (Safe for MacBook Air)
+      // ==========================================
+      const { Fragment } = React;
 
-      // ==========================================
-      // COMPONENTS
-      // ==========================================
-
-      const MenuCard = ({ label, subtext, onClick, theme }) => {
-        return (
-          <button
-            onClick={onClick}
-            style={{ 
-              backgroundColor: theme.cardBg, 
-              color: theme.text,
-              border: `4px double ${theme.accent}`,
-              boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
-            }}
-            className={`
-              w-full p-4 mb-3 rounded-xl
-              flex flex-col items-center justify-center
-              text-lg font-bold transition-all duration-200
-              active:scale-[0.98]
-            `}
-          >
-            <span className="font-heading text-xl">{label}</span>
-            {subtext && (
-                <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">
-                    {subtext}
-                </span>
-            )}
-          </button>
-        );
-      };
-
-      // ==========================================
-      // APP LOGIC
-      // ==========================================
+      // BUILT-IN ICONS
+      const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconBack = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
+      const IconClose = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>;
+      const IconPlus = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>;
+      const IconMinus = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/></svg>;
+      const IconCheck = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>;
 
       const THEMES = {
-        cream: {
-          id: 'cream',
-          bg: '#FCFBF4',
-          text: '#000000',
-          headerBg: '#0B1E3F',
-          cardBg: '#FFF',
-          cardBorder: '#D4AF37',
-          accent: '#D4AF37',
-          nameRed: '#8B0000'
-        },
-        white: {
-          id: 'white',
-          bg: '#FFFFFF',
-          text: '#000000',
-          headerBg: '#0B1E3F',
-          cardBg: '#FFFFFF',
-          cardBorder: '#D4AF37',
-          accent: '#D4AF37',
-          nameRed: '#8B0000'
-        },
-        dark: {
-          id: 'dark',
-          bg: '#121212',
-          text: '#E0E0E0',
-          headerBg: '#1E1E1E',
-          cardBg: '#2b2b2b',
-          cardBorder: '#D4AF37',
-          accent: '#D4AF37',
-          nameRed: '#EF5350'
-        }
+        cream: { id: 'cream', bg: '#FCFBF4', text: '#2D241E', headerBg: '#0B1E3F', cardBg: '#FFF', accent: '#D4AF37' },
+        white: { id: 'white', bg: '#FFFFFF', text: '#000000', headerBg: '#0B1E3F', cardBg: '#FFF', accent: '#D4AF37' },
+        dark: { id: 'dark', bg: '#121212', text: '#E0E0E0', headerBg: '#1E1E1E', cardBg: '#1E293B', accent: '#D4AF37' }
       };
-
-      const Logo = () => (
-        <div className="flex flex-col items-center justify-center mb-10">
-          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md">
-            Qalb-e-Dua
-          </h1>
-        </div>
-      );
 
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
         const [showSettings, setShowSettings] = useState(false);
         const [currentThemeId, setCurrentThemeId] = useState('cream');
         const [fontScale, setFontScale] = useState(0);
+        const [selectedPrayer, setSelectedPrayer] = useState(null);
+        const [bookmarks, setBookmarks] = useState(() => {
+            try { return JSON.parse(localStorage.getItem('qalb_saved_v8')) || []; } catch(e) { return []; }
+        });
 
-        const theme = THEMES[currentThemeId];
-        
+        useEffect(() => {
+            localStorage.setItem('qalb_saved_v8', JSON.stringify(bookmarks));
+        }, [bookmarks]);
+
+        const theme = THEMES[currentThemeId] || THEMES.cream;
         const arabicSize = 32 + (fontScale * 2);
         const englishSize = 18 + (fontScale * 1);
 
-        const handleOpenPage = (id) => {
-          setActivePageId(id);
-          window.scrollTo(0,0);
+        const toggleBookmark = (item) => {
+            if (!item || !item.arabic) return;
+            const exists = bookmarks.find(b => b.arabic === item.arabic);
+            if (exists) { 
+                setBookmarks(bookmarks.filter(b => b.arabic !== item.arabic)); 
+            } else { 
+                setBookmarks([...bookmarks, { arabic: item.arabic, english: item.english, title: item.title }]); 
+            }
         };
 
-        const handleClosePage = () => {
-          setActivePageId(null);
-        };
-
-        const renderContentBlock = (block, idx, cardVariant) => {
+        const renderContentBlock = (block, idx, cardVariant, pageTitle, fullCard) => {
+          if (!block) return null;
           let textColor = block.textColor || theme.text;
           
           if (cardVariant === 'rabbana') {
-             if (block.type === 'arabic-indopak' || block.type === 'arabic') {
-                 textColor = '#D4AF37'; 
-             } else {
-                 textColor = '#FFFFFF'; 
-             }
-          } else if (block.type === 'arabic-green') {
-              textColor = '#2e7d32';
-          }
+             textColor = (block.type && block.type.startsWith('arabic')) ? '#D4AF37' : '#FFFFFF';
+          } else if (block.type === 'arabic-green') { textColor = '#2e7d32'; }
 
-          const commonStyle = { color: textColor };
+          // Helper to find companion text
+          const findPrayerPair = () => {
+             const arabic = fullCard.content.find(b => b.type.startsWith('arabic'))?.text || "";
+             const english = fullCard.content.find(b => b.type === 'text')?.text || "";
+             return { arabic, english, title: pageTitle };
+          };
+
+          const handleSelect = () => {
+             setSelectedPrayer(findPrayerPair());
+          };
 
           switch (block.type) {
-            case 'allah-name':
+            case 'arabic': case 'arabic-green': case 'arabic-indopak':
               return (
-                <div key={idx} className="mb-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="font-bold text-lg" style={{ color: theme.nameRed }}>{block.number}</span>
-                    <span className="font-arabic font-bold" style={{ fontSize: `${arabicSize + 4}px`, color: currentThemeId === 'dark' ? '#90CAF9' : '#1a237e' }}>
-                      {block.arabic}
-                    </span>
-                  </div>
-                  <div className="text-lg leading-relaxed mb-4" style={{ fontSize: `${englishSize}px` }}>
-                    <span className="font-bold" style={{ color: theme.nameRed }}>{block.english}</span>
-                    <span style={{ color: theme.text }}>, He is exalted!</span>
-                  </div>
-                  <hr className="border-t border-gray-300 opacity-50" />
-                </div>
-              );
-            case 'arabic':
-            case 'arabic-green':
-            case 'arabic-indopak':
-              const isJustified = block.style && (block.style.includes('text-justify') || block.style.includes('text-right'));
-              const alignmentClass = isJustified ? '' : 'text-center';
-              
-              return (
-                <p 
-                  key={idx} 
-                  dir="rtl"
-                  className={`font-arabic mb-4 leading-[2.3] ${alignmentClass} ${block.style || ''}`} 
-                  style={{ color: textColor, fontSize: `${arabicSize}px`, fontWeight: 'bold' }}
-                >
-                  {block.text}
-                  {block.number && (
-                    <span 
-                      className="inline-flex items-center justify-center w-8 h-8 mx-2 border-2 rounded-full align-middle font-sans opacity-80" 
-                      style={{ 
-                        borderColor: 'currentColor', 
-                        fontSize: '0.5em',
-                        lineHeight: 1,
-                        verticalAlign: 'middle',
-                        fontFamily: 'system-ui, -apple-system, sans-serif'
-                      }}
-                    >
-                      {block.number}
-                    </span>
-                  )}
+                <p key={idx} dir="rtl" onClick={handleSelect}
+                   className="font-arabic mb-6 text-center cursor-pointer hover:bg-black/5 rounded-xl transition-all font-bold" 
+                   style={{ color: textColor, fontSize: `${arabicSize}px` }}>
+                   {block.text}
                 </p>
               );
             case 'text':
               return (
-                <p key={idx} className={`font-sans mb-3 leading-relaxed ${block.style || ''}`} style={{ ...commonStyle, fontSize: `${englishSize}px` }}>
-                  {block.text}
-                </p>
-              );
-            case 'section-title':
-              return (
-                <h3 key={idx} className="text-center font-bold text-lg mb-4 pb-1 border-b border-gray-300" style={{ color: theme.headerBg }}>
-                  {block.text}
-                </h3>
-              );
-            case 'title-green':
-              return (
-                <h2 key={idx} className="font-arabic font-bold text-center mb-2" style={{ color: '#d63384', fontSize: '34px' }}>
-                   {block.text}
-                </h2>
-              );
-            case 'subtitle-green':
-              return (
-                <p key={idx} className="text-center mb-4 text-gray-500 font-serif text-lg">
+                <p key={idx} onClick={handleSelect}
+                   className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer hover:opacity-100" 
+                   style={{ color: textColor, fontSize: `${englishSize}px` }}>
                    {block.text}
                 </p>
               );
-            case 'flower-icon':
-              return (
-                <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">
-                  {block.text}
+            case 'allah-name':
+               return (
+                <div key={idx} onClick={() => setSelectedPrayer({ arabic: block.arabic, english: block.english, title: pageTitle })}
+                     className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer hover:bg-black/5 rounded-xl transition-all">
+                  <div className="flex justify-between items-center mb-2 px-4">
+                    <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
+                    <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
+                  </div>
+                  <div className="font-bold opacity-60" style={{ fontSize: `${englishSize}px`, color: '#8B0000' }}>{block.english}</div>
                 </div>
               );
-            case 'hr':
-              return <hr key={idx} className="my-5 border-t border-gray-300 opacity-50" />;
-            case 'count-badge':
-              return (
-                <div key={idx} className="text-center mb-4">
-                   <span className="inline-block px-3 py-1 rounded-full text-sm font-bold bg-[#0B1E3F] text-[#D4AF37]">
-                      {block.text}
-                   </span>
-                </div>
-              );
-            default:
-              return null;
+            case 'section-title': return <h3 key={idx} className="text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase" style={{ color: theme.accent }}>{block.text}</h3>;
+            case 'title-green': return <h2 key={idx} className="font-arabic font-bold text-center mb-2 text-[#d63384]" style={{ fontSize: '34px' }}>{block.text}</h2>;
+            case 'subtitle-green': return <p key={idx} className="text-center mb-6 text-gray-500 text-lg">{block.text}</p>;
+            case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter shadow-md">{block.text}</span></div>;
+            case 'flower-icon': return <div key={idx} className="text-center text-2xl my-4 text-[#2e7d32]">{block.text}</div>;
+            case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
+            default: return null;
           }
         };
 
-        const renderCard = (card, idx) => {
-          let cardStyle = {
-              marginBottom: '25px',
-              padding: '20px',
-              borderRadius: '12px',
-              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)'
-          };
-
-          if (card.variant === 'green') {
-              cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32', color: '#000' };
-          } else if (card.variant === 'rabbana') {
-              cardStyle = { 
-                  ...cardStyle, 
-                  backgroundColor: '#1f2937', // Solid Dark Navy
-                  border: '2px solid #D4AF37', // Gold Border
-                  color: '#ffffff'
-              };
-          } else {
-              cardStyle = { 
-                  ...cardStyle, 
-                  backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', 
-                  border: `4px double ${theme.accent}`,
-                  color: theme.text
-              };
-          }
-
-          return (
-            <div key={idx} style={cardStyle} className="relative overflow-hidden">
-              {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant))}
+        const renderBookmarks = () => (
+          <div className="min-h-screen animate-in pb-20" style={{ backgroundColor: theme.bg }}>
+            <div className="sticky top-0 z-30 shadow-xl p-4 text-white flex items-center justify-between" style={{ backgroundColor: theme.headerBg }}>
+              <button onClick={() => setActivePageId(null)}><IconBack /></button>
+              <h1 className="font-heading font-bold text-sm tracking-widest uppercase text-center">My Saved Prayers</h1>
+              <div className="w-8"></div>
             </div>
-          );
-        };
+            <div className="max-w-2xl mx-auto p-6 space-y-8">
+              {bookmarks.length === 0 ? <p className="text-center py-40 opacity-40 italic">No prayers saved yet.</p> :
+                bookmarks.map((b, i) => (
+                  <div key={i} className="p-10 rounded-[2.5rem] bg-white border-4 border-double border-[#D4AF37] shadow-lg relative">
+                    <p dir="rtl" className="font-arabic text-center mb-4 font-bold leading-[2.4]" style={{ fontSize: `${arabicSize}px`, color: '#1A472A' }}>{b.arabic}</p>
+                    {b.english && <p className="text-center font-sans text-gray-600 border-t pt-4 mb-4" style={{ fontSize: `${englishSize - 2}px` }}>{b.english}</p>}
+                    <div className="flex justify-between items-center pt-2 border-t border-gray-50">
+                      <span className="text-[9px] font-bold tracking-widest text-[#D4AF37] uppercase opacity-60">{b.title}</span>
+                      <button onClick={() => setBookmarks(bookmarks.filter(item => item.arabic !== b.arabic))} className="text-red-500 font-bold text-[10px] uppercase">Remove</button>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        );
 
         const renderPage = () => {
-          if (!activePageId) return null;
+          if (activePageId === 'bookmarks_list') return renderBookmarks();
           const page = PAGES_DATA[activePageId];
-          if (!page) return <div>Page not found</div>;
-
+          if (!page) return null;
           return (
-            <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
+            <div className="min-h-screen relative animate-in pb-40" style={{ backgroundColor: theme.bg }}>
+              <div className="sticky top-0 z-30 shadow-xl" style={{ backgroundColor: theme.headerBg }}>
+                  <div className="flex items-center justify-between p-4 text-white">
+                      <button onClick={() => setActivePageId(null)} className="p-2 transition-transform active:scale-75"><IconBack /></button>
+                      <h1 className="font-heading font-bold text-xs tracking-[0.2em] uppercase truncate px-4">{page.title}</h1>
+                      <button onClick={() => setShowSettings(true)} className="p-2 transition-transform active:scale-75"><IconSettings /></button>
+                  </div>
+                  <div className="flex overflow-x-auto p-2 gap-2 bg-black/20 no-scrollbar border-t border-white/5">
+                    {page.cards && page.cards.map((card, i) => {
+                      const titleBlock = card.content?.find(b => b.type === 'section-title' || b.type === 'title-green');
+                      const btnLabel = titleBlock ? titleBlock.text.substring(0,10) : `Part ${i+1}`;
+                      return <button key={i} onClick={() => document.getElementById(`card-${i}`).scrollIntoView({behavior:'smooth'})} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase">{btnLabel}</button>;
+                    })}
+                  </div>
+              </div>
+              <div className="max-w-2xl mx-auto p-6 space-y-12">
+                  {page.cards && page.cards.map((card, idx) => (
+                    <div id={`card-${idx}`} key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-8 shadow-sm relative overflow-hidden animate-in">
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/5 rounded-bl-full"></div>
+                      {card.content && card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, page.title, card))}
+                    </div>
+                  ))}
+              </div>
               
-              {page.backgroundImage && (
-                   <div 
-                      className="fixed inset-0 z-0 bg-cover bg-center blur-[3px]"
-                      style={{ backgroundImage: `url(${page.backgroundImage})` }}
-                   />
+              {/* THE SELECTOR BAR (Rebuilt) */}
+              {selectedPrayer && (
+                <div className="fixed bottom-8 left-6 right-6 z-50 animate-in">
+                  <div className="max-w-md mx-auto bg-white shadow-2xl rounded-full p-2 flex items-center justify-between border border-[#D4AF37]">
+                    <div className="flex items-center gap-3 ml-2">
+                      {/* PLUS BUTTON: THIS SAVES THE BOOKMARK */}
+                      <button 
+                         onClick={() => toggleBookmark(selectedPrayer)} 
+                         className="bg-[#D4AF37] text-white p-3 rounded-full shadow-lg transition-transform active:scale-90"
+                      >
+                         {bookmarks.some(b => b.arabic === selectedPrayer.arabic) ? <IconCheck /> : <IconPlus />}
+                      </button>
+                      <div className="flex flex-col">
+                        <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4AF37]">
+                           {bookmarks.some(b => b.arabic === selectedPrayer.arabic) ? "Saved to Bookmarks" : "Tap + to Bookmark"}
+                        </span>
+                        <span className="text-[10px] font-bold text-gray-400 uppercase truncate w-32">{selectedPrayer.title}</span>
+                      </div>
+                    </div>
+                    <button onClick={() => setSelectedPrayer(null)} className="p-3 mr-1 text-gray-300 hover:text-red-400 transition-colors"><IconClose /></button>
+                  </div>
+                </div>
               )}
-
-              <div 
-                  className="sticky top-0 z-20 flex items-center justify-between p-4 shadow-md bg-opacity-95 backdrop-blur-sm"
-                  style={{ backgroundColor: theme.headerBg, color: '#fff', borderBottom: `2px solid ${theme.accent}` }}
-              >
-                  <div className="w-10">
-                    <button 
-                      onClick={handleClosePage} 
-                      className="p-2 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors" 
-                      style={{ color: theme.accent }}
-                    >
-                        <ChevronLeft size={28} />
-                    </button>
-                  </div>
-                  
-                  <h1 className="font-bold text-xl text-center font-heading tracking-wider truncate flex-1 px-2">
-                    {page.title}
-                  </h1>
-                  
-                  <div className="w-10 flex justify-end">
-                    <button 
-                      onClick={() => setShowSettings(true)} 
-                      className="p-2 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors" 
-                      style={{ color: theme.accent }}
-                    >
-                        <Settings size={24} />
-                    </button>
-                  </div>
-              </div>
-
-              <div className="relative z-10 max-w-2xl mx-auto p-5 pb-32">
-                  {page.cards.map((card, idx) => renderCard(card, idx))}
-              </div>
             </div>
           );
         };
 
         const renderMenu = () => (
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
-            <div className="p-10 pb-14 flex flex-col items-center justify-center relative">
-               <div className="absolute top-4 right-4">
-                 <button 
-                   onClick={() => setShowSettings(true)} 
-                   style={{ color: theme.accent }} 
-                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                 >
-                   <Settings size={24}/>
-                 </button>
-               </div>
-               <Logo />
+            <div className="p-16 relative text-center">
+               <button onClick={() => setShowSettings(true)} className="absolute top-8 right-8 text-[#D4AF37] active:scale-75 transition-transform"><IconSettings /></button>
+               <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-[0.2em] drop-shadow-lg text-center uppercase">Qalb-e-Dua</h1>
+               
             </div>
-
-            <div className="flex-1 rounded-t-[2.5rem] -mt-8 p-6 pb-20 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] overflow-y-auto relative z-10" style={{ backgroundColor: theme.bg }}>
-              <div className="max-w-md mx-auto pt-4">
+            <div className="flex-1 rounded-t-[4rem] -mt-8 p-8 pb-32 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
+              <div className="max-w-md mx-auto pt-4 space-y-4">
                 {MENU_ITEMS.map((item) => (
-                    <MenuCard 
-                        key={item.id}
-                        label={item.label}
-                        subtext={item.subtext}
-                        onClick={() => handleOpenPage(item.pageId)}
-                        theme={theme}
-                    />
+                    <button key={item.id} onClick={() => setActivePageId(item.pageId)} style={{ backgroundColor: theme.cardBg, color: theme.text, border: `4px double ${theme.accent}` }} className="w-full p-6 rounded-2xl flex flex-col items-center justify-center transition-all shadow-sm active:scale-95 group hover:scale-[1.02]">
+                      <span className="font-heading text-xl tracking-wide text-center uppercase">{item.label}</span>
+                      {item.subtext && <span className="mt-1 text-[10px] opacity-40 uppercase tracking-[0.2em] font-sans text-center">{item.subtext}</span>}
+                    </button>
                 ))}
               </div>
             </div>
@@ -2128,76 +1967,27 @@
         );
 
         return (
-          <>
+          <Fragment>
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
-              <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
-                  <div 
-                      className="w-full max-w-sm bg-white rounded-t-2xl sm:rounded-xl p-6 shadow-2xl animate-in"
-                      style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#fff', color: currentThemeId === 'dark' ? '#fff' : '#000', borderTop: `4px solid ${theme.accent}` }}
-                      onClick={(e) => e.stopPropagation()}
-                  >
-                      <div className="flex justify-between items-center mb-6">
-                          <h3 className="font-bold text-lg">Settings</h3>
-                          <button onClick={() => setShowSettings(false)} className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10"><X size={24}/></button>
-                      </div>
-                      <div className="mb-6">
-                          <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Theme</p>
-                          <div className="flex justify-center gap-4">
-                              <button 
-                                  onClick={() => setCurrentThemeId('cream')}
-                                  className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'cream' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                                  style={{ backgroundColor: '#FCFBF4' }}
-                                  title="Cream"
-                              />
-                              <button 
-                                  onClick={() => setCurrentThemeId('white')}
-                                  className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'white' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                                  style={{ backgroundColor: '#FFFFFF' }}
-                                  title="White"
-                              />
-                              <button 
-                                  onClick={() => setCurrentThemeId('dark')}
-                                  className={`w-14 h-14 rounded-full border-2 transition-transform hover:scale-105 ${currentThemeId === 'dark' ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`}
-                                  style={{ backgroundColor: '#1E293B' }}
-                                  title="Dark"
-                              />
-                          </div>
-                      </div>
+              <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm px-4 pb-10" onClick={() => setShowSettings(false)}>
+                  <div className="w-full max-w-sm bg-white rounded-[2.5rem] p-8 shadow-2xl animate-in" style={{ backgroundColor: theme.id === 'dark' ? '#1E293B' : '#FFF', color: theme.id === 'dark' ? '#FFF' : '#000' }} onClick={(e) => e.stopPropagation()}>
+                      <div className="flex justify-between items-center mb-8"><h3 className="font-heading font-bold text-xl uppercase tracking-widest text-center">Settings</h3><button onClick={() => setShowSettings(false)} className="p-2 opacity-50"><IconClose /></button></div>
+                      
+                      <button onClick={() => { setActivePageId('bookmarks_list'); setShowSettings(false); }} className="w-full mb-8 p-4 rounded-2xl bg-[#D4AF37]/10 flex items-center justify-center gap-3 text-[#D4AF37] font-bold uppercase text-[10px] tracking-widest border border-[#D4AF37]/30">★ View My Saved Prayers ({bookmarks.length})</button>
 
-                      <div>
-                          <p className="font-bold mb-3 text-sm uppercase tracking-wide opacity-70">Text Size</p>
-                          <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2" style={{ backgroundColor: currentThemeId === 'dark' ? '#475569' : '#F1F5F9' }}>
-                              <button 
-                                  onClick={() => setFontScale(prev => Math.max(prev - 2, -4))}
-                                  className="p-2 rounded hover:bg-black/5 active:bg-black/10 transition-colors"
-                              >
-                                  <Minus size={20} />
-                              </button>
-                              <span className="font-bold font-arabic px-4 text-xl">
-                                  بِسْمِ
-                              </span>
-                              <button 
-                                  onClick={() => setFontScale(prev => Math.min(prev + 4, 12))}
-                                  className="p-2 rounded hover:bg-black/5 active:bg-black/10 transition-colors"
-                              >
-                                  <Plus size={20} />
-                              </button>
-                          </div>
-                      </div>
+                      <div className="mb-10"><p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-40 text-center">Theme Color</p><div className="flex justify-around px-2">{['cream', 'white', 'dark'].map(t => (<button key={t} onClick={() => setCurrentThemeId(t)} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37] scale-110 shadow-lg' : 'border-gray-100'}`} style={{ backgroundColor: THEMES[t].bg }} />))}</div></div>
+                      <div><p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-40 text-center">Arabic Size</p><div className="flex items-center justify-between bg-gray-50 dark:bg-slate-800 rounded-3xl p-2 border border-black/5"><button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="p-4 active:scale-75 transition-transform"><IconMinus /></button><span className="font-arabic text-2xl font-bold">بِسْمِ</span><button onClick={() => setFontScale(s => Math.min(s+4, 16))} className="p-4 active:scale-75 transition-transform"><IconPlus /></button></div></div>
                   </div>
               </div>
             )}
-          </>
+          </Fragment>
         );
       };
 
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      );
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
     </script>
 </body>
 </html>
