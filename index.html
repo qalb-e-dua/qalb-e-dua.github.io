@@ -18,12 +18,19 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-      /* This part fixes the white gap at the top */
+   <style>
+      /* 1. KEEPING THE GAP FIX (No changes here) */
       html, body { 
         overscroll-behavior-y: none; 
         background-color: #030e26; 
       }
+
+      /* 2. ONLY ADDING THIS TO REMOVE THE SCROLLBAR */
+      ::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      /* 3. YOUR ORIGINAL CODE BELOW (No changes) */
       body { 
         transition: background-color 0.3s; 
         margin: 0; 
@@ -31,13 +38,12 @@
         overflow-x: hidden; 
         padding-top: env(safe-area-inset-top); 
       }
-      /* Your original styles below are kept exactly the same */
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .animate-in { animation: fadeIn 0.4s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+</style>
 </head>
 <body>
     <div id="root"></div>
