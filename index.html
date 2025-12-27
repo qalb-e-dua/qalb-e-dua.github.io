@@ -18,31 +18,40 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
-   <style>
-      /* 1. KEEPING THE GAP FIX (No changes here) */
-      html, body { 
-        overscroll-behavior-y: none; 
-        background-color: #030e26; 
-      }
+  <style>
+    /* 1. STOPS THE BLUE LIGHT FLASH WHEN YOU PRESS BUTTONS */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
 
-      /* 2. ONLY ADDING THIS TO REMOVE THE SCROLLBAR */
-      ::-webkit-scrollbar {
+    /* 2. REMOVES THE SCROLLBAR LINE ON ALL IPHONES */
+    *::-webkit-scrollbar {
         display: none !important;
-      }
+        width: 0 !important;
+        height: 0 !important;
+    }
 
-      /* 3. YOUR ORIGINAL CODE BELOW (No changes) */
-      body { 
+    /* 3. KEEPS YOUR TOP GAP FIX */
+    html, body { 
+        overscroll-behavior-y: none; 
+        background-color: #030e26; /* Set this to your exact header blue */
+        scrollbar-width: none;     /* For Firefox */
+    }
+
+    body { 
         transition: background-color 0.3s; 
         margin: 0; 
         padding: 0; 
         overflow-x: hidden; 
         padding-top: env(safe-area-inset-top); 
-      }
-      .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      .animate-in { animation: fadeIn 0.4s ease-out; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    }
+
+    /* 4. YOUR ORIGINAL STYLES (NO CHANGES) */
+    .font-heading { font-family: 'Cinzel', serif; }
+    .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .animate-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
