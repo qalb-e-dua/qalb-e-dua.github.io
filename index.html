@@ -20,51 +20,39 @@ Update check 2 last
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. GLOBAL FIXES: Scrollbar, Top Gap, and Blue Flashing */
+    /* 1. KEEPS THE TOP BLUE (NO WHITE GAP) */
     html, body { 
         overscroll-behavior-y: none; 
         background-color: #030e26 !important; 
         margin: 0; 
         padding: 0;
-        scrollbar-width: none !important;
     }
 
+    /* 2. STOPS BLUE FLASHING ON BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
+    /* 3. HIDES THE SCROLLBAR LINE */
     ::-webkit-scrollbar { display: none !important; }
+    html { scrollbar-width: none !important; }
 
-    /* 2. FIX OVERLAP WITH CLOCK/NOTCH */
-    /* This pushes everything down so it never touches the clock or battery */
+    /* 4. FIXES OVERLAP WITH IPHONE CLOCK/NOTCH */
     body { 
         padding-top: env(safe-area-inset-top); 
-        overflow-x: hidden;
+        overflow-x: hidden; 
     }
 
-    /* 3. FIX THE TITLES: No more "..." and no more overlap */
+    /* 5. HEADER TEXT: Kept simple so it does not break anything */
     .font-heading { 
         font-family: 'Cinzel', serif; 
-        /* This allows long titles like "MORNING & EVENING" to use two lines 
-           so they are NEVER cut off with "..." */
-        white-space: normal !important; 
-        overflow: visible !important;
-        text-overflow: unset !important;
+        font-size: 20px !important; 
         line-height: 1.2 !important;
         text-align: center !important;
-        /* Safe font size that fits all iPhones nicely */
-        font-size: 1.25rem !important; 
     }
 
-    /* 4. MAIN LOGO ONLY: "QALB-E-DUA" on one line */
-    /* This targets the main title specifically without breaking other pages */
-    #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
-        font-size: 22px !important;
-    }
-
-    /* 5. YOUR ORIGINAL STYLES */
+    /* 6. YOUR ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
