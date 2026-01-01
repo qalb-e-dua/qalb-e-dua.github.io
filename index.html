@@ -19,40 +19,32 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. FIX THE TITLES: Stops "..." and shows the full name */
+    /* 1. THE TITLE FIX: Stops cutting off ("...") and shows full titles */
     .font-heading { 
         font-family: 'Cinzel', serif; 
-        line-height: 1.2 !important;
-        /* This removes the "..." and allows the text to wrap to a 2nd line */
+        /* Allow text to wrap to a second line so it is NEVER cut off */
         white-space: normal !important; 
         overflow: visible !important;
         text-overflow: clip !important;
-    }
-
-    /* 2. SPECIAL RULE FOR MAIN LOGO ONLY: Keep "QALB-E-DUA" on one line */
-    /* This targets the logo on the first page so it looks perfect */
-    #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
-        font-size: 22px !important;
-    }
-
-    /* 3. SUB-PAGE HEADER FIX: Ensures titles like "Morning & Evening" fit */
-    header .font-heading, 
-    nav .font-heading,
-    .header-title {
-        font-size: 1.1rem !important; /* Slightly smaller so more fits */
-        max-width: 70% !important;   /* Centers it between the icons */
-        margin: 0 auto !important;
+        line-height: 1.2 !important;
+        /* Adjust size so it fits between buttons on all iPhones */
+        font-size: 18px !important; 
         text-align: center !important;
     }
 
-    /* 4. STOP BLUE FLASHING WHEN PRESSING BUTTONS */
+    /* 2. MAIN LOGO SIZE: Makes "QALB-E-DUA" fit perfectly */
+    #root > div > div:first-child .font-heading {
+        font-size: 22px !important;
+        letter-spacing: 0.05em;
+    }
+
+    /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 5. HIDE SCROLLBAR & STOP WHITE GAP */
+    /* 4. HIDE THE SCROLLBAR & FIX THE WHITE GAP */
     ::-webkit-scrollbar { display: none !important; }
     html, body { 
         overscroll-behavior-y: none; 
@@ -62,12 +54,13 @@
         padding: 0;
     }
 
-    /* 6. PUSH CONTENT DOWN FROM CLOCK */
-    header, .header-container {
-        padding-top: env(safe-area-inset-top) !important;
+    /* 5. FIX OVERLAP WITH CLOCK: Pushes header down away from battery/clock */
+    body { 
+        padding-top: env(safe-area-inset-top); 
+        overflow-x: hidden;
     }
 
-    /* 7. ORIGINAL STYLES */
+    /* 6. YOUR ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
