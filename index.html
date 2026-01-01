@@ -18,64 +18,60 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. GAP & SCROLLBAR FIXES */
+    /* 1. PREVENT WHITE GAP & SIDE GAP */
     html, body {
         width: 100%;
         margin: 0;
         padding: 0;
-        overscroll-behavior-y: none !important;
         background-color: #030e26 !important;
-        /* Sticky works better if the body doesn't have overflow-x: hidden */
+        overscroll-behavior-y: none !important;
+        /* We remove 'overflow' from body so the Sticky Menu works */
     }
 
+    /* 2. SIDE GAP FIX: Move overflow-x hidden here to stop the "turn right" gap */
     #root {
         width: 100%;
-        overflow-x: hidden !important; /* Side gap fix moved here */
+        overflow-x: hidden !important;
+        min-height: 100vh;
     }
 
-    ::-webkit-scrollbar { display: none !important; }
-    * { scrollbar-width: none !important; }
-
-    /* 2. THE STICKY FIX: Forces Header and Index Buttons to stay at the top */
-    /* Header (Title) Sticks */
+    /* 3. STICKY HEADER & INDEX: Keeps menu at top while scrolling */
+    /* This ensures you can change Duas while reading down the page */
     header, .header-container, #root > div > div:first-child {
         position: -webkit-sticky !important;
         position: sticky !important;
         top: 0 !important;
-        z-index: 1100 !important;
+        z-index: 1000 !important;
         background-color: #030e26 !important;
         padding-top: env(safe-area-inset-top) !important;
-        padding-bottom: 5px !important;
     }
 
-    /* Index Buttons (1. Dua For...) Stick right below the title */
+    /* Targets the horizontal row of buttons (1. Dua For, 2. Dua For...) */
     .flex.overflow-x-auto, [class*="overflow-x-auto"], nav.flex {
         position: -webkit-sticky !important;
         position: sticky !important;
-        top: 60px !important; /* Sitting right below the main title */
-        z-index: 1050 !important;
+        top: 60px !important; /* Positions buttons right below the title */
+        z-index: 999 !important;
         background-color: #030e26 !important;
         padding: 10px 0 !important;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 3. LOGO vs TITLES: Keeping your working fixes */
+    /* 4. TITLE FIXES: Logo vs. Internal Titles */
     .font-heading { 
         font-family: 'Cinzel', serif; 
-        line-height: 1.2 !important; 
-        text-align: center !important; 
+        line-height: 1.2 !important;
+        text-align: center !important;
     }
 
-    /* Main Logo: Stays on one line */
+    /* Main Logo "QALB-E-DUA": Keep on one line */
     #root > div > div:first-child .font-heading {
         white-space: nowrap !important;
-        font-size: 20px !important;
+        font-size: 22px !important;
     }
 
-    /* Dua Titles inside boxes: ALLOW wrapping so they are NEVER cut off */
-    main .font-heading, 
-    .p-4 .font-heading, 
-    .max-w-4xl .font-heading {
+    /* Internal Titles (Gold text in white boxes): Wrap to 2 lines, NEVER cut off */
+    main .font-heading, .p-4 .font-heading, .max-w-4xl .font-heading {
         white-space: normal !important;
         overflow: visible !important;
         text-overflow: unset !important;
@@ -83,13 +79,16 @@
         display: block !important;
     }
 
-    /* 4. STOP BLUE FLASHING */
+    /* 5. STOP BLUE FLASHING & HIDE SCROLLBAR */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 5. ORIGINAL STYLES */
+    ::-webkit-scrollbar { display: none !important; }
+    * { scrollbar-width: none !important; }
+
+    /* 6. ORIGINAL ANIMATIONS */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
