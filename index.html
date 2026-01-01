@@ -25,13 +25,13 @@
         margin: 0;
         padding: 0;
         background-color: #030e26 !important;
-        overscroll-behavior: none !important; /* Stops white top gap and side bounce */
+        overscroll-behavior-y: none !important; /* Stops white top gap */
     }
 
+    /* This stops the side-to-side gap without breaking the "Sticky" menu */
     #root {
         width: 100%;
         position: relative;
-        /* This stops the side-to-side gap without breaking the sticky menu */
         overflow-x: clip !important; 
     }
 
@@ -43,9 +43,7 @@
     ::-webkit-scrollbar { display: none !important; width: 0 !important; }
     * { scrollbar-width: none !important; }
 
-    /* 2. THE STICKY FIX: Forces Header & Index Menu to stay at the top */
-    /* This allows you to change Duas while scrolling down */
-    
+    /* 2. THE STICKY FIX: Keeps both Title and Index at the top while scrolling */
     header, .header-container, #root > div > div:first-child {
         position: -webkit-sticky !important;
         position: sticky !important;
@@ -56,18 +54,18 @@
         padding-bottom: 5px !important;
     }
 
-    /* Target the Index Menu (The horizontal buttons: 1. Dua For, 2. Dua For...) */
-    .flex.overflow-x-auto, [class*="overflow-x-auto"], nav.flex {
+    /* This keeps the horizontal buttons (1. Dua For...) at the top */
+    nav, .flex.overflow-x-auto, [class*="overflow-x-auto"] {
         position: -webkit-sticky !important;
         position: sticky !important;
-        top: 60px !important; /* Sits right below the page title */
+        top: 55px !important; /* Positions buttons right below the title */
         z-index: 1999 !important;
         background-color: #030e26 !important;
         padding: 10px 0 !important;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 3. LOGO & TITLES FIXES: No more cutting off with "..." */
+    /* 3. LOGO vs TITLES: Fixed cutting off */
     .font-heading { 
         font-family: 'Cinzel', serif; 
         line-height: 1.2 !important;
@@ -78,11 +76,13 @@
     #root > div > div:first-child .font-heading {
         white-space: nowrap !important;
         font-size: 22px !important;
+        display: block !important;
     }
 
-    /* INTERNAL PAGE TITLES: ALLOWS wrapping so they are NEVER cut off */
+    /* PAGE TITLES (Inside Pages): NO MORE CUTTING OFF with "..." */
+    /* This allows "PRAYERS OF THE PROPHET" to use two lines so it's full */
     header .font-heading, .title-container .font-heading {
-        white-space: normal !important;   /* Fixes the "..." cut off */
+        white-space: normal !important;   /* Shows the FULL title */
         overflow: visible !important;
         text-overflow: unset !important;
         font-size: 18px !important;
