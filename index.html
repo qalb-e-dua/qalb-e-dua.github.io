@@ -19,74 +19,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. VISUAL FIXES: Background, No Side Gap, No Blue Flash, No Scrollbar */
+    /* 1. THE STICKY FIX: This forces the Index to stay at the top */
+    /* We must remove overflow:hidden from html/body for this to work */
     html, body {
         margin: 0;
         padding: 0;
         background-color: #030e26 !important;
         overscroll-behavior-y: none !important;
-        width: 100%;
-        /* Note: We don't put overflow: hidden on body so sticky works */
     }
-    #root {
-        overflow-x: hidden !important;
-        width: 100%;
-    }
-    * { -webkit-tap-highlight-color: transparent !important; outline: none !important; }
-    ::-webkit-scrollbar { display: none !important; }
 
-    /* 2. THE STICKY FIX: Keeps the Header and the Index at the top */
-    header, .header-container, #root > div > div:first-child header {
+    /* 2. THE HEADER & INDEX CONTAINER */
+    /* This makes the Title AND the Buttons stick together at the top */
+    header, .header-container, #root > div > div:first-child {
         position: -webkit-sticky !important;
         position: sticky !important;
         top: 0 !important;
-        z-index: 1000 !important;
+        z-index: 2000 !important; /* Highest priority */
         background-color: #030e26 !important;
         padding-top: env(safe-area-inset-top) !important;
     }
 
-    /* Target the Index menu (1. Dua For, 2. Dua For...) to stay at the top */
-    .flex.overflow-x-auto, nav.flex {
+    /* Target the row of buttons (1. Dua For, 2. Dua For...) */
+    .flex.overflow-x-auto, nav.flex, [class*="overflow-x-auto"] {
         position: -webkit-sticky !important;
         position: sticky !important;
-        top: 55px !important; /* Adjust if needed to sit below the title */
-        z-index: 999 !important;
+        /* This places the buttons right under the title */
+        top: 54px !important; 
+        z-index: 1999 !important;
         background-color: #030e26 !important;
-        padding: 10px 0 !important;
+        padding: 12px 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 3. SETTINGS BUTTON: Remove from Home Screen, keep on inside pages */
-    #root > div > div:first-child header button:last-child,
-    #root > div > div:first-child .header-container button:last-child {
-        display: none !important;
+    /* 3. SIDE GAP FIX: Locks the screen so it doesn't turn right */
+    #root {
+        width: 100%;
+        overflow-x: hidden !important;
+        display: block !important;
     }
-    header button:last-child { display: block; }
 
-    /* 4. TITLE FIXES: Logo vs Page Titles */
+    /* 4. LOGO & TITLES FIXES */
     .font-heading { 
         font-family: 'Cinzel', serif; 
-        text-align: center;
         line-height: 1.2 !important;
+        text-align: center !important;
     }
 
-    /* HOME LOGO: Forces "QALB-E-DUA" on one line */
+    /* Main Logo "QALB-E-DUA" on one line */
     #root > div > div:first-child .font-heading {
         white-space: nowrap !important;
         font-size: 22px !important;
+        display: block !important;
     }
 
-    /* INTERNAL TITLES: ALLOWS wrapping to 2 lines so they are NEVER cut off */
-    /* Fixes "PRAYERS AFTER SALAH" being full and not cut off with "..." */
-    header .font-heading, .header-container .font-heading {
+    /* Internal Dua Titles (Gold text) wrap so they are NEVER cut off */
+    main .font-heading, .p-4 .font-heading, .max-w-4xl .font-heading {
         white-space: normal !important;
         overflow: visible !important;
         text-overflow: unset !important;
-        font-size: 18px !important;
-        max-width: 80% !important;
-        margin: 0 auto !important;
+        font-size: 1.15rem !important;
+        display: block !important;
     }
 
-    /* 5. ORIGINAL STYLES */
+    /* 5. STOP BLUE FLASHING & HIDE SCROLLBAR */
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+        outline: none !important;
+    }
+    ::-webkit-scrollbar { display: none !important; }
+    * { scrollbar-width: none !important; }
+
+    /* 6. ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
@@ -2021,8 +2024,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
