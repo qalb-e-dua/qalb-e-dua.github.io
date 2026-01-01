@@ -19,55 +19,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. THE BATTERY/CLOCK FIX: Pushes everything down so it never overlaps the top icons */
-    header, .header-container, #root > div > div:first-child {
-        padding-top: env(safe-area-inset-top) !important;
-        background-color: #030e26 !important;
-        position: relative !important;
-    }
-
-    /* 2. REMOVE SETTINGS BUTTON FROM HOME SCREEN ONLY */
-    /* This finds the settings gear on the first page and hides it completely */
-    #root > div > div:first-child header button:last-child,
-    #root > div > div:first-child .settings-icon,
-    #root > div > div:first-child svg[class*="gear"] {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
-    /* 3. KEEP SETTINGS BUTTON ON INSIDE PAGES */
-    /* This ensures it stays visible when you are reading a Dua */
-    header button:last-child {
-        display: block;
-    }
-
-    /* 4. THE LOGO: Stays on one line ("QALB-E-DUA") */
-    .font-heading { 
-        font-family: 'Cinzel', serif; 
-        white-space: nowrap !important;
-        font-size: 22px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-
-    /* 5. STOP BLUE FLASHING AND HIDE SCROLLBAR */
+    /* 1. STOPS THE BLUE LIGHT FLASH WHEN YOU PRESS BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
-    
-    ::-webkit-scrollbar { display: none !important; }
 
-    /* 6. GAP FIX: No white top gap or side gap */
-    html, body {
-        margin: 0;
+    /* 2. REMOVES THE SCROLLBAR LINE ON ALL DEVICES */
+    *::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    /* 3. KEEPS YOUR TOP GAP FIX & SIDE GAP FIX */
+    html, body { 
+        overscroll-behavior-y: none !important; 
+        background-color: #030e26 !important; 
+        margin: 0; 
         padding: 0;
-        background-color: #030e26 !important;
-        overscroll-behavior-y: none !important;
+        width: 100%;
         overflow-x: hidden;
     }
 
-    /* 7. YOUR ORIGINAL STYLES */
+    body { 
+        padding-top: env(safe-area-inset-top); 
+    }
+
+    /* 4. THE LOGO: Forces "QALB-E-DUA" to stay on one line on Home Screen */
+    #root > div > div:first-child .font-heading {
+        white-space: nowrap !important;
+        font-size: 22px !important;
+    }
+
+    /* 5. REMOVE SETTINGS BUTTON FROM HOME SCREEN ONLY */
+    /* This targets the gear icon ONLY on the main menu page */
+    #root > div > div:first-child header button:last-child,
+    #root > div > div:first-child .settings-icon {
+        display: none !important;
+    }
+
+    /* 6. KEEP SETTINGS BUTTON ON INSIDE PAGES */
+    /* This ensures it remains visible when you are reading a Dua */
+    header button:last-child {
+        display: block;
+    }
+
+    /* 7. YOUR ORIGINAL STYLES (NO CHANGES) */
+    .font-heading { font-family: 'Cinzel', serif; text-align: center; line-height: 1.2; }
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
