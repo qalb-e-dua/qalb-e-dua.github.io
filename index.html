@@ -19,47 +19,54 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. STOPS THE WHITE GAP (PULL-DOWN BOUNCE) */
-    html, body { 
-        overscroll-behavior-y: none; 
-        background-color: #030e26; 
-        margin: 0;
-        padding: 0;
+    /* 1. FIX THE OVERLAP WITH THE CLOCK */
+    /* This ensures headers never touch the iPhone status bar icons */
+    header, .header-container, #root > div > div:first-child {
+        padding-top: env(safe-area-inset-top) !important;
+        min-height: calc(60px + env(safe-area-inset-top)) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
     }
 
-    /* 2. REMOVES THE SCROLLBAR LINE (AERO) */
-    ::-webkit-scrollbar {
-        display: none !important;
-    }
-    * {
-        scrollbar-width: none !important;
+    /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
+    .font-heading { 
+        font-family: 'Cinzel', serif; 
+        line-height: 1.2 !important;
     }
 
-    /* 3. STOPS THE BLUE FLASHING WHEN PRESSING BUTTONS */
+    /* Target ONLY the main "QALB-E-DUA" logo to stay on one line */
+    #root > div > div:first-child .font-heading {
+        white-space: nowrap !important;
+        font-size: 22px !important;
+    }
+
+    /* ALLOW other page titles like "PRAYERS OF THE PROPHET" to wrap naturally */
+    /* This stops the "..." cut off problem in your picture */
+    header .font-heading, .title-container .font-heading {
+        white-space: normal !important;
+        font-size: 1.2rem !important;
+        width: 90% !important;
+        margin: 0 auto !important;
+    }
+
+    /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 4. FIXES OVERLAP WITH IPHONE CLOCK/NOTCH */
-    body { 
-        padding-top: env(safe-area-inset-top); 
-        overflow-x: hidden; 
+    /* 4. HIDE SCROLLBAR & STOP WHITE GAP */
+    ::-webkit-scrollbar { display: none !important; }
+    html, body { 
+        overscroll-behavior-y: none; 
+        background-color: #030e26 !important; 
+        scrollbar-width: none !important;
+        margin: 0;
+        padding: 0;
     }
 
-    /* 5. THE "HALF TITLE" LOOK (One line, truncated with ...) */
-    .font-heading { 
-        font-family: 'Cinzel', serif; 
-        white-space: nowrap !important;   /* Forces one line */
-        overflow: hidden !important;      /* Cuts off extra text */
-        text-overflow: ellipsis !important; /* Adds "..." if too long */
-        font-size: 22px !important;       /* Standard size */
-        line-height: 1.2 !important;
-        text-align: center !important;
-        display: block !important;
-    }
-
-    /* 6. YOUR ORIGINAL STYLES - NO CHANGES */
+    /* 5. YOUR ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
