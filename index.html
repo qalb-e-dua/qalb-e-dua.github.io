@@ -19,80 +19,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. THE ULTIMATE GAP FIX (Top & Side) */
-    html {
-        background-color: #030e26 !important;
-        overscroll-behavior: none !important; /* Stops white top gap */
-        overflow-x: hidden !important;        /* Stops side-to-side gap */
-        width: 100vw;
-    }
-
-    body {
+    /* 1. CLEAN APP LOOK: Resets the header so it looks professional again */
+    html, body {
         margin: 0;
         padding: 0;
         background-color: #030e26 !important;
+        overscroll-behavior-y: none !important;
         width: 100%;
-        /* We leave overflow off here so the Sticky menu works */
+        overflow-x: hidden;
     }
 
-    /* 2. STICKY HEADER & INDEX: This forces the menu to stay at the top while scrolling */
-    header, .header-container, #root > div > div:first-child {
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        top: 0 !important;
-        z-index: 2000 !important;
-        background-color: #030e26 !important;
-        padding-top: env(safe-area-inset-top) !important;
-        padding-bottom: 5px !important;
+    body {
+        padding-top: env(safe-area-inset-top);
     }
 
-    /* Target the row of buttons (1. Dua For, 2. Dua For...) to stay at the top */
-    .flex.overflow-x-auto, nav.flex, [class*="overflow-x-auto"] {
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        top: 60px !important; /* Sits right below the page title */
-        z-index: 1999 !important;
-        background-color: #030e26 !important;
-        padding: 10px 0 !important;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+    /* 2. HIDE SETTINGS BUTTON ON HOME SCREEN ONLY */
+    /* This targets the gear icon on the main menu and hides it */
+    #root > div > div:first-child button:last-child,
+    #root > div > div:first-child .settings-icon {
+        display: none !important;
     }
 
-    /* 3. LOGO vs TITLES: No more "..." cutting off names */
+    /* 3. LOGO & TITLES: Stays on one line (it will cut off with "..." to stay neat) */
     .font-heading { 
         font-family: 'Cinzel', serif; 
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        font-size: 20px !important;
         line-height: 1.2 !important;
         text-align: center !important;
     }
 
-    /* MAIN LOGO (Home Screen): Keeps QALB-E-DUA on one line */
-    #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
-        font-size: 22px !important;
+    /* 4. FIX GAPS, FLASHING, AND SCROLLBARS */
+    * { 
+        -webkit-tap-highlight-color: transparent !important; 
+        outline: none !important; 
+    }
+    
+    ::-webkit-scrollbar { 
+        display: none !important; 
     }
 
-    /* INTERNAL PAGE TITLES: Allows wrapping to 2 lines so they are NEVER cut off */
-    /* This ensures you see "VICTORY & PROTECTION" full and clear */
-    header .font-heading, .title-container .font-heading {
-        white-space: normal !important;   /* Shows the FULL name */
-        overflow: visible !important;
-        text-overflow: unset !important;
-        font-size: 18px !important;
-        max-width: 80% !important;
-        margin: 0 auto !important;
-        display: block !important;
-    }
-
-    /* 4. STOP BLUE FLASHING ON BUTTONS */
-    * {
-        -webkit-tap-highlight-color: transparent !important;
-        outline: none !important;
-    }
-
-    /* 5. HIDE SCROLLBAR */
-    ::-webkit-scrollbar { display: none !important; width: 0 !important; }
-    * { scrollbar-width: none !important; }
-
-    /* 6. ORIGINAL STYLES */
+    /* 5. YOUR ORIGINAL STYLES - RESTORED */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
