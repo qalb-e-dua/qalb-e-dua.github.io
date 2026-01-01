@@ -18,19 +18,19 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. LOCK SCREEN: Stops side-to-side gap and white pull-down gap */
+    /* 1. LOCK SCREEN & BACKGROUND: No white gap, no side gap */
     html, body {
         width: 100%;
         margin: 0;
         padding: 0;
-        overscroll-behavior: none !important; 
-        overflow-x: hidden !important; 
+        overscroll-behavior-y: none !important; 
         background-color: #030e26 !important;
+        /* We remove 'overflow: hidden' here so 'sticky' actually works */
     }
 
-    /* 2. STICKY HEADER & INDEX: This keeps the menu at the top while you scroll */
-    /* It pushes the text down so it never touches the iPhone clock */
+    /* 2. STICKY HEADER & INDEX: This keeps them at the top when you scroll */
     header, .header-container, #root > div > div:first-child {
+        position: -webkit-sticky !important;
         position: sticky !important;
         top: 0 !important;
         z-index: 1000 !important;
@@ -39,18 +39,20 @@
         padding-bottom: 5px !important;
     }
 
-    /* This targets the horizontal row of Dua buttons (1. Dua For...) */
-    .flex.overflow-x-auto {
+    /* THIS IS THE INDEX FIX: It makes the buttons stay at the top 
+       so you can see them the moment you scroll back up */
+    .flex.overflow-x-auto, nav.flex, [class*="overflow-x-auto"] {
+        position: -webkit-sticky !important;
         position: sticky !important;
-        top: 55px !important; /* Positions buttons right below the header title */
+        top: 60px !important; /* Adjust this if your title is taller */
         z-index: 999 !important;
         background-color: #030e26 !important;
+        padding-top: 10px !important;
         padding-bottom: 10px !important;
-        padding-top: 5px !important;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 3. STOP BLUE FLASHING ON ALL BUTTONS */
+    /* 3. STOP BLUE FLASHING ON BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
@@ -60,7 +62,7 @@
     ::-webkit-scrollbar { display: none !important; }
     * { scrollbar-width: none !important; }
 
-    /* 5. TITLE LOOK: One line, cuts off with "..." (As you requested) */
+    /* 5. TITLE LOOK: One line, cuts off with "..." (To keep layout clean) */
     .font-heading { 
         font-family: 'Cinzel', serif; 
         line-height: 1.2 !important;
