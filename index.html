@@ -19,24 +19,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. BACKGROUND & GAP FIXES: Stops white pull-down and side gap */
-    html, body {
+    /* 1. BACKGROUND & OVERSCROLL FIX (No White Gap) */
+    html {
+        background-color: #030e26 !important;
+        overscroll-behavior: none !important;
+    }
+
+    body {
         margin: 0;
         padding: 0;
         background-color: #030e26 !important;
-        overscroll-behavior-y: none !important;
+        /* We remove 'overflow-x' from body here so 'Sticky' menu works */
     }
 
-    /* This stops the "turn right" side gap without breaking the sticky menu */
+    /* 2. SIDE GAP FIX (Turn Right Gap) */
     #root {
         width: 100%;
-        overflow-x: clip !important;
+        overflow-x: hidden !important; /* This locks the side gap */
         position: relative;
     }
 
-    /* 2. STICKY HEADER & INDEX: Keeps the Title and the Buttons at the top */
-    /* This allows you to change Duas while you are scrolling down */
-    
+    /* 3. STICKY INDEX & HEADER: Forces them to stay at the top while scrolling */
     header, .header-container, #root > div > div:first-child {
         position: -webkit-sticky !important;
         position: sticky !important;
@@ -44,53 +47,44 @@
         z-index: 2000 !important;
         background-color: #030e26 !important;
         padding-top: env(safe-area-inset-top) !important;
-        padding-bottom: 5px !important;
     }
 
-    /* Target the row of buttons (1. Dua For, 2. Dua For...) */
-    nav, .flex.overflow-x-auto, [class*="overflow-x-auto"] {
+    /* Target the row of buttons (1. Dua For, 2. Dua For...) to stay at the top */
+    .flex.overflow-x-auto, nav.flex, [class*="overflow-x-auto"] {
         position: -webkit-sticky !important;
         position: sticky !important;
-        top: 60px !important; /* Sits right below the title */
+        top: 55px !important; /* This sticks them right below the header title */
         z-index: 1999 !important;
         background-color: #030e26 !important;
         padding: 10px 0 !important;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 3. LOGO & TITLE FIXES: No more "..." cutting off */
+    /* 4. TITLE FIX: NO MORE CUTTING OFF with "..." */
     .font-heading { 
         font-family: 'Cinzel', serif; 
         line-height: 1.2 !important;
         text-align: center !important;
     }
 
-    /* Home Screen Logo (QALB-E-DUA): Keep on one line */
+    /* MAIN LOGO (Home Screen Only): Keeps QALB-E-DUA on one line */
     #root > div > div:first-child .font-heading {
         white-space: nowrap !important;
         font-size: 22px !important;
-        display: block !important;
     }
 
-    /* Internal Page Titles: ALLOW wrapping so they are NEVER cut off */
-    /* This makes "PRAYERS OF THE PROPHET" show the FULL name */
+    /* INTERNAL PAGE TITLES: Allows wrapping to 2nd line so they are NEVER cut off */
     header .font-heading, .title-container .font-heading {
-        white-space: normal !important;   /* Shows the FULL name */
+        white-space: normal !important;   /* Shows the FULL name, no '...' */
         overflow: visible !important;
         text-overflow: unset !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
         max-width: 80% !important;
         margin: 0 auto !important;
         display: block !important;
     }
 
-    /* 4. BUTTONS FIX: Ensures buttons look normal and fit well */
-    .flex.overflow-x-auto button {
-        flex-shrink: 0 !important;
-        white-space: nowrap !important;
-    }
-
-    /* 5. STOP BLUE FLASHING & HIDE SCROLLBAR */
+    /* 5. STOP BLUE FLASHING & HIDE SCROLLBARS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
