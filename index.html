@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. CLEAN APP LOOK: Resets the header so it looks professional again */
+    /* 1. GLOBAL FIXES: Background, Side Gap, No Flashing, Safe Area */
     html, body {
         margin: 0;
         padding: 0;
@@ -33,35 +33,53 @@
         padding-top: env(safe-area-inset-top);
     }
 
-    /* 2. HIDE SETTINGS BUTTON ON HOME SCREEN ONLY */
-    /* This targets the gear icon on the main menu and hides it */
-    #root > div > div:first-child button:last-child,
-    #root > div > div:first-child .settings-icon {
-        display: none !important;
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+        outline: none !important;
     }
 
-    /* 3. LOGO & TITLES: Stays on one line (it will cut off with "..." to stay neat) */
+    ::-webkit-scrollbar { display: none !important; }
+
+    /* 2. THE LOGO: Forces "QALB-E-DUA" to stay on one line */
     .font-heading { 
         font-family: 'Cinzel', serif; 
         white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
         font-size: 20px !important;
         line-height: 1.2 !important;
         text-align: center !important;
     }
 
-    /* 4. FIX GAPS, FLASHING, AND SCROLLBARS */
-    * { 
-        -webkit-tap-highlight-color: transparent !important; 
-        outline: none !important; 
-    }
-    
-    ::-webkit-scrollbar { 
-        display: none !important; 
+    /* 3. SETTINGS BUTTON LOGIC */
+
+    /* FIRST: Hide the Settings button on ALL pages */
+    header button:last-child, 
+    .header-container button:last-child,
+    .settings-icon {
+        display: none !important;
     }
 
-    /* 5. YOUR ORIGINAL STYLES - RESTORED */
+    /* SECOND: Show the Settings button ONLY on the Home Screen */
+    /* This targets the main menu screen specifically */
+    #root > div > div:first-child header button:last-child,
+    #root > div > div:first-child .header-container button:last-child,
+    #root > div > div:first-child button:has(svg:last-child) {
+        display: block !important;
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+    }
+
+    /* 4. PREVENT OVERLAP WITH CLOCK */
+    header, .header-container {
+        position: relative !important;
+        min-height: 60px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* 5. ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
