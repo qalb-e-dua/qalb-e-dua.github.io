@@ -20,48 +20,51 @@ Update check 2 last
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. THE TITLE FIX: Stops cutting off ("...") and shows full titles */
-    .font-heading { 
-        font-family: 'Cinzel', serif; 
-        /* Allow text to wrap to a second line so it is NEVER cut off */
-        white-space: normal !important; 
-        overflow: visible !important;
-        text-overflow: clip !important;
-        line-height: 1.2 !important;
-        /* Adjust size so it fits between buttons on all iPhones */
-        font-size: 18px !important; 
-        text-align: center !important;
+    /* 1. GLOBAL FIXES: Scrollbar, Top Gap, and Blue Flashing */
+    html, body { 
+        overscroll-behavior-y: none; 
+        background-color: #030e26 !important; 
+        margin: 0; 
+        padding: 0;
+        scrollbar-width: none !important;
     }
 
-    /* 2. MAIN LOGO SIZE: Makes "QALB-E-DUA" fit perfectly */
-    #root > div > div:first-child .font-heading {
-        font-size: 22px !important;
-        letter-spacing: 0.05em;
-    }
-
-    /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 4. HIDE THE SCROLLBAR & FIX THE WHITE GAP */
     ::-webkit-scrollbar { display: none !important; }
-    html, body { 
-        overscroll-behavior-y: none; 
-        background-color: #030e26 !important; 
-        scrollbar-width: none !important;
-        margin: 0;
-        padding: 0;
-    }
 
-    /* 5. FIX OVERLAP WITH CLOCK: Pushes header down away from battery/clock */
+    /* 2. FIX OVERLAP WITH CLOCK/NOTCH */
+    /* This pushes everything down so it never touches the clock or battery */
     body { 
         padding-top: env(safe-area-inset-top); 
         overflow-x: hidden;
     }
 
-    /* 6. YOUR ORIGINAL STYLES */
+    /* 3. FIX THE TITLES: No more "..." and no more overlap */
+    .font-heading { 
+        font-family: 'Cinzel', serif; 
+        /* This allows long titles like "MORNING & EVENING" to use two lines 
+           so they are NEVER cut off with "..." */
+        white-space: normal !important; 
+        overflow: visible !important;
+        text-overflow: unset !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        /* Safe font size that fits all iPhones nicely */
+        font-size: 1.25rem !important; 
+    }
+
+    /* 4. MAIN LOGO ONLY: "QALB-E-DUA" on one line */
+    /* This targets the main title specifically without breaking other pages */
+    #root > div > div:first-child .font-heading {
+        white-space: nowrap !important;
+        font-size: 22px !important;
+    }
+
+    /* 5. YOUR ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
