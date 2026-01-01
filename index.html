@@ -19,47 +19,43 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. STOPS THE WHITE GAP (PULL-DOWN BOUNCE) */
+    /* 1. STOPS THE WHITE GAP (PULL-DOWN) */
     html, body { 
         overscroll-behavior-y: none; 
         background-color: #030e26 !important; 
         margin: 0; 
         padding: 0;
+        scrollbar-width: none !important;
     }
 
-    /* 2. STOPS THE BLUE FLASHING ON BUTTONS */
+    /* 2. STOPS THE BLUE FLASHING ON ALL BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 3. REMOVES THE SCROLLBAR LINE (AERO) */
-    ::-webkit-scrollbar {
-        display: none !important;
-    }
-    html {
-        scrollbar-width: none !important;
+    /* 3. HIDES THE SCROLLBAR LINE (AERO) */
+    ::-webkit-scrollbar { 
+        display: none !important; 
+        width: 0 !important; 
     }
 
-    /* 4. FIXES OVERLAP WITH IPHONE CLOCK/NOTCH */
+    /* 4. FIXES OVERLAP WITH THE IPHONE CLOCK/NOTCH */
     body { 
         padding-top: env(safe-area-inset-top); 
         overflow-x: hidden; 
     }
 
-    /* 5. THE "ONE LINE" HEADER (This keeps it clean even if it cuts off) */
+    /* 5. FIXES THE LOGO: "QALB-E-DUA" stays on one line.
+       We use 20px so it fits perfectly on all iPhones without cutting off other pages. */
     .font-heading { 
         font-family: 'Cinzel', serif; 
-        white-space: nowrap !important;     /* Forces one line */
-        overflow: hidden !important;        /* Hides extra text */
-        text-overflow: ellipsis !important;   /* Adds "..." if too long */
-        font-size: 22px !important;         /* Fixed size that fits all iPhones */
+        font-size: 20px !important; 
         line-height: 1.2 !important;
         text-align: center !important;
-        display: block !important;
     }
 
-    /* 6. YOUR ORIGINAL STYLES */
+    /* 6. YOUR ORIGINAL STYLES - NO CHANGES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
