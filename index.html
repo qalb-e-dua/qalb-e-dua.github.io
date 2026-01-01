@@ -19,27 +19,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. BACKGROUND & OVERSCROLL FIX (No White Gap) */
+    /* 1. THE ULTIMATE GAP FIX (Top & Side) */
     html {
         background-color: #030e26 !important;
-        overscroll-behavior: none !important;
+        overscroll-behavior: none !important; /* Stops white top gap */
+        overflow-x: hidden !important;        /* Stops side-to-side gap */
+        width: 100vw;
     }
 
     body {
         margin: 0;
         padding: 0;
         background-color: #030e26 !important;
-        /* We remove 'overflow-x' from body here so 'Sticky' menu works */
-    }
-
-    /* 2. SIDE GAP FIX (Turn Right Gap) */
-    #root {
         width: 100%;
-        overflow-x: hidden !important; /* This locks the side gap */
-        position: relative;
+        /* We leave overflow off here so the Sticky menu works */
     }
 
-    /* 3. STICKY INDEX & HEADER: Forces them to stay at the top while scrolling */
+    /* 2. STICKY HEADER & INDEX: This forces the menu to stay at the top while scrolling */
     header, .header-container, #root > div > div:first-child {
         position: -webkit-sticky !important;
         position: sticky !important;
@@ -47,48 +43,52 @@
         z-index: 2000 !important;
         background-color: #030e26 !important;
         padding-top: env(safe-area-inset-top) !important;
+        padding-bottom: 5px !important;
     }
 
     /* Target the row of buttons (1. Dua For, 2. Dua For...) to stay at the top */
     .flex.overflow-x-auto, nav.flex, [class*="overflow-x-auto"] {
         position: -webkit-sticky !important;
         position: sticky !important;
-        top: 55px !important; /* This sticks them right below the header title */
+        top: 60px !important; /* Sits right below the page title */
         z-index: 1999 !important;
         background-color: #030e26 !important;
         padding: 10px 0 !important;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 4. TITLE FIX: NO MORE CUTTING OFF with "..." */
+    /* 3. LOGO vs TITLES: No more "..." cutting off names */
     .font-heading { 
         font-family: 'Cinzel', serif; 
         line-height: 1.2 !important;
         text-align: center !important;
     }
 
-    /* MAIN LOGO (Home Screen Only): Keeps QALB-E-DUA on one line */
+    /* MAIN LOGO (Home Screen): Keeps QALB-E-DUA on one line */
     #root > div > div:first-child .font-heading {
         white-space: nowrap !important;
         font-size: 22px !important;
     }
 
-    /* INTERNAL PAGE TITLES: Allows wrapping to 2nd line so they are NEVER cut off */
+    /* INTERNAL PAGE TITLES: Allows wrapping to 2 lines so they are NEVER cut off */
+    /* This ensures you see "VICTORY & PROTECTION" full and clear */
     header .font-heading, .title-container .font-heading {
-        white-space: normal !important;   /* Shows the FULL name, no '...' */
+        white-space: normal !important;   /* Shows the FULL name */
         overflow: visible !important;
         text-overflow: unset !important;
-        font-size: 16px !important;
+        font-size: 18px !important;
         max-width: 80% !important;
         margin: 0 auto !important;
         display: block !important;
     }
 
-    /* 5. STOP BLUE FLASHING & HIDE SCROLLBARS */
+    /* 4. STOP BLUE FLASHING ON BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
+
+    /* 5. HIDE SCROLLBAR */
     ::-webkit-scrollbar { display: none !important; width: 0 !important; }
     * { scrollbar-width: none !important; }
 
