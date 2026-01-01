@@ -19,48 +19,47 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. THE TITLE FIX: Stops cutting off ("...") and shows full titles */
-    .font-heading { 
-        font-family: 'Cinzel', serif; 
-        /* Allow text to wrap to a second line so it is NEVER cut off */
-        white-space: normal !important; 
-        overflow: visible !important;
-        text-overflow: clip !important;
-        line-height: 1.2 !important;
-        /* Adjust size so it fits between buttons on all iPhones */
-        font-size: 18px !important; 
-        text-align: center !important;
+    /* 1. STOPS THE WHITE GAP (PULL-DOWN BOUNCE) */
+    html, body { 
+        overscroll-behavior-y: none; 
+        background-color: #030e26; 
+        margin: 0;
+        padding: 0;
     }
 
-    /* 2. MAIN LOGO SIZE: Makes "QALB-E-DUA" fit perfectly */
-    #root > div > div:first-child .font-heading {
-        font-size: 22px !important;
-        letter-spacing: 0.05em;
+    /* 2. REMOVES THE SCROLLBAR LINE (AERO) */
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
+    * {
+        scrollbar-width: none !important;
     }
 
-    /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
+    /* 3. STOPS THE BLUE FLASHING WHEN PRESSING BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 4. HIDE THE SCROLLBAR & FIX THE WHITE GAP */
-    ::-webkit-scrollbar { display: none !important; }
-    html, body { 
-        overscroll-behavior-y: none; 
-        background-color: #030e26 !important; 
-        scrollbar-width: none !important;
-        margin: 0;
-        padding: 0;
-    }
-
-    /* 5. FIX OVERLAP WITH CLOCK: Pushes header down away from battery/clock */
+    /* 4. FIXES OVERLAP WITH IPHONE CLOCK/NOTCH */
     body { 
         padding-top: env(safe-area-inset-top); 
-        overflow-x: hidden;
+        overflow-x: hidden; 
     }
 
-    /* 6. YOUR ORIGINAL STYLES */
+    /* 5. THE "HALF TITLE" LOOK (One line, truncated with ...) */
+    .font-heading { 
+        font-family: 'Cinzel', serif; 
+        white-space: nowrap !important;   /* Forces one line */
+        overflow: hidden !important;      /* Cuts off extra text */
+        text-overflow: ellipsis !important; /* Adds "..." if too long */
+        font-size: 22px !important;       /* Standard size */
+        line-height: 1.2 !important;
+        text-align: center !important;
+        display: block !important;
+    }
+
+    /* 6. YOUR ORIGINAL STYLES - NO CHANGES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
