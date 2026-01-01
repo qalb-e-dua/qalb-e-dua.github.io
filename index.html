@@ -18,56 +18,51 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* 1. THE TOP LOGO: Fits "QALB-E-DUA" on one line on all iPhones */
-    /* Only targets the main title on the home screen */
-    #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
-        font-size: clamp(20px, 6.5vw, 24px) !important;
-        display: block !important;
-        text-align: center !important;
-    }
-
-    /* 2. THE INTERNAL TITLES: Stops "..." and shows full names */
-    /* Allows titles like "MORNING & EVENING" to wrap to 2 lines so they are NOT cut off */
-    header .font-heading, 
-    nav .font-heading,
-    .title-container .font-heading {
-        white-space: normal !important;
-        font-size: 1.1rem !important;
-        line-height: 1.2 !important;
-        overflow: visible !important;
-        text-overflow: unset !important;
-    }
-
-    /* 3. CLOCK/NOTCH FIX: Pushes text down so it NEVER touches the iPhone clock */
-    body {
+    /* 1. THE STATUS BAR FIX: Pushes the header down so it never touches the clock */
+    header, .header-container, #root > div > div:first-child {
         padding-top: env(safe-area-inset-top) !important;
         background-color: #030e26 !important;
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
-        overflow-x: hidden;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        min-height: calc(44px + env(safe-area-inset-top)) !important;
     }
 
-    /* 4. STOP BLUE FLASHING AND BUTTON HIGHLIGHTS */
+    /* 2. THE TITLES FIX: Keeps logo on one line, but lets internal titles wrap */
+    .font-heading { font-family: 'Cinzel', serif; line-height: 1.2 !important; }
+
+    /* Home Screen Logo (QALB-E-DUA) */
+    #root > div > div:first-child .font-heading {
+        white-space: nowrap !important;
+        font-size: 22px !important;
+        margin-top: 10px !important;
+    }
+
+    /* Internal Page Titles (e.g., Visiting Graves) */
+    header .font-heading, .title-container .font-heading {
+        font-size: 16px !important;  /* Smaller so it fits between icons */
+        white-space: normal !important; /* Allows wrapping if title is very long */
+        max-width: 70% !important;   /* Centers it without hitting back/gear icons */
+        margin: 0 auto !important;
+    }
+
+    /* 3. STOP BLUE FLASHING ON BUTTONS */
     * {
         -webkit-tap-highlight-color: transparent !important;
         outline: none !important;
     }
 
-    /* 5. STOP WHITE GAP AND HIDE SCROLLBAR */
-    html {
-        background-color: #030e26 !important;
-        overscroll-behavior-y: none !important;
+    /* 4. HIDE SCROLLBAR & STOP WHITE GAP */
+    ::-webkit-scrollbar { display: none !important; }
+    html, body { 
+        overscroll-behavior-y: none; 
+        background-color: #030e26 !important; 
+        scrollbar-width: none !important;
+        margin: 0;
+        padding: 0;
     }
 
-    ::-webkit-scrollbar {
-        display: none !important;
-        width: 0 !important;
-    }
-
-    /* 6. YOUR ORIGINAL STYLES - RESTORED */
-    .font-heading { font-family: 'Cinzel', serif; }
+    /* 5. YOUR ORIGINAL STYLES */
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
