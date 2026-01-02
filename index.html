@@ -30,6 +30,11 @@
         justify-content: center !important;
     }
 
+    /* >>> ADD THIS FIX (INTERNAL PAGES ONLY) <<< */
+    header {
+        justify-content: flex-start !important;
+    }
+
     /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
     .font-heading { 
         font-family: 'Cinzel', serif; 
@@ -49,6 +54,11 @@
         font-size: 1.2rem !important;
         width: 90% !important;
         margin: 0 auto !important;
+    }
+
+    /* OPTIONAL EXTRA SAFETY (RECOMMENDED FOR iOS) */
+    header .font-heading {
+        padding-top: 0.2em;
     }
 
     /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
@@ -71,7 +81,10 @@
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 </head>
 <body>
