@@ -20,36 +20,57 @@
 
 
 <style>
-    /* 1. FIX THE OVERLAP WITH THE CLOCK */
-    /* This ensures headers never touch the iPhone status bar icons */
+    /* 1. FIX THE OVERLAP WITH THE CLOCK - REVISED FOR FLEXBOX HEADER */
+    /* This ensures headers never touch the iPhone status bar icons,
+       and correctly positions the back button, title, and settings icon. */
     header, .header-container, #root > div > div:first-child {
         padding-top: env(safe-area-inset-top) !important;
         min-height: calc(60px + env(safe-area-inset-top)) !important;
         display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
+        flex-direction: row !important; /* Changed: Items now align horizontally */
+        justify-content: space-between !important; /* Added: Pushes items to edges, title in middle */
+        align-items: center !important; /* Added: Vertically centers items in the header */
+        width: 100% !important; /* Ensure header takes full width */
+        box-sizing: border-box !important; /* Include padding in width/height */
+        padding-left: 15px !important; /* Added: Spacing for left/right elements */
+        padding-right: 15px !important; /* Added: Spacing for left/right elements */
     }
 
     /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
     .font-heading {
         font-family: 'Cinzel', serif;
         line-height: 1.2 !important;
+        /* Default flex-grow for all font-heading, overridden for specific logo below */
+        flex-grow: 1 !important; /* Added: Allows title to take available space */
+        text-align: center !important; /* Added: Centers the title text */
+        overflow: hidden !important; /* Added: Gracefully handles any residual overflow */
+        white-space: normal !important; /* Ensures text wraps */
+        word-break: normal !important; /* Prevents awkward word breaking */
+        font-size: 1.2rem !important; /* Keep original font size */
+        margin: 0 !important; /* Reset margin to prevent extra space */
+        min-width: 0 !important; /* Flexbox safety: allows element to shrink */
     }
 
     /* Target ONLY the main "QALB-E-DUA" logo to stay on one line */
     #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
+        white-space: nowrap !important; /* Keep this specific one on one line */
         font-size: 22px !important;
+        flex-grow: 0 !important; /* Prevents logo from growing beyond its content */
+        max-width: fit-content !important; /* Allows logo to fit its content */
+        margin: 0 auto !important; /* Ensure it stays centered if alone */
     }
 
     /* ALLOW other page titles like "PRAYERS OF THE PROPHET" to wrap naturally */
-    /* This stops the "..." cut off problem in your picture */
+    /* This now largely relies on the general .font-heading rule above,
+       but we ensure specific overrides are handled. */
     header .font-heading, .title-container .font-heading {
-        white-space: normal !important;
-        font-size: 1.2rem !important;
-    
+        /* The width: 90% !important; line is removed here */
+        /* Flex-grow and other properties from .font-heading will now apply */
+        /* Re-assert text-align and margin for robustness */
+        text-align: center !important;
         margin: 0 auto !important;
     }
+
 
     /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
     * {
