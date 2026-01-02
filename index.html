@@ -31,8 +31,8 @@
     }
 
     /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
-    .font-heading { 
-        font-family: 'Cinzel', serif; 
+    .font-heading {
+        font-family: 'Cinzel', serif;
         line-height: 1.2 !important;
     }
 
@@ -47,7 +47,9 @@
     header .font-heading, .title-container .font-heading {
         white-space: normal !important;
         font-size: 1.2rem !important;
-        width: auto !important;   <-- MODIFIED HERE
+        /* width: auto !important; <-- REMOVED THIS LINE */
+        max-width: 90% !important; /* ADDED/MODIFIED: Let's give it ample space but constrain within reasonable bounds */
+        text-align: center !important; /* ADDED: Ensure it's centered if it wraps */
         margin: 0 auto !important;
     }
 
@@ -59,9 +61,9 @@
 
     /* 4. HIDE SCROLLBAR & STOP WHITE GAP */
     ::-webkit-scrollbar { display: none !important; }
-    html, body { 
-        overscroll-behavior-y: none; 
-        background-color: #030e26 !important; 
+    html, body {
+        overscroll-behavior-y: none;
+        background-color: #030e26 !important;
         scrollbar-width: none !important;
         margin: 0;
         padding: 0;
