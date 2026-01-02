@@ -41,20 +41,25 @@
         line-height: 1.2 !important;
     }
 
-    /* Target ONLY the main "QALB-E-DUA" logo to stay on one line */
-    #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
-        font-size: 22px !important;
-    }
+   /* Target ONLY the main "QALB-E-DUA" logo to stay on one line */
+#root > div > div:first-child .font-heading {
+    white-space: nowrap !important;
+    font-size: 22px !important;
+}
 
-    /* ALLOW other page titles like "PRAYERS OF THE PROPHET" to wrap naturally */
-    /* This stops the "..." cut off problem in your picture */
-    header .font-heading, .title-container .font-heading {
-        white-space: normal !important;
-        font-size: 1.2rem !important;
-        width: 90% !important;
-        margin: 0 auto !important;
-    }
+/* ALLOW other page titles to wrap naturally */
+header .font-heading, .title-container .font-heading {
+    white-space: normal !important;
+    font-size: 1.2rem !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+}
+
+/* FIX TEXT TOP CUTOFF (iOS SAFE) */
+.font-heading {
+    padding-top: 0.25em;
+    padding-bottom: 0.15em;
+}
 
     /* OPTIONAL EXTRA SAFETY (RECOMMENDED FOR iOS) */
     header .font-heading {
