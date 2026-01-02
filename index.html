@@ -30,42 +30,35 @@
         justify-content: center !important;
     }
 
+    /* >>> ADD THIS FIX (INTERNAL PAGES ONLY) <<< */
+    header {
+        justify-content: flex-start !important;
+    }
+
     /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
     .font-heading { 
         font-family: 'Cinzel', serif; 
         line-height: 1.2 !important;
-        padding-top: 0.25em;
-        padding-bottom: 0.15em;
     }
 
     /* Target ONLY the main "QALB-E-DUA" logo to stay on one line */
     #root > div > div:first-child .font-heading {
         white-space: nowrap !important;
         font-size: 22px !important;
-        line-height: 1.2 !important;       /* iOS-safe line height */
-        padding-top: 0.35em !important;    /* prevents top clipping on iPhone */
-        padding-bottom: 0.15em !important;
     }
 
     /* ALLOW other page titles like "PRAYERS OF THE PROPHET" to wrap naturally */
-    /* Stops the "..." cut off problem on iPhone */
+    /* This stops the "..." cut off problem in your picture */
     header .font-heading, .title-container .font-heading {
         white-space: normal !important;
         font-size: 1.2rem !important;
         width: 90% !important;
         margin: 0 auto !important;
-        line-height: 1.3 !important;       /* extra safety for mobile */
-        padding-top: 0.25em !important;
-        padding-bottom: 0.15em !important;
     }
 
-    /* Optional tiny nudge for stubborn iOS clipping */
-    @supports (-webkit-touch-callout: none) {
-        #root > div > div:first-child .font-heading,
-        header .font-heading,
-        .title-container .font-heading {
-            transform: translateY(0.1em); /* gently pushes text down on iPhone */
-        }
+    /* OPTIONAL EXTRA SAFETY (RECOMMENDED FOR iOS) */
+    header .font-heading {
+        padding-top: 0.2em;
     }
 
     /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
@@ -88,7 +81,10 @@
     .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.3; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .animate-in { animation: fadeIn 0.4s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 </head>
 <body>
