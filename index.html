@@ -20,24 +20,17 @@
 
 
 <style>
-    /* 1. FIX THE OVERLAP WITH THE CLOCK & PRESERVE BLUE BACKGROUND */
-    /* Only apply padding-top to elements that are already blue (your actual header). */
+    /* 1. FIX THE OVERLAP WITH THE CLOCK */
+    /* This ensures headers never touch the iPhone status bar icons.
+       It uses the original, broadest selectors for safety, focusing only on padding-top. */
     header, 
-    .header-container { 
+    .header-container, 
+    #root > div > div:first-child, /* This targets the top-level container of your app */
+    #root > div:first-child /* Also targeting the immediate child of #root for top-level padding */
+    {
         padding-top: env(safe-area-inset-top) !important;
-        /* Ensure the element itself has your background color, e.g., via Tailwind or your own CSS */
-        /* background-color: #0a1931 !important; /* UNCOMMENT IF YOUR HEADER DOESN'T HAVE A BACKGROUND */
+        /* Removed min-height, flex properties, and box-sizing from here to prevent layout disruption */
     }
-
-    /* Important: The immediate child of #root should NOT get padding-top here
-       if it doesn't have the desired background color, to avoid white bar. */
-    #root > div:first-child {
-        /* Ensure this element does NOT have a conflicting padding-top or background if it's not meant to. */
-        /* If this element IS your primary header container, uncomment padding-top below 
-           and ensure it has a background-color. */
-        /* padding-top: env(safe-area-inset-top) !important; */
-    }
-
 
     /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
     .font-heading { 
@@ -48,12 +41,10 @@
 
     /* Target ONLY the main "QALB-E-DUA" logo to stay on one line.
        This is a very specific selector for the main logo on the home page. */
-    /* Assuming the main logo is in the first div inside the first div of #root, 
-       and that outer div is your main app container. */
-    #root > div:first-child > div:first-child .font-heading { 
+    #root > div:first-child > div:first-child .font-heading { /* Assuming the main logo is in the first div inside the first div of #root */
         white-space: nowrap !important;
         font-size: 22px !important;
-        max-width: 85% !important; /* Adjusted to give more room for icons */
+        max-width: 90% !important; /* Limit width to prevent pushing out icons */
         overflow: hidden !important; /* Hide overflow */
         text-overflow: ellipsis !important; /* Show ellipsis if content is truncated */
         margin-left: auto !important; /* Center it */
@@ -68,9 +59,9 @@
         white-space: normal !important; /* Allow text to wrap */
         font-size: 1.2rem !important; /* Consistent font size */
         width: 100% !important; /* Take available width */
-        max-width: calc(100% - 70px) !important; /* More generous space for side icons (e.g. back and settings) */
+        max-width: calc(100% - 100px) !important; /* Leave space for back/settings icons */
         margin: 0 auto !important; /* Center it */
-        padding: 0 5px !important; /* A little padding for text on the sides */
+        padding: 0 !important; /* Reset padding to be controlled by its parent */
         box-sizing: border-box !important; /* Ensure width calculation is correct */
         line-height: 1.4 !important; /* Better line height for wrapped text */
     }
