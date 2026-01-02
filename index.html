@@ -20,38 +20,64 @@
 
 
 <style>
-    /* 1. FIX THE OVERLAP WITH THE CLOCK */
+    /* 1. FIX THE OVERLAP WITH THE CLOCK - REVISED */
     /* This ensures headers never touch the iPhone status bar icons */
+    /* This section is updated to give better control to the header itself */
     header, .header-container, #root > div > div:first-child {
         padding-top: env(safe-area-inset-top) !important;
         min-height: calc(60px + env(safe-area-inset-top)) !important;
+        /* Ensure header itself uses flex to align content if needed */
         display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
+        flex-direction: row !important; /* Changed to row to better manage child items */
+        align-items: center !important; /* Vertically center items in the header */
+        justify-content: space-between !important; /* Distribute items with space between */
+        width: 100% !important; /* Ensure header takes full width */
+        box-sizing: border-box !important; /* Include padding in width/height calculations */
+        padding-left: 15px !important; /* Add some padding to the sides of the header */
+        padding-right: 15px !important;
     }
 
-    /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) */
+    /* Adjust the specific styling for the back arrow and settings icon if they are direct children of the header */
+    header > *:first-child, /* Assuming back arrow is first child */
+    header > *:last-child { /* Assuming settings icon is last child */
+        flex-shrink: 0 !important; /* Prevent them from shrinking */
+        z-index: 10; /* Ensure they are above other content if overlapping */
+    }
+
+    /* 2. FIX THE TITLES (LOGO VS INTERNAL PAGES) - REVISED */
     .font-heading {
         font-family: 'Cinzel', serif;
         line-height: 1.2 !important;
+        flex-grow: 1 !important; /* Allow titles to grow and take available space */
+        text-align: center !important; /* Center the text */
+        overflow: visible !important; /* Explicitly allow text to not be hidden */
+        white-space: normal !important; /* Allow wrapping */
+        word-break: normal !important; /* Normal word breaking */
+        font-size: 1.2rem !important; /* Maintain original font size */
+        margin: 0 !important; /* Reset margin to prevent extra space */
+        padding: 0 5px !important; /* Add slight horizontal padding if needed */
+        min-width: 0 !important; /* Allow flex item to shrink to 0 if needed for calculation */
     }
 
     /* Target ONLY the main "QALB-E-DUA" logo to stay on one line */
     #root > div > div:first-child .font-heading {
-        white-space: nowrap !important;
+        white-space: nowrap !important; /* Keep this specific one on one line */
         font-size: 22px !important;
+        flex-grow: 0 !important; /* Prevent it from growing, it has fixed content */
+        max-width: fit-content !important; /* Allow it to fit its content */
     }
 
-   /* ALLOW other page titles like "PRAYERS OF THE PROPHET" to wrap naturally */
-    /* This stops the "..." cut off problem in your picture */
+    /* The original rule for other page titles is now largely handled by the general .font-heading rule */
+    /* However, let's ensure it doesn't get overwritten */
     header .font-heading, .title-container .font-heading {
-        white-space: normal !important;
+        white-space: normal !important; /* Explicitly allow wrapping for other titles */
         font-size: 1.2rem !important;
-        /* width: auto !important; <-- REMOVED THIS LINE */
-        max-width: 90% !important; /* ADDED/MODIFIED: Let's give it ample space but constrain within reasonable bounds */
-        text-align: center !important; /* ADDED: Ensure it's centered if it wraps */
-        margin: 0 auto !important;
+        /* width: auto !important; - Removing this as flex-grow handles width */
+        /* max-width: 90% !important; - Removing this for now to see if it makes a difference */
+        text-align: center !important;
+        margin: 0 auto !important; /* Keep centering via margin auto if flex isn't taking over */
     }
+
 
     /* 3. STOP THE BLUE FLASHING WHEN PRESSING BUTTONS */
     * {
