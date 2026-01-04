@@ -33,23 +33,36 @@
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
       
-      /* iPhone Alignment Logic */
-      .safe-top { padding-top: env(safe-area-inset-top); }
-      
-      /* INDEX BAR STYLING */
-      .index-bar {
+      /* FIXED IPHONE HEADER - Ensuring it doesn't hide behind Notch */
+      .sticky-header {
         position: sticky;
         top: 0;
-        z-index: 50;
+        z-index: 100;
+        padding-top: env(safe-area-inset-top); /* This pushes content below notch */
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      
+      /* NAVIGATION BAR CONTAINER */
+      .nav-bar {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+      }
+
+      /* INDEX BAR - Below Nav, also sticky */
+      .index-bar {
         width: 100%;
         display: flex;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-        padding: 10px 15px;
+        padding: 12px 15px;
         gap: 8px;
-        border-bottom: 2px solid #D4AF37;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border-top: 1px solid rgba(212, 175, 55, 0.2);
+        scrollbar-width: none;
       }
       .index-bar::-webkit-scrollbar { display: none; }
       
@@ -60,23 +73,16 @@
         font-size: 13px;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
         border: 1px solid #D4AF37;
         background: rgba(255, 255, 255, 0.1);
         color: #FFFFFF;
-        /* Ensure no text cut-off */
         white-space: nowrap;
       }
 
-      /* Offset for jumping so title isn't covered by header */
+      /* Jump offset to prevent title hidden by sticky header */
       .scroll-target {
-        scroll-margin-top: 150px;
+        scroll-margin-top: 180px; 
       }
-      
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
       
       .animate-in { animation: fadeIn 0.3s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -94,26 +100,10 @@
 </head>
 <body>
     <div id="root"></div>
-    
-    <div id="error-container" style="display:none; position:fixed; top:0; left:0; right:0; padding:20px; background:rgba(255,0,0,0.9); color:white; z-index:9999; font-family:sans-serif;"></div>
-    <script>
-      window.onerror = function(message, source, lineno, colno, error) {
-        const container = document.getElementById('error-container');
-        if(container) {
-          container.style.display = 'block';
-          container.innerHTML = '<strong>Error:</strong> ' + message + '<br><small>' + source + ':' + lineno + '</small>';
-        }
-      };
-    </script>
-
     <script type="text/babel" data-type="module" data-presets="typescript,react">
       import React, { useState, useEffect } from 'react';
       import ReactDOM from 'react-dom/client';
       import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
-
-      // ==========================================
-      // DATA & CONFIGURATION
-      // ==========================================
 
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
@@ -1707,7 +1697,7 @@
       };
 
 
-   // ==========================================
+ // ==========================================
       // COMPONENTS
       // ==========================================
 
@@ -1744,8 +1734,8 @@
       };
 
       const Logo = () => (
-        <div className="flex flex-col items-center justify-center mb-8 safe-top">
-          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md text-center pt-4">
+        <div className="flex flex-col items-center justify-center mb-8">
+          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md text-center pt-6">
             Qulb e Dua
           </h1>
         </div>
@@ -1786,7 +1776,6 @@
           }
 
           const commonStyle = { color: textColor };
-          // Unique ID for titles to allow jumping
           const titleId = (block.type === 'section-title' || block.type === 'title-green') 
                           ? `title-${cardIdx}-${idx}` 
                           : null;
@@ -1859,7 +1848,6 @@
           const page = PAGES_DATA[activePageId];
           if (!page) return <div>Page not found</div>;
 
-          // SCAN ALL CARDS AND ALL BLOCKS FOR TITLES (This finds all 61+ titles)
           const allTitles = [];
           page.cards.forEach((card, cardIdx) => {
             card.content.forEach((block, bIdx) => {
@@ -1872,23 +1860,28 @@
           return (
             <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
               
-              {/* STICKY HEADER & COMPREHENSIVE INDEX */}
-              <div className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: theme.headerBg }}>
-                <div className="flex items-center justify-between p-4 safe-top">
-                  <button onClick={handleClosePage} className="p-2" style={{ color: theme.accent }}><ChevronLeft size={28} /></button>
-                  <h1 className="font-bold text-xl text-center font-heading tracking-wider truncate flex-1 px-2 text-white">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="p-2" style={{ color: theme.accent }}><Settings size={24} /></button>
+              {/* FIXED STICKY TOP CONTAINER */}
+              <div className="sticky-header" style={{ backgroundColor: theme.headerBg }}>
+                <div className="nav-bar">
+                  <button onClick={handleClosePage} className="p-2" style={{ color: theme.accent }}>
+                    <ChevronLeft size={32} />
+                  </button>
+                  <h1 className="font-bold text-lg text-center font-heading tracking-wider truncate px-2 text-white">
+                    {page.title}
+                  </h1>
+                  <button onClick={() => setShowSettings(true)} className="p-2" style={{ color: theme.accent }}>
+                    <Settings size={26} />
+                  </button>
                 </div>
                 
-                {/* HORIZONTAL INDEX BAR FOR ALL TOPICS */}
                 {allTitles.length > 0 && (
-                  <div className="index-bar" style={{ backgroundColor: theme.headerBg }}>
+                  <div className="index-bar">
                     {allTitles.map((item, i) => (
                       <button 
                         key={i} 
                         onClick={() => scrollToSection(item.id)}
                         className="index-btn"
-                        style={{ borderColor: theme.accent, color: '#FFFFFF' }}
+                        style={{ borderColor: theme.accent }}
                       >
                         {item.text}
                       </button>
@@ -1906,9 +1899,11 @@
 
         const renderMenu = () => (
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
-            <div className="p-6 pt-12 flex flex-col items-center justify-center relative safe-top">
-               <div className="absolute top-4 right-4 safe-top">
-                 <button onClick={() => setShowSettings(true)} style={{ color: theme.accent }} className="p-2 pt-4"><Settings size={24}/></button>
+            <div className="p-6 pt-12 flex flex-col items-center justify-center relative sticky-header">
+               <div className="absolute top-4 right-4">
+                 <button onClick={() => setShowSettings(true)} style={{ color: theme.accent }} className="p-2">
+                   <Settings size={26}/>
+                 </button>
                </div>
                <Logo />
             </div>
@@ -1926,7 +1921,7 @@
           <>
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
-              <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
+              <div className="fixed inset-0 z-[150] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
                   <div className="w-full max-w-sm rounded-t-2xl p-6 shadow-2xl animate-in"
                       style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#fff', color: currentThemeId === 'dark' ? '#fff' : '#000', borderTop: `4px solid ${theme.accent}` }}
                       onClick={(e) => e.stopPropagation()}>
@@ -1935,7 +1930,7 @@
                           <button onClick={() => setShowSettings(false)} className="p-1"><X size={24}/></button>
                       </div>
                       <div className="mb-6">
-                          <p className="font-bold mb-3 text-sm uppercase opacity-70">Theme</p>
+                          <p className="font-bold mb-3 text-sm uppercase opacity-70 text-center">Theme</p>
                           <div className="flex justify-center gap-4">
                               {['cream', 'white', 'dark'].map(t => (
                                 <button key={t} onClick={() => setCurrentThemeId(t)} className={`w-12 h-12 rounded-full border-2 ${currentThemeId === t ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`} style={{ backgroundColor: THEMES[t].bg }} />
@@ -1943,7 +1938,7 @@
                           </div>
                       </div>
                       <div>
-                          <p className="font-bold mb-3 text-sm uppercase opacity-70">Text Size</p>
+                          <p className="font-bold mb-3 text-sm uppercase opacity-70 text-center">Text Size</p>
                           <div className="flex items-center justify-between rounded-lg p-2" style={{ backgroundColor: currentThemeId === 'dark' ? '#444' : '#f3f4f6' }}>
                               <button onClick={() => setFontScale(prev => Math.max(prev - 2, -4))} className="p-2"><Minus size={20} /></button>
                               <span className="font-bold font-arabic text-xl">بِسْمِ</span>
