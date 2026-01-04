@@ -17,7 +17,7 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- BABEL -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -1878,8 +1878,8 @@
             }}
             className="w-full p-4 mb-3 rounded-xl flex flex-col items-center justify-center text-lg transition-all duration-200 active:scale-[0.98]"
           >
-            {/* CLEAN REGULAR WEIGHT FOR HOME SCREEN */}
-            <span className="font-heading text-lg text-center uppercase tracking-widest" style={{ fontWeight: '400' }}>{label}</span>
+            {/* CLEAN REGULAR WEIGHT FOR HOME SCREEN - AS PER 2ND IMAGE */}
+            <span className="font-heading text-lg text-center uppercase tracking-[0.15em]" style={{ fontWeight: '400' }}>{label}</span>
             {subtext && (
                 <span className="mt-1 text-[10px] opacity-60 uppercase tracking-[0.2em] font-sans">
                     {subtext}
@@ -1936,8 +1936,8 @@
         const renderContentBlock = (block, idx, cardVariant, cardIdx) => {
           let textColor = block.textColor || theme.text;
           
-          // BRIGHTER LIGHT GOLD FOR TITLES (EBC06D)
-          let brightGold = '#EBC06D'; 
+          // EXACT GOLD FROM YOUR 2ND IMAGE
+          let classicGold = '#D4AF37'; 
 
           if (cardVariant === 'rabbana') {
              textColor = (block.type.includes('arabic')) ? '#D4AF37' : '#FFFFFF';
@@ -1982,8 +1982,8 @@
             case 'section-title':
               return (
                 <div key={idx} className="text-center mb-6">
-                  {/* CLEAN BRIGHT GOLD - REGULAR WEIGHT */}
-                  <h3 id={titleId} className="text-lg mb-2 scroll-target uppercase tracking-[0.2em] font-heading" style={{ color: brightGold, fontWeight: '400' }}>
+                  {/* CLEAN CLASSIC GOLD - REGULAR/MEDIUM WEIGHT LIKE 2ND IMAGE */}
+                  <h3 id={titleId} className="text-[17px] mb-2 scroll-target uppercase tracking-[0.12em] font-heading" style={{ color: classicGold, fontWeight: '500' }}>
                     {block.text}
                   </h3>
                   <hr className="w-2/3 mx-auto border-t border-gray-200 opacity-30" />
