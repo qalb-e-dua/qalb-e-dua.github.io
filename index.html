@@ -11,10 +11,15 @@
     <!-- APP ICON -->
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
 
+    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- BABEL -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -77,7 +82,7 @@
       /* Pop-up Action Menu styling */
       .action-popup {
         position: absolute;
-        top: -45px;
+        top: -50px;
         left: 50%;
         transform: translateX(-50%);
         background: white;
@@ -91,6 +96,7 @@
       }
 
       .scroll-target { scroll-margin-top: 170px; }
+      .active-press:active { transform: scale(0.97); transition: 0.1s; }
     </style>
 
     <script type="importmap">
@@ -1728,7 +1734,7 @@
             color: theme.text,
             border: `4px double ${theme.accent}`,
           }}
-          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active:scale-[0.98] transition-all shadow-sm"
+          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active-press shadow-sm"
         >
           <span className="font-heading text-xl text-center">{label}</span>
           {subtext && <span className="mt-1 text-xs opacity-60 uppercase tracking-widest font-sans">{subtext}</span>}
@@ -1772,11 +1778,8 @@
           const element = document.getElementById(id);
           if (element) {
             const offset = 170;
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = element.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - offset;
-            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: elementPosition, behavior: 'smooth' });
           }
         };
 
@@ -1784,13 +1787,38 @@
           let textColor = block.textColor || theme.text;
           if (cardVariant === 'rabbana') textColor = block.type.includes('arabic') ? '#D4AF37' : '#FFFFFF';
           
-          // Toggle logic for Translations
           if (block.style?.includes('transliteration') && !showTransliteration) return null;
           if (block.type === 'text' && !block.style?.includes('transliteration') && !showEnglish) return null;
 
-          const titleId = (block.type === 'section-title' || block.type === 'title-green') ? `dua-${cardIdx}-${idx}` : null;
+          const titleId = (block.type === 'section-title' || block.type === 'title-green' || block.type === 'allah-name') ? `item-${cardIdx}-${idx}` : null;
 
           switch (block.type) {
+            case 'allah-name':
+              const isNameFav = bookmarks.includes(titleId);
+              return (
+                <div key={idx} id={titleId} className="mb-6 relative scroll-target" onClick={() => setActiveActionId(activeActionId === titleId ? null : titleId)}>
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="font-bold text-lg" style={{ color: theme.nameRed }}>{block.number}</span>
+                    <span className="font-arabic font-bold text-right" style={{ fontSize: `${arabicSize + 4}px`, color: currentThemeId === 'dark' ? '#90CAF9' : '#1a237e' }}>
+                      {block.arabic}
+                    </span>
+                  </div>
+                  {showEnglish && (
+                    <div className="text-lg leading-relaxed mb-4" style={{ fontSize: `${englishSize}px` }}>
+                      <span className="font-bold" style={{ color: theme.nameRed }}>{block.english}</span>
+                      <span style={{ color: theme.text }}>, He is exalted!</span>
+                    </div>
+                  )}
+                  {activeActionId === titleId && (
+                    <div className="action-popup">
+                       <button onClick={(e) => toggleBookmark(titleId, e)} className={isNameFav ? "text-red-500" : "text-gray-600"}><Bookmark size={18} fill={isNameFav ? "currentColor" : "none"}/></button>
+                       <button onClick={(e) => { e.stopPropagation(); copyToClipboard(block.arabic); }} className="text-gray-600"><Copy size={18}/></button>
+                       <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Share2 size={18}/></button>
+                    </div>
+                  )}
+                  <hr className="border-t border-gray-300 opacity-50" />
+                </div>
+              );
             case 'arabic':
             case 'arabic-indopak':
               return (
@@ -1825,6 +1853,9 @@
                   )}
                 </div>
               );
+            case 'hr': return <hr key={idx} className="my-5 border-t border-gray-300 opacity-50" />;
+            case 'flower-icon': return <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">{block.text}</div>;
+            case 'count-badge': return <div key={idx} className="text-center mb-4"><span className="inline-block px-3 py-1 rounded-full text-sm font-bold bg-[#0B1E3F] text-[#D4AF37]">{block.text}</span></div>;
             default: return null;
           }
         };
@@ -1835,7 +1866,7 @@
           page.cards.forEach((card, cIdx) => {
             card.content.forEach((block, bIdx) => {
               if (block.type === 'section-title' || block.type === 'title-green') 
-                allTitles.push({ text: block.text, id: `dua-${cIdx}-${bIdx}` });
+                allTitles.push({ text: block.text, id: `item-${cIdx}-${bIdx}` });
             });
           });
 
@@ -1843,14 +1874,14 @@
             <div className="min-h-screen" style={{ backgroundColor: theme.bg }}>
               <div className="sticky-header">
                 <div className="nav-bar">
-                  <button onClick={handleClosePage} className="p-2 text-white"><ChevronLeft size={32}/></button>
+                  <button onClick={handleClosePage} className="p-2 text-white active-press"><ChevronLeft size={32}/></button>
                   <h1 className="font-bold text-lg font-heading tracking-wider truncate text-white uppercase">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="p-2 text-[#D4AF37]"><Settings size={26}/></button>
+                  <button onClick={() => setShowSettings(true)} className="p-2 text-[#D4AF37] active-press"><Settings size={26}/></button>
                 </div>
                 {allTitles.length > 0 && (
                   <div className="index-bar">
                     {allTitles.map((item, i) => (
-                      <button key={i} onClick={() => { triggerHaptic(); scrollToSection(item.id); }} className="index-btn" style={{ borderColor: theme.accent }}>{item.text}</button>
+                      <button key={i} onClick={() => { triggerHaptic(); scrollToSection(item.id); }} className="index-btn active-press" style={{ borderColor: theme.accent }}>{item.text}</button>
                     ))}
                   </div>
                 )}
@@ -1871,20 +1902,20 @@
             <div className="safe-top">
               <div className="flex justify-between items-center px-6 pt-6 pb-6">
                 <div className="w-10"></div>
-                <h1 className="text-3xl font-heading font-extrabold text-[#D4AF37] tracking-widest">Qulb e Dua</h1>
-                <button onClick={() => { triggerHaptic(); setShowSettings(true); }} className="p-2 text-[#D4AF37]"><Settings size={28}/></button>
+                <h1 className="text-3xl font-heading font-extrabold text-[#D4AF37] tracking-widest pt-2">Qulb e Dua</h1>
+                <button onClick={() => { triggerHaptic(); setShowSettings(true); }} className="p-2 text-[#D4AF37] active-press"><Settings size={28}/></button>
               </div>
             </div>
             <div className="flex-1 rounded-t-[3rem] p-6 pb-24 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
-              <div className="max-w-md mx-auto">
+              <div className="max-w-md mx-auto pt-4">
                 {bookmarks.length > 0 && (
-                   <div className="mb-8">
+                   <div className="mb-8 animate-in">
                       <div className="flex items-center gap-2 text-[#D4AF37] font-bold mb-4 px-2 tracking-widest text-sm">
                         <Heart size={18} fill="#D4AF37"/> <span>FAVORITES</span>
                       </div>
-                      <div className="flex gap-3 overflow-x-auto pb-2">
+                      <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
                          {bookmarks.map(id => (
-                           <button key={id} className="flex-shrink-0 bg-white border-2 border-[#D4AF37] px-5 py-3 rounded-xl text-xs font-bold shadow-sm">Saved Item</button>
+                           <button key={id} onClick={() => triggerHaptic()} className="flex-shrink-0 bg-white border-2 border-[#D4AF37] px-5 py-3 rounded-xl text-xs font-bold shadow-sm">Saved Item</button>
                          ))}
                       </div>
                    </div>
@@ -1905,7 +1936,7 @@
                   <h3 className="text-2xl font-bold mb-8 text-center font-heading">Settings</h3>
                   
                   <div className="mb-8">
-                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase">Theme</p>
+                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase text-center">Theme</p>
                     <div className="flex justify-center gap-6">
                       {['cream', 'white', 'dark'].map(t => (
                         <button key={t} onClick={() => { triggerHaptic(); setCurrentThemeId(t); }} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37]' : 'border-gray-200'}`} style={{ backgroundColor: THEMES[t].bg }} />
@@ -1929,11 +1960,11 @@
                   </div>
 
                   <div>
-                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase">Text Size</p>
+                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase text-center">Arabic Font Size</p>
                     <div className="flex items-center justify-between bg-gray-50 rounded-2xl p-4" style={{ backgroundColor: currentThemeId === 'dark' ? '#2A2A2A' : '#F9F9F9' }}>
-                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-xl shadow-sm text-black"><Minus/></button>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active:scale-90"><Minus/></button>
                       <span className="font-arabic text-3xl">بِسْمِ</span>
-                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-xl shadow-sm text-black"><Plus/></button>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active:scale-90"><Plus/></button>
                     </div>
                   </div>
                 </div>
