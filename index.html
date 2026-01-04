@@ -29,30 +29,29 @@
         -webkit-tap-highlight-color: transparent;
         margin: 0;
         padding: 0;
+        background-color: #0B1E3F;
       }
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
       
-      /* FIXED IPHONE HEADER - Ensuring it doesn't hide behind Notch */
+      /* FIXED IPHONE HEADER */
       .sticky-header {
         position: sticky;
         top: 0;
         z-index: 100;
-        padding-top: env(safe-area-inset-top); /* This pushes content below notch */
+        padding-top: env(safe-area-inset-top);
         width: 100%;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       }
       
-      /* NAVIGATION BAR CONTAINER */
       .nav-bar {
-        height: 60px;
+        height: 64px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 16px;
       }
 
-      /* INDEX BAR - Below Nav, also sticky */
       .index-bar {
         width: 100%;
         display: flex;
@@ -79,13 +78,19 @@
         white-space: nowrap;
       }
 
-      /* Jump offset to prevent title hidden by sticky header */
       .scroll-target {
         scroll-margin-top: 180px; 
       }
       
       .animate-in { animation: fadeIn 0.3s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* Home Screen Safe Area Fix */
+      .home-safe-header {
+        padding-top: calc(env(safe-area-inset-top) + 20px);
+        width: 100%;
+        position: relative;
+      }
     </style>
 
     <script type="importmap">
@@ -1697,7 +1702,7 @@
       };
 
 
- // ==========================================
+// ==========================================
       // COMPONENTS
       // ==========================================
 
@@ -1734,8 +1739,8 @@
       };
 
       const Logo = () => (
-        <div className="flex flex-col items-center justify-center mb-8">
-          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md text-center pt-6">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md text-center">
             Qulb e Dua
           </h1>
         </div>
@@ -1827,14 +1832,9 @@
 
         const renderCard = (card, cardIdx) => {
           let cardStyle = { marginBottom: '25px', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', color: theme.text };
-
-          if (card.variant === 'green') {
-              cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32' };
-          } else if (card.variant === 'rabbana') {
-              cardStyle = { ...cardStyle, backgroundColor: '#1f2937', border: '2px solid #D4AF37', color: '#ffffff' };
-          } else {
-              cardStyle = { ...cardStyle, backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', border: `4px double ${theme.accent}` };
-          }
+          if (card.variant === 'green') { cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32' }; } 
+          else if (card.variant === 'rabbana') { cardStyle = { ...cardStyle, backgroundColor: '#1f2937', border: '2px solid #D4AF37', color: '#ffffff' }; } 
+          else { cardStyle = { ...cardStyle, backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', border: `4px double ${theme.accent}` }; }
 
           return (
             <div key={cardIdx} style={cardStyle} className="relative overflow-hidden">
@@ -1859,37 +1859,20 @@
 
           return (
             <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
-              
-              {/* FIXED STICKY TOP CONTAINER */}
               <div className="sticky-header" style={{ backgroundColor: theme.headerBg }}>
                 <div className="nav-bar">
-                  <button onClick={handleClosePage} className="p-2" style={{ color: theme.accent }}>
-                    <ChevronLeft size={32} />
-                  </button>
-                  <h1 className="font-bold text-lg text-center font-heading tracking-wider truncate px-2 text-white">
-                    {page.title}
-                  </h1>
-                  <button onClick={() => setShowSettings(true)} className="p-2" style={{ color: theme.accent }}>
-                    <Settings size={26} />
-                  </button>
+                  <button onClick={handleClosePage} className="p-2" style={{ color: theme.accent }}><ChevronLeft size={32} /></button>
+                  <h1 className="font-bold text-lg text-center font-heading tracking-wider truncate px-2 text-white">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="p-2" style={{ color: theme.accent }}><Settings size={26} /></button>
                 </div>
-                
                 {allTitles.length > 0 && (
                   <div className="index-bar">
                     {allTitles.map((item, i) => (
-                      <button 
-                        key={i} 
-                        onClick={() => scrollToSection(item.id)}
-                        className="index-btn"
-                        style={{ borderColor: theme.accent }}
-                      >
-                        {item.text}
-                      </button>
+                      <button key={i} onClick={() => scrollToSection(item.id)} className="index-btn" style={{ borderColor: theme.accent }}>{item.text}</button>
                     ))}
                   </div>
                 )}
               </div>
-
               <div className="relative z-10 max-w-2xl mx-auto p-5 pb-32">
                   {page.cards.map((card, idx) => renderCard(card, idx))}
               </div>
@@ -1899,15 +1882,15 @@
 
         const renderMenu = () => (
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
-            <div className="p-6 pt-12 flex flex-col items-center justify-center relative sticky-header">
-               <div className="absolute top-4 right-4">
-                 <button onClick={() => setShowSettings(true)} style={{ color: theme.accent }} className="p-2">
-                   <Settings size={26}/>
+            <div className="home-safe-header flex flex-col items-center justify-center relative">
+               <div className="absolute right-4 bottom-2">
+                 <button onClick={() => setShowSettings(true)} style={{ color: theme.accent }} className="p-2 active:scale-90 transition-transform">
+                   <Settings size={30}/>
                  </button>
                </div>
                <Logo />
             </div>
-            <div className="flex-1 rounded-t-[2.5rem] p-6 pb-20 overflow-y-auto relative z-10" style={{ backgroundColor: theme.bg }}>
+            <div className="flex-1 rounded-t-[2.5rem] mt-6 p-6 pb-20 overflow-y-auto relative z-10" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto pt-4">
                 {MENU_ITEMS.map((item) => (
                     <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => handleOpenPage(item.pageId)} theme={theme} />
