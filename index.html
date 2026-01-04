@@ -11,15 +11,10 @@
     <!-- APP ICON -->
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNIDI1NiAyODAgUSAzMTAgMjgwIDMxMCAyMzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0gMTgwIDM2MCBRIDI1NiAzOTAgMzMyIDM2MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
 
-    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- BABEL -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -34,30 +29,27 @@
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.3; }
       
-      /* IPHONE SAFE AREAS (12-16) */
+      /* IPHONE 12-16 SAFE AREA ALIGNMENT */
       .safe-top { padding-top: env(safe-area-inset-top); }
-      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
-
-      /* Sticky Header */
+      
       .sticky-header {
         position: sticky;
         top: 0;
         z-index: 100;
         padding-top: env(safe-area-inset-top);
         width: 100%;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         background-color: #0B1E3F;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       }
       
       .nav-bar {
-        height: 60px;
+        height: 64px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 20px;
       }
 
-      /* Index Bar (Horizontal Scroll) */
       .index-bar {
         width: 100%;
         display: flex;
@@ -82,27 +74,7 @@
         background: rgba(255, 255, 255, 0.1);
       }
 
-      /* Search Pill */
-      .search-pill {
-        margin: 10px 20px 20px;
-        background: rgba(255,255,255,0.1);
-        border: 1.5px solid #D4AF37;
-        border-radius: 50px;
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .search-pill input {
-        background: transparent;
-        border: none;
-        color: white;
-        width: 100%;
-        outline: none;
-        font-size: 16px;
-      }
-
-      /* Action Menu Popup */
+      /* Pop-up Action Menu styling */
       .action-popup {
         position: absolute;
         top: -45px;
@@ -118,29 +90,25 @@
         border: 1px solid #D4AF37;
       }
 
-      .scroll-target { scroll-margin-top: 160px; }
-      .active-press:active { transform: scale(0.97); transition: 0.1s; }
+      .scroll-target { scroll-margin-top: 170px; }
     </style>
 
     <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.292.0"
-  }
-}
-</script>
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.292.0"
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="root"></div>
     <script type="text/babel" data-type="module" data-presets="typescript,react">
-      import React, { useState, useEffect, useMemo } from 'react';
+      import React, { useState, useEffect } from 'react';
       import ReactDOM from 'react-dom/client';
-      import { 
-        Settings, X, ChevronLeft, Minus, Plus, Search, 
-        Bookmark, Share2, Play, Heart, Copy, Languages 
-      } from 'lucide-react';
+      import { Settings, X, ChevronLeft, Minus, Plus, Bookmark, Share2, Play, Copy, Heart, Languages } from 'lucide-react';
 
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
@@ -1734,17 +1702,18 @@
       };
 
 // ==========================================
-      // UTILITIES & HAPTICS
+      // UTILITIES
       // ==========================================
       const triggerHaptic = () => {
         if (window.navigator && window.navigator.vibrate) {
-          window.navigator.vibrate(10);
+          window.navigator.vibrate(15);
         }
       };
 
       const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         triggerHaptic();
+        alert("Text Copied");
       };
 
       // ==========================================
@@ -1759,7 +1728,7 @@
             color: theme.text,
             border: `4px double ${theme.accent}`,
           }}
-          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active-press shadow-sm"
+          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active:scale-[0.98] transition-all shadow-sm"
         >
           <span className="font-heading text-xl text-center">{label}</span>
           {subtext && <span className="mt-1 text-xs opacity-60 uppercase tracking-widest font-sans">{subtext}</span>}
@@ -1781,21 +1750,14 @@
         const [showSettings, setShowSettings] = useState(false);
         const [currentThemeId, setCurrentThemeId] = useState('cream');
         const [fontScale, setFontScale] = useState(0);
-        const [searchQuery, setSearchQuery] = useState('');
         const [bookmarks, setBookmarks] = useState([]);
         const [showTransliteration, setShowTransliteration] = useState(true);
+        const [showEnglish, setShowEnglish] = useState(true);
         const [activeActionId, setActiveActionId] = useState(null);
 
         const theme = THEMES[currentThemeId];
         const arabicSize = 32 + (fontScale * 2);
         const englishSize = 17 + (fontScale * 1);
-
-        // Filter menu based on Search
-        const filteredMenu = useMemo(() => {
-          return MENU_ITEMS.filter(item => 
-            item.label.toLowerCase().includes(searchQuery.toLowerCase())
-          );
-        }, [searchQuery]);
 
         const toggleBookmark = (id, e) => {
           e.stopPropagation();
@@ -1808,15 +1770,23 @@
 
         const scrollToSection = (id) => {
           const element = document.getElementById(id);
-          if (element) element.scrollIntoView({ behavior: 'smooth' });
+          if (element) {
+            const offset = 170;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          }
         };
 
         const renderContentBlock = (block, idx, cardVariant, cardIdx) => {
           let textColor = block.textColor || theme.text;
           if (cardVariant === 'rabbana') textColor = block.type.includes('arabic') ? '#D4AF37' : '#FFFFFF';
           
-          // Hide transliteration if toggled off
+          // Toggle logic for Translations
           if (block.style?.includes('transliteration') && !showTransliteration) return null;
+          if (block.type === 'text' && !block.style?.includes('transliteration') && !showEnglish) return null;
 
           const titleId = (block.type === 'section-title' || block.type === 'title-green') ? `dua-${cardIdx}-${idx}` : null;
 
@@ -1826,6 +1796,11 @@
               return (
                 <p key={idx} dir="rtl" className="font-arabic mb-4 text-center font-bold" style={{ color: textColor, fontSize: `${arabicSize}px` }}>
                   {block.text}
+                  {block.number && (
+                    <span className="inline-flex items-center justify-center w-10 h-10 mx-2 border-2 rounded-full align-middle font-sans text-base opacity-70" style={{ borderColor: textColor }}>
+                      {block.number}
+                    </span>
+                  )}
                 </p>
               );
             case 'text':
@@ -1838,9 +1813,8 @@
                   <div className={`text-center font-bold py-2 ${block.type === 'title-green' ? 'font-arabic text-4xl text-[#d63384]' : 'text-lg border-b border-gray-200'}`} style={{ color: block.type === 'title-green' ? '#d63384' : theme.headerBg }}>
                     {block.text}
                   </div>
-                  
                   {activeActionId === titleId && (
-                    <div className="action-popup active-press">
+                    <div className="action-popup">
                        <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Play size={18}/></button>
                        <button onClick={(e) => toggleBookmark(titleId, e)} className={isFav ? "text-red-500" : "text-gray-600"}>
                           <Bookmark size={18} fill={isFav ? "currentColor" : "none"}/>
@@ -1869,14 +1843,14 @@
             <div className="min-h-screen" style={{ backgroundColor: theme.bg }}>
               <div className="sticky-header">
                 <div className="nav-bar">
-                  <button onClick={handleClosePage} className="p-2 text-white active-press"><ChevronLeft size={32}/></button>
+                  <button onClick={handleClosePage} className="p-2 text-white"><ChevronLeft size={32}/></button>
                   <h1 className="font-bold text-lg font-heading tracking-wider truncate text-white uppercase">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="p-2 text-[#D4AF37] active-press"><Settings size={26}/></button>
+                  <button onClick={() => setShowSettings(true)} className="p-2 text-[#D4AF37]"><Settings size={26}/></button>
                 </div>
                 {allTitles.length > 0 && (
                   <div className="index-bar">
                     {allTitles.map((item, i) => (
-                      <button key={i} onClick={() => { triggerHaptic(); scrollToSection(item.id); }} className="index-btn active-press" style={{ borderColor: theme.accent }}>{item.text}</button>
+                      <button key={i} onClick={() => { triggerHaptic(); scrollToSection(item.id); }} className="index-btn" style={{ borderColor: theme.accent }}>{item.text}</button>
                     ))}
                   </div>
                 )}
@@ -1895,31 +1869,27 @@
         const renderMenu = () => (
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#0B1E3F' }}>
             <div className="safe-top">
-              <div className="flex justify-between items-center px-6 pt-6 pb-2">
+              <div className="flex justify-between items-center px-6 pt-6 pb-6">
                 <div className="w-10"></div>
                 <h1 className="text-3xl font-heading font-extrabold text-[#D4AF37] tracking-widest">Qulb e Dua</h1>
-                <button onClick={() => { triggerHaptic(); setShowSettings(true); }} className="p-2 text-[#D4AF37] active-press"><Settings size={28}/></button>
-              </div>
-              <div className="search-pill">
-                <Search size={20} className="text-[#D4AF37]" />
-                <input type="text" placeholder="Search Duas..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                <button onClick={() => { triggerHaptic(); setShowSettings(true); }} className="p-2 text-[#D4AF37]"><Settings size={28}/></button>
               </div>
             </div>
             <div className="flex-1 rounded-t-[3rem] p-6 pb-24 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto">
-                {bookmarks.length > 0 && !searchQuery && (
-                   <div className="mb-6 animate-in">
-                      <div className="flex items-center gap-2 text-[#D4AF37] font-bold mb-3 px-2">
-                        <Heart size={18} fill="#D4AF37"/> <span>BOOKMARKED DUAS</span>
+                {bookmarks.length > 0 && (
+                   <div className="mb-8">
+                      <div className="flex items-center gap-2 text-[#D4AF37] font-bold mb-4 px-2 tracking-widest text-sm">
+                        <Heart size={18} fill="#D4AF37"/> <span>FAVORITES</span>
                       </div>
-                      <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+                      <div className="flex gap-3 overflow-x-auto pb-2">
                          {bookmarks.map(id => (
-                           <button key={id} onClick={() => triggerHaptic()} className="flex-shrink-0 bg-white border border-[#D4AF37] px-4 py-2 rounded-xl text-xs font-bold shadow-sm">Saved Dua</button>
+                           <button key={id} className="flex-shrink-0 bg-white border-2 border-[#D4AF37] px-5 py-3 rounded-xl text-xs font-bold shadow-sm">Saved Item</button>
                          ))}
                       </div>
                    </div>
                 )}
-                {filteredMenu.map((item) => <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => handleOpenPage(item.pageId)} theme={theme} />)}
+                {MENU_ITEMS.map((item) => <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => handleOpenPage(item.pageId)} theme={theme} />)}
               </div>
             </div>
           </div>
@@ -1930,12 +1900,12 @@
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
               <div className="fixed inset-0 z-[150] flex items-end justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
-                <div className="w-full max-w-sm rounded-t-[2.5rem] p-8 pb-12 animate-in" style={{ backgroundColor: currentThemeId === 'dark' ? '#1E1E1E' : '#fff', color: theme.text }} onClick={e => e.stopPropagation()}>
+                <div className="w-full max-w-sm rounded-t-[2.5rem] p-8 pb-12 animate-in shadow-2xl" style={{ backgroundColor: currentThemeId === 'dark' ? '#1E1E1E' : '#fff', color: theme.text }} onClick={e => e.stopPropagation()}>
                   <div className="w-16 h-1.5 bg-gray-300 rounded-full mx-auto mb-8" onClick={() => setShowSettings(false)}/>
                   <h3 className="text-2xl font-bold mb-8 text-center font-heading">Settings</h3>
                   
-                  <div className="mb-10">
-                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4">THEME MODE</p>
+                  <div className="mb-8">
+                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase">Theme</p>
                     <div className="flex justify-center gap-6">
                       {['cream', 'white', 'dark'].map(t => (
                         <button key={t} onClick={() => { triggerHaptic(); setCurrentThemeId(t); }} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37]' : 'border-gray-200'}`} style={{ backgroundColor: THEMES[t].bg }} />
@@ -1943,7 +1913,13 @@
                     </div>
                   </div>
 
-                  <div className="mb-10">
+                  <div className="space-y-4 mb-10">
+                    <div className="flex justify-between items-center p-5 bg-gray-50 rounded-2xl" style={{ backgroundColor: currentThemeId === 'dark' ? '#2A2A2A' : '#F9F9F9' }}>
+                      <div className="flex items-center gap-3 font-bold">English Translation</div>
+                      <button onClick={() => { triggerHaptic(); setShowEnglish(!showEnglish); }} className={`w-14 h-7 rounded-full transition-all relative ${showEnglish ? 'bg-[#D4AF37]' : 'bg-gray-300'}`}>
+                        <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${showEnglish ? 'left-8' : 'left-1'}`}/>
+                      </button>
+                    </div>
                     <div className="flex justify-between items-center p-5 bg-gray-50 rounded-2xl" style={{ backgroundColor: currentThemeId === 'dark' ? '#2A2A2A' : '#F9F9F9' }}>
                       <div className="flex items-center gap-3 font-bold"><Languages size={20}/> Transliteration</div>
                       <button onClick={() => { triggerHaptic(); setShowTransliteration(!showTransliteration); }} className={`w-14 h-7 rounded-full transition-all relative ${showTransliteration ? 'bg-[#D4AF37]' : 'bg-gray-300'}`}>
@@ -1953,11 +1929,11 @@
                   </div>
 
                   <div>
-                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4">TEXT SIZE</p>
+                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase">Text Size</p>
                     <div className="flex items-center justify-between bg-gray-50 rounded-2xl p-4" style={{ backgroundColor: currentThemeId === 'dark' ? '#2A2A2A' : '#F9F9F9' }}>
-                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active-press"><Minus/></button>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-xl shadow-sm text-black"><Minus/></button>
                       <span className="font-arabic text-3xl">بِسْمِ</span>
-                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active-press"><Plus/></button>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-xl shadow-sm text-black"><Plus/></button>
                     </div>
                   </div>
                 </div>
