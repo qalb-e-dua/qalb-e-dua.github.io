@@ -30,28 +30,34 @@
         margin: 0;
         padding: 0;
         background-color: #0B1E3F;
+        user-select: none;
       }
       .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
+      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
       
-      /* FIXED IPHONE HEADER */
+      /* IPHONE SAFE AREAS */
+      .safe-top { padding-top: env(safe-area-inset-top); }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+      /* STICKY HEADER FIX */
       .sticky-header {
         position: sticky;
         top: 0;
         z-index: 100;
         padding-top: env(safe-area-inset-top);
         width: 100%;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       }
       
       .nav-bar {
-        height: 64px;
+        height: 60px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 16px;
+        padding: 0 20px;
       }
 
+      /* INDEX BAR */
       .index-bar {
         width: 100%;
         display: flex;
@@ -64,33 +70,56 @@
         scrollbar-width: none;
       }
       .index-bar::-webkit-scrollbar { display: none; }
-      
       .index-btn {
         flex: 0 0 auto;
-        padding: 7px 15px;
+        padding: 6px 14px;
         border-radius: 20px;
         font-size: 13px;
         font-weight: 800;
-        text-transform: uppercase;
         border: 1px solid #D4AF37;
         background: rgba(255, 255, 255, 0.1);
         color: #FFFFFF;
-        white-space: nowrap;
       }
 
-      .scroll-target {
-        scroll-margin-top: 180px; 
+      /* POPUP ACTION MENU (Like in your picture) */
+      .action-popup {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        gap: 15px;
+        padding: 8px 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        z-index: 40;
+        border: 1px solid #eee;
+        animation: popIn 0.2s ease-out;
       }
-      
+      @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+      /* SEARCH BAR */
+      .search-container {
+        padding: 0 20px;
+        margin-bottom: 20px;
+      }
+      .search-input {
+        width: 100%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid #D4AF37;
+        border-radius: 12px;
+        padding: 12px 15px;
+        color: white;
+        font-size: 16px;
+      }
+      .search-input::placeholder { color: rgba(255,255,255,0.5); }
+
+      /* HAPTIC FEEL */
+      .active-press:active { transform: scale(0.96); transition: 0.1s; }
+
+      .scroll-target { scroll-margin-top: 180px; }
       .animate-in { animation: fadeIn 0.3s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-      /* Home Screen Safe Area Fix */
-      .home-safe-header {
-        padding-top: calc(env(safe-area-inset-top) + 20px);
-        width: 100%;
-        position: relative;
-      }
     </style>
 
     <script type="importmap">
@@ -106,9 +135,12 @@
 <body>
     <div id="root"></div>
     <script type="text/babel" data-type="module" data-presets="typescript,react">
-      import React, { useState, useEffect } from 'react';
+      import React, { useState, useEffect, useMemo } from 'react';
       import ReactDOM from 'react-dom/client';
-      import { Settings, X, ChevronLeft, Minus, Plus } from 'lucide-react';
+      import { 
+        Settings, X, ChevronLeft, Minus, Plus, Search, 
+        Bookmark, Share2, Play, Languages, Heart, Copy 
+      } from 'lucide-react';
 
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
@@ -1701,35 +1733,34 @@
 
       };
 
-
 // ==========================================
-      // COMPONENTS
+      // UTILITIES
       // ==========================================
-
-      const MenuCard = ({ label, subtext, onClick, theme }) => {
-        return (
-          <button
-            onClick={onClick}
-            style={{ 
-              backgroundColor: theme.cardBg, 
-              color: theme.text,
-              border: `4px double ${theme.accent}`,
-              boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
-            }}
-            className="w-full p-4 mb-3 rounded-xl flex flex-col items-center justify-center text-lg font-bold transition-all duration-200 active:scale-[0.98]"
-          >
-            <span className="font-heading text-xl text-center">{label}</span>
-            {subtext && (
-                <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">
-                    {subtext}
-                </span>
-            )}
-          </button>
-        );
+      const triggerHaptic = () => {
+        if (window.navigator.vibrate) window.navigator.vibrate(10);
       };
 
       // ==========================================
-      // APP LOGIC
+      // COMPONENTS
+      // ==========================================
+
+      const MenuCard = ({ label, subtext, onClick, theme }) => (
+        <button
+          onClick={() => { triggerHaptic(); onClick(); }}
+          style={{ 
+            backgroundColor: theme.cardBg, 
+            color: theme.text,
+            border: `4px double ${theme.accent}`,
+          }}
+          className="w-full p-4 mb-3 rounded-xl flex flex-col items-center justify-center text-lg font-bold active-press shadow-sm"
+        >
+          <span className="font-heading text-xl text-center">{label}</span>
+          {subtext && <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">{subtext}</span>}
+        </button>
+      );
+
+      // ==========================================
+      // MAIN APP
       // ==========================================
 
       const THEMES = {
@@ -1738,197 +1769,191 @@
         dark: { id: 'dark', bg: '#121212', text: '#E0E0E0', headerBg: '#1E1E1E', cardBg: '#2b2b2b', accent: '#D4AF37', nameRed: '#EF5350' }
       };
 
-      const Logo = () => (
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-md text-center">
-            Qulb e Dua
-          </h1>
-        </div>
-      );
-
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
         const [showSettings, setShowSettings] = useState(false);
         const [currentThemeId, setCurrentThemeId] = useState('cream');
         const [fontScale, setFontScale] = useState(0);
+        const [searchQuery, setSearchQuery] = useState('');
+        const [bookmarks, setBookmarks] = useState([]);
+        const [showTransliteration, setShowTransliteration] = useState(false);
+        const [activeActionId, setActiveActionId] = useState(null);
 
         const theme = THEMES[currentThemeId];
         const arabicSize = 32 + (fontScale * 2);
-        const englishSize = 18 + (fontScale * 1);
+        const englishSize = 16 + (fontScale * 1);
 
-        const handleOpenPage = (id) => {
-          setActivePageId(id);
-          window.scrollTo(0, 0);
+        const handleOpenPage = (id) => { setActivePageId(id); window.scrollTo(0, 0); };
+        const handleClosePage = () => { setActivePageId(null); setActiveActionId(null); };
+
+        const toggleBookmark = (id) => {
+          triggerHaptic();
+          setBookmarks(prev => prev.includes(id) ? prev.filter(b => b !== id) : [...prev, id]);
         };
 
-        const handleClosePage = () => {
-          setActivePageId(null);
+        const handleShare = (text) => {
+          if (navigator.share) {
+            navigator.share({ title: 'Qulb e Dua', text: text });
+          } else {
+            navigator.clipboard.writeText(text);
+            alert("Copied to clipboard");
+          }
         };
 
         const scrollToSection = (id) => {
           const element = document.getElementById(id);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
+          if (element) element.scrollIntoView({ behavior: 'smooth' });
         };
 
         const renderContentBlock = (block, idx, cardVariant, cardIdx) => {
           let textColor = block.textColor || theme.text;
-          if (cardVariant === 'rabbana') {
-             textColor = (block.type.includes('arabic')) ? '#D4AF37' : '#FFFFFF';
-          } else if (block.type === 'arabic-green') {
-              textColor = '#2e7d32';
-          }
-
+          if (cardVariant === 'rabbana') textColor = block.type.includes('arabic') ? '#D4AF37' : '#FFFFFF';
+          
           const commonStyle = { color: textColor };
-          const titleId = (block.type === 'section-title' || block.type === 'title-green') 
-                          ? `title-${cardIdx}-${idx}` 
-                          : null;
+          const titleId = (block.type === 'section-title' || block.type === 'title-green') ? `title-${cardIdx}-${idx}` : null;
+
+          if (block.type === 'text' && !showTransliteration && block.style?.includes('transliteration')) return null;
 
           switch (block.type) {
-            case 'allah-name':
-              return (
-                <div key={idx} className="mb-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="font-bold text-lg" style={{ color: theme.nameRed }}>{block.number}</span>
-                    <span className="font-arabic font-bold text-right" style={{ fontSize: `${arabicSize + 4}px`, color: currentThemeId === 'dark' ? '#90CAF9' : '#1a237e' }}>
-                      {block.arabic}
-                    </span>
-                  </div>
-                  <div className="text-lg leading-relaxed mb-4" style={{ fontSize: `${englishSize}px` }}>
-                    <span className="font-bold" style={{ color: theme.nameRed }}>{block.english}</span>
-                    <span style={{ color: theme.text }}>, He is exalted!</span>
-                  </div>
-                  <hr className="border-t border-gray-300 opacity-50" />
-                </div>
-              );
             case 'arabic':
             case 'arabic-green':
             case 'arabic-indopak':
               return (
-                <p key={idx} dir="rtl" className={`font-arabic mb-4 leading-[2.3] ${block.style?.includes('text-justify') ? '' : 'text-center'} ${block.style || ''}`} 
+                <p key={idx} dir="rtl" className={`font-arabic mb-4 leading-[2.3] text-center ${block.style || ''}`} 
                    style={{ color: textColor, fontSize: `${arabicSize}px`, fontWeight: 'bold' }}>
                   {block.text}
-                  {block.number && <span className="inline-flex items-center justify-center w-8 h-8 mx-2 border-2 rounded-full align-middle font-sans opacity-80" style={{ borderColor: 'currentColor', fontSize: '0.5em' }}>{block.number}</span>}
                 </p>
               );
             case 'text':
               return <p key={idx} className={`font-sans mb-3 leading-relaxed ${block.style || ''}`} style={{ ...commonStyle, fontSize: `${englishSize}px` }}>{block.text}</p>;
             case 'section-title':
-              return <h3 id={titleId} key={idx} className="text-center font-bold text-lg mb-4 pb-1 border-b border-gray-300 scroll-target" style={{ color: theme.headerBg }}>{block.text}</h3>;
             case 'title-green':
-              return <h2 id={titleId} key={idx} className="font-arabic font-bold text-center mb-2 scroll-target" style={{ color: '#d63384', fontSize: '34px' }}>{block.text}</h2>;
-            case 'subtitle-green':
-              return <p key={idx} className="text-center mb-4 text-gray-500 font-serif text-lg">{block.text}</p>;
-            case 'flower-icon':
-              return <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">{block.text}</div>;
-            case 'hr':
-              return <hr key={idx} className="my-5 border-t border-gray-300 opacity-50" />;
-            case 'count-badge':
-              return <div key={idx} className="text-center mb-4"><span className="inline-block px-3 py-1 rounded-full text-sm font-bold bg-[#0B1E3F] text-[#D4AF37]">{block.text}</span></div>;
+              const Tag = block.type === 'section-title' ? 'h3' : 'h2';
+              return (
+                <div className="relative group scroll-target" id={titleId} key={idx} onClick={() => setActiveActionId(activeActionId === titleId ? null : titleId)}>
+                  <Tag className={`text-center font-bold mb-4 ${block.type === 'title-green' ? 'font-arabic text-4xl' : 'text-lg border-b border-gray-300'}`} 
+                       style={{ color: block.type === 'title-green' ? '#d63384' : theme.headerBg }}>
+                    {block.text}
+                  </Tag>
+                  {activeActionId === titleId && (
+                    <div className="action-popup">
+                       <button onClick={() => triggerHaptic()} className="text-gray-700"><Play size={20}/></button>
+                       <button onClick={() => toggleBookmark(titleId)} className={bookmarks.includes(titleId) ? "text-red-500" : "text-gray-700"}>
+                          <Bookmark size={20} fill={bookmarks.includes(titleId) ? "currentColor" : "none"}/>
+                       </button>
+                       <button onClick={() => handleShare(block.text)} className="text-gray-700"><Share2 size={20}/></button>
+                    </div>
+                  )}
+                </div>
+              );
             default: return null;
           }
         };
 
-        const renderCard = (card, cardIdx) => {
-          let cardStyle = { marginBottom: '25px', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', color: theme.text };
-          if (card.variant === 'green') { cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32' }; } 
-          else if (card.variant === 'rabbana') { cardStyle = { ...cardStyle, backgroundColor: '#1f2937', border: '2px solid #D4AF37', color: '#ffffff' }; } 
-          else { cardStyle = { ...cardStyle, backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', border: `4px double ${theme.accent}` }; }
-
-          return (
-            <div key={cardIdx} style={cardStyle} className="relative overflow-hidden">
-              {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, cardIdx))}
-            </div>
-          );
-        };
-
         const renderPage = () => {
-          if (!activePageId) return null;
           const page = PAGES_DATA[activePageId];
-          if (!page) return <div>Page not found</div>;
-
           const allTitles = [];
-          page.cards.forEach((card, cardIdx) => {
+          page.cards.forEach((card, cIdx) => {
             card.content.forEach((block, bIdx) => {
-              if (block.type === 'section-title' || block.type === 'title-green') {
-                allTitles.push({ text: block.text, id: `title-${cardIdx}-${bIdx}` });
-              }
+              if (block.type === 'section-title' || block.type === 'title-green') 
+                allTitles.push({ text: block.text, id: `title-${cIdx}-${bIdx}` });
             });
           });
 
           return (
-            <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg, color: theme.text }}>
+            <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg }}>
               <div className="sticky-header" style={{ backgroundColor: theme.headerBg }}>
                 <div className="nav-bar">
-                  <button onClick={handleClosePage} className="p-2" style={{ color: theme.accent }}><ChevronLeft size={32} /></button>
-                  <h1 className="font-bold text-lg text-center font-heading tracking-wider truncate px-2 text-white">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="p-2" style={{ color: theme.accent }}><Settings size={26} /></button>
+                  <button onClick={handleClosePage} className="p-2 text-white active-press"><ChevronLeft size={32}/></button>
+                  <h1 className="font-bold text-lg font-heading tracking-wider truncate text-white">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="p-2 text-[#D4AF37] active-press"><Settings size={26}/></button>
                 </div>
                 {allTitles.length > 0 && (
                   <div className="index-bar">
                     {allTitles.map((item, i) => (
-                      <button key={i} onClick={() => scrollToSection(item.id)} className="index-btn" style={{ borderColor: theme.accent }}>{item.text}</button>
+                      <button key={i} onClick={() => { triggerHaptic(); scrollToSection(item.id); }} className="index-btn" style={{ borderColor: theme.accent }}>{item.text}</button>
                     ))}
                   </div>
                 )}
               </div>
-              <div className="relative z-10 max-w-2xl mx-auto p-5 pb-32">
-                  {page.cards.map((card, idx) => renderCard(card, idx))}
+              <div className="max-w-2xl mx-auto p-5 pb-32">
+                {page.cards.map((card, idx) => (
+                  <div key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1f2937' : (currentThemeId === 'dark' ? '#1E293B' : '#ffffff'), border: `4px double ${theme.accent}` }} className="mb-6 p-5 rounded-xl shadow-md overflow-hidden relative">
+                    {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, idx))}
+                  </div>
+                ))}
               </div>
             </div>
           );
         };
 
-        const renderMenu = () => (
-          <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
-            <div className="home-safe-header flex flex-col items-center justify-center relative">
-               <div className="absolute right-4 bottom-2">
-                 <button onClick={() => setShowSettings(true)} style={{ color: theme.accent }} className="p-2 active:scale-90 transition-transform">
-                   <Settings size={30}/>
-                 </button>
-               </div>
-               <Logo />
-            </div>
-            <div className="flex-1 rounded-t-[2.5rem] mt-6 p-6 pb-20 overflow-y-auto relative z-10" style={{ backgroundColor: theme.bg }}>
-              <div className="max-w-md mx-auto pt-4">
-                {MENU_ITEMS.map((item) => (
-                    <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => handleOpenPage(item.pageId)} theme={theme} />
-                ))}
+        const renderMenu = () => {
+          const filteredMenu = MENU_ITEMS.filter(item => item.label.toLowerCase().includes(searchQuery.toLowerCase()));
+          return (
+            <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
+              <div className="safe-top bg-[#0B1E3F]">
+                <div className="flex justify-between items-center px-6 py-4">
+                  <div className="w-10"></div>
+                  <h1 className="text-3xl font-heading font-bold text-[#D4AF37] tracking-widest pt-2">Qulb e Dua</h1>
+                  <button onClick={() => setShowSettings(true)} className="p-2 text-[#D4AF37] active-press"><Settings size={28}/></button>
+                </div>
+                <div className="search-container">
+                   <input type="text" placeholder="Search for a Dua..." className="search-input" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                </div>
+              </div>
+              <div className="flex-1 rounded-t-[2.5rem] bg-white p-6 pb-24 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
+                <div className="max-w-md mx-auto">
+                  {bookmarks.length > 0 && !searchQuery && (
+                    <div className="mb-8">
+                      <h2 className="text-[#D4AF37] font-heading font-bold mb-4 flex items-center gap-2"><Heart size={18} fill="#D4AF37"/> Favorites</h2>
+                      <div className="grid grid-cols-2 gap-3">
+                         {bookmarks.map(id => <div key={id} onClick={() => triggerHaptic()} className="p-3 border border-[#D4AF37] rounded-lg text-xs font-bold truncate">Dua Saved</div>)}
+                      </div>
+                    </div>
+                  )}
+                  {filteredMenu.map((item) => <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => handleOpenPage(item.pageId)} theme={theme} />)}
+                </div>
               </div>
             </div>
-          </div>
-        );
+          );
+        };
 
         return (
           <>
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
-              <div className="fixed inset-0 z-[150] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
-                  <div className="w-full max-w-sm rounded-t-2xl p-6 shadow-2xl animate-in"
-                      style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#fff', color: currentThemeId === 'dark' ? '#fff' : '#000', borderTop: `4px solid ${theme.accent}` }}
-                      onClick={(e) => e.stopPropagation()}>
-                      <div className="flex justify-between items-center mb-6">
-                          <h3 className="font-bold text-lg">Settings</h3>
-                          <button onClick={() => setShowSettings(false)} className="p-1"><X size={24}/></button>
-                      </div>
-                      <div className="mb-6">
-                          <p className="font-bold mb-3 text-sm uppercase opacity-70 text-center">Theme</p>
-                          <div className="flex justify-center gap-4">
-                              {['cream', 'white', 'dark'].map(t => (
-                                <button key={t} onClick={() => setCurrentThemeId(t)} className={`w-12 h-12 rounded-full border-2 ${currentThemeId === t ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/20' : 'border-gray-300'}`} style={{ backgroundColor: THEMES[t].bg }} />
-                              ))}
-                          </div>
-                      </div>
-                      <div>
-                          <p className="font-bold mb-3 text-sm uppercase opacity-70 text-center">Text Size</p>
-                          <div className="flex items-center justify-between rounded-lg p-2" style={{ backgroundColor: currentThemeId === 'dark' ? '#444' : '#f3f4f6' }}>
-                              <button onClick={() => setFontScale(prev => Math.max(prev - 2, -4))} className="p-2"><Minus size={20} /></button>
-                              <span className="font-bold font-arabic text-xl">بِسْمِ</span>
-                              <button onClick={() => setFontScale(prev => Math.min(prev + 4, 12))} className="p-2"><Plus size={20} /></button>
-                          </div>
-                      </div>
+              <div className="fixed inset-0 z-[150] flex items-end justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
+                <div className="w-full max-w-sm rounded-t-3xl p-8 animate-in" style={{ backgroundColor: currentThemeId === 'dark' ? '#1E1E1E' : '#fff', color: theme.text }} onClick={e => e.stopPropagation()}>
+                  <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6" onClick={() => setShowSettings(false)}/>
+                  <h3 className="text-xl font-bold mb-8 text-center">Settings</h3>
+                  
+                  <div className="mb-8">
+                    <p className="font-bold mb-4 text-xs uppercase opacity-50 tracking-widest text-center">Appearance</p>
+                    <div className="flex justify-center gap-6">
+                      {['cream', 'white', 'dark'].map(t => (
+                        <button key={t} onClick={() => { triggerHaptic(); setCurrentThemeId(t); }} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37]' : 'border-gray-200'}`} style={{ backgroundColor: THEMES[t].bg }} />
+                      ))}
+                    </div>
                   </div>
+
+                  <div className="mb-8">
+                    <div className="flex justify-between items-center p-4 bg-gray-100 rounded-xl" style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#F3F4F6' }}>
+                      <span className="font-bold">Transliteration</span>
+                      <button onClick={() => { triggerHaptic(); setShowTransliteration(!showTransliteration); }} className={`w-12 h-6 rounded-full transition-colors ${showTransliteration ? 'bg-green-500' : 'bg-gray-400'} relative`}>
+                        <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${showTransliteration ? 'left-7' : 'left-1'}`}/>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="font-bold mb-4 text-xs uppercase opacity-50 tracking-widest text-center">Arabic Font Size</p>
+                    <div className="flex items-center justify-between bg-gray-100 rounded-xl p-3" style={{ backgroundColor: currentThemeId === 'dark' ? '#333' : '#F3F4F6' }}>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-lg shadow-sm"><Minus/></button>
+                      <span className="font-arabic text-2xl">بِسْمِ</span>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-lg shadow-sm"><Plus/></button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </>
