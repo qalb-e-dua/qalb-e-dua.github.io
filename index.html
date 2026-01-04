@@ -1717,11 +1717,12 @@
               border: `4px double ${theme.accent}`,
               boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
             }}
-            className="w-full p-4 mb-3 rounded-xl flex flex-col items-center justify-center text-lg font-bold transition-all duration-200 active:scale-[0.98]"
+            className="w-full p-4 mb-3 rounded-xl flex flex-col items-center justify-center text-lg transition-all duration-200 active:scale-[0.98]"
           >
-            <span className="font-heading text-xl text-center">{label}</span>
+            {/* REMOVED BOLD FROM HOME SCREEN TITLES */}
+            <span className="font-heading text-lg text-center uppercase tracking-wide">{label}</span>
             {subtext && (
-                <span className="mt-1 text-xs opacity-70 uppercase tracking-widest font-sans font-medium">
+                <span className="mt-1 text-[10px] opacity-60 uppercase tracking-[0.2em] font-sans">
                     {subtext}
                 </span>
             )}
@@ -1775,9 +1776,7 @@
 
         const renderContentBlock = (block, idx, cardVariant, cardIdx) => {
           let textColor = block.textColor || theme.text;
-          
-          // Apply Gold color to titles like in the user picture
-          let titleColor = '#D4AF37'; 
+          let goldTitle = '#D4AF37'; 
 
           if (cardVariant === 'rabbana') {
              textColor = (block.type.includes('arabic')) ? '#D4AF37' : '#FFFFFF';
@@ -1822,10 +1821,11 @@
             case 'section-title':
               return (
                 <div key={idx} className="text-center mb-6">
-                  <h3 id={titleId} className="font-bold text-lg mb-2 scroll-target uppercase tracking-wide" style={{ color: titleColor }}>
+                  {/* GOLD TITLES - NOT BOLD AS REQUESTED */}
+                  <h3 id={titleId} className="text-lg mb-2 scroll-target uppercase tracking-[0.15em] font-heading" style={{ color: goldTitle }}>
                     {block.text}
                   </h3>
-                  <hr className="w-full border-t border-gray-200 opacity-60" />
+                  <hr className="w-2/3 mx-auto border-t border-gray-200 opacity-40" />
                 </div>
               );
             case 'title-green':
@@ -1843,14 +1843,16 @@
         };
 
         const renderCard = (card, cardIdx) => {
-          let cardStyle = { marginBottom: '25px', padding: '20px', borderRadius: '25px', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)', color: theme.text };
+          let cardStyle = { marginBottom: '25px', padding: '24px', borderRadius: '35px', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)', color: theme.text };
           if (card.variant === 'green') { cardStyle = { ...cardStyle, backgroundColor: '#ffffff', border: '4px double #2e7d32' }; } 
           else if (card.variant === 'rabbana') { cardStyle = { ...cardStyle, backgroundColor: '#1f2937', border: '2px solid #D4AF37', color: '#ffffff' }; } 
-          else { cardStyle = { ...cardStyle, backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', border: `1.5px solid ${theme.accent}` }; }
+          else { cardStyle = { ...cardStyle, backgroundColor: currentThemeId === 'dark' ? '#1E293B' : '#ffffff', border: `1.2px solid ${theme.accent}44` }; }
 
           return (
             <div key={cardIdx} style={cardStyle} className="relative overflow-hidden">
-              {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, cardIdx))}
+                {/* User image shows a gold border inside the card */}
+                <div className="absolute inset-2 border border-[#D4AF37] opacity-20 rounded-[28px] pointer-events-none"></div>
+                {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, cardIdx))}
             </div>
           );
         };
