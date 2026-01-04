@@ -1708,7 +1708,7 @@
       };
 
 // ==========================================
-      // UTILITIES
+      // UTILITIES & HAPTICS
       // ==========================================
       const triggerHaptic = () => {
         if (window.navigator && window.navigator.vibrate) {
@@ -1734,7 +1734,7 @@
             color: theme.text,
             border: `4px double ${theme.accent}`,
           }}
-          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active-press shadow-sm"
+          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active:scale-[0.98] transition-all shadow-sm"
         >
           <span className="font-heading text-xl text-center">{label}</span>
           {subtext && <span className="mt-1 text-xs opacity-60 uppercase tracking-widest font-sans">{subtext}</span>}
@@ -1778,8 +1778,11 @@
           const element = document.getElementById(id);
           if (element) {
             const offset = 170;
-            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
           }
         };
 
@@ -1804,16 +1807,16 @@
                     </span>
                   </div>
                   {showEnglish && (
-                    <div className="text-lg leading-relaxed mb-4" style={{ fontSize: `${englishSize}px` }}>
+                    <div className="text-lg leading-relaxed mb-4 text-center" style={{ fontSize: `${englishSize}px` }}>
                       <span className="font-bold" style={{ color: theme.nameRed }}>{block.english}</span>
                       <span style={{ color: theme.text }}>, He is exalted!</span>
                     </div>
                   )}
                   {activeActionId === titleId && (
-                    <div className="action-popup">
-                       <button onClick={(e) => toggleBookmark(titleId, e)} className={isNameFav ? "text-red-500" : "text-gray-600"}><Bookmark size={18} fill={isNameFav ? "currentColor" : "none"}/></button>
-                       <button onClick={(e) => { e.stopPropagation(); copyToClipboard(block.arabic); }} className="text-gray-600"><Copy size={18}/></button>
-                       <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Share2 size={18}/></button>
+                    <div className="action-popup active-press">
+                       <button onClick={(e) => toggleBookmark(titleId, e)} className={isNameFav ? "text-red-500" : "text-gray-600"}><Bookmark size={20} fill={isNameFav ? "currentColor" : "none"}/></button>
+                       <button onClick={(e) => { e.stopPropagation(); copyToClipboard(block.arabic); }} className="text-gray-600"><Copy size={20}/></button>
+                       <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Share2 size={20}/></button>
                     </div>
                   )}
                   <hr className="border-t border-gray-300 opacity-50" />
@@ -1842,13 +1845,12 @@
                     {block.text}
                   </div>
                   {activeActionId === titleId && (
-                    <div className="action-popup">
-                       <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Play size={18}/></button>
+                    <div className="action-popup active-press">
                        <button onClick={(e) => toggleBookmark(titleId, e)} className={isFav ? "text-red-500" : "text-gray-600"}>
-                          <Bookmark size={18} fill={isFav ? "currentColor" : "none"}/>
+                          <Bookmark size={20} fill={isFav ? "currentColor" : "none"}/>
                        </button>
-                       <button onClick={(e) => { e.stopPropagation(); copyToClipboard(block.text); }} className="text-gray-600"><Copy size={18}/></button>
-                       <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Share2 size={18}/></button>
+                       <button onClick={(e) => { e.stopPropagation(); copyToClipboard(block.text); }} className="text-gray-600"><Copy size={20}/></button>
+                       <button onClick={(e) => { e.stopPropagation(); triggerHaptic(); }} className="text-gray-600"><Share2 size={20}/></button>
                     </div>
                   )}
                 </div>
@@ -1900,26 +1902,14 @@
         const renderMenu = () => (
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#0B1E3F' }}>
             <div className="safe-top">
-              <div className="flex justify-between items-center px-6 pt-6 pb-6">
+              <div className="flex justify-between items-center px-6 pt-6 pb-6 relative">
                 <div className="w-10"></div>
-                <h1 className="text-3xl font-heading font-extrabold text-[#D4AF37] tracking-widest pt-2">Qulb e Dua</h1>
+                <h1 className="text-3xl font-heading font-extrabold text-[#D4AF37] tracking-widest pt-2">QULB E DUA</h1>
                 <button onClick={() => { triggerHaptic(); setShowSettings(true); }} className="p-2 text-[#D4AF37] active-press"><Settings size={28}/></button>
               </div>
             </div>
             <div className="flex-1 rounded-t-[3rem] p-6 pb-24 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto pt-4">
-                {bookmarks.length > 0 && (
-                   <div className="mb-8 animate-in">
-                      <div className="flex items-center gap-2 text-[#D4AF37] font-bold mb-4 px-2 tracking-widest text-sm">
-                        <Heart size={18} fill="#D4AF37"/> <span>FAVORITES</span>
-                      </div>
-                      <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
-                         {bookmarks.map(id => (
-                           <button key={id} onClick={() => triggerHaptic()} className="flex-shrink-0 bg-white border-2 border-[#D4AF37] px-5 py-3 rounded-xl text-xs font-bold shadow-sm">Saved Item</button>
-                         ))}
-                      </div>
-                   </div>
-                )}
                 {MENU_ITEMS.map((item) => <MenuCard key={item.id} label={item.label} subtext={item.subtext} onClick={() => handleOpenPage(item.pageId)} theme={theme} />)}
               </div>
             </div>
@@ -1936,7 +1926,7 @@
                   <h3 className="text-2xl font-bold mb-8 text-center font-heading">Settings</h3>
                   
                   <div className="mb-8">
-                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase text-center">Theme</p>
+                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase">Theme</p>
                     <div className="flex justify-center gap-6">
                       {['cream', 'white', 'dark'].map(t => (
                         <button key={t} onClick={() => { triggerHaptic(); setCurrentThemeId(t); }} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37]' : 'border-gray-200'}`} style={{ backgroundColor: THEMES[t].bg }} />
@@ -1960,11 +1950,11 @@
                   </div>
 
                   <div>
-                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase text-center">Arabic Font Size</p>
+                    <p className="text-center font-bold text-xs opacity-50 tracking-widest mb-4 uppercase">Text Size</p>
                     <div className="flex items-center justify-between bg-gray-50 rounded-2xl p-4" style={{ backgroundColor: currentThemeId === 'dark' ? '#2A2A2A' : '#F9F9F9' }}>
-                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active:scale-90"><Minus/></button>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.max(prev - 2, -4)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active-press"><Minus/></button>
                       <span className="font-arabic text-3xl">بِسْمِ</span>
-                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active:scale-90"><Plus/></button>
+                      <button onClick={() => { triggerHaptic(); setFontScale(prev => Math.min(prev + 4, 12)); }} className="p-3 bg-white rounded-xl shadow-sm text-black active-press"><Plus/></button>
                     </div>
                   </div>
                 </div>
