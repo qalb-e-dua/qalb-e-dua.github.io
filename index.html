@@ -1,33 +1,32 @@
-Today apps 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- iPhone Settings -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Qulb-e-Dua">
     <meta name="theme-color" content="#0B1E3F">
+    
     <title>Qulb-e-Dua</title>
     
-    <!-- LIBRARIES (Safe for Safari MacBook) -->
+    <!-- YOUR LOGO ICON -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iPTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN5PSIyMDUiIGN4PSIyNDUiIHI9IjEwIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0gMjU2IDI4MCBRIDMxMCAyODAgMzEwIDIzMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTSAxODAgMzYwIFEgMjU2IDM5MCAzMzIgMzYwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
+
+    <!-- Tailwind and Safe React Loading -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-      html, body { 
-        background-color: #0B1E3F !important; 
-        margin: 0; padding: 0; height: 100%; overflow-x: hidden; 
-        -webkit-tap-highlight-color: transparent; 
-      }
+      html, body { background-color: #0B1E3F !important; margin: 0; padding: 0; height: 100%; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
       .font-heading { font-family: 'Cinzel', serif; }
-      /* YOUR ORIGINAL ARABIC FONT */
+      /* ORIGINAL ARABIC FONT */
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .animate-in { animation: fadeIn 0.3s ease-out; }
@@ -39,7 +38,6 @@ Today apps
     <div id="root"></div>
     <script type="text/babel">
       const { useState, useEffect, Fragment } = React;
-
 
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
@@ -280,70 +278,144 @@ Today apps
         { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا خَليلَ اللّٰهِ' },
         { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا نَبِيَّ اللّٰهِ' },
         { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا صَفِيَّ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا خَيْرَ خَلْقِ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا نُورَ عَرْشِ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا أَمِينَ وَحْىِ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا مَنْ زَيَّنَهُ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا مَنْ شَرَّفَهُ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا مَنْ كَرَّمَهُ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا مَنْ عَظَّمَهُ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا مَنْ عَلَّمَهُ اللّٰهِ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا سَيِّدَ الْمُرْسَلينَ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا اِمَامَ الْمُتَّقِينَ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا خَاتَمَ النَّبِيّينَ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْك يَا رَحْمَةً لِلْعَالَمِينَ' },
         { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا شَفِيعَ الْمُذْنِبِينَ' },
-        { type: 'arabic', text: 'اَلصَّلاَةُ وَالسَّلاَمُ عَلَيْكَ يَا رَسُولَ رَبِّ العَالَمينَ صَلَوَاتُ اللّٰهِ وَمَلٰائِكَتِهِ وَاَنْبِيٰائِهِ وَرُسُلِهِ وَحَمَلَةِ عَرْشِهِ وَجَميعِ خَلْقِهِ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِهِ وَصَحْبِهِ أَجْمَعينَ.' },
         { type: 'hr' },
-        { type: 'arabic', text: 'أَللّٰهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَنَبِيِّكَ وَحَبِيبِكَ وَرَسُولِكَ النَّبِيِّ الْاُمِّىِّ وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلِّمْ (3)' },
-        { type: 'arabic', text: 'اَللّٰهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّدٍ النَّبِيِّ الْمَلِيحِ صَاحِبِ الْمَقَامِ الْأَعْلٰى وَاللِّسَانِ الْفَصِيحِ (3)' },
-        { type: 'arabic', text: 'اَللّٰهُمَّ اجْعَلْ أَفْضَلَ صَلَوَاتِكَ أَبَدًا... عَلٰى أَشْرَفِ الْخَلَائِقِ وَأَفْضَلِ الْخَلْقِ أَجْمَعِينَ.' }
-     ] 
-            } 
-          ] 
-                },
-  
-        'p5': { 
+
+        { type: 'section-title', text: 'Salat of Sayyida Fatima al-Zahra (as)' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى مَنْ رُوحُهُ مِحْرَابُ الأَرْوَاحِ وَالمَلَائِكَةِ وَالكَوْنِ * اللَّهُمَّ صَلِّ عَلَى مَنْ هُوَ إِمَامُ الأَنْبِيَاءِ وَالمُرْسَلِينَ * اللَّهُمَّ صَلِّ عَلَى مَنْ هُوَ إِمَامُ أَهْلِ الجَنَّةِ عِبَادِ اللَّهِ المُؤْمِنِينَ' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat of our master Abdullah bin Mas’ud (ra)' },
+        { type: 'arabic', text: 'اللَّهُمَّ اجْعَلْ صَلَوَاتِكَ وَرَحْمَتَكَ وَبَرَكَاتِكَ عَلَى سَيِّدِ المُرْسَلِينَ وَإِمَامِ المُتَّقِينَ وَخَاتَمِ النَّبِيِّينَ * عَبْدِكَ وَرَسُولِكَ إِمَامِ الخَيْرِ وَقَائِدِ الخَيْرِ وَرَسُولِ الرَّحْمَةِ * اللَّهُمَّ ابْعَثْهُ المَقَامَ المَحْمُودَ الَّذِي يَغْبِطُهُ بِهِ الأَوَّلُونَ وَالآخِرُونَ' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat of our master Abdullah bin Abbas (ra)' },
+        { type: 'arabic', text: 'اللَّهُمَّ يَا دَائِمَ الفَضْلِ عَلَى البَرِيَّةِ * يَا بَاسِطَ اليَدَيْنِ بِالعَطِيَّةِ * يَا صَاحِبَ المَوَاهِبِ السَّنِيَّةِ * صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ خَيْرِ البَرِيَّةِ * وَاغْفِرْ لَنَا يَا ذَا العُلَا فِي هَذِهِ العَشِيَّةِ' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat of Imam Abu al-Hasan al-Shadhili (ra)' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ النُّورِ الذَّاتِيِّ * السَّارِي سِرُّهُ فِي جَمِيعِ الأَسْمَاءِ وَالصِّفَاتِ * وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat of the Qutb Abdul Qadir al-Jilani (ra)' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ السَّابِقِ لِلْخَلْقِ نُورُهُ * وَرَحْمَةً لِلْعَالَمِينَ ظُهُورُهُ * عَدَدَ مَنْ مَضَى مِنْ خَلْقِكَ وَمَنْ بَقِيَ * وَمَنْ سَعِدَ مِنْهُمْ وَمَنْ شَقِيَ * صَلَاةً تَسْتَغْرِقُ العَدَّ وَتُحِيطُ بِالحَدِّ * صَلَاةً لَا غَايَةَ لَهَا وَلَا مُنْتَهَى وَلَا انْقِضَاءَ * صَلَاةً دَائِمَةً بِدَوَامِ مُلْكِكَ بَاقِيَةً بِبَقَائِكَ إِلَى يَوْمِ الدِّينِ * وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيمًا مِثْلَ ذَلِكَ' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat of the Qutb Shams al-Din al-Hanafi' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ عَدَدَ مَا عَلِمْتَ وَزِنَةَ مَا عَلِمْتَ وَمِلْءَ مَا عَلِمْتَ' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat al-Nariya (Sidi Abdul Wahhab al-Tazi)' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا * عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِي تَنْحَلُّ بِهِ العُقَدُ * وَتَنْفَرِجُ بِهِ الكُرَبُ * وَتُقْضَى بِهِ الحَوَائِجُ * وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الخَوَاتِيمِ * وَيُسْتَسْقَى الغَمَامُ بِوَجْهِهِ الكَرِيمِ * وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ (١١)' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Şalāt Al-Tunjīnā' },
+        { type: 'text', text: 'Prayer For The Removal Of Hardships Through Sending Blessings On The Prophet' },
+        { type: 'arabic', text: 'اَللّٰهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ صَلَاةً' },
+        { type: "text", text: 'O Allāh! Pray upon our master Muḥammad ﷺ such a prayer' },
+        { type: 'arabic', text: 'تُنْجِينَا بِهَا مِنْ جَمِيعِ الْأَهْوَالِ وَالْآفَاتِ ؕ' },
+        { type: 'text', text: 'by means of which we are relieved of all fears and calamities' },
+        { type: 'arabic', text: 'وَتَقْضِي لَنَا بِهَا جَمِيعَ الْحَاجَاتِ ؕ' },
+        { type: 'text', text: 'and by which You fulfil all our needs' },
+        { type: 'arabic', text: 'وَتُطَهِّرُنَا بِهَا مِنْ جَمِيعِ السَّيِّئَاتِ ؕ' },
+        { type: 'text', text: 'and by which You purify us of all evil' },
+        { type: 'arabic', text: 'وَتَرْفَعُنَا بِهَا عِنْدَكَ أَعْلَى الدَّرَجَاتِ ؕ' },
+        { type: 'text', text: 'And by which You raise us to the highest station' },
+        { type: 'arabic', text: 'وَتُبَلِّغُنَا بِهَا أَقْصَى الْغَايَاتِ مِنْ جَمِيعِ الْخَيْرَاتِ ؕ' },
+        { type: 'text', text: 'And by which You make us attain our utmost aspirations, in all goodness,' },
+        { type: 'arabic', text: 'فِي الْحَيَاتِ وَبَعْدَ الْمَمَاتِ ؕ اِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ ؕ' },
+        { type: 'text', text: 'in this life and after death, truly You have the power over everything.' },
+        { type: 'hr' },
+
+        { type: 'section-title', text: 'Salat al-Habib al-Mahbub' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ الحَبِيبِ المَحْبُوبِ شَافِي العِلَلِ وَمُفَرِّجِ الكُرُوبِ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ (٣)' },
+        { type: 'hr' },
+
+        // NEWLY ADDED DUROOD NARIYA STARTS HERE
+        { type: 'section-title', text: 'Durood Nariya' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ صَلَاةً كَامِلَةً ❁ وَسَلِّمْ سَلَامًا تَامًّا ❁ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ الَّذِي تَنْحَلُّ بِهِ الْعُقَدُ ❁ وَتَنْفَرِجُ بِهِ الْكُرَبُ ❁ وَتُقْضَىٰ بِهِ الْحَوَائِجُ ❁ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ ❁ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيمِ ❁ وَعَلىٰ آلِهِ وَصَحْبِهِ ❁ فِي كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُومٍ لَكَ ❁' },
+        { type: 'text', text: 'O Allah, send a perfect prayer and complete greeting of peace upon our master Muhammad — the one by whom problems are solved, and anxieties are relieved, and needs are fulfilled, and aspirations are attained and good endings are received, and by whose noble face the clouds give rain — and upon his Family and Companions, with every glance and every breath, by the number of everything that is known to You.' },
+        { type: 'hr' },
+        
+
+        // As Salat al-Kaamil STARTS HERE
+        { type: 'section-title', text: 'As Salat al-Kaamil' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ كَمَا لَا نِهَايَةَ لِكَمَالِكَ وَعَدَدَ كَمَالِهِ' },
+        { type: 'hr' },
+
+        { type: 'arabic', text: 'يَا رَبِّ بِالمُصْطَفَى بَلِّغْ مَقَاصِدَنَا' },
+        { type: 'arabic', text: 'وَارْفَعْ وَبَاءً أَتَى بِالكَرْبِ وَالسَّقَمِ' },
+        { type: 'arabic', text: 'وَالْطُفْ بِنَا وَاشْفِ مَرْضَانَا عَلَى عَجَلٍ' },
+        { type: 'arabic', text: 'وَاغْفِرْ لَنَا مَا مَضَى يَا وَاسِعَ الكَرَمِ' },
+        { type: 'arabic', text: '(٣)' },
+
+      ]
+    }
+  ]
+},
+'p5': {
   id: 'p5', 
   title: 'Prayers after Salah', 
   cards: [ 
     { 
       variant: 'default', 
       content: [ 
-
         { type: 'section-title', text: 'Supplications After Salam' }, 
-        { type: 'text', text: 'After the Tashahhud and Salawat, one should make a supplication such as:' }, 
+         { type: 'text', text: 'After the Tashahhud and Salawat, one should make a supplication such as:' }, 
 
-        { type: 'arabic', text: 'ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَالَمِينَ' },
+    { type: 'arabic', text: '1. ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَالَمِينَ' },
+    { type: 'text', text: '1. All praise is due to Allah Ta’ala, Creator of all the worlds.' },
 
-        { type: 'text', text: 'All praise is due to Allah Taala, Creator of all the worlds.' },
+    { type: 'arabic', text: '2. وَٱلصَّلَاةُ وَٱلسَّلَامُ عَلَىٰ رَسُولِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+    { type: 'text', text: '2. May peace and blessings be upon Prophet Muhammad ‘alayhis-salam, and on his blessed family and noble companions.' },
 
-        { type: 'arabic', text: 'وَٱلصَّلَاةُ وَٱلسَّلَامُ عَلَىٰ رَسُولِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+    { type: 'arabic', text: '3. بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ انْتَهَيْتُ لِلَّهِ ۞ بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ تُبْتُ إِلَى اللهِ ۞ بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ سَلَّمْتُ نَفْسِي إِلَى اللهِ ۞ بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ رَضِيتُ بِاللهِ ۞ بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ اعْتَصَمْتُ بِاللهِ ۞ بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ فَوَّضْتُ أَمْرِي إِلَى اللهِ ۞ بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ تَوَكَّلْتُ عَلَى اللهِ ۞' },
+  
 
-        { type: 'text', text: 'May peace and blessings be upon Prophet Muhammed ‘alayhis-salam, and on his blessed family and noble companions.' },
+    { type: 'arabic', text: '4. بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ وَبِاللهِ وَعَلَى اللهِ وَمِنَ اللهِ وَإِلَى اللهِ ۞ اعْتَمَدْتُ عَلَى اللهِ وَمَا تَوْفِيقِي إِلَّا بِاللهِ ۞ وَحَسْبِيَ اللهُ وَلَا إِلَهَ إِلَّا اللهُ وَاللهُ أَكْبَرُ ۞' },
+    { type: 'text', text: '4. Allah - beginning with the name of - the Most Gracious, the Most Merciful and by Allah, and upon Allah, and from Allah, and to Allah. I have depended on Allah, and my success is only by Allah. Allah is sufficient for me, and there is no god but Allah, and Allah is the Greatest.' },
 
-        { type: 'section-title', text: 'دُعَاءُ الشَّيْخِ مَاءَ الْعَيْنَيْنِ الشَّنْقِيطِيِّ' },
+    { type: 'arabic', text: '5. بِسْمِ اللهِ عَلَى نَفْسِي وَدِينِي وَخَوَاتِمِ عَمَلِي ۞ بِسْمِ اللهِ عَلَى أَهْلِي وَوَلَدِي ۞ بِسْمِ اللهِ عَلَى مَالِي وَبِلَادِي ۞ بِسْمِ اللهِ عَلَى أَحْبَابِي وَجِيرَانِي ۞ بِسْمِ اللهِ عَلَى كُلِّ شَيْءٍ أَعْطَانِيهِ رَبِّي ۞ بِسْمِ اللهِ خَيْرِ الْأَسْمَاءِ فِي الْأَرْضِ وَالسَّمَاءِ ۞ بِسْمِ اللهِ الَّذِي فِي جَمِيعِ أَسْمَائِهِ الشِّفَاءُ ۞' },
+    
 
-        { type: 'arabic', text: 'ٱللَّهُ ٱللَّهُ رَبِّي لَا أُشْرِكُ بِهِ شَيْئًا، ٱللَّهُمَّ إِنِّي أَسْأَلُكَ بِٱسْمِكَ ٱلْعَظِيمِ، وَرِضْوَانِكَ ٱلْأَكْبَرِ، يَا ذَا ٱلْجَلَالِ وَٱلْإِكْرَامِ، أَنْ تَفْعَلَ بِي كَذَا (وَيَذْكُرُ حَاجَتَهُ)' },
+    { type: 'arabic', text: '6. اللّٰهُ اللّٰهُ اللّٰهُ رَبِّي لَا أُشْرِكُ بِهِ شَيْئًا ۞ اللّٰهُمَّ إِنِّي أَسْأَلُكَ بِاسْمِكَ الْعَظِيمِ ۞ وَرِضْوَانِكَ الْأَكْبَرِ ۞ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ ۞ أَنْ تَفْعَلَ بِي كَذَا (وَيَذْكُرُ حَاجَتَهُ) ۞' },
+    { type: 'text', text: '6. Allah, Allah, Allah is my Rabb, I do not associate anything with Him. O Allah, I ask You by Your Great Name and Your Greatest Pleasure. O Owner of Majesty and Honor, that You do for me [such and such] (here, one mentions their specific need).' },
 
-        { type: 'text', text: 'Allah, Allah is my Lord, I associate nothing with Him. O Allah, I ask You by Your Great Name and Your Greatest Pleasure, O Possessor of Majesty and Honor, to do for me such and such (and here one mentions their need).' },
+    { type: 'text', style: 'history-note', text: 'This line of the Burdah is known for its powerful meaning and protection. It reminds the believer that whoever has the support, love, and connection of the Messenger of Allah ﷺ, even the greatest dangers become harmless by the permission of Allah. Many scholars and righteous people would recite this verse during travel, fear, or difficulty, trusting in Allah and seeking strength through their love for the Prophet ﷺ..' },
 
-        { type: 'arabic', text: 'وَمَنْ تَكُنْ بِرَسُولِ ٱللَّهِ نُصْرَتُهُ إِنْ تَلْقَهُ ٱلْأُسْدُ فِي أَجَامِهَا تَجِمِ' },
+    { type: 'arabic', text: '7. وَمَنْ تَكُنْ بِرَسُولِ اللّٰهِ نُصْرَتُهُ ۞ إِنْ تَلْقَهُ الْأُسْدُ فِي آجَامِهَا تَجِمِ (7)' },
+    { type: 'text', text: '7. And whoever has the support of the Messenger of Allah, if the lions encounter him in their thickets, they become silent and speechless out of awe. (Repeat 7 times)' },
 
-        { type: 'text', text: 'And whoever has the Messenger of Allah as his helper, if the lions meet him in their lairs, they will retreat in fear. (7 times)' },
+    { type: 'arabic', text: '8. يَا خَفِيَّ الْأَلْطَافِ نَجِّنَا مِمَّا نَخَافُ يَا حَيُّ حِينَ لَا حَيَّ فِي دَيْمُومِيَّةِ مُلْكِهِ وَبَقَائِهِ يَا حَيُّ (7)' },
+    { type: 'text', text: '8. O You who are hidden in subtle kindness, save us from what we fear. O Ever-Living One, when no living being remains—in the eternity of Your Sovereignty and the everlastingness of Your Existence. O Ever-Living One. (Repeat 7 times)' },
 
-        { type: 'arabic', text: 'يَا خَفِيَّ ٱلْأَلْطَافِ نَجِّنَا مِمَّا نَخَافُ، يَا حَيُّ حِينَ لَا حَيَّ فِي دَيْمُومِيَّةِ مُلْكِهِ وَبَقَائِهِ، يَا حَيُّ' },
+    { type: 'arabic', text: '9. اللَّهُمَّ اغْفِرْلِي وَلِوَالِدَيَّ وَلِمَنْ تَوَالَدَ وَلِجَمِيعِ الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ وَالْمُسْلِمِينَ وَالْمُسْلِمَاتِ الْأَحْيَاءِ مِنْهُمْ وَالْأَمْوَاتِ إِنَّكَ مُجِيبُ الدَّعَوَاتِ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ' },
+    { type: 'text', text: '9. O Allah, forgive me, my parents, and all those who descended from them, and all believing men and believing women, and all Muslim men and Muslim women, those who are alive among them and those who are dead. Indeed, You are the Answerer of prayers, by Your mercy, O Most Merciful of the merciful.' },
 
-        { type: 'text', text: 'O You Who are Subtle in Kindness, save us from what we fear. O The Ever-Living, when there was no living in the perpetuity of His dominion and His permanence, O The Ever-Living. (7 times)' },
+    { type: 'arabic', text: '10. اللَّهُمَّ رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِي رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ' },
+    { type: 'text', text: '10. O Allah, my Rab. Make me establish the prayer, and my offspring; O Allah! Accept my prayer. O Allah! Forgive me, and my parents, and all the believers on the Day when Reckoning will take place.' },
 
-        { type: 'arabic', text: 'بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ تَهَيَّأْتُ * بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ ثَبَتُّ بِٱللَّهِ * بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ سَلَّمْتُ نَفْسِي إِلَى ٱللَّهِ * بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ رَضِيتُ بِٱللَّهِ * بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ ٱعْتَصَمْتُ بِٱللَّهِ * بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ وَضَعْتُ أَمْرِي إِلَى ٱللَّهِ * بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ تَوَكَّلْتُ عَلَى ٱللَّهِ' },
+    { type: 'arabic', text: '11. ٱللّٰهُمَّ ٱغْفِرْ وَٱرْحَمْ وَأَنْتَ خَيْرُ ٱلرَّاحِمِينَ، تَوَفَّنِي مُسْلِمًا وَأَلْحِقْنِي بِٱلصَّالِحِينَ' },
+    { type: 'text', text: '11. "O Allah, forgive and have mercy, for You are the best of those who show mercy. Cause me to die as a Muslim, and join me with the righteous."' },
 
-        { type: 'text', text: 'Allah – beginning with the name of – the Most Gracious, the Most Merciful, I have turned to Allah. I have firmly established myself with Allah. I have submitted myself to Allah. I am pleased with Allah. I have sought protection with Allah. I have entrusted my affair to Allah. I have placed my trust in Allah.' },
+    { type: 'arabic', text: '12. ٱللّٰهُمَّ إِنِّي أَسْأَلُكَ ٱلصِّحَّةَ وَٱلْعَافِيَةَ وَٱلْأَمَانَةَ وَحُسْنَ ٱلْخُلُقِ وَٱلرِّضَاءَ بِٱلْقَدَرِ بِرَحْمَتِكَ يَا أَرْحَمَ ٱلرَّاحِمِينَ، آمِينَ' },
+    { type: 'text', text: '12. O Allah, I ask You for health, well-being, trustworthiness, good character, and contentment with the divine decree, by Your mercy, O Most Merciful of the merciful. Amen' },
+{ type: 'text', style: 'dua-style', text: '13. O Allah, Grant truth to our hearts, help in our lives, and sincerity in our intentions. Protect us from sorrow, regret, and worry in every moment and step. Make our circumstances comfortable, joyful, and soothing. Accept our prayers and bring our hearts closer to Your salvation.' },
 
-        { type: 'arabic', text: 'بِسْمِ ٱللَّهِ عَلَىٰ نَفْسِي وَدِينِي وَخَوَاتِيمِ عَمَلِي، وَبِسْمِ ٱللَّهِ عَلَىٰ أَهْلِي وَوَلَدِي، وَبِسْمِ ٱللَّهِ عَلَىٰ مَالِي وَبِلَادِي، وَبِسْمِ ٱللَّهِ عَلَىٰ أَحْبَابِي وَجِيرَانِي، وَبِسْمِ ٱللَّهِ عَلَىٰ كُلِّ شَيْءٍ أَعْطَانِيهِ رَبِّي، وَبِسْمِ ٱللَّهِ خَيْرِ ٱلْأَسْمَاءِ فِي ٱلْأَرْضِ وَٱلسَّمَاءِ، وَبِسْمِ ٱللَّهِ ٱلَّذِي فِي جَمِيعِ أَسْمَائِهِ شِفَاءٌ' },
+    { type: 'text', style: 'dua-style', text: '14. O Allah, Let today incline toward Your approval, guide our lives with goodness, and lead our steps on the straight path. Grant us compassion, goodness, and the strength of Your help. Free our hearts from corruption, fill our benefit with goodness, and ease our concerns. Accept our prayers and protect our circumstances.' },
 
-        { type: 'text', text: 'Allah – beginning with the name of – the Most Gracious, the Most Merciful, and by Allah, and upon Allah, and from Allah, and to Allah. I have relied upon Allah, and my success is only by Allah. Allah is sufficient for me, there is no deity except Allah, and Allah is the Greatest.' }
+    { type: 'text', style: 'dua-style', text: '15. O Allah, At this time, grant us peace, calm in our hearts, health in our bodies, and relief in our souls. Forgive our sins, overlook our faults, and open doors of goodness for our hearts. Guide our resting limbs with Your mercy, and keep our steps aligned with Your approval. Give us comfort in Your embrace and bring us near to You; protect our families, loved ones, and the Muslim ummah from all harm.' },
 
+    { type: 'text', style: 'dua-style', text: '16. O Allah, Whatever I did today, spoke, or felt—grant us the ability to seek Your approval in all of it. Grant us rest and safety at this time, make my tongue a vessel of worship, and protect my heart from all harm and Satan’s deception. Protect me and my loved ones from all sorrow, grief, illness, and evil. Raise us in the morning with peace and faith, and let our day begin with Your guidance.' },
+
+    { type: 'text', style: 'dua-style', text: '17. O Allah, Today as well, grant peace to our hearts, goodness to our tongues, and the right path to our steps. Do not show us anything we should not see; Do not let us hear anything we should not hear. Engage us only in those actions that earn Your pleasure. You are the One who knows us better than we know ourselves, O Allah.' },
+
+    { type: 'text', style: 'dua-style', text: '18. O Allah Make our hearts the way You love them to be.” Grant us the ability to place Your pleasure above everything, To wait with patience, and to rejoice with gratitude. Give spaciousness to our hearts, peace to our souls, and ease to our tasks. Do not let us walk any path that lacks Your pleasure, O Allah.”' },
+
+    { type: 'text', style: 'dua-style', text: '19. O Allah, In every step we take today, grant us the ability to keep Your pleasure in mind, And in every word we speak, grant us truth and humility. Grant peace to our hearts, patience to our tongues, and light to our faces, O Allah. Bring good people into our lives and place beautiful feelings in our hearts. Provide us sustenance through halal means, and make our happiness come from You. We hand over today to Your forgiveness, and tomorrow to Your mercy.' },
+
+    { type: 'arabic', text: '20. ٱلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، وَٱلصَّلَّاةُ وَٱلسَّلَامُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+    { type: 'text', text: '20. Closing praise: All praise is due to Allah, Lord of the worlds, and may peace and blessings be upon our master Muhammad, and upon his family and all his companions.' }
       ] 
     } 
   ] 
@@ -495,620 +567,851 @@ Today apps
 
                  { type: 'text', text: '19. Recite the following verses (Once)', style: 'font-bold' },
           { type: 'arabic-indopak', text: 'سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ ۝ وَسَلَامٌ عَلَى الْمُرْسَلِينَ ۝ وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝' }
-             ]
-            }
-          ]
-        },
-        'p7': {
+            
+      ] 
+    } 
+  ] 
+},
+'p7': {
   id: 'p7',
-          title: 'Prayers of the Prophet ﷺ',
-          cards: [
-            {
-              variant: 'default',
+  title: 'Prayers of the Prophet ﷺ',
+  cards: [
+    /* --- 1. WAKING UP --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '1. Glorification and Praise of Allah' },
+        { type: 'arabic', text: 'سُبْحَانَ الَّذِي تَعَطَّفَ الْعِزَّ وَقَالَ بِهِ، سُبْحَانَ الَّذِي لَبِسَ الْمَجْدَ وَتَكَرَّمَ بِهِ، سُبْحَانَ الَّذِي لَا يَنْبَغِي التَّسْبِيحُ إِلَّا لَهُ، سُبْحَانَ ذِي الْفَضْلِ وَالنِّعَمِ، سُبْحَانَ ذِي الْمَجْدِ وَالْكَرَمِ، سُبْحَانَ ذِي الْجَلَالِ وَالْإِكْرَامِ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ.' },
+        { type: 'text', text: 'Glorified is He who embraces might and speaks with it. Glorified is He who wears glory and honors with it. Glorified is He to whom none but He deserves glorification. Glorified is the Possessor of grace and blessings. Glorified is the Possessor of glory and generosity. Glorified is the Possessor of majesty and honor. And all praise is due to Allah, Lord of the worlds.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '2. Dua for Guidance and Righteousnes' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى ' },
+        { type: 'text', text: 'O Allah, I ask You for guidance, piety, chastity, and self-sufficiency.' }
+      ]
+    },
+
+    /* --- 2. KNOWLEDGE & GUIDANCE --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '3. Dua For Beneficial Knowledge' },
+        { type: 'arabic', text: 'اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي، وَعَلِّمْنِي مَا يَنْفَعُنِي، وَزِدْنِي عِلْمًا' },
+        { type: 'text', text: 'O Allah, benefit me with what You taught me, teach me what will benefit me, and increase me in knowledge.' },
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '4. Dua upon Waking Up' },
+        { type: 'arabic', text: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.' },
+        { type: 'text', text: '“All praise is due to Allah, who has given us life after causing us to die, and to Him is the resurrection.” (Buhârî, Deavât, 8)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '5. Dua upon Waking up during Sleep' },
+        { type: 'arabic', text: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.' },
+        { type: 'text', text: '“There is no god but Allah alone, Who has no partner. To Him belongs sovereignty, and to Him belongs praise, and He is over all things competent. Glory be to Allah, and praise be to Allah, and there is no god but Allah, and Allah is the Greatest. There is no power nor might except with Allah. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '6. Dua for Guidance, Well-being, and Blessings' },
+        { type: 'arabic', text: 'اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ وَعَافِنِي فِيمَنْ عَافَيْتَ وَتَوَلَّني فِيمَنْ تَوَلَّيْتَ وَبَارِكْ لِي فِيمَا أَعْطَيْتَ وَقِنِي شَرَّ مَا قَضَيْتَ إِنَّكَ تَقْضِي وَلَا يُقْضَى عَلَيْكَ وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ وَلَا يَعِزُّ مَنْ عَادَيْتَ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ.' },
+        { type: 'text', text: '“O Allah! Guide me among those whom You have guided, and grant me well-being among those whom You have granted well-being, and take me as a friend among those whom You have taken as friends, and bless for me that which You have given, and protect me from the evil of what You have decreed. Indeed, You decree and none can decree against You, and surely, he whom You befriend is not humiliated, and he whom You oppose is not honored. Blessed are You, our Lord, and Exalted!” (İbn Hıbbân, Ed’ıye, No: 945)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '7. Dua for Guidance in All Affairs' },
+        { type: 'arabic', text: 'رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا' },
+        { type: 'text', text: '"O Allah! Grant me to enter with a truthful entry and to exit with a truthful exit, and grant me from Your presence an assisting authority." (Isra Surah 80, Verse 80)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '8. Supplication for Guidance and Divine Light' },
+        { type: 'arabic', text: 'اللَّهُمَّ اجْعَلْنَا هَادِينَ مُهْتَدِينَ، غَيْرَ ضَالِّينَ وَلَا مُضِلِّينَ، سِلْمًا لِأَوْلِيَائِكَ، وَعَدُوًّا لِأَعْدَائِكَ، نُحِبُّ بِحُبِّكَ مَنْ أَحَبَّكَ، وَنُعَادِي بِعَدَاوَتِكَ مَنْ خَالَفَكَ. اللَّهُمَّ هَذَا الدُّعَاءُ وَعَلَيْكَ الْإِجَابَةُ، وَهَذَا الْجُهْدُ وَعَلَيْكَ التُّكْلَانُ.' },
+        { type: 'text', text: 'O Allah, make us guides and rightly guided,\nnot astray and not leading others astray.\nMake us at peace with Your friends,\nand enemies to Your enemies.\nWe love, for Your sake, whoever loves You,\nand we show enmity, for Your sake, to whoever opposes You.\nO Allah, this is the supplication and upon You is the response;\nthis is the effort and upon You is reliance.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '9.Allah of Jibrīl, Mīkā’īl, and Isrāfīl' },
+        { type: 'arabic', text: 'اللَّهُمَّ رَبَّ جِبْرِيلَ وَمِيكَائِيلَ وَإِسْرَافِيلَ، فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، أَنْتَ تَحْكُمُ بَيْنَ عِبَادِكَ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ. اهْدِنِي لِمَا اخْتُلِفَ فِيهِ مِنَ الْحَقِّ بِإِذْنِكَ.' },
+        { type: 'text', text: 'O Allah, Lord of Jibrīl, Mīkā’īl, and Isrāfīl, Originator of the heavens and the earth, Knower of the unseen and the seen, You judge between Your servants concerning that wherein they differ. Guide me, by Your permission, to the truth concerning that wherein they differ.' }
+      ]
+    },
+
+    /* --- 3. RIZQ, PROVISION & DEBT --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '10. Dua For Rizq – Contentment and Barakah' },
+        { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
+        { type: 'arabic', text: 'اللَّهُمَّ قَنِّعْنِي بِمَا رَزَقْتَنِي، وَبَارِكْ لِي فِيهِ، وَاخْلُفْ عَلَيَّ كُلَّ غَائِبَةٍ لِي بِخَيْرٍ' },
+        { type: 'text', text: 'O Allah, make me content with what You have provided, bless it for me, and replace every loss with something better.' },
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '11. duʿā for fulfilling needs' },
+        { type: 'arabic', text: 'اللَّهُمَّ اكْفِنِي بِحَلاَلِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ' },
+        { type: 'text', text: 'O Allah, suffice me with what You have made lawful over what You have made unlawful, and enrich me with Your bounty from needing anyone besides You.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '12. Dua for Protection and Provision' },
+        { type: 'arabic', text: 'اللَّهُمَّ رَبَّ السَّمَاوَاتِ وَرَبَّ الْأَرْضِ وَرَبَّ الْعَرْشِ الْعَظِيمِ، اقْضِ عَنَّا الدَّيْنَ وَأَغْنِنَا مِنَ الْفَقْرِ' },
+        { type: 'text', text: 'O Allah, Lord of the heavens and earth, relieve us from debt and enrich us from poverty.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '13. Dua for Paying Debts and Relief from Poverty' },
+        { type: 'arabic', text: 'اللَّهُمَّ فَارِقَ الْإِصْبَاحِ وَجَاعِلَ اللَّيْلِ سَكَنًا وَالشَّمْسَ وَالْقَمَرَ حُسْبَانًا اقْضِ عَنِّي الدَّيْنَ وَأَغْنِنِي مِنَ الْفَقْرِ وَمَتِّعْنِي بِسَمْعِي وَبَصَرِي وَقُوَّتِي فِي سَبِيلِكَ.' },
+        { type: 'text', text: '“O Allah, Creator of the dawn, Maker of the night for rest, and the sun and moon for calculation! Grant me to pay off my debts, enrich me from poverty, and let me enjoy my hearing, sight, and strength in Your path.” (Malik, Dua, No: 495)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '14. Dua For Spiritual Wealth' },
+        { type: 'text', text: 'Hasan Basri (may Allah sanctify his secret) used to make the following supplication to Allah Almighty:' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَغْنِنِي بِالْفَقْرِ إِلَيْكَ وَلاَ تُفْقِرْنِي بِالاِسْتِغْنَاءِ عَنْكَ' },
+        { type: 'text', text: 'O Allah! Enrich me by making me dependent on You, and do not make me poor by making me independent of You! (Baqillani, s.107)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '15. Intercession and Asking Allah' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ وَأَتَوَجَّهُ إِلَيْكَ بِنَبِيِّكَ مُحَمَّدٍ نَبِيِّ الرَّحْمَةِ. يَا مُحَمَّدُ، إِنِّي تَوَجَّهْتُ بِكَ إِلَى رَبِّي فِي حَاجَتِي هَذِهِ لِتُقْضَى لِي. اللَّهُمَّ فَشَفِّعْهُ فِيَّ.' },
+        { type: 'text', text: 'O Allah, I ask You and turn to You\nby Your Prophet Muhammad, the Prophet of mercy.\nO Muhammad, I have turned by you to my Lord\nregarding this need of mine, that it may be fulfilled.\nO Allah, grant him intercession for me.' }
+      ]
+    },
+
+    /* --- 4. CHARACTER, GRATITUDE & PIETY --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '16. Dua For Qualities of a true believer' },
+        { type: 'arabic', text: 'رَبِّ اجْعَلْنِي لَكَ شَكَّارًا، لَكَ ذَكَّارًا، لَكَ رَهَّابًا، لَكَ مُطِوَاعًا، لَكَ مُخْبِتًا، إِلَيْكَ أَوَّاهًا مُنِيبًا' },
+        { type: 'text', text: 'My Lord, make me one who is very grateful to You, remembers You much, fears You, obeys You, humbles himself to You, turns to You, and repents to You.' },
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '17. Dua for Remembrance, Gratitude, and Worship' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ' },
+        { type: 'text', text: '“O Allah! Help me to remember You, to be grateful to You, and to worship You in the best way.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '18. Supplication of Gratitude and Repentance' },
+        { type: 'arabic', text: 'اللَّهُمَّ اجْعَلْنِي أَعْظَمَ شُكْرِكَ، وَأُكْثِرَ ذِكْرِكَ، وَأَتَّبِعَ نَصِيحَتَكَ، وَأَحْفَظَ وَصِيَّتَكَ. اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ، وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ.' },
+        { type: 'text', text: 'O Allah, make me among those who show You the greatest gratitude,\nwho remember You abundantly,\nwho follow Your guidance,\nand who guard Your commandments.\nO Allah, make me among those who constantly repent,\nand among those who purify themselves.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '19. Dua for Steadfastness of Heart' },
+        { type: 'arabic', text: 'يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ.' },
+        { type: 'text', text: '“O Turner of hearts, keep my heart steadfast upon Your religion! ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '20. Dua for Turning Hearts to Obedience' },
+        { type: 'arabic', text: 'اللَّهُمَّ يَا مُصَرِّفَ الْقُلُوبِ صَرِّفْ قُلُوبَنَا عَلَى طَاعَتِكَ.' },
+        { type: 'text', text: '“O Allah, O Turner of hearts, turn our hearts to Your obedience!” (Müslim, Kader 17)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '21. Dua for Good Creation and Character' },
+        { type: 'arabic', text: 'اللَّهُمَّ حَسَّنْتَ خَلْقِي فَحَسِّنْ خُلُقِي.' },
+        { type: 'text', text: '“O Allah! You made my creation good, so make my character good.” (İbn Hıbbân, Ed’ıye, No: 959)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '22. Dua for Protection from Bad Morals and Desires' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ مُنْكَرَاتِ الْأَخْلَاقِ وَالْأَعْمَالِ وَالْأَهْوَاءِ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in You from corrupt character, deeds, and desires.” (İbn Hıbbân, Ed’ıye, No: 960)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '23. Dua for Soul\'s Piety and Purification' },
+        { type: 'arabic', text: 'اللَّهُمَّ آتِ نَفْسِي تَقْوَاهَا وَزَكِّهَا أَنْتَ خَيْرُ مَنْ زَكَّاهَا أَنْتَ وَلِيُّهَا وَمَوْلَاهَا.' },
+        { type: 'text', text: '“O Allah! Grant my soul its piety and purify it, for You are the best of those who purify it. You are its Guardian and its Master.” (Müslim, 73)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '28. Dua for Good Deeds and Love of the Poor' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ فِعْلَ الْخَيْرَاتِ وَتَرْكَ الْمُنْكَرَاتِ وَحُبَّ الْمَسَاكِينِ.' },
+        { type: 'text', text: '“O Allah! I ask You for the performance of good deeds, the abandonment of evil deeds, and the love of the poor. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '24. Dua for Faith in Health and Good Character' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ إِيمَانًا فِي صِحَّةٍ وَإِيمَانًا فِي حُسْنِ خُلُقٍ وَنَجَاحًا يَتْبَعُهُ رَحْمَةٌ وَعَافِيَةٌ وَمَغْفِرَةٌ وَرِضْوَانٌ.' },
+        { type: 'text', text: '“O Allah! I ask You for faith within health, and faith within good character, and success followed by mercy, well-being, forgiveness, and pleasure. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '25. Dua for Righteous Deeds and Sincerity' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ رَحْمَةً مِنْ عِنْدِكَ تَهْدِي بِهَا قَلْبِي وَتَجْمَعُ بِهَا أَمْرِي وَتَلُمُّ بِهَا شَعَثِي وَتُصْلِحُ بِهَا غَائِبِي وَتَرْفَعُ بِهَا شَاهِدِي وَتُزَكِّي بِهَا عَمَلِي وَتُلْهِمُنِي بِهَا رُشْدِي وَتَرُدُّ بِهَا خَلْفَتِي وَتَعْصِمُنِي بِهَا مِنْ كُلِّ سُوءٍ. اللَّهُمَّ أَعْطِنِي إِيمَانًا وَيَقِينًا لَيْسَ بَعْدَهُ كُفْرٌ وَرَحْمَةً أَنَالُ بِهَا شَرَفَ كَرَامَتِكَ فِي الدُّنْيَا وَالْآخِرَةِ.' },
+        { type: 'text', text: '“O Allah! I ask You for such a mercy from You with which You guide my heart, organize my affairs, gather my scattered state, rectify my hidden matters, elevate my apparent state, purify my deeds, inspire me with proper guidance, restore my harmony, and protect me from all evil. O Allah, grant me faith and certainty after which there is no disbelief, and a mercy by which I may attain the honor of Your dignity in this world and the Hereafter. ' }
+      ]
+    },
+
+    /* --- 5. SOCIAL LIFE, FAMILY & LIGHT --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '26. Unity, peace, and light' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا، وَأَصْلِحْ ذَاتَ بَيْنِنَا، وَاهْدِنَا سُبُلَ السَّلَامِ، وَنَجِّنَا مِنَ الظُّلُمَاتِ إِلَى النُّورِ' },
+        { type: 'text', text: 'O Allah, unite our hearts, fix our relationships, guide us to the paths of peace, and take us out of darkness into light.' },
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '27. Dua For Unite Hearts' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا وَاهْدِنَا سُبُلَ السَّلاَمِ وَنَجِّنَا مِنَ الظُّلُمَاتِ إِلَى النُّورِ وَجَنِّبْنَا الْفَوَاحِشَ مَا ظَهَرَ مِنْهَا وَمَا بَطَنَ وَبَارِكْ لَنَا فِي أَسْمَاعِنَا وَأَبْصَارِنَا وَقُلُوبِنَا وَأَزْوَاجِنَا وَذُرِّيَّاتِنَا وَتُبْ عَلَيْنَا إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ وَاجْعَلْنَا شَاكِرِينَ لِنِعْمَتِكَ مُثْنِينَ بِهَا قَابِلِيهَا وَأَتِمَّهَا عَلَيْنَا' },
+        { type: 'text', text: '"O Allah! Unite our hearts, rectify our affairs, guide us to the paths of peace, and save us from darkness into light. Keep us away from immoralities, both apparent and hidden. Bless our hearing, our sight, our hearts, our spouses, and our offspring. Accept our repentance, for You are the Acceptor of Repentance, the Most Merciful. And make us grateful for Your blessings, praising them, accepting them, and complete them upon us!" (Abu Dawud, Salat, 178)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '28. Dua for Attaining the Love of Our Lord' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ حُبَّكَ وَحُبَّ مَنْ يُحِبُّكَ وَالْعَمَلَ الَّذِي يُبَلِّغُنِي حُبَّكَ. اللَّهُمَّ اجْعَلْ حُبَّكَ أَحَبَّ إِلَيَّ مِنْ نَفْسِي وَأَهْلِي وَمِنَ الْمَاءِ الْبَارِدِ' },
+        { type: 'text', text: '“O Allah! I ask You for Your love, the love of those who love You, and the deeds that will bring me closer to Your love.”' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '29. Supplication for Love and Good Use of Provision' },
+        { type: 'arabic', text: 'اللَّهُمَّ ارْزُقْنِي حُبَّكَ، وَحُبَّ مَنْ يَنْفَعُنِي حُبُّهُ عِنْدَكَ. اللَّهُمَّ مَا رَزَقْتَنِي مِمَّا أُحِبُّ فَاجْعَلْ لِي قُوَّةً فِيمَا تُحِبُّ، وَمَا زَوَيْتَ عَنِّي مِمَّا أُحِبُّ فَاجْعَلْهُ فَرَاغًا لِي فِيمَا تُحِبُّ.' },
+        { type: 'text', text: 'O Allah, grant me Your love, and the love of those whose love benefits me with You. O Allah, whatever You have provided me of what I love, make it strength for me in what You love; and whatever You have withheld from me of what I love, make it free time for me in what You love.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '30. Dua for Thanking Others' },
+        { type: 'text', text: 'According to Usama ibn Zayd (may Allah be pleased with him); our Messenger of Allah (ﷺ) said: "Whoever has good done to him, if he says to the one who did the good: \'May Allah reward you with good\' he will have thanked and prayed for him in the best way."' },
+        { type: 'arabic', text: 'جَزَاكَ اللَّهُ خَيْرًا' },
+        { type: 'text', text: '(Tirmidhi, Birr, 87)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '31. Dua for Good Offspring' },
+        { type: 'arabic', text: 'رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ ' },
+        { type: 'text', text: 'O Allah, grant me from Your presence a good offspring. Indeed, You are the Hearer of supplication.' }
+      ]
+    },
+
+    /* --- 6. PROTECTION FROM EVIL, HARM & CALAMITY --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '32. Dua For Protection from harm and evil' },
+        { type: 'arabic', text: 'اللَّهُمَّ احْفَظْنِي وَبَلَدِي وَأَهْلِي وَمَالِي' },
+        { type: 'text', text: 'O Allah, protect me, my country, my family, and my wealth.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '33. Dua For Protection from Evil' },
+        { type: 'arabic', text: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ' },
+        { type: 'text', text: '"Whoever alights in a place and then says: \'I seek refuge in the perfect words (verses, attributes, and names) of Allah from the evil of what He has created.\' Nothing will harm him until he departs from that place." (Muslim, Dhikr, 54-55)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '34. Protection From Fire, Hardship' },
+        { type: 'arabic', text: 'بِسْمِ اللَّهِ الَّذِي لاَ يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلاَ فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ\nأَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ' },
+        { type: 'text', text: 'Imam-ı Rabbânî Hazretleri (may Allah sanctify his secret) stated that during a journey, a fire broke out in a caravanserai. He said: "Today, we see that a calamity will befall this place and spread to everyone. Our friends should tell each other. Everyone should recite these duas repeatedly. Because whoever recites these duas, by the grace of Allah Almighty, he and his property are protected. Within a short time, a fire broke out in the caravanserai. Despite all human efforts, the fire could not be extinguished. Many perished and lost their property. It is narrated that when Mevlana Abdülmümin Lahorî\'s property burned, he barely saved his life. Imam-ı Rabbânî Hazretleri came to his presence and asked, "Did anyone tell me to recite the necessary duas?" He replied, "No, master. Imam-ı Rabbânî Hazretleri admonished his students who did not inform him and said, "Whoever recites this dua, he and his property will be saved."' }
+      ]
+    },
+    {
+       variant: 'default',
               content: [
-                { type: 'section-title', text: '1. Dua For Rizq – Contentment and Barakah' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ قَنِّعْنِي بِمَا رَزَقْتَنِي، وَبَارِكْ لِي فِيهِ، وَاخْلُفْ عَلَيَّ كُلَّ غَائِبَةٍ لِي بِخَيْرٍ' },
-                { type: 'text', text: 'O Allah, make me content with what You have provided, bless it for me, and replace every loss with something better.' },
-                { type: 'text', text: 'Reference: Hâkim, al‑Mustadrak 3/49' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '2. Dua For Asking for the best of everything' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
+                { type: 'section-title', text: '35. Dua For Asking for the best of everything' },
                 { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَسْأَلَةِ، وَخَيْرَ الدُّعَاءِ، وَخَيْرَ النَّجَاحِ، وَخَيْرَ الْعَمَلِ، وَخَيْرَ الثَّوَابِ، وَخَيْرَ الْحَيَاةِ، وَخَيْرَ الْمَمَاتِ' },
                 { type: 'text', text: 'O Allah, I ask You for the best of requests, the best of supplications, the best of success, the best of deeds, the best of rewards, the best of life, and the best of death.' },
                 { type: 'text', text: 'Reference: Hâkim, Da‘awât 1911' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '3. Unity, peace, and light' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا، وَأَصْلِحْ ذَاتَ بَيْنِنَا، وَاهْدِنَا سُبُلَ السَّلَامِ، وَنَجِّنَا مِنَ الظُّلُمَاتِ إِلَى النُّورِ' },
-                { type: 'text', text: 'O Allah, unite our hearts, fix our relationships, guide us to the paths of peace, and take us out of darkness into light.' },
-                { type: 'text', text: 'Reference: Abû Dâwûd, Salât 181' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '4. Dua For Beneficial Knowledge' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي، وَعَلِّمْنِي مَا يَنْفَعُنِي، وَزِدْنِي عِلْمًا' },
-                { type: 'text', text: 'O Allah, benefit me with what You taught me, teach me what will benefit me, and increase me in knowledge.' },
-                { type: 'text', text: 'Reference: Tirmidhî, Da‘awât 145' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '5. Dua For Protection from harm and evil' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ احْفَظْنِي وَبَلَدِي وَأَهْلِي وَمَالِي' },
-                { type: 'text', text: 'O Allah, protect me, my country, my family, and my wealth.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '6. Dua For Qualities of a true believer' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'رَبِّ اجْعَلْنِي لَكَ شَكَّارًا، لَكَ ذَكَّارًا، لَكَ رَهَّابًا، لَكَ مُطِوَاعًا، لَكَ مُخْبِتًا، إِلَيْكَ أَوَّاهًا مُنِيبًا' },
-                { type: 'text', text: 'My Lord, make me one who is very grateful to You, remembers You much, fears You, obeys You, humbles himself to You, turns to You, and repents to You.' },
-                { type: 'text', text: 'Reference: Tirmidhî, Da‘awât 103' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '7. Dua for Guidance, piety, chastity, sufficiency' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى' },
-                { type: 'text', text: 'O Allah, I ask You for guidance, piety, chastity, and self-sufficiency.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '8. Dua For Protection from every direction' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā morning and evening:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي' },
-                { type: 'text', text: 'O Allah, I ask You for pardon and well‑being in my religion, worldly life, family, and wealth. O Allah, conceal my faults and calm my fears. O Allah, protect me from in front of me, behind me, from my right, from my left, and from above me, and I seek refuge in Your greatness from being taken from beneath me.' },
-                { type: 'text', text: 'Reference: Ahmad, Musnad 8/403' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '9. Dua For Protection from evil' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ جَهْدِ الْبَلاَءِ وَدَرَكِ الشَّقَاءِ وَسُوءِ الْقَضَاءِ وَشَمَاتَةِ الأَعْدَاءِ' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from severe trial, from reaching wretchedness, from evil decree, and from the malicious joy of enemies.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '10. Dua For Removing sorrow and distress' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ فَارِجَ الْهَمِّ، كَاشِفَ الْغَمِّ، مُجِيبَ دَعْوَةِ الْمُضْطَرِّينَ، رَحْمَانَ الدُّنْيَا وَالْآخِرَةِ وَرَحِيمَهُمَا، أَنْتَ تَرْحَمُنِي، فَارْحَمْنِي بِرَحْمَةٍ تُغْنِينِي بِهَا عَنْ رَحْمَةٍ مِنْ سِوَاكَ' },
-                { type: 'text', text: 'O Allah, remover of worry, lifter of grief, responder to the distressed—show me a mercy from You that makes me need no one else’s mercy.' },
-                { type: 'text', text: 'Reference: Hâkim, Mustadrak 1/696' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '11. Dua For To be patient with hardships' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ اقْسِمْ لَنَا مِنْ طَاعَتِكَ مَا تُبَلِّغُنَا بِهِ جَنَّتَكَ، وَمِنَ الْيَقِينِ مَا يُهَوِّنُ بِهِ عَلَيْنَا مُصِيبَاتِ الدُّنْيَا' },
-                { type: 'text', text: 'O Allah, give us such obedience that will lead us to Your Paradise, and such certainty that will make the hardships of this world easy for us.' },
-                { type: 'text', text: 'Reference: Tirmidhî, Da‘awât 84' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '12. Dua for Protection from calamity' },
-                { type: 'text', text: 'This duʿā is mentioned in Musnad al‑Firdaus:' },
-                { type: 'arabic', text: 'اللَّهُمَّ يَا كَافِيَ الْبَلَاءِ اكْفِنَا الْبَلَاءَ قَبْلَ نُزُولِهِ مِنَ السَّمَاءِ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ' },
-                { type: 'text', text: 'O Allah, O One who protects from calamity, protect us from calamity before it descends. Ya Allah, Ya Allah…' },
-                { type: 'text', text: 'Reference: Musnad al‑Firdaus' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '13. Dua For Refuge from anxiety, sorrow, laziness, debt' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْبُخْلِ وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from anxiety and sorrow, helplessness and laziness, cowardice and stinginess, the burden of debt, and the dominance of men.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '14. Dua For Refuge from hypocrisy' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْبُخْلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ مِنْ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from stinginess, cowardice, being returned to the most decrepit old age, the trial of this worldly life, and the torment of the grave.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '15. Dua For Purification from sins' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ اغْسِلْ خَطَايَايَ بِمَاءِ الثَّلْجِ وَالْبَرَدِ، وَنَقِّ قَلْبِي مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الْأَبْيَضَ مِنَ الدَّنَسِ، وَبَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ' },
-                { type: 'text', text: 'O Allah, wash away my sins with snow and cold water, purify my heart like a white garment, and distance me from my sins as far as east from west.' },
-                { type: 'text', text: 'Reference: Bukhârî; Muslim; Tirmidhî' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '16. Dua For Forgive all sins' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ، دِقَّهُ، وَجِلَّهُ، وَأَوَّلَهُ، وَآخِرَهُ، وَعَلاَنِيَتَهُ، وَسِرَّهُ' },
-                { type: 'text', text: 'O Allah, forgive me all my sins, the small and the great, the first and the last, the open and the secret.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '17. Forgive mistakes, ignorance, excess' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā:' },
-                { type: 'arabic', text: 'رَبِّ اغْفِرْ لِي خَطِيئَتِي وَجَهْلِي وَإِسْرَافِي فِي أَمْرِي كُلِّهِ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اغْفِرْ لِي خَطَايَايَ وَعَمْدِي وَجَهْلِي وَهَزْلِي، وَكُلُّ ذَلِكَ عِنْدِي، اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ وَأَنْتَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ' },
-                { type: 'text', text: 'O Allah, forgive my mistakes, my ignorance, and my excess in all my affairs, and what You know better than I do. O Allah, forgive my mistakes, my intentional acts, my ignorance, and my jesting, and all of that is with me. O Allah, forgive me what I have sent forth and what I have held back, what I have concealed and what I have declared. You are the Advancer and the Delayer, and You are over all things competent.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '18. Dua For Witr prayer' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this duʿā in Witr:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي' },
-                { type: 'text', text: 'O Allah, indeed You are Pardoning, Generous; You love to pardon, so pardon me.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '19. duʿā for fulfilling needs' },
-                { type: 'text', text: 'The Prophet ﷺ taught this duʿā for fulfilling needs:' },
-                { type: 'arabic', text: 'اللَّهُمَّ اكْفِنِي بِحَلاَلِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ' },
-                { type: 'text', text: 'O Allah, suffice me with what You have made lawful over what You have made unlawful, and enrich me with Your bounty from needing anyone besides You.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '20. Leaving the house' },
-                { type: 'text', text: 'The Prophet ﷺ said whoever says this when leaving home is protected:' },
-                { type: 'arabic', text: 'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ' },
-                { type: 'text', text: 'In the name of Allah, I place my trust in Allah, and there is no power nor might except with Allah.' },
-                { type: 'text', text: 'Reference: Abû Dâwûd, Adab 101' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '21. Prophet ﷺ Seeking Refuge From Bad Omen' },
-                { type: 'text', text: 'The Prophet ﷺ used to seek refuge from bad omens:' },
-                { type: 'arabic', text: 'اللَّهُمَّ لَا طَيْرَ إِلَّا طَيْرُكَ، وَلَا خَيْرَ إِلَّا خَيْرُكَ، وَلَا إِلَهَ غَيْرُكَ' },
-                { type: 'text', text: 'O Allah, there is no omen except Your decree, no good except Your good, and there is no god besides You.' },
-                { type: 'text', text: 'Reference: Musnad Ahmad' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '22. New moon sighting' },
-                { type: 'text', text: 'When the Prophet ﷺ saw the new moon, he would say:' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَهِلَّهُ عَلَيْنَا بِالْيُمْنِ وَالْإِيمَانِ، وَالسَّلَامَةِ وَالْإِسْلَامِ، رَبِّي وَرَبُّكَ اللَّهُ' },
-                { type: 'text', text: 'O Allah, bring this moon upon us with blessings, faith, safety, and Islam. My Lord and your Lord is Allah.' },
-                { type: 'text', text: 'Reference: Tirmidhî, Da‘awât 45' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '23. Asking for all good & protection from all evil' },
-                { type: 'text', text: 'The Prophet ﷺ used to make this comprehensive duʿā:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ' },
-                { type: 'text', text: 'O Allah, I ask You for all good — immediate and delayed, what I know and what I do not know. And I seek refuge with You from all evil — immediate and delayed, what I know and what I do not know.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '24. Dua For Spiritual Wealth' },
-                { type: 'text', text: 'Hasan Basri (may Allah sanctify his secret) used to make the following supplication to Allah Almighty:' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَغْنِنِي بِالْفَقْرِ إِلَيْكَ وَلاَ تُفْقِرْنِي بِالاِسْتِغْنَاءِ عَنْكَ' },
-                { type: 'text', text: 'O Allah! Enrich me by making me dependent on You, and do not make me poor by making me independent of You! (Baqillani, s.107)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '25. Dua for During Calamity' },
-                { type: 'text', text: 'On one occasion, the Messenger of Allah (ﷺ) said: "If a Muslim upon whom a calamity has befallen says, Allah will remove that calamity from him and surely give him something better in return:"' },
-                { type: 'arabic', text: 'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ. اللَّهُمَّ أَجِرْنِي فِي مُصِيبَتِي وَأَخْلِفْ لِي خَيْرًا مِنْهَا' },
-                { type: 'text', text: 'Indeed, to Allah we belong, and to Him we shall return. O Allah, reward me in my calamity and replace it with something better for me! (Muslim, Janaiz, 3)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '26. Dua For Protection from Evil' },
-                { type: 'text', text: 'Our Prophet (ﷺ) advised seeking refuge in Allah for protection from evils, saying:' },
-                { type: 'arabic', text: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ' },
-                { type: 'text', text: '"Whoever alights in a place and then says: \'I seek refuge in the perfect words (verses, attributes, and names) of Allah from the evil of what He has created.\' Nothing will harm him until he departs from that place." (Muslim, Dhikr, 54-55)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '27. Dua For Prayer Before Sleeping' },
-                { type: 'text', text: 'Our beloved Prophet (ﷺ), when he wanted to sleep, would lie on his right side, place his right hand under his right cheek, and then make the following dua:' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ وَوَجَّهْتُ وَجْهِي إِلَيْكَ وَفَوَّضْتُ أَمْرِي إِلَيْكَ وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ رَغْبَةً وَرَهْبَةً إِلَيْكَ لاَ مَلْجَأَ وَلاَ مَنْجَا مِنْكَ إِلاَّ إِلَيْكَ آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ وَنَبِيِّكَ الَّذِي أَرْسَلْتَ' },
-                { type: 'text', text: '"O Allah! I have surrendered myself to You, I have entrusted my affair to You, I have turned my face to You. Desiring Your pleasure and fearing Your punishment, I have leaned my back on You, I have sought refuge in You. There is no refuge and no escape from You except to You. I believe in Your Book which You revealed and Your Prophet whom You sent." (Bukhari, Da\'avat, 7)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '28. Dua For Refuge from Hypocrisy' },
-                { type: 'text', text: 'Our Prophet (ﷺ) sought refuge in Allah as follows:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشِّقَاقِ وَالنِّفَاقِ وَسُوءِ الأَخْلاقِ' },
-                { type: 'text', text: '"O Allah! I seek refuge in You from dissension, from hypocrisy, and from bad manners." (Abu Dawud, Salat, 367)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '29. Dua For Against Bad Luck' },
-                { type: 'text', text: 'In the presence of the Messenger of Allah (ﷺ), ill omens were mentioned. Thereupon, he said: "The best of it is not to interpret it as bad luck. Bad luck should not make any Muslim give up his endeavour. When any of you sees something he dislikes, he should make the following dua:' },
-                { type: 'arabic', text: 'اللَّهُمَّ لاَ يَأْتِي بِالْحَسَنَاتِ إِلاَّ أَنْتَ وَلاَ يَدْفَعُ السَّيِّئَاتِ إِلاَّ أَنْتَ وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِكَ' },
-                { type: 'text', text: '"O Allah! Only You bring good deeds; only You ward off evil deeds. There is no might and no power except with Your help." (Abu Dawud, Tib, 24)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '30. Dua For Unite Hearts' },
-                { type: 'text', text: 'Our Prophet (ﷺ) always warned his companions against falling into disbelief and sins that lead to disbelief, and he would advise them to make the following dua:' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا وَاهْدِنَا سُبُلَ السَّلاَمِ وَنَجِّنَا مِنَ الظُّلُمَاتِ إِلَى النُّورِ وَجَنِّبْنَا الْفَوَاحِشَ مَا ظَهَرَ مِنْهَا وَمَا بَطَنَ وَبَارِكْ لَنَا فِي أَسْمَاعِنَا وَأَبْصَارِنَا وَقُلُوبِنَا وَأَزْوَاجِنَا وَذُرِّيَّاتِنَا وَتُبْ عَلَيْنَا إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ وَاجْعَلْنَا شَاكِرِينَ لِنِعْمَتِكَ مُثْنِينَ بِهَا قَابِلِيهَا وَأَتِمَّهَا عَلَيْنَا' },
-                { type: 'text', text: '"O Allah! Unite our hearts, rectify our affairs, guide us to the paths of peace, and save us from darkness into light. Keep us away from immoralities, both apparent and hidden. Bless our hearing, our sight, our hearts, our spouses, and our offspring. Accept our repentance, for You are the Acceptor of Repentance, the Most Merciful. And make us grateful for Your blessings, praising them, accepting them, and complete them upon us!" (Abu Dawud, Salat, 178)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '31. Protection from Calamities (Abu Dawud)' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ التَّرَدِّي، وَأَعُوذُ بِكَ مِنَ الْهَدْمِ، وَأَعُوذُ بِكَ مِنَ الْغَرَقِ وَالْهَرَمِ، وَأَعُوذُ بِكَ أَنْ يَتَخَبَّطَنِي الشَّيْطَانُ عِنْدَ الْمَوْتِ، وَأَعُوذُ بِكَ أَنْ أَمُوتَ فِي سَبِيلِكَ مُدْبِرًا، وَأَعُوذُ بِكَ أَنْ أَمُوتَ لَدِيغًا' },
-                { type: 'text', text: '"O Allah! I seek refuge in You from falling from a height. O Allah! I seek refuge in You from being crushed by a building, from falling into a chasm. I seek refuge in You from drowning, from fire, and from (excessive) old age. I seek refuge in You from Satan striking me during death. I seek refuge in You from dying while turning away from Your path. I seek refuge in You from dying from poisoning." (Abu Dawud, Musnad, II, 92, nr. 1552)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '32. Protection from Calamities (Nesai)' },
-                { type: 'text', text: 'Our Prophet (ﷺ) sought refuge in Allah as follows:' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ التَّرَدِّي وَالْهَدْمِ وَالْغَرَقِ وَالْحَرِيقِ وَأَعُوذُ بِكَ أَنْ يَتَخَبَّطَنِي الشَّيْطَانُ عِنْدَ الْمَوْتِ وَأَعُوذُ بِكَ أَنْ أَمُوتَ فِي سَبِيلِكَ مُدْبِرًا وَأَعُوذُ بِكَ أَنْ أَمُوتَ لَدِيغًا' },
-                { type: 'text', text: '"O Allah! I seek refuge in You from falling from a high place, from being crushed/falling under a collapse, from drowning, from burning. And I seek refuge in You from being tormented by Satan at the time of death. And I seek refuge in You from dying while fleeing from Your path. And I seek refuge in You from dying from a snake bite." (Nesai, as-Sunenu\'l-Kübra, Istiaze, 65, No:7972)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: "33. Dua of Abdullah ibn Mas'ud" },
-                { type: 'text', text: "Abdullah ibn-i Mas'ud (may Allah be pleased with him) once recited Surah An-Nisa and made a dua. Seeing this, the Prophet (peace and blessings be upon him) said three times, “Behold! Whatever you ask for will be given to you!” Abdullah ibn-i Mas'ud's dua was as follows:" },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ إِيمَانًا لاَ يَرْتَدُّ وَنَعِيمًا لاَ يَنْفَدُ وَمُرَافَقَةَ نَبِيِّكَ مُحَمَّدٍ فِي أَعْلَى جَنَّةِ الْخُلْدِ' },
-                { type: 'text', text: '"O Allah! I ask You for faith that does not falter, and blessings that do not end, and the companionship of Your Prophet Muhammad (peace and blessings be upon him) in the highest gardens of eternity." (Ahmed, I, 445; Hakim, III, 358/5386)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '34. Dua for Guidance in All Affairs' },
-                { type: 'text', text: 'O Allah, in the Holy Qur\'an, our Prophet (ﷺ) was instructed to make the following dua:' },
-                { type: 'arabic', text: 'رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا' },
-                { type: 'text', text: '"O Allah! Grant me to enter with a truthful entry and to exit with a truthful exit, and grant me from Your presence an assisting authority." (Isra Surah 80, Verse 80)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '35. Protection From Fire, Hardship' },
-                { type: 'arabic', text: 'بِسْمِ اللَّهِ الَّذِي لاَ يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلاَ فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ\nأَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ' },
-                { type: 'text', text: 'Imam-ı Rabbânî Hazretleri (may Allah sanctify his secret) stated that during a journey, a fire broke out in a caravanserai. He said: "Today, we see that a calamity will befall this place and spread to everyone. Our friends should tell each other. Everyone should recite these duas repeatedly. Because whoever recites these duas, by the grace of Allah Almighty, he and his property are protected. Within a short time, a fire broke out in the caravanserai. Despite all human efforts, the fire could not be extinguished. Many perished and lost their property. It is narrated that when Mevlana Abdülmümin Lahorî\'s property burned, he barely saved his life. Imam-ı Rabbânî Hazretleri came to his presence and asked, "Did anyone tell me to recite the necessary duas?" He replied, "No, master." Imam-ı Rabbânî Hazretleri admonished his students who did not inform him and said, "Whoever recites this dua, he and his property will be saved."' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '36. Dua for Guidance, Protection, and Barakah' },
-                { type: 'text', text: 'O Allah! MAKE THE BLESSINGS YOU HAVE GIVEN BLESSED. It has been narrated that the Messenger of Allah (ﷺ) made the following dua:' },
-                { type: 'arabic', text: 'اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ، إِنَّكَ تَقْضِي وَلاَ يُقْضَى عَلَيْكَ، وَإِنَّهُ لاَ يَذِلُّ مَنْ وَالَيْتَ، وَلاَ يَعِزُّ مَنْ عَادَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ' },
-                { type: 'text', text: '"O Allah! Guide me among those whom You have guided and grant me well-being among those whom You have granted well-being and take me as a friend among those whom You have taken as friends, and bless for me that You have given, and protect me from the evil of what You have decreed. Indeed, You decree and none can decree against You, and surely, he whom You befriend is not humiliated, and he whom You oppose is not honored. Blessed are You, our Lord, and Exalted!"' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '37. Dua for Thanking Others' },
-                { type: 'text', text: 'According to Usama ibn Zayd (may Allah be pleased with him); our Messenger of Allah (ﷺ) said: "Whoever has good done to him, if he says to the one who did the good: \'May Allah reward you with good\' he will have thanked and prayed for him in the best way."' },
-                { type: 'arabic', text: 'جَزَاكَ اللَّهُ خَيْرًا' },
-                { type: 'text', text: '(Tirmidhi, Birr, 87)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '38. Prophet Adam\'s Dua' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ بِحَقِّ مُحَمَّدٍ وَآلِ مُحَمَّدٍ سُبْحَانَكَ اللّهُمَّ وَبِحَمْدِكَ عَمِلْتُ سُوءًا وَظَلَمْتُ نَفْسِي فَاغْفِرْ لِي فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ' },
-                { type: 'text', text: '"O Allah! I ask You by the right of Muhammad and the family of Muhammad. Glory be to You, O Allah, and with Your praise. I have done wrong and wronged myself, so forgive me, for indeed no one forgives sins except You. Accept my repentance, for indeed You are the Acceptor of Repentance, the Most Merciful."' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '39. Prophet ﷺ Dua Bless' },
-                { type: 'text', text: 'It has been narrated that the Messenger of Allah (ﷺ) made the following dua:' },
-                { type: 'arabic', text: 'اللَّهُمَّ بَارِكْ لَنَا فِي مِدِّنَا وَصَاعِنَا' },
-                { type: 'text', text: '"O Allah! Bless our products that we measure and weigh." (Bukhari, Da\'avat, 42)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '40. Dua for Controlling Anger' },
-                { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي ذَنْبِي وَأَذْهِبْ غَيْظَ قَلْبِي وَأَجِرْنِي مِنْ مُضِلاَّتِ الْفِتَنِ' },
-                { type: 'text', text: '"O Allah! Forgive my sin, remove the anger from my heart, and protect me from misleading trials." (Tabarani, el-Mu\'cemü\'l-Kebir, XXIII, 338, No: 785)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '41. Dua for Seeking Refuge in Allah' },
-                { type: 'arabic', text: 'أَعُوذُ بِاللَّهِ مِنْ جَهْدِ الْبَلاءِ، وَدَرَكِ الشَّقَاءِ، وَسُوءِ الْقَضَاءِ، وَشَمَاتَةِ الأَعْدَاءِ' },
-                { type: 'text', text: '"I seek refuge in Allah from severe affliction, from reaching wretchedness, from a bad decree, and from the malicious joy of enemies." (Bukhari, Dawud, Muslim, Nesai)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '42. Prayer Before Sleeping (Wudu)' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ...' },
-                { type: 'text', text: '"O Allah! I have surrendered myself to You. I have turned my face to You. I have entrusted my affair to You..."' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '43. Duʿāʾ for Protection from the Grave, Hellfire, and Trials' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، وَمِنْ عَذَابِ النَّارِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ' },
-                { type: 'text', text: '"O Allah! I seek refuge with You from the punishment in the grave, hellfire, and the afflictions of life, death, and Al-Masih Al-Dajjal." [Bukhari: 1377]' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '44. Supplications for Success and Victory' },
-                { type: 'arabic', text: 'لَمْ يَلِدْ وَلَمْ يُولَدْ' },
-                { type: 'text', text: 'Lam yalid wa lam yoolad' },
-                { type: 'arabic', text: 'يَا كَرِيمُ يَا أَرْحَمَ الرَّاحِمِينَ' },
-                { type: 'text', text: 'Ya Kareem, Ya Arham ar-Rahimeen' },
-                { type: 'arabic', text: 'يَا جَبَّارُ يَا قَهَّارُ' },
-                { type: 'text', text: 'Ya Jabbar, Ya Qahhar' },
-                { type: 'arabic', text: 'يَا رَبِّ يَا رَبِّ يَا رَبِّ' },
-                { type: 'text', text: 'Ya Rabb, Ya Rabb, Ya Rabb' },
-                { type: 'text', text: 'Recite Surah Al-Ikhlas twice after every prayer for 30 days, preferably in a quiet place.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '45. Dua for Light (Nūr)' },
-                { type: 'arabic', text: 'اللَّهُمَّ اجْعَلْ لِي فِي قَلْبِي نُورًا، وَفِي لِسَانِي نُورًا...' },
-                { type: 'text', text: 'O Allah, place light in my heart, tongue, hearing, sight, above, beneath, right, left, front, behind, and within my soul.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '46. Dua for Protection from Hardships' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ جَهْدِ الْبَلاَءِ وَدَرَكِ الشَّقَاءِ وَسُوءِ الْقَضَاءِ وَشَمَاتَةِ الأَعْدَاء' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from severe trial, wretchedness, evil decree, and the malicious joy of enemies.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '47. Dua of Surrender and Reliance on Allah' },
-                { type: 'arabic', text: 'اللَّهُمَّ لَكَ أَسْلَمْتُ، وَبِكَ آمَنْتُ...' },
-                { type: 'text', text: 'O Allah, to You I have surrendered, in You I have believed, upon You I have relied...' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '48. Dua for Ease and Well‑Being in All Affairs' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَصْلِحْ لِي دِينِي...' },
-                { type: 'text', text: 'O Allah, make my religion easy, set right my world, make good my Hereafter, make life prone to good, and make death a comfort from all evil.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '49. Dua for Protection and Provision' },
-                { type: 'arabic', text: 'اللَّهُمَّ رَبَّ السَّمَوَاتِ وَرَبَّ الأَرْضِ...' },
-                { type: 'text', text: 'O Allah, Lord of the heavens and earth, relieve us from debt and enrich us from poverty.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '50. Dua for Forgiveness of All Sins' },
-                { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ، دِقَّهُ، وَجِلَّهُ، وَأَوَّلَهُ، وَآخِرَهُ، وَعَلاَنِيَتَهُ، وَسِرَّهُ.' },
-                { type: 'text', text: 'O Allah, forgive me all my sins, the small and the great, the first and the last, the open and the secret.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '51. Dua for Guidance and Righteousnes' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى.' },
-                { type: 'text', text: 'O Allah, I ask You for guidance, piety, chastity, and self-sufficiency.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '52. Prophetic Dua for Complete Forgiveness' },
-                { type: 'arabic', text: 'رَبِّ اغْفِرْ لِي خَطِيئَتِي وَجَهْلِي وَإِسْرَافِي فِي أَمْرِي كُلِّهِ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اغْفِرْ لِي خَطَايَايَ وَعَمْدِي وَجَهْلِي وَهَزْلِي، وَكُلُّ ذَلِكَ عِنْدِي، اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ وَأَنْتَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.' },
-                { type: 'text', text: 'O Allah, forgive my mistakes, my ignorance, and my extravagance in all my affairs, and what You know better than I do. O Allah, forgive my mistakes, my intentional acts, my ignorance, and my jesting, and all of that is with me. O Allah, forgive me what I have sent forth and what I have held back, and what I have concealed and what I have declared. You are the Advancer and You are the Delayer, and You are over all things competent.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '53. Dua for Protection from Hardships and Weakness' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْبُخْلِ وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ.' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from anxiety and sorrow, and from helplessness and laziness, and from cowardice and stinginess, and from the burden of debt, and from the dominance of men.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '54. Dua for Protection from Weakness and Trials' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْبُخْلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ مِنْ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ.' },
-                { type: 'text', text: 'O Allah, I seek refuge with You from stinginess, and I seek refuge with You from cowardice, and I seek refuge with You from being returned to the most decrepit old age, and I seek refuge with You from the trial of this worldly life, and I seek refuge with You from the torment of the grave.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '55. Dua for Rectification of Religion, Life, and Hereafter' },
-                { type: 'arabic', text: 'اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ.' },
-                { type: 'text', text: 'O Allah, set right for me my religion, which is the safeguard of my affairs; and set right for me my worldly life, in which is my livelihood; and set right for me my Hereafter, to which is my return; and make life an increase for me in every good; and make death a relief for me from every evil.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '56. Dua for Forgiveness' },
-                { type: 'arabic', text: 'غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ.' },
-                { type: 'text', text: 'O Allah, we seek Your forgiveness, and to You is the final return.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '57. Dua for Allah’s Mercy' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي.' },
-                { type: 'text', text: 'O Allah, indeed You are a Pardoner, Generous, You love pardoning, so pardon me.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '58. Dua for Good Offspring' },
-                { type: 'arabic', text: 'رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ.' },
-                { type: 'text', text: 'O Allah, grant me from Your presence a good offspring. Indeed, You are the Hearer of supplication.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '59. Dua for Forgiveness and Protection' },
-                { type: 'arabic', text: 'رَبَّنَا لاَ تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلاَ تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلاَ تُحَمِّلْنَا مَا لاَ طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلاَنَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ.' },
-                { type: 'text', text: 'O Allah, do not impose blame upon us if we forget or err. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our Protector, so grant us victory over the disbelieving people.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '60. Dua for a Blessed Month' },
-                { type: 'arabic', text: 'اللهُ أَكْبَرُ، اللَّهُمَّ أَهْلِهِ عَلَيْنَا بِالْأَمْنِ وَالْإِيمَانِ، وَالسَّلَامَةِ وَالْإِسْلَامِ، وَالتَّوْفِيقِ لِمَا تُحِبُّ رَبَّنَا وَتَرْضَى، رَبَّنَا وَرَبُّكَ اللَّهُ.' },
-                { type: 'text', text: 'Allah is the Greatest. O Allah, make it (the new moon/month) dawn upon us with security and faith, and safety and Islam, and success in what our Lord loves and is pleased with. Our Lord and your Lord is Allah.' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: '61. Dua for Good and Protection' },
-                { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ عَبْدُكَ وَنَبِيُّكَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا عَاذَ بِهِ عَبْدُكَ وَنَبِيُّكَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَسْأَلُكَ أَنْ تَجْعَلَ كُلَّ قَضَاءٍ قَضَيْت' },
-                { type: 'text', text: 'O Allah, I ask You for all good, the immediate and the delayed, what I know of it and what I do not know. And I seek refuge with You from all evil, the immediate and the delayed, what I know of it and what I do not know. O Allah, I ask You for the good that Your slave and Prophet asked You for, and I seek refuge with You from the evil that Your slave and Prophet sought refuge from. O Allah, I ask You for Paradise and whatever brings one closer to it of word or deed, and I seek refuge with You from the Fire and whatever brings one closer to it of word or deed. And I ask You to make every decree You have decreed for me good.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '36. Dua for Protection from Hardships' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ جَهْدِ الْبَلاَءِ وَدَرَكِ الشَّقَاءِ وَسُوءِ الْقَضَاءِ وَشَمَاتَةِ الأَعْدَاء' },
+        { type: 'text', text: 'O Allah, I seek refuge with You from severe trial, wretchedness, evil decree, and the malicious joy of enemies.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '37. Dua for Forgiveness and Protection' },
+        { type: 'arabic', text: 'رَبَّنَا لاَ تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلاَ تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلاَ تُحَمِّلْنَا مَا لاَ طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلاَنَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ ' },
+        { type: 'text', text: 'O Allah, do not impose blame upon us if we forget or err. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our Protector, so grant us victory over the disbelieving people.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '38. Refuge from Weakness and the Senses' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ سَمْعِي، وَمِنْ شَرِّ بَصَرِي، وَمِنْ شَرِّ لِسَانِي، وَمِنْ شَرِّ قَلْبِي، وَمِنْ شَرِّ مَنِيِّي.' },
+        { type: 'text', text: 'O Allah, I seek refuge in You from the evil of my hearing,\nthe evil of my sight,\nthe evil of my tongue,\nthe evil of my heart,\nand the evil of my private part.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '39. Dua for Protection from Disappearance of Blessings' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ وَتَحَوُّلِ عَافِيَتِكَ وَفُجَاءَةِ نِقْمَتِكَ وَجَمِيعِ سَخَطِكَ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in You from the disappearance of Your favor, from the change of Your well-being, from the suddenness of Your punishment, and from all of Your displeasure.” (Müslim, Zikir 96)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '40. Dua for Protection from Jinn, Evil Eye, and Harmful Creatures' },
+        { type: 'arabic', text: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ.' },
+        { type: 'text', text: '“I seek refuge in the perfect words of Allah from every devil and every harmful thing, and from every evil eye.” (Buhârî, Enbiyâ, 10)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '41. Grand Dua for Protection' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْهَرَمِ وَالْبُخْلِ وَأَعُوذُ بِكَ مِنَ الْقَسْوَةِ وَالْغَفْلَةِ وَالْعَيْلَةِ وَالذِّلَّةِ وَالْمَسْكَنَةِ وَأَعُوذُ بِكَ مِنَ الْفَقْرِ وَالْكُفْرِ وَالْفُسُوقِ وَالشِّقَاقِ وَالنِّفَاقِ وَالسُّمْعَةِ وَالرِّيَاءِ وَأَعُوذُ بِكَ مِنَ الصَّمَمِ وَالْبَكَمِ وَالْجُنُونِ وَالْجُذَامِ وَالْبَرَصِ وَسَيِّئِ الْأَسْقَامِ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in You from incapacity, laziness, cowardice, old age, and stinginess. I seek refuge in You from hardness of heart, heedlessness, destitution, humiliation, and wretchedness. I seek refuge in You from poverty, disbelief, immorality, dissension, hypocrisy, seeking reputation, and showing off. And I seek refuge in You from deafness, muteness, madness, leprosy, vitiligo, and all evil and chronic diseases.” (Buhâri, Tefsir, 16/1; Suyûtî, el-Câmiu’s-sağîr, no: 1489; Hâkim, el-Müstedrek, I, 712/1944)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '42. Declaration of Monotheism and Seeking Protection from Obstacles' },
+        { type: 'arabic', text: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ وَلَا مُعْطِيَ لِمَا مَنَعْتَ وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ.' },
+        { type: 'text', text: '“There is no god but Allah alone, Who has no partner. To Him belongs sovereignty, and to Him belongs praise, and He is over all things competent. O Allah! There is none to withhold what You give, and none to give what You withhold. And the worldly fortune of a wealthy person will not benefit him against You.” (Buhârî, Ezân, 155, Deavât, 18; Müslim, Salât, 193)' }
+      ]
+    },
+
+    /* --- 7. SORROW, HARDSHIP, ANXIETY & ANGER --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '43. Dua For Removing sorrow and distress' },
+        { type: 'arabic', text: 'اللَّهُمَّ فَارِجَ الْهَمِّ، كَاشِفَ الْغَمِّ، مُجِيبَ دَعْوَةِ الْمُضْطَرِّينَ، رَحْمَانَ الدُّنْيَا وَالْآخِرَةِ وَرَحِيمَهُمَا، أَنْتَ تَرْحَمُنِي، فَارْحَمْنِي بِرَحْمَةٍ تُغْنِينِي بِهَا عَنْ رَحْمَةٍ مِنْ سِوَاكَ' },
+        { type: 'text', text: 'O Allah, remover of worry, lifter of grief, responder to the distressed—show me a mercy from You that makes me need no one else’s mercy.' },
+        { type: 'text', text: 'Reference: Hâkim, Mustadrak 1/696' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '44. Dua For To be patient with hardships' },
+        { type: 'arabic', text: 'اللَّهُمَّ اقْسِمْ لَنَا مِنْ طَاعَتِكَ مَا تُبَلِّغُنَا بِهِ جَنَّتَكَ، وَمِنَ الْيَقِينِ مَا يُهَوِّنُ بِهِ عَلَيْنَا مُصِيبَاتِ الدُّنْيَا' },
+        { type: 'text', text: 'O Allah, give us such obedience that will lead us to Your Paradise, and such certainty that will make the hardships of this world easy for us.' },
+        { type: 'text', text: 'Reference: Tirmidhî, Da‘awât 84' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '45. Dua for Protection from calamity' },
+        { type: 'arabic', text: 'اللَّهُمَّ يَا كَافِيَ الْبَلَاءِ اكْفِنَا الْبَلَاءَ قَبْلَ نُزُولِهِ مِنَ السَّمَاءِ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ يَا اللهُ' },
+        { type: 'text', text: 'O Allah, O One who protects from calamity, protect us from calamity before it descends. Ya Allah, Ya Allah…' },
+        { type: 'text', text: 'Reference: Musnad al‑Firdaus' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '46. Dua For Refuge from sorrow,debt' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْبُخْلِ وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ' },
+        { type: 'text', text: 'O Allah, I seek refuge with You from anxiety and sorrow, helplessness and laziness, cowardice and stinginess, the burden of debt, and the dominance of men.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '47. Dua during Calamity' },
+        { type: 'arabic', text: 'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ. اللَّهُمَّ أَجِرْنِي فِي مُصِيبَتِي وَأَخْلِفْ لِي خَيْرًا مِنْهَا' },
+        { type: 'text', text: 'Indeed, to Allah we belong, and to Him we shall return. O Allah, reward me in my calamity and replace it with something better for me! ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '48. Dua For Against Bad Luck' },
+        { type: 'arabic', text: 'اللَّهُمَّ لاَ يَأْتِي بِالْحَسَنَاتِ إِلاَّ أَنْتَ وَلاَ يَدْفَعُ السَّيِّئَاتِ إِلاَّ أَنْتَ وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِكَ' },
+        { type: 'text', text: '"O Allah! Only You bring good deeds; only You ward off evil deeds. There is no might and no power except with Your help. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '49. Dua for Controlling Anger' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي ذَنْبِي وَأَذْهِبْ غَيْظَ قَلْبِي وَأَجِرْنِي مِنْ مُضِلاَّتِ الْفِتَنِ' },
+        { type: 'text', text: '"O Allah! Forgive my sin, remove the anger from my heart, and protect me from misleading trials. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '50. Dua for Protection from Hunger and Treachery' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُوعِ فَإِنَّهُ بِئْسَ الضَّجِيعُ وَأَعُوذُ بِكَ مِنَ الْخِيَانَةِ فَإِنَّهَا بِئْسَتِ الْبِطَانَةُ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in You from hunger, for it is indeed a bad companion. And I seek refuge in You from treachery, for it is indeed a bad inner quality. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '51. Dua for Protection from Laziness, Old Age,' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَالْمَأْثَمِ وَالْمَغْرَمِ وَمِنْ فِتْنَةِ الْقَبْرِ وَعَذَابِ الْقَبْرِ وَمِنْ فِتْنَةِ النَّارِ وَعَذَابِ النَّارِ وَمِنْ شَرِّ فِتْنَةِ الْغِنَى وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْفَقْرِ وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ اللَّهُمَّ اغْسِلْ عَنِّي خَطَايَايَ بِمَاءِ الثَّلْجِ وَالْبَرَدِ وَنَقِّ قَلْبِي مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ وَبَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in You from laziness, old age that leads to decrepitude, sinfulness, and debt. I seek refuge in You from the trial of the grave, and the torment of the grave, and from the trial of the Hellfire, and the torment of the Hellfire, and from the evil of the trial of wealth. I seek refuge in You from the trial of poverty. I seek refuge in You from the trial of the False Messiah (Dajjal). O Allah! Wash away my sins with the water of snow and hail, and cleanse my heart from sins as a white garment is cleansed from dirt, and distance me from my sins as You have distanced the East from the West. ' }
+      ]
+    },
+
+    /* --- 8. SICKNESS & TRAVEL --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '52. Supplications for Healing and Pain' },
+        { type: 'arabic', text: 'أَذْهِبِ الْبَأْسَ، رَبَّ النَّاسِ، وَاشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا. بِسْمِ اللَّهِ، أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ.' },
+        { type: 'text', text: 'Remove the harm, Lord of mankind, and heal — for You are the Healer. There is no healing except Your healing, a healing that leaves behind no illness. In the name of Allah, I seek refuge in the might of Allah and His power from the evil of what I find and fear.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '53. Dua for Protection from Harmful Diseases' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْبَرَصِ وَالْجُنُونِ وَالْجُذَامِ وَسَيِّئِ الْأَسْقَامِ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in You from leprosy, madness, elephantiasis, and evil diseases.” (Ebû Dâvûd, Vitir 32)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '54. Supplication for Travel (Safe Companion)' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ. اللَّهُمَّ اصْحَبْنَا بِنُصْحِكَ، وَاقْلِبْنَا بِذِمَّةٍ. اللَّهُمَّ اطْوِ لَنَا الْأَرْضَ، وَهَوِّنْ عَلَيْنَا السَّفَرَ.' },
+        { type: 'text', text: 'O Allah, You are the Companion in travel and the Guardian over the family. O Allah, accompany us with Your care, and return us in safety. O Allah, fold up the earth for us, and make the journey easy for us.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '55. Refuge from Travel Hardships and Gloom' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمُنْقَلَبِ، وَمِنَ الْحَوْرِ بَعْدَ الْكَوْرِ، وَمِنْ دَعْوَةِ الْمَظْلُومِ، وَمِنْ سُوءِ الْمَنْظَرِ فِي الْأَهْلِ وَالْمَالِ.' },
+        { type: 'text', text: 'O Allah, I seek refuge in You from the hardship of travel, from a gloomy return, from deterioration after prosperity, from the supplication of the oppressed, and from an evil sight regarding family and wealth.' }
+      ]
+    },
+
+    /* --- 9. SEEKING FORGIVENESS & MERCY --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '56. Dua For Forgive all sins' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ، دِقَّهُ، وَجِلَّهُ، وَأَوَّلَهُ، وَآخِرَهُ، وَعَلاَنِيَتَهُ، وَسِرَّهُ' },
+        { type: 'text', text: 'O Allah, forgive me all my sins, the small and the great, the first and the last, the open and the secret.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '57. Prophet Adam\'s Dua' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ بِحَقِّ مُحَمَّدٍ وَآلِ مُحَمَّدٍ سُبْحَانَكَ اللّهُمَّ وَبِحَمْدِكَ عَمِلْتُ سُوءًا وَظَلَمْتُ نَفْسِي فَاغْفِرْ لِي فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ' },
+        { type: 'text', text: '"O Allah! I ask You by the right of Muhammad and the family of Muhammad. Glory be to You, O Allah, and with Your praise. I have done wrong and wronged myself, so forgive me, for indeed no one forgives sins except You. Accept my repentance, for indeed You are the Acceptor of Repentance, the Most Merciful."' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '58. Dua for Allah’s Mercy' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي ' },
+        { type: 'text', text: 'O Allah, indeed You are a Pardoner, Generous, You love pardoning, so pardon me.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '59. Dua for Forgiveness and Well-being' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَعَافِنِي وَارْزُقْنِي.' },
+        { type: 'text', text: '“O Allah, forgive me, have mercy on me, guide me, grant me well-being, and provide for me.” (Müslim, Zikir 35)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '60. Dua for Forgiveness of Sins and Injustices' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لَنَا ذُنُوبَنَا وَظُلْمَنَا وَهَزْلَنَا وَجِدَّنَا وَخَطَايَانَا وَعَمْدَنَا وَكُلُّ ذَلِكَ عِنْدَنَا.' },
+        { type: 'text', text: '“O Allah! Forgive our sins, our injustices, our jesting, our seriousness, our mistakes, and our intentional acts; all of that is with us.” (Hâkim, De’avât,)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '61. Dua for Comprehensive Forgiveness' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي خَطايَايَ وَجَهْلِي وَإِسْرَافِي فِي أَمْرِي كُلِّهِ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اغْفِرْ لِي هَزْلِي وَجِدِّي وَخَطَايَايَ وَعَمْدِي وَكُلُّ ذَلِكَ عِنْدِي.' },
+        { type: 'text', text: '“O Allah! Forgive my mistakes, my ignorance, my extravagance in all my affairs, and what You know better than I do. O Allah! Forgive my jesting and my seriousness, my errors and my intentional sins; and all of that is with me. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '62. The Master of Supplications for Forgiveness (Sayyid al-Istighfar)' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.' },
+        { type: 'text', text: '“O Allah! You are my Lord; there is no god but You. You created me, and I am Your servant, and I am abiding by Your covenant and promise as much as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favors upon me, and I acknowledge my sin. So forgive me, for indeed none forgives sins except You. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '63. Dua for Forgiveness of All Sins ' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي مَا أَسْرَرْتُ وَمَا أَعْلَنْتُ وَمَا أَخْطَأْتُ وَمَا عَمَدْتُ وَمَا عَلِمْتُ وَمَا لَمْ أَعْلَمْ.' },
+        { type: 'text', text: '“O Allah! Forgive me for what I have concealed and what I have made public, what I have done by mistake and what I have done intentionally, what I know and what I do not know. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '64. Dua for Best Deeds, Best Character, and Protection from Evil' },
+        { type: 'arabic', text: 'اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اهْدِنِي لِأَحْسَنِ الْأَعْمَالِ وَأَحْسَنِ الْأَخْلَاقِ لَا يَهْدِي لِأَحْسَنِهَا إِلَّا أَنْتَ وَقِنِي سَيِّئَ الْأَعْمَالِ وَسَيِّئِ الْأَخْلَاقِ لَا يَقِي سَيِّئَهَا إِلَّا أَنْتَ.' },
+        { type: 'text', text: '“O Allah! Forgive me for what I have sent forth and what I have held back, what I have concealed and what I have declared, and what You know better than I do. O Allah! Guide me to the best of deeds and the best of morals, for none guides to the best of them except You. And protect me from the evil of deeds and the evil of morals, for none protects from their evil except You. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '65. Dua for Seeking Refuge from Allah\'s Wrath to His Pleasure' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِرِضَاكَ مِنْ سَخَطِكَ وَبِمُعَافَاتِكَ مِنْ عُقُوبَتِكَ وَأَعُوذُ بِكَ مِنْكَ لَا أُحْصِي ثَنَاءً عَلَيْكَ أَنْتَ كَمَا أَثْنَيْتَ عَلَى نَفْسِكَ.' },
+        { type: 'text', text: '“O Allah! I seek refuge in Your pleasure from Your wrath, and in Your forgiveness from Your punishment. And I seek refuge in You from You. I cannot enumerate Your praises; You are as You have praised Yourself.” (Müslim, ' }
+      ]
+    },
+
+    /* --- 10. INTERCESSION & SALAWAT --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '66. Intercession and Sending Blessings' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ وَأَتَوَجَّهُ إِلَيْكَ بِنَبِيِّكَ مُحَمَّدٍ نَبِيِّ الرَّحْمَةِ. يَا مُحَمَّدُ، إِنِّي تَوَجَّهْتُ بِكَ إِلَى رَبِّي فِي حَاجَتِي هَذِهِ لِتُقْضَى لِي. اللَّهُمَّ فَشَفِّعْهُ فِيَّ.' },
+        { type: 'text', text: 'O Allah, I ask You and turn to You by Your Prophet Muhammad, the Prophet of mercy. O Muhammad, I have turned by you to my Lord regarding this need of mine, that it may be fulfilled. O Allah, grant him intercession for me.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '67. Salawat (The Ibrahimic Prayer)' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ. وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ. إِنَّكَ حَمِيدٌ مَجِيدٌ.' },
+        { type: 'text', text: 'O Allah, send Your blessings upon Muhammad and the family of Muhammad, as You sent blessings upon the family of Ibrahim. And bless Muhammad and the family of Muhammad, as You blessed the family of Ibrahim among all creation. Indeed, You are Praiseworthy, Glorious.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '68. Dua for Intercession for Believers' },
+        { type: 'arabic', text: 'اللَّهُمَّ فَأَيُّمَا مُؤْمِنٍ سَبَبْتُهُ فَاجْعَلْ ذَلِكَ لَهُ قُرْبَةً إِلَيْكَ يَوْمَ الْقِيَامَةِ.' },
+        { type: 'text', text: '“O my Lord! If I have ever insulted or said anything that grieved any believer, then make that a means for him to draw closer to You on the Day of Resurrection.” (Buhârî, Deavât, 34)' }
+      ]
+    },
+
+    /* --- 11. THE HEREAFTER, DEATH & PARADISE --- */
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '69. Asking for all good & protection from all evil' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ' },
+        { type: 'text', text: 'O Allah, I ask You for all good — immediate and delayed, what I know and what I do not know. And I seek refuge with You from all evil — immediate and delayed, what I know and what I do not know.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '70. Dua for Good and Protection' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ عَبْدُكَ وَنَبِيُّكَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا عَاذَ بِهِ عَبْدُكَ وَنَبِيُّكَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَسْأَلُكَ أَنْ تَجْعَلَ كُلَّ قَضَاءٍ قَضَيْت' },
+        { type: 'text', text: 'O Allah, I ask You for all good, the immediate and the delayed, what I know of it and what I do not know. And I seek refuge with You from all evil, the immediate and the delayed, what I know of it and what I do not know. O Allah, I ask You for the good that Your slave and Prophet asked You for, and I seek refuge with You from the evil that Your slave and Prophet sought refuge from. O Allah, I ask You for Paradise and whatever brings one closer to it of word or deed, and I seek refuge with You from the Fire and whatever brings one closer to it of word or deed. And I ask You to make every decree You have decreed for me good.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: "71. Dua of Abdullah ibn Mas'ud" },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ إِيمَانًا لاَ يَرْتَدُّ وَنَعِيمًا لاَ يَنْفَدُ وَمُرَافَقَةَ نَبِيِّكَ مُحَمَّدٍ فِي أَعْلَى جَنَّةِ الْخُلْدِ' },
+        { type: 'text', text: '"O Allah! I ask You for faith that does not falter, and blessings that do not end, and the companionship of Your Prophet Muhammad (peace and blessings be upon him) in the highest gardens of eternity. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '72. Dua for Rectification of Religion, Life, and Hereafter' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ' },
+        { type: 'text', text: 'O Allah, set right for me my religion, which is the safeguard of my affairs; and set right for me my worldly life, in which is my livelihood; and set right for me my Hereafter, to which is my return; and make life an increase for me in every good; and make death a relief for me from every evil.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '73. Dua of Surrender and Reliance on Allah' },
+        { type: 'arabic', text: 'اللَّهُمَّ لَكَ أَسْلَمْتُ، وَبِكَ آمَنْتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خَاصَمْتُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ بِعِزَّتِكَ، لَا إِلَهَ إِلَّا أَنْتَ، أَنْ تُضِلَّنِي، أَنْتَ الْحَيُّ الَّذِي لَا يَمُوتُ، وَالْجِنُّ وَالْإِنسُ يَمُوتُونَ' },
+        { type: 'text', text: 'O Allah, I have submitted to You, believed in You, relied upon You, returned to You, and acted according to Your guidance. O Allah, I seek refuge in Your might—there is no deity except You—from being led astray. You are the Ever-Living who does not die, while jinn and mankind perish.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '74. Dua for Seeking Refuge in Allah\'s Might' },
+        { type: 'arabic', text: 'يَا رَبِّ بِعِزَّتِكَ لَا إِلَهَ إِلَّا أَنْتَ أَنْ تُضِلَّنِي أَنْتَ الْحَيُّ الَّذِي لَا يَمُوتُ وَالْجِنُّ وَالْإِنْسُ يَمُوتُونَ.' },
+        { type: 'text', text: '“O Lord! By Your might and power, there is no god but You, lest You lead me astray. You are the Ever-Living who does not die, while jinn and mankind perish.” ( Müslim, Zikr, 68)' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '76. Supplication of Humble Pleading and Hope' },
+        { type: 'arabic', text: 'اللَّهُمَّ ذَا الْحَبْلِ الشَّدِيدِ، وَالْأَمْرِ الرَّشِيدِ، أَسْأَلُكَ الْأَمْنَ يَوْمَ الْوَعِيدِ، وَالْجَنَّةَ يَوْمَ الْخُلُودِ، مَعَ الْمُقَرَّبِينَ الشُّهُودِ، الرُّكَّعِ السُّجُودِ، الْمُوفِينَ بِالْعُهُودِ. إِنَّكَ رَحِيمٌ وَدُودٌ، وَإِنَّكَ تَفْعَلُ مَا تُرِيدُ.' },
+        { type: 'text', text: 'O Allah, Possessor of the strong rope and the sound command,\nI ask You for safety on the Day of Threat,\nand for Paradise on the Day of Eternity,\nwith those brought near, who witness,\nthose who bow and prostrate,\nthose who fulfill their covenants.\nIndeed, You are Compassionate, Loving,\nand indeed You do whatever You will.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '77. Seeking Mercy from Grave and Fire' },
+        { type: 'arabic', text: 'افْتَقَرْتُ إِلَى رَحْمَتِكَ، فَأَسْأَلُكَ يَا قَاضِيَ الْأُمُورِ، وَيَا شَافِيَ الصُّدُورِ، كَمَا تُجِيرُ بَيْنَ الْبُحُورِ، أَنْ تُجِيرَنِي مِنْ عَذَابِ السَّعِيرِ، وَمِنْ دَعْوَةِ الثُّبُورِ، وَمِنْ فِتْنَةِ الْقُبُورِ.' },
+        { type: 'text', text: 'I am in need of Your mercy,\nso I ask You, O Disposer of affairs,\nO Healer of hearts,\njust as You grant safety between the seas,\nthat You grant me safety from the punishment of the Blaze,\nfrom the cry of destruction,\nand from the trial of the graves.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '78. Supplication for Longing for Goodness' },
+        { type: 'arabic', text: 'اللَّهُمَّ مَا قَصُرَ عَنْهُ رَأْيِي، وَلَمْ تَبْلُغْهُ نِيَّتِي، وَلَمْ تَبْلُغْهُ مَسْأَلَتِي، مِنْ خَيْرٍ وَعَدْتَهُ أَحَدًا مِنْ خَلْقِكَ، أَوْ خَيْرٍ أَنْتَ مُعْطِيهِ أَحَدًا مِنْ عِبَادِكَ، فَإِنِّي أَرْغَبُ إِلَيْكَ فِيهِ، وَأَسْأَلُكَ بِرَحْمَتِكَ يَا رَبَّ الْعَالَمِينَ.' },
+        { type: 'text', text: 'O Allah, whatever my opinion has fallen short of,\nmy intention has not reached,\nand my request has not encompassed,\nof good You have promised to any of Your creation,\nor good You will give to any of Your servants,\nthen I long for it from You,\nand I ask You for it by Your mercy,\nO Lord of the worlds.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '79. Life, Death, and the Company of the Poor (Repeated)' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَحْيِنِي مَا كَانَتِ الْحَيَاةُ خَيْرًا لِي، وَتَوَلَّنِي إِذَا كَانَتِ الْوَفَاةُ خَيْرًا لِي. اللَّهُمَّ أَحْيِنِي مِسْكِينًا، وَأَمِتْنِي مِسْكِينًا، وَاحْشُرْنِي فِي زُمْرَةِ الْمَسَاكِينِ يَوْمَ الْقِيَامَةِ.' },
+        { type: 'text', text: 'O Allah, let me live as long as life is better for me, and cause me to die when death is better for me. O Allah, let me live poor, die poor, and be raised in the company of the poor on the Day of Resurrection.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '80. Detachment and Abandoning Sin' },
+        { type: 'arabic', text: 'اللَّهُمَّ ارْحَمْنِي بِتَرْكِ الْمَعَاصِي أَبَدًا مَا أَبْقَيْتَنِي، وَارْحَمْنِي أَنْ أَتَكَلَّفَ مَا لَا يَعْنِينِي، وَارْزُقْنِي حُسْنَ النَّظَرِ فِيمَا يُرْضِيكَ عَنِّي.' },
+        { type: 'text', text: 'O Allah, have mercy on me by enabling me to abandon sins\nfor as long as You keep me alive,\nand have mercy on me by not burdening me with what does not concern me,\nand grant me good insight into what pleases You regarding me.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '81. Dua for Sincerity and Trial Avoidance' },
+        { type: 'arabic', text: 'اللَّهُمَّ اجْعَلْ سَرِيرَتِي خَيْرًا مِنْ عَلَانِيَتِي، وَاجْعَلْ عَلَانِيَتِي صَالِحَةً. وَإِذَا أَرَدْتَ فِتْنَةً فِي قَوْمٍ فَتَوَفَّنِي غَيْرَ مَفْتُونٍ.' },
+        { type: 'text', text: 'O Allah, make my inner state better than my outward state, and make my outward state righteous. And if You intend a trial for a people, then take me to Yourself without being tried.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '82. Dua for Victory, Success, and Certainty' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْفَوْزَ فِي الْقَضَاءِ، وَنُزُلَ الشُّهَدَاءِ، وَعَيْشَ السُّعَدَاءِ، وَالنَّصْرَ عَلَى الْأَعْدَاءِ.' },
+        { type: 'text', text: 'O Allah, I ask You for success in judgment, the hospitality of the martyrs, the life of the fortunate, and victory over enemies.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '83. Dua for Attaining Mercy and Paradise' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مُوجِبَاتِ رَحْمَتِكَ وَعَزَائِمَ مَغْفِرَتِكَ وَالسَّلَامَةَ مِنْ كُلِّ إِثْمٍ وَالْغَنِيمَةَ مِنْ كُلِّ بِرٍّ وَالْفَوْزَ بِالْجَنَّةِ وَالنَّجَاةَ مِنَ النَّارِ.' },
+        { type: 'text', text: '“O Allah! I ask You for the means of Your mercy and the determination of Your forgiveness, safety from every sin, gain from every righteousness, success in attaining Paradise, and salvation from the Fire. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '84. Dua for Good Endings and Protection from Disgrace' },
+        { type: 'arabic', text: 'اللَّهُمَّ أَحْسِنْ عَاقِبَتَنَا فِي الْأُمُورِ كُلِّهَا وَأَجِرْنَا مِنْ خِزْيِ الدُّنْيَا وَعَذَابِ الْآخِرَةِ.' },
+        { type: 'text', text: '“O Allah! Make the outcome of all our affairs good, and protect us from the disgrace of this world and the torment of the Hereafter.' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '85. Dua for Righteous Life, Death, and Honorable Return' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ عِيشَةً سَوِيَّةً وَمِيتَةً سَوِيَّةً وَمَرَدًّا غَيْرَ مَخْزٍ وَلَا فَاضِحٍ.' },
+        { type: 'text', text: '“O Allah! I ask You for a righteous life, a righteous death, and a return (to You) that is neither shameful nor disgraceful. ' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: '86. A prayer to be recited when ill' },
+        { type: 'text', text: 'The Messenger of Allah ﷺ said: “Whoever recites these words when ill, and then dies, the fire will not touch them:”' },
+        { type: 'arabic', text: 'لَا إِلٰهَ إِلَّا اللهُ وَاللهُ أَكْبَرُ، لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ،' },
+        { type: 'arabic', text: 'لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ،' },
+        { type: 'arabic', text: 'لَا إِلٰهَ إِلَّا اللهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ،' },
+        { type: 'arabic', text: 'لَا إِلٰهَ إِلَّا اللهُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ' }
+      ]
+    }
+  ]
+},
+'p8': {
+  id: 'p8',
+  title: "Du'a for Shifa",
+  cards: [
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: 'Curing Sickness' },
+        { type: 'text', text: '"Do not deny the [divine] inspiration of his ﷺ dream-visions, Although his ﷺ eyes may rest, his ﷺ heart never sleeps (82)! They appeared to him ﷺ at the outset of his ﷺ Prophethood, So these dream-visions of his ﷺ cannot be denied (83)."', style: 'text-center mb-5' },
+        { type: 'hr' },
+        { type: 'text', text: 'Imam al-Bajuri (may Allah have mercy on him) states that if couplet eighty-two and eighty-three are written on a piece of pottery and then wiped away with liquorice juice, the juice should be drunk on an empty stomach and it will have an immense healing power.' },
+        { type: 'hr' },
+        { type: 'arabic', text: 'لَا تُنْكِرِ الْوَحْيَ مِنْ رُؤْيَاهُ إِنَّ لَهُ\nقَلْبًا إِذَا نَامَتِ الْعَيْنَانِ لَمْ يَنَمِ' },
+        { type: 'text', text: 'Do not deny the Divine inspiration of his ﷺ dream-visions;\nAlthough his ﷺ eyes may rest, his ﷺ heart never slept! (82)' },
+        { type: 'hr' },
+        { type: 'arabic', text: 'وَذَاكَ حِينَ بُلُوغٍ مِّنْ نُّبُوَّتِهِ\nفَلَيْسَ يُنْكَرُ فِيْهِ حَالُ مُحْتَلِمِ' },
+        { type: 'text', text: 'They appeared to him ﷺ at the outset of his ﷺ Prophethood,\nSo these dream-visions of his ﷺ cannot be denied. (83)' }
+      ]
+    },
+
+    {
+      variant: 'default',
+      content: [
+        { type: 'title-green', text: 'آيَاتُ الشِّفَاءِ' },
+        { type: 'subtitle-green', text: '(Verses of Healing)' },
+        { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
+
+        { type: 'arabic', text: 'وَيَشْفِ صُدُورَ قَوْمٍ مُّؤْمِنِينَ' },
+        { type: 'count-badge', text: 'Read 7 Times' },
+        { type: 'hr' },
+
+        { type: 'arabic', text: 'وَشِفَاءٌ لِّمَا فِي الصُّدُورِ' },
+        { type: 'count-badge', text: 'Read 7 Times' },
+        { type: 'hr' },
+
+        { type: 'arabic', text: 'فِيهِ شِفَاءٌ لِّلنَّاسِ' },
+        { type: 'count-badge', text: 'Read 7 Times' },
+        { type: 'hr' },
+
+        { type: 'arabic', text: 'وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ' },
+        { type: 'count-badge', text: 'Read 7 Times' },
+        { type: 'hr' },
+
+        { type: 'arabic', text: 'قُلْ هُوَ لِلَّذِينَ آمَنُوا هُدًى وَشِفَاءٌ' },
+        { type: 'count-badge', text: 'Read 7 Times' },
+        { type: 'hr' },
+
+        { type: 'arabic', text: 'وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ' },
+        { type: 'count-badge', text: 'Read 7 Times' }
+      ]
+    },
+
+    {
+      variant: 'green',
+      content: [
+        { type: 'title-green', text: 'Prayers of Healing' },
+        { type: 'arabic-green', text: 'للشَّيْخِ مُحَمَّد أَبِي الهُدَى الصَّيَادِي البَعْشَوِي' },
+        { type: 'flower-icon', text: '❁' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ طَبِيبِ الْقُلُوبِ وَالْأَبْدَانِ ❁ وَالَّذِي شَخَّصَ الْأَمْرَاضَ وَلَمْ يَحْتَجْ إِلَى أَدَوَاتٍ وَلَا أَعْوَانٍ ❁ وَوَصَفَ مِنَ الْأَدْوِيَةِ مَا يُنَاسِبُ كُلَّ إِنْسَانٍ ❁ وَأَظْهَرَ مِنْ مُعْجِزَاتِ الْعِلَاجِ مَا أَذْهَشَ أَطِبَّاءَ كُلِّ زَمَانٍ ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تَقِينَا بِهَا مِنْ جَمِيعِ الْآفَاتِ ❁ وَتَدْفَعُ بِهَا عَنَّا سَائِرَ الْبَلِيَّاتِ ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً شَافِيَةً لِلْعِلَلِ وَالْأَسْقَامِ ❁ مَا حِيَةً لِلذُّنُوبِ وَالْآثَامِ ❁ مُذْهِبَةً لِلْهُمُومِ وَالْأَوْهَامِ ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تَشْفِي السَّقِيمَ ❁ وَتَدْفَعُ ضَرَرَ الْجَرَائِيمِ ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تَقِينَا مِنَ الْوَبَاءِ ❁ وَتَجْعَلُ الشِّفَاءَ فِي الْغَدَاءِ ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تَشْفِينَا بِهَا مِنْ جَمِيعِ الْأَمْرَاضِ ❁ وَتُفْضِي لَنَا بِهَا جَمِيعَ الْأَغْرَاضِ ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ عَجِّلْ لَنَا بِالشِّفَاءِ بِجَاهِ سَيِّدِ الْأَنْبِيَاءِ ❁ وَصَلِّ عَلَيْهِ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ' }
+      ]
+    },
+
+    {
+      variant: 'green',
+      content: [
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِي جَعَلْتَ اِسْمَهُ دَوَاءً ❁ وَرِيقَهُ شِفَاءً ❁ وَعَرْقَهُ طِيباً ❁ وَجِسْمَهُ رَطِبَا ❁ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ يَا بَارِئَ الْأَدْوَاءِ ❁ صَلِّ عَلَى سَيِّدِ الْأَنْبِيَاءِ ❁' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تَشْفِينَا ❁ وَسَلِّمْ عَلَيْهِ سَلَامًا يُدَاوِينَا' },
+        { type: 'count-badge', text: 'Read 70 Times' },
+
+        { type: 'arabic-green', text: 'وَعَلَى آلِهِ وَصَحْبِهِ وَسَلَّمَ' },
+        { type: 'hr' },
+
+       { type: 'arabic-green', text: 'يَا شَافِي يَا كَافِي يَا مُعَافِي (أَذْهِبِ الْبَاسَ رَبَّ النَّاسِ اِشْفِ وَأَنْتَ الشَّافِي لَا شِفَاءَ إِلَّا شِفَاؤُكَ شِفَاءً لَا يُغَادِرُ سَقَمًا)' },
+        { type: 'count-badge', text: 'Read 3 Times' },
+        { type: 'hr' },
+
+        { type: 'arabic-green', text: 'يَا سَيِّدِي يَا رَسُولَ اللَّهِ ❁ ضَاقَتْ حِيلَتِي وَأَنْتَ وَسِيلَتِي ❁ أَغِثْنِي سَرِيعًا بِعِزَّةِ اللَّهِ' },
+        { type: 'count-badge', text: 'Read 7 Times' }
+
               ]
             }
           ]
         },
-        'p8': {
-          id: 'p8',
-          title: "Du'a for Shifa",
-          cards: [
-            {
-              variant: 'default',
-              content: [
-                { type: 'section-title', text: 'Curing Sickness' },
-                { type: 'text', text: '"Do not deny the [divine] inspiration of his ﷺ dream-visions, Although his ﷺ eyes may rest, his ﷺ heart never sleeps (82)! They appeared to him ﷺ at the outset of his ﷺ Prophethood, So these dream-visions of his ﷺ cannot be denied (83)."', style: 'text-center mb-5' },
-                { type: 'hr' },
-                { type: 'text', text: 'Imam al-Bajuri (may Allah have mercy on him) states that if couplet eighty-two and eighty-three are written on a piece of pottery and then wiped away with liquorice juice, the juice should be drunk on an empty stomach and it will have an immense healing power.' },
-                { type: 'hr' },
-                { type: 'arabic', text: 'لَا تُنْكِرِ الْوَحْيَ مِنْ رُؤْيَاهُ إِنَّ لَهُ\nقَلْبًا إِذَا نَامَتِ الْعَيْنَانِ لَمْ يَنَمِ' },
-                { type: 'text', text: 'Do not deny the Divine inspiration of his ﷺ dream-visions;\nAlthough his ﷺ eyes may rest, his ﷺ heart never slept! (82)' },
-                { type: 'hr' },
-                { type: 'arabic', text: 'وَذَاكَ حِينَ بُلُوغٍ مِّنْ نُّبُوَّتِهِ\nفَلَيْسَ يُنْكَرُ فِيْهِ حَالُ مُحْتَلِمِ' },
-                { type: 'text', text: 'They appeared to him ﷺ at the outset of his ﷺ Prophethood,\nSo these dream-visions of his ﷺ cannot be denied. (83)' }
-              ]
-            },
-            {
-              variant: 'default',
-              content: [
-                { type: 'title-green', text: 'آيَاتُ الشِّفَاءِ' },
-                { type: 'subtitle-green', text: '(Verses of Healing)' },
-                { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
-                
-                { type: 'arabic', text: 'وَيَشْفِ صُدُورَ قَوْمٍ مُّؤْمِنِينَ' },
-                { type: 'count-badge', text: 'Read 7 Times' },
-                { type: 'hr' },
-
-                { type: 'arabic', text: 'وَشِفَاءٌ لِّمَا فِي الصُّدُورِ' },
-                { type: 'count-badge', text: 'Read 7 Times' },
-                { type: 'hr' },
-
-                { type: 'arabic', text: 'فِيهِ شِفَاءٌ لِّلنَّاسِ' },
-                { type: 'count-badge', text: 'Read 7 Times' },
-                { type: 'hr' },
-
-                { type: 'arabic', text: 'وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ' },
-                { type: 'count-badge', text: 'Read 7 Times' },
-                { type: 'hr' },
-
-                { type: 'arabic', text: 'قُلْ هُوَ لِلَّذِينَ آمَنُوا هُدًى وَشِفَاءٌ' },
-                { type: 'count-badge', text: 'Read 7 Times' },
-                { type: 'hr' },
-
-                { type: 'arabic', text: 'وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ' },
-                { type: 'count-badge', text: 'Read 7 Times' }
-              ]
-            }
-          ]
-        },
-        'p9': {
+         'p9': {
           id: 'p9',
           title: 'Victory & Protection',
           cards: [
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'المُسَبِّعَاتُ العَشْرُ' },
+                { type: 'title-green', text: 'Al‑Musabbiʿatu Al‑ʿashr' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ۞ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ * ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ * مَـٰلِكِ يَوْمِ ٱلدِّينِ * إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ * ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ * صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ' },
                 { type: 'count-badge', text: 'Read 7 Times' },
@@ -1144,7 +1447,7 @@ Today apps
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'حِزْبُ النَّصْرِ' },
+                { type: 'title-green', text: 'Hizb An‑Nasr' },
                 { type: 'subtitle-green', text: 'لِلْإِمَامِ أَبِي الْحَسَنِ الشَّاذُلِيِّ رَضِيَ اللهُ تَعَالَى عَنْهُ' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nاللَّهُمَّ بِسَطْوَةِ جَبَرُوتِ قَهْرِكَ ۞ وَبِسُرْعَةِ إِغَاثَةِ نَصْرِكَ ۞ وَبِغَيْرَتِكَ لِانْتِهَاكِ حُرُمَاتِكَ ۞ وَبِحِمَايَتِكَ لِمَنِ احْتَمَى بِآيَاتِكَ ۞ نَسْأَلُكَ يَا اللَّهُ يَا قَرِيبُ ۞ يَا سَمِيعُ يَا مُجِيبُ ۞ يَا سَرِيعُ يَا جَبَارُ ۞ يَا مُنْتَقِمُ يَا قَهَارُ ۞ يَا شَدِيدَ الْبَطْشِ ۞ يَا مَنْ لَا يُعْجِزُهُ قَهْرُ الْجَبَابِرَةِ ۞ وَلَا يَعْظُمُ عَلَيْهِ هَلَاكُ الْمُتَمَرِّدَةِ مِنَ الْمُلُوكِ وَالْأَكَاسِرَةِ ۞ أَنْ تَجْعَلَ كَيْدَ مَنْ كَادَنِي فِي نَحْرِهِ ۞ وَمَكْرَ مَنْ مَكَرَ بِي عَائِدًا عَلَيْهِ ۞ وَحُفْرَةَ مَنْ حَفَرَ لِي وَاقِعًا فِيهَا ۞ وَمَنْ نَصَبَ لِي شَبَكَةَ الْخِدَاعِ اجْعَلْهُ يَا سَيِّدِي مُسَاقًا إِلَيْهَا ۞ وَمَصِيدًا فِيهَا ۞ وَأَسِيرًا لَدَيْهَا' },
@@ -1163,7 +1466,7 @@ Today apps
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'حِزْبُ الْإِخْفَاءِ' },
+                { type: 'title-green', text: 'Hizbul‑ikhfā' },
                 { type: 'subtitle-green', text: 'لِلْإِمَامِ أَبِي الْحَسَنِ الشَّاذُلِيِّ رَضِيَ اللهُ تَعَالَى عَنْهُ' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nاحْتَجَبْتُ بِنُورِ اللَّهِ الدَّائِمِ الْكَامِلِ ۞ وَتَحَصَّنْتُ بِحِصْنِ اللَّهِ الْقَوِيِّ الشَّامِلِ ۞ وَرَمَيْتُ مَنْ بَغَىٰ عَلَيَّ بِسَهْمِ اللَّهِ وَسَيْفِهِ الْقَاتِلِ ۞ اللَّهُمَّ يَا غَالِبًا عَلَى أَمْرِهِ ۞ وَيَا قَائِمًا فَوْقَ خَلْقِهِ ۞ وَحَائِلًا بَيْنَ الْمَرْءِ وَقَلْبِهِ ۞ حُلْ بَيْنِي وَبَيْنَ الشَّيْطَانِ وَنَزْغِهِ ۞ وَبَيْنَ مَنْ لَا طَاقَةَ لِي بِهِ مِنْ خَلْقِكَ أَجْمَعِينَ ۞ اللَّهُمَّ كُفَّ عَنِّي أَلْسِنَتَهُمْ ۞ وَاغْلُلْ أَيْدِيَهُمْ وَأَرْجُلَهُمْ ۞ وَارْبِطْ عَلَى قُلُوبِهِمْ ۞ وَاجْعَلْ بَيْنِي وَبَيْنَهُمْ سَدًّا مِنْ نُورِ عَظَمَتِكَ ۞ وَحِجَابًا مِنْ قُوَّتِكَ ۞ وَجُنْدًا مِنْ سُلْطَانِكَ ۞ إِنَّكَ حَيٌّ قَادِرٌ مُقْتَدِرٌ قَهَّارٌ ۞ اللَّهُمَّ اغْشِ عَنِّي أَبْصَارَ الْأَشْرَارِ وَالظَّلَمَةِ لَا أُبَالِي بِأَبْصَارِهِمْ ۞ ﴿يَكَادُ سَنَا بَرْقِهِ يَذْهَبُ بِالْأَبْصَارِ ۞ يُقَلِّبُ اللَّهُ اللَّيْلَ وَالنَّهَارَ إِنَّ فِي ذَٰلِكَ لَعِبْرَةً لِأُولِي الْأَبْصَارِ﴾ ۞ بِسْمِ اللَّهِ ﴿كهيعص﴾ بِسْمِ اللَّهِ ﴿حم عسق﴾ ۞ ﴿كَمَاءٍ أَنْزَلْنَاهُ مِنَ السَّمَاءِ فَاخْتَلَطَ بِهِ نَبَاتُ الْأَرْضِ فَأَصْبَحَ هَشِيمًا تَذْرُوهُ الرِّيَاحُ﴾ ۞ ﴿هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمَٰنُ الرَّحِيمُ﴾ ۞ ﴿يَوْمَ الْآزِفَةِ إِذِ الْقُلُوبُ لَدَى الْحَنَاجِرِ كَاظِمِينَ مَا لِلظَّالِمِينَ مِنْ حَمِيمٍ وَلَا شَفِيعٍ يُطَاعُ﴾ ۞ ﴿عَلِمَتْ نَفْسٌ مَا أَحْضَرَتْ ۞ فَلَا أُقْسِمُ بِالْخُنَّسِ ۞ الْجَوَارِ الْكُنَّسِ ۞ وَاللَّيْلِ إِذَا عَسْعَسَ ۞ وَالصُّبْحِ إِذَا تَنَفَّسَ﴾ ۞ ﴿ص وَالْقُرْآنِ ذِي الذِّكْرِ ۞ بَلِ الَّذِينَ كَفَرُوا فِي عِزَّةٍ وَشِقَاقٍ﴾' },
@@ -1181,7 +1484,7 @@ Today apps
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'حِزْبُ الْكِفَايَةِ' },
+                { type: 'title-green', text: 'Hizb Al‑Kifayah' },
                 { type: 'subtitle-green', text: 'لِلْإِمَامِ أَبِي الْحَسَنِ الشَّاذُلِيِّ رَضِيَ اللهُ تَعَالَى عَنْهُ' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
@@ -1195,7 +1498,7 @@ Today apps
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'الْحِزْبُ الْمَصُونُ' },
+                { type: 'title-green', text: 'Al‑hizb Al‑Masoon' },
                 { type: 'subtitle-green', text: 'لِلْإِمَامِ أَبِي الْحَسَنِ الشَّاذُلِيِّ رَضِيَ اللهُ تَعَالَى عَنْهُ' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'آمَنْتُ بِاللَّهِ ۞ وَدَخَلْتُ فِي كَنَفِ اللَّهِ ۞ وَتَحَصَّنْتُ بِكِتَابِ اللَّهِ وَآيَاتِ اللَّهِ ۞ وَاسْتَجَرْتُ بِرَسُولِ اللَّهِ سَيِّدِنَا مُحَمَّدِ بْنِ عَبْدِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ ۞ اللَّهُ أَكْبَرُ ۞ اللَّهُ أَكْبَرُ مِمَّا أَخَافُ وَأَحْذَرُ ۞ أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ ۞ بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ ۞ حَسْبِيَ اللَّهُ وَنِعْمَ الْوَكِيلُ ۞ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ ۞ بِسْمِ اللَّهِ عَلَى نَفْسِي وَدِينِي وَأَهْلِي وَمَالِي وَعِيَالِي وَأَصْحَابِي ۞ وَعَلَى كُلِّ شَيْءٍ أَعْطَانِيهِ رَبِّي ۞ اللَّهُ الْحَافِظُ الْكَافِي ۞ بِسْمِ اللَّهِ بَابُنَا ۞ تَبَارَكَ حِيطَانُنَا ۞ يس سَقْفُنَا ۞ ﴿وَاللَّهُ مِنْ وَرَائِهِمْ مُحِيطٌ ۞ بَلْ هُوَ قُرْآنٌ مَجِيدٌ ۞ فِي لَوْحٍ مَحْفُوظٍ﴾' },
@@ -1206,7 +1509,7 @@ Today apps
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'حِزْبُ التَّوَسُّلِ' },
+                { type: 'title-green', text: 'Hizb at‑tawassul' },
                 { type: 'subtitle-green', text: 'لِلْإِمَامِ أَبِي الْحَسَنِ الشَّاذُلِيِّ رَضِيَ اللهُ تَعَالَى عَنْهُ' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'اللَّهُمَّ إِنِّي أَتَوَسَّلُ بِكَ إِلَيْكَ ۞ اللَّهُمَّ إِنِّي أُقْسِمُ بِكَ عَلَيْكَ ۞ اللَّهُمَّ كَمَا كُنْتَ دَلِيلِي عَلَيْكَ فَكُنْ شَفِيعِي إِلَيْكَ ۞ اللَّهُمَّ إِنَّ حَسَنَاتِي مِنْ عَطَائِكَ ۞ وَسَيِّئَاتِي مِنْ قَضَائِكَ ۞ فَجِدِ اللَّهُمَّ بِمَا أَعْطَيْتَ عَلَىٰ بِمَا بِهِ قَضَيْتَ ۞ حَتَّىٰ تَمْحُوَ ذَلِكَ بِذَلِكَ ۞ لَا لِمَنْ أَطَاعَكَ فِيمَا أَطَاعَكَ فِيهِ لَهُ الشُّكْرُ ۞ وَلَا لِمَنْ عَصَاكَ فِيمَا عَصَاكَ فِيهِ لَهُ الْعُذْرُ ۞ ﴿لِأَنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ ۞ لَا يُسْأَلُ عَمَّا يَفْعَلُ وَهُمْ يُسْأَلُونَ﴾ ۞ اللَّهُمَّ لَوْلَا عَطَاؤُكَ لَكُنْتُ مِنَ الْغَاوِينَ ۞ وَلَوْلَا قَضَاؤُكَ لَكُنْتُ مِنَ الْغَاوِينَ ۞ وَأَنْتَ أَجَلُّ وَأَعْظَمُ وَأَعْظَمُ وَأَعْزُّ وَأَكْرَمُ مِنْ أَنْ تُطَاعَ إِلَّا بِإِذْنِكَ وَرِضَاكَ ۞ أَوْ أَنْ تُعْصَىٰ إِلَّا بِحُكْمِكَ وَقَضَائِكَ ۞ إِلَهِي مَا أَطَعْتُكَ حَتَّىٰ رَضِيتَ ۞ وَلَا عَصَيْتُكَ حَتَّىٰ قَضَيْتَ ۞ أَطَعْتُكَ بِإِرَادَتِكَ وَالْمِنَّةُ لَكَ عَلَيَّ ۞ وَعَصَيْتُكَ بِتَقْدِيرِكَ وَالْحُجَّةُ لَكَ عَلَيَّ ۞ فَبِوُجُوبِ حُجَّتِكَ وَانْقِطَاعِ حُجَّتِي إِلَّا مَا رَحِمْتَنِي ۞ وَبِفَقْرِي إِلَيْكَ وَغِنَاكَ عَنِّي إِلَّا مَا كَفَيْتَنِي ۞ يَا أَرْحَمَ الرَّاحِمِينَ' },
@@ -1215,10 +1518,81 @@ Today apps
               ]
             },
             {
-              variant: 'green',
+               variant: 'green',
               content: [
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'عَبْدًا لَا يَمْلِكُ دُنْيَا وَلَا أُخْرَى ۞ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ ۞ وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلَّمَ ۞' }
+              ]
+            },
+            {
+              variant: 'green',
+              content: [
+                { type: 'flower-icon', text: '❁ ❁ ❁' },
+                { type: 'title-green', text: 'Ayāt al‑fath' },
+                { type: 'arabic-green', text: 'بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ' },
+                { type: 'hr' },
+                { type: 'arabic-green', text: 'فَعَسَى اللهُ أَنْ يَأْتِيَ بِالْفَتْحِ ۞ وَعِنْدَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ ۞ رَبَّنَا افْتَحْ بَيْنَنَا وَبَيْنَ قَوْمِنَا بِالْحَقِّ وَأَنْتَ خَيْرُ الْفَاتِحِينَ ۞ وَلَوْ أَنَّ أَهْلَ الْقُرَى آمَنُوا وَاتَّقَوْا لَفَتَحْنَا عَلَيْهِمْ بَرَكَاتٍ مِنَ السَّمَاءِ وَالْأَرْضِ ۞ إِنْ تَسْتَفْتِحُوا فَقَدْ جَاءَكُمُ الْفَتْحُ ۞ رَبِّ إِنَّ قَوْمِي كَذَّبُونِ فَافْتَحْ بَيْنِي وَبَيْنَهُمْ فَتْحًا وَنَجِّنِي وَمَنْ مَعِي مِنَ الْمُؤْمِنِينَ ۞ مَا يَفْتَحِ اللهُ لِلنَّاسِ مِنْ رَحْمَةٍ فَلَا مُمْسِكَ لَهَا ۞ حَتَّى إِذَا جَاءُوهَا وَفُتِحَتْ أَبْوَابُهَا ۞ إِنَّا فَتَحْنَا لَكَ فَتْحًا مُبِينًا ۞ وَأَثَابَهُمْ فَتْحًا قَرِيبًا وَمَغَانِمَ كَثِيرَةً يَأْخُذُونَهَا ۞ فَفَتَحْنَا أَبْوَابَ السَّمَاءِ بِمَاءٍ مُنْهَمِرٍ ۞ نَصْرٌ مِنَ اللهِ وَفَتْحٌ قَرِيبٌ ۞ وَفُتِحَتِ السَّمَاءُ فَكَانَتْ أَبْوَابًا ۞ إِذَا جَاءَ نَصْرُ اللهِ وَالْفَتْحُ ۞ وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللهِ أَفْوَاجًا ۞ فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا ۞' }
+            ]
+            },
+            {
+    "variant": "green",
+  "content": [
+    { "type": "flower-icon", "text": "❁ ❁ ❁" },
+    { "type": "title-green", "text": "Supplications for victory over enemies." },
+    { "type": "arabic-green", "text": " Comprehensive Supplications " },
+    { "type": "hr" },
+    { "type": "arabic-green", "text": "أَدْعِيَةُ النَّصْرِ عَلَى الْأَعْدَاءِ" },
+
+    { "type": "arabic-green", "text": "﴿ رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ ﴾" },
+    { "type": "reference-small", "text": "[Surah Al-Baqarah, verse 250]." },
+
+    { "type": "arabic-green", "text": "﴿ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ ﴾" },
+    { "type": "reference-small", "text": "[Surah Al-Baqarah,verse 286]" },
+
+    { "type": "arabic-green", "text": "﴿ رَبَّنَا ﴿ وَاجْعَل لَّنَا مِن لَّدُنكَ وَلِيًّا وَاجْعَل لَّنَا مِن لَّدُنكَ نَصِيرًا ﴾" },
+    { "type": "reference-small", "text": "[Surah An-Nisā,verse 75]" },
+
+    { "type": "arabic-green", "text": "﴿ رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنكَ سُلْطَانًا نَصِيرًا ﴾" },
+    { "type": "reference-small", "text": "[Surah Al-Isrā’ (17:80)]" },
+
+    { "type": "arabic-green", "text": "﴿ رَبِّ نَجِّنِي مِنَ الْقَوْمِ الظَّالِمِينَ ﴾" },
+    { "type": "reference-small", "text": "[Surah Al-Qasas,verse 21]." },
+
+    { "type": "arabic-green", "text": "﴿ رَبِّ انصُرْنِي عَلَى الْقَوْمِ الْمُفْسِدِينَ ﴾" },
+    { "type": "reference-small", "text": "[Surah Al-Qasas,verse 30]." },
+
+    { "type": "arabic-green", "text": "﴿ رَبِّ فَلَا تَجْعَلْنِي فِي الْقَوْمِ الظَّالِمِينَ ﴾" },
+    { "type": "reference-small", "text": "[Surah Al-Mu’minūn,verse 94]." },
+
+    { "type": "arabic-green", "text": "﴿ رَبِّ أَعِنِّي وَلَا تُعِنْ عَلَيَّ، وَانْصُرْنِي وَلَا تَنْصُرْ عَلَيَّ، وَامْكُرْ لِي وَلَا تَمْكُرْ عَلَيَّ، وَاهْدِنِي وَيَسِّرْ الْهُدَى إِلَيَّ، وَانْصُرْنِي عَلَى مَنْ بَغَى عَلَيَّ، رَبِّ اجْعَلْنِي لَكَ شَاكِرًا، لَكَ ذَاكِرًا، لَكَ رَاهِبًا، لَكَ مِطْوَاعًا، إِلَيْكَ مُخْبِتًا، أَوْ مُنِيبًا، رَبِّ تَقَبَّلْ تَوْبَتِي، وَاغْسِلْ حَوْبَتِي، وَأَجِبْ دَعْوَتِي، وَثَبِّتْ حُجَّتِي، وَاهْدِ قَلْبِي، وَسَدِّدْ لِسَانِي، وَاسْلُلْ سَخِيمَةَ قَلْبِي»" },
+    { "type": "reference-small", "text": "Qur’an 17:80:, وصححه الألباني." },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ إِنِّي أَعْجَلُكَ فِي نُحُورِهِمْ، وَأَعُوذُ بِكَ مِنْ شُرُورِهِمْ»" },
+    { "type": "reference-small", "text": "Musnad Ahmad 6719, ." },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ أَنْتَ عَضُدِي وَنَصِيرِي، بِكَ أَحُولُ، وَبِكَ أَصُولُ، وَبِكَ أُقَاتِلُ»" },
+    { "type": "reference-small", "text": "Abu Dawud (2632)." },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ رَبَّ السَّمَوَاتِ السَّبْعِ، وَرَبَّ الْعَرْشِ الْعَظِيمِ، كُنْ لِي جَارًا مِنْ فُلَانٍ بْنِ فُلَانٍ، وَأَحْزَابِهِ مِنْ خَلَائِقِكَ؛ أَنْ يَفْرُطَ عَلَيَّ أَحَدٌ مِنْهُمْ، أَوْ يَطْغَى، عَزَّ جَارُكَ، وَجَلَّ ثَنَاؤُكَ، وَلَا إِلَهَ إِلَّا أَنْتَ»" },
+    { "type": "reference-small", "text": "البخاري في الأدب المفرد (٧٠٧)." },
+
+    { "type": "arabic-green", "text": "«اللهُ أَكْبَرُ، اللهُ أَعَزُّ مِنْ خَلْقِهِ جَمِيعًا، اللهُ أَعَزُّ مِمَّا أَخَافُ وَأَحْذَرُ، وَأَعُوذُ بِاللهِ الَّذِي لَا إِلَهَ إِلَّا هُوَ، الْمُمْسِكِ السَّمَوَاتِ السَّبْعِ أَنْ يَقَعْنَ عَلَى الْأَرْضِ إِلَّا بِإِذْنِهِ، مِنْ شَرِّ عَبْدِكَ فُلَانٍ، وَجُنُودِهِ وَأَتْبَاعِهِ وَأَشْيَاعِهِ مِنَ الْجِنِّ وَالْإِنْسِ، اللَّهُمَّ كُنْ لِي جَارًا مِنْ شَرِّهِمْ، جَلَّ ثَنَاؤُكَ، وَعَزَّ جَارُكَ، وَتَبَارَكَ اسْمُكَ، وَلَا إِلَهَ إِلَّا غَيْرُكَ»" },
+    { "type": "reference-small", "text": "Al-Bukhari’s Al-Adab Al-Mufrad,no.708:." },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ اكْفِنِيهِمْ بِمَا شِئْتَ»" },
+    { "type": "reference-small", "text": "Ahmad (23931) " },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ مُنْزِلَ الْكِتَابِ، سَرِيعَ الْحِسَابِ، اهْزِمِ الْأَحْزَابَ، اللَّهُمَّ اهْزِمْهُمْ وَزَلْزِلْهُمْ»" },
+    { "type": "reference-small", "text": "“Ahmad (6719)" },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ قَاتِلِ الْكَفَرَةَ الَّذِينَ يُكَذِّبُونَ رُسُلَكَ، وَيَصُدُّونَ عَنْ سَبِيلِكَ، وَاجْعَلْ عَلَيْهِمْ رِجْزَكَ وَعَذَابَكَ، اللَّهُمَّ قَاتِلِ الْكَفَرَةَ الَّذِينَ أُوتُوا الْكِتَابَ إِلَهَ الْحَقِّ»" },
+    { "type": "reference-small", "text": "“Ahmad (15492) " },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ انْصُرِ الْمُسْتَضْعَفِينَ مِنَ الْمُسْلِمِينَ، اللَّهُمَّ إِنَّهُمْ حُفَاةٌ فَاحْمِلْهُمْ، اللَّهُمَّ إِنَّهُمْ عُرَاةٌ فَاكْسُهُمْ، اللَّهُمَّ إِنَّهُمْ جِيَاعٌ فَأَشْبِعْهُمْ»" },
+    { "type": "reference-small", "text": "“Abu Dawud (2747)" },
+
+    { "type": "arabic-green", "text": "«اللَّهُمَّ أَمْتِعْنِي بِسَمْعِي وَبَصَرِي، وَاجْعَلْهُمَا الْوَارِثَ مِنِّي، وَانْصُرْنِي عَلَى مَنْ ظَلَمَنِي، وَأَرِنِي فِيهِ ثَأْرِي»" },
+    { "type": "reference-small", "text": "الحاكم (١٩١٨)، وصححه." }
               ]
             }
           ]
@@ -1305,15 +1679,27 @@ Today apps
                       { type: 'text', text: 'Recite Surah Al-Ikhlas, Al-Falaq, and An-Nas 3 times each. Suffices for everything.' },
                       
                       { type: 'section-title', text: 'IKHLAS', style: 'text-sm font-bold mt-4' },
-                      { type: 'arabic', text: 'قُلْ هُوَ ٱللَّهُ أَحَدٌ ۝ ٱللَّهُ ٱلصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ ۝' },
+                      { type: 'arabic', text: 'قُلْ هُوَ ٱللَّهُ أَحَدٌ', number: '1' },
+                      { type: 'arabic', text: 'ٱللَّهُ ٱلصَّمَدُ', number: '2' },
+                      { type: 'arabic', text: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', number: '3' },
+                      { type: 'arabic', text: 'وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ', number: '4' },
                       { type: 'hr' },
 
                       { type: 'section-title', text: 'AL FALAQ', style: 'text-sm font-bold mt-4' },
-                      { type: 'arabic', text: 'قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ۝' },
+                      { type: 'arabic', text: 'قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ', number: '1' },
+                      { type: 'arabic', text: 'مِن شَرِّ مَا خَلَقَ', number: '2' },
+                      { type: 'arabic', text: 'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ', number: '3' },
+                      { type: 'arabic', text: 'وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ', number: '4' },
+                      { type: 'arabic', text: 'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ', number: '5' },
                       { type: 'hr' },
 
                       { type: 'section-title', text: 'AL NAAS', style: 'text-sm font-bold mt-4' },
-                      { type: 'arabic', text: 'قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ ۝ مَلِكِ ٱلنَّاسِ ۝ إِلَـٰهِ ٱلنَّاسِ ۝ مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ ۝ ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ ۝ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ ۝' },
+                      { type: 'arabic', text: 'قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ', number: '1' },
+                      { type: 'arabic', text: 'مَلِكِ ٱلنَّاسِ', number: '2' },
+                      { type: 'arabic', text: 'إِلَـٰهِ ٱلنَّاسِ', number: '3' },
+                      { type: 'arabic', text: 'مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ', number: '4' },
+                      { type: 'arabic', text: 'ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ', number: '5' },
+                      { type: 'arabic', text: 'مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ', number: '6' },
                       
                       { type: 'hr' },
 
@@ -1337,7 +1723,7 @@ Today apps
 
                       { type: 'section-title', text: '6. For Bodily Health' },
                       { type: 'text', text: 'Read 3 times.' },
-                      { type: 'arabic', text: 'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ، وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ' },
+                      { type: 'arabic', text: 'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ، وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنَ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ' },
                       { type: 'hr' },
 
                       { type: 'section-title', text: '7. Sufficient is Allah' },
@@ -1401,21 +1787,20 @@ Today apps
                       { type: 'arabic', text: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ' }
                   ]
               },
-              // --- NEW CARD: SURAH AL-AN'AM (First 5 Verses) ---
               {
                   variant: 'default',
                   content: [
                       { type: 'section-title', text: "Surah Al-An'am (First 5 Verses)" },
                       
-                      { type: 'text', text: 'Whoever reaches the morning, performs the morning prayer, and reads the first 5 verses of this Surah before getting up, 70,000 angels are assigned to them, and they are taken under protection. The deeds that these angels will perform until the Day of Judgment are written in the deed book of the person who reads them.', style: 'mb-4 italic opacity-80' },
+                      { type: 'text', text: 'Whoever reaches the morning, performs the morning prayer, and reads the first 5 verses of this Surah before getting up, 70,000 angels are assigned to them...', style: 'mb-4 italic opacity-80' },
                       
                       { type: 'arabic-indopak', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                       
-                      { type: 'arabic-indopak', text: 'اَلْحَمْدُ لِلّٰهِ الَّذِىْ خَلَقَ السَّمٰوٰتِ وَ الْاَرْضَ وَ جَعَلَ الظُّلُمٰتِ وَ النُّوْرَ ۬ ثُمَّ الَّذِيْنَ كَفَرُوْا بِرَبِّهِمْ يَعْدِلُوْنَ ۝', style: 'text-justify' },
-                      { type: 'arabic-indopak', text: 'هُوَ الَّذِىْ خَلَقَكُمْ مِّنْ طِيْنٍ ثُمَّ قَضٰى اَجَلًا ۬ وَ اَجَلٌ مُّسَمًّى عِنْدَهٗ ثُمَّ اَنْتُمْ تَمْتَرُوْنَ ۝', style: 'text-justify' },
-                      { type: 'arabic-indopak', text: 'وَ هُوَ اللّٰهُ فِى السَّمٰوٰتِ وَ فِى الْاَرْضِ ۭ يَعْلَمُ سِرَّكُمْ وَ جَهْرَكُمْ وَ يَعْلَمُ مَا تَكْسِبُوْنَ ۝', style: 'text-justify' },
-                      { type: 'arabic-indopak', text: 'وَ مَا تَاْتِيْهِمْ مِّنْ اٰيَةٍ مِّنْ اٰيٰتِ رَبِّهِمْ اِلَّا كَانُوْا عَنْهَا مُعْرِضِيْنَ ۝', style: 'text-justify' },
-                      { type: 'arabic-indopak', text: 'فَقَدْ كَذَّبُوْا بِالْحَقِّ لَمَّا جَآءَهُمْ ۬ فَسَوْفَ يَاْتِيْهِمْ اَنْبٰٓـؤُا مَا كَانُوْا بِهٖ يَسْتَهْزِءُوْنَ ۝', style: 'text-justify' }
+                      { type: 'arabic-indopak', text: 'اَلْحَمْدُ لِلّٰهِ الَّذِىْ خَلَقَ السَّمٰوٰتِ وَ الْاَرْضَ وَ جَعَلَ الظُّلُمٰتِ وَ النُّوْرَ ۬ ثُمَّ الَّذِيْنَ كَفَرُوْا بِرَبِّهِمْ يَعْدِلُوْنَ', number: '1', style: 'text-justify' },
+                      { type: 'arabic-indopak', text: 'هُوَ الَّذِىْ خَلَقَكُمْ مِّنْ طِيْنٍ ثُمَّ قَضٰى اَجَلًا ۬ وَ اَجَلٌ مُّسَمًّى عِنْدَهٗ ثُمَّ اَنْتُمْ تَمْتَرُوْنَ', number: '2', style: 'text-justify' },
+                      { type: 'arabic-indopak', text: 'وَ هُوَ اللّٰهُ فِى السَّمٰوٰتِ وَ فِى الْاَرْضِ ۭ يَعْلَمُ سِرَّكُمْ وَ جَهْرَكُمْ وَ يَعْلَمُ مَا تَكْسِبُوْنَ', number: '3', style: 'text-justify' },
+                      { type: 'arabic-indopak', text: 'وَ مَا تَاْتِيْهِمْ مِّنْ اٰيَةٍ مِّنْ اٰيٰتِ رَبِّهِمْ اِلَّا كَانُوْا عَنْهَا مُعْرِضِيْنَ', number: '4', style: 'text-justify' },
+                      { type: 'arabic-indopak', text: 'فَقَدْ كَذَّبُوْا بِالْحَقِّ لَمَّا جَآءَهُمْ ۬ فَسَوْفَ يَاْتِيْهِمْ اَنْبٰٓـؤُا مَا كَانُوْا بِهٖ يَسْتَهْزِءُوْنَ', number: '5', style: 'text-justify' }
                   ]
               }
           ]
@@ -1633,42 +2018,9 @@ Today apps
       };
 
 // ==========================================
-      // UTILITIES
-      // ==========================================
-      const triggerHaptic = () => {
-        if (window.navigator && window.navigator.vibrate) {
-          window.navigator.vibrate(15);
-        }
-      };
-
-      const copyToClipboard = (text) => {
-        navigator.clipboard.writeText(text);
-        triggerHaptic();
-        alert("Text Copied");
-      };
-
-      // ==========================================
-      // COMPONENTS
+      // STABLE BRAIN (No Bookmarks = No Blue Crash)
       // ==========================================
 
-      const MenuCard = ({ label, subtext, onClick, theme }) => (
-        <button
-          onClick={() => { triggerHaptic(); onClick(); }}
-          style={{ 
-            backgroundColor: theme.cardBg, 
-            color: theme.text,
-            border: `4px double ${theme.accent}`,
-          }}
-          className="w-full p-4 mb-3 rounded-2xl flex flex-col items-center justify-center text-lg font-bold active-press shadow-sm"
-        >
-          <span className="font-heading text-xl text-center">{label}</span>
-          {subtext && <span className="mt-1 text-xs opacity-60 uppercase tracking-widest font-sans">{subtext}</span>}
-        </button>
-      );
-
-      // ==========================================
-      // STABLE BRAIN (No Imports = No Errors)
-      // ==========================================
       const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
       const IconClose = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>;
@@ -1691,7 +2043,7 @@ Today apps
         const arabicSize = 32 + (fontScale * 2);
         const englishSize = 18 + (fontScale * 1);
 
-        const renderContentBlock = (block, idx, cardVariant, pageTitle) => {
+        const renderContentBlock = (block, idx, cardVariant, pageTitle, fullCard) => {
           if (!block) return null;
           let textColor = block.textColor || theme.text;
           if (cardVariant === 'rabbana') { textColor = (block.type && block.type.startsWith('arabic')) ? '#D4AF37' : '#FFFFFF';
@@ -1706,7 +2058,7 @@ Today apps
               return <p key={idx} onClick={handleSelect} className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
             case 'section-title': return <h3 key={idx} className="text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase" style={{ color: theme.accent }}>{block.text}</h3>;
             case 'title-green': return <h2 key={idx} className="font-arabic font-bold text-center mb-2 text-[#d63384]" style={{ fontSize: '34px' }}>{block.text}</h2>;
-            case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter shadow-md">{block.text}</span></div>;
+            case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter shadow-md text-center">{block.text}</span></div>;
             case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
             case 'allah-name': return (
                 <div key={idx} onClick={handleSelect} className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer active:bg-black/5 rounded-xl">
@@ -1714,7 +2066,7 @@ Today apps
                     <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
                   </div>
-                  <div className="font-bold opacity-60 font-sans text-center" style={{ fontSize: `${englishSize}px`, color: '#8B0000' }}>{block.english}</div>
+                  <div className="font-bold opacity-60 font-sans text-center text-sm" style={{ color: '#8B0000' }}>{block.english}</div>
                 </div>
               );
             case 'flower-icon': return <div key={idx} className="text-center text-2xl my-4 text-[#2e7d32]">{block.text}</div>;
@@ -1752,7 +2104,7 @@ Today apps
               {selectedPrayer && (
                 <div className="fixed bottom-10 left-6 right-6 z-50 animate-in">
                   <div className="max-w-md mx-auto bg-white shadow-2xl rounded-full p-2 flex items-center justify-between border border-[#D4AF37]">
-                    <div className="flex items-center gap-6 ml-10 overflow-hidden">
+                    <div className="flex items-center gap-6 ml-10 overflow-hidden text-center">
                         <div className="flex flex-col truncate">
                             <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4AF37]">Reading Verse</span>
                             <span className="text-[11px] font-bold text-gray-500 uppercase truncate font-sans">{selectedPrayer.title}</span>
