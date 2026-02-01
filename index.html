@@ -2014,9 +2014,10 @@
 
       };
 
-const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+onst IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
       const IconClose = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>;
+      const IconPlus = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>;
 
       const THEMES = {
         cream: { id: 'cream', bg: '#FCFBF4', text: '#2D241E', headerBg: '#0B1E3F', cardBg: '#FFF', accent: '#D4AF37' },
@@ -2045,15 +2046,15 @@ const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill=
 
           switch (block.type) {
             case 'arabic': case 'arabic-green': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" onClick={handleSelect} className="font-arabic mb-6 text-center cursor-pointer active:bg-black/5 rounded-xl transition-all font-bold px-2" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>;
+              return <p key={idx} dir="rtl" onClick={handleSelect} className="font-arabic mb-6 text-center cursor-pointer active:bg-black/5 rounded-xl transition-all font-bold px-1" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>;
             case 'text':
-              return <p key={idx} onClick={handleSelect} className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer px-2" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
+              return <p key={idx} onClick={handleSelect} className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer font-medium px-1" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
             case 'section-title': return <h3 key={idx} className="text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase" style={{ color: theme.accent }}>{block.text}</h3>;
             case 'title-green': return <h2 key={idx} className="font-arabic font-bold text-center mb-2 text-[#d63384]" style={{ fontSize: '34px' }}>{block.text}</h2>;
             case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter inline-block shadow-sm">{block.text}</span></div>;
             case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
             case 'allah-name': return (
-                <div key={idx} onClick={handleSelect} className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer active:bg-black/5 rounded-xl px-2">
+                <div key={idx} onClick={handleSelect} className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer active:bg-black/5 rounded-xl px-1">
                   <div className="flex justify-between items-center mb-2 px-4">
                     <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
@@ -2070,35 +2071,30 @@ const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill=
           const page = PAGES_DATA[activePageId];
           if (!page) return null;
           return (
-            <div className="min-h-screen relative animate-in pb-40" style={{ backgroundColor: theme.bg }}>
+            <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg }}>
               <div className="sticky top-0 z-30 shadow-xl safe-top" style={{ backgroundColor: theme.headerBg }}>
                   <div className="flex items-center justify-between p-4 text-white text-center">
                       <button onClick={() => setActivePageId(null)} className="p-2 active:scale-75"><IconBack /></button>
                       <h1 className="font-heading font-bold text-xs tracking-[0.2em] uppercase truncate px-4 flex-1 text-center font-sans">{page.title}</h1>
                       <button onClick={() => setShowSettings(true)} className="p-2 active:scale-75"><IconSettings /></button>
                   </div>
-                  
-                  {/* IMPROVED INDEX BAR (Works for Salawat and all others) */}
-                  <div className="flex overflow-x-auto p-2 gap-2 bg-black/20 no-scrollbar border-t border-white/5 text-center">
+                  {/* FULL INDEX MENU - NO TRUNCATION */}
+                  <div className="flex overflow-x-auto p-2 gap-2 bg-black/20 no-scrollbar border-t border-white/5 text-center justify-center">
                     {page.cards && page.cards.map((card, i) => {
-                      // Smart Label: Look for titles, then short arabic, then part number
-                      const titleBlock = card.content?.find(b => b.type === 'section-title' || b.type === 'title-green' || (b.type.startsWith('arabic') && b.text.length < 50));
+                      const titleBlock = card.content?.find(b => b.type === 'section-title' || b.type === 'title-green');
                       const btnLabel = titleBlock ? titleBlock.text : `Part ${i+1}`;
-                      return <button key={i} onClick={() => document.getElementById(`card-${i}`).scrollIntoView({behavior:'smooth'})} className="whitespace-nowrap px-5 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase font-sans">{btnLabel}</button>;
+                      return <button key={i} onClick={() => document.getElementById(`card-${i}`).scrollIntoView({behavior:'smooth'})} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase font-sans">{btnLabel}</button>;
                     })}
                   </div>
               </div>
-
-              {/* Wider width container for gold borders */}
-              <div className="max-w-3xl mx-auto px-1 py-6 space-y-10">
+              <div className="max-w-2xl mx-auto px-1 py-6 space-y-8 pb-40">
                   {page.cards && page.cards.map((card, idx) => (
-                    <div id={`card-${idx}`} key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-6 sm:p-10 shadow-sm relative overflow-hidden animate-in">
+                    <div id={`card-${idx}`} key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-4 sm:p-8 shadow-sm relative overflow-hidden animate-in">
                       <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/5 rounded-bl-full"></div>
                       {card.content && card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, page.title))}
                     </div>
                   ))}
               </div>
-
               {selectedPrayer && (
                 <div className="fixed bottom-10 left-6 right-6 z-50 animate-in">
                   <div className="max-w-md mx-auto bg-white shadow-2xl rounded-full p-2 flex items-center justify-between border border-[#D4AF37]">
@@ -2120,8 +2116,7 @@ const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill=
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
             <div className="pt-16 pb-8 safe-top relative text-center">
                <button onClick={() => setShowSettings(true)} className="absolute top-12 right-8 text-[#D4AF37] active:scale-75 transition-transform"><IconSettings /></button>
-               {/* QALB-E-DUA: Forced to one line */}
-               <h1 className="text-2xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-lg text-center uppercase whitespace-nowrap px-4">Qalb-e-Dua</h1>
+               <h1 className="text-2xl font-heading font-bold text-[#D4AF37] tracking-widest drop-shadow-lg text-center uppercase whitespace-nowrap px-4">Qalb-e-Dua</h1>
             </div>
             <div className="flex-1 rounded-t-[4rem] -mt-8 p-8 pb-32 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto pt-4 space-y-4 text-center">
@@ -2142,7 +2137,7 @@ const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill=
             {showSettings && (
               <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm px-4 pb-10" onClick={() => setShowSettings(false)}>
                   <div className="w-full max-w-sm bg-white rounded-[2.5rem] p-8 shadow-2xl animate-in" style={{ backgroundColor: theme.id === 'dark' ? '#1E293B' : '#FFF', color: theme.id === 'dark' ? '#FFF' : '#000' }} onClick={(e) => e.stopPropagation()}>
-                      <div className="flex justify-between items-center mb-8 text-center"><h3 className="font-heading font-bold text-xl uppercase tracking-widest text-center flex-1 font-sans text-center">Settings</h3><button onClick={() => setShowSettings(false)} className="p-2 opacity-50"><IconClose /></button></div>
+                      <div className="flex justify-between items-center mb-8 text-center"><h3 className="font-heading font-bold text-xl uppercase tracking-widest text-center flex-1 font-sans">Settings</h3><button onClick={() => setShowSettings(false)} className="p-2 opacity-50"><IconClose /></button></div>
                       <div className="mb-10 text-center"><p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-40 text-center font-sans">Theme Color</p><div className="flex justify-around px-2">{['cream', 'white', 'dark'].map(t => (<button key={t} onClick={() => setCurrentThemeId(t)} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37] scale-110 shadow-lg' : 'border-gray-100'}`} style={{ backgroundColor: THEMES[t].bg }} />))}</div></div>
                       <div className="text-center"><p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-40 text-center font-sans">Arabic Size</p><div className="flex items-center justify-between bg-gray-50 dark:bg-slate-800 rounded-3xl p-2 border border-black/5 text-center font-sans"><button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="p-4 active:scale-75 transition-transform"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14"/></svg></button><span className="font-arabic text-2xl font-bold">بِسْمِ</span><button onClick={() => setFontScale(s => Math.min(s+4, 16))} className="p-4 active:scale-75 transition-transform"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M5 12h14"/></svg></button></div></div>
                   </div>
