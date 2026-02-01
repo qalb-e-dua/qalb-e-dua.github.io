@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: #0B1E3F;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- iPhone notch and color fix -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Qalb-e-Dua">
     <meta name="theme-color" content="#0B1E3F">
+    
     <title>Qalb-e-Dua</title>
+    
+    <!-- LOGO ICON -->
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN5PSIyMDUiIGN4PSIyNDUiIHI9IjEwIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0gMjU2IDI4MCBRIDMxMCAyODAgMzEwIDIzMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTSAxODAgMzYwIFEgMjU2IDM5MCAzMzIgMzYwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIG9wYWNpdHk9IjAuOCIvPjx0ZXh0IHg9IjI1NiIgeT0iNDYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zaXplPSI0MiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
       html, body { background-color: #0B1E3F !important; margin: 0; padding: 0; height: 100%; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
       .font-heading { font-family: 'Cinzel', serif; }
-      /* ORIGINAL FONT */
+      /* YOUR ORIGINAL ARABIC FONT */
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .animate-in { animation: fadeIn 0.3s ease-out; }
@@ -2007,8 +2015,8 @@
 
       };
 
-       // ==========================================
-      // FINAL STABLE BRAIN (No storage calls = No Blue Crash)
+  // ==========================================
+      // STABLE BRAIN (Fixed Width & Home Screen)
       // ==========================================
       const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
@@ -2041,16 +2049,16 @@
 
           switch (block.type) {
             case 'arabic': case 'arabic-green': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" onClick={handleSelect} className="font-arabic mb-6 text-center cursor-pointer active:bg-black/5 rounded-xl transition-all font-bold" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>;
+              return <p key={idx} dir="rtl" onClick={handleSelect} className="font-arabic mb-6 text-center cursor-pointer active:bg-black/5 rounded-xl transition-all font-bold px-2" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>;
             case 'text':
-              return <p key={idx} onClick={handleSelect} className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer font-medium" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
+              return <p key={idx} onClick={handleSelect} className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer px-2" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
             case 'section-title': return <h3 key={idx} className="text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase" style={{ color: theme.accent }}>{block.text}</h3>;
             case 'title-green': return <h2 key={idx} className="font-arabic font-bold text-center mb-2 text-[#d63384]" style={{ fontSize: '34px' }}>{block.text}</h2>;
             case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter shadow-md inline-block">{block.text}</span></div>;
             case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
             case 'allah-name': return (
-                <div key={idx} onClick={handleSelect} className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer active:bg-black/5 rounded-xl">
-                  <div className="flex justify-between items-center mb-2 px-4 text-center">
+                <div key={idx} onClick={handleSelect} className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer active:bg-black/5 rounded-xl px-2">
+                  <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
                   </div>
@@ -2070,21 +2078,21 @@
               <div className="sticky top-0 z-30 shadow-xl safe-top" style={{ backgroundColor: theme.headerBg }}>
                   <div className="flex items-center justify-between p-4 text-white text-center">
                       <button onClick={() => setActivePageId(null)} className="p-2 active:scale-75"><IconBack /></button>
-                      <h1 className="font-heading font-bold text-xs tracking-[0.2em] uppercase truncate px-4 flex-1 text-center font-sans">{page.title}</h1>
+                      <h1 className="font-heading font-bold text-xs tracking-[0.2em] uppercase truncate px-4 flex-1 text-center">{page.title}</h1>
                       <button onClick={() => setShowSettings(true)} className="p-2 active:scale-75"><IconSettings /></button>
                   </div>
-                  {/* FULL INDEX MENU: No cutoff for text */}
                   <div className="flex overflow-x-auto p-2 gap-2 bg-black/20 no-scrollbar border-t border-white/5 text-center justify-center">
                     {page.cards && page.cards.map((card, i) => {
                       const titleBlock = card.content?.find(b => b.type === 'section-title' || b.type === 'title-green');
-                      const btnLabel = titleBlock ? titleBlock.text : `Part ${i+1}`;
-                      return <button key={i} onClick={() => document.getElementById(`card-${i}`).scrollIntoView({behavior:'smooth'})} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase font-sans">{btnLabel}</button>;
+                      const btnLabel = titleBlock ? titleBlock.text.substring(0,12) : `Part ${i+1}`;
+                      return <button key={i} onClick={() => document.getElementById(`card-${i}`).scrollIntoView({behavior:'smooth'})} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase">{btnLabel}</button>;
                     })}
                   </div>
               </div>
-              <div className="max-w-2xl mx-auto p-6 space-y-12">
+              {/* FIXED WIDTH CONTAINER: Removed large padding to make box wider */}
+              <div className="w-full max-w-2xl mx-auto px-2 py-6 space-y-8">
                   {page.cards && page.cards.map((card, idx) => (
-                    <div id={`card-${idx}`} key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-8 shadow-sm relative overflow-hidden animate-in">
+                    <div id={`card-${idx}`} key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-4 sm:p-8 shadow-sm relative overflow-hidden animate-in">
                       <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/5 rounded-bl-full"></div>
                       {card.content && card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, page.title))}
                     </div>
@@ -2111,14 +2119,14 @@
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
             <div className="pt-16 pb-8 safe-top relative text-center">
                <button onClick={() => setShowSettings(true)} className="absolute top-12 right-8 text-[#D4AF37] active:scale-75 transition-transform"><IconSettings /></button>
-               {/* QALB-E-DUA: Fixed to stay on one line */}
-               <h1 className="text-2xl font-heading font-bold text-[#D4AF37] tracking-widest drop-shadow-lg text-center uppercase whitespace-nowrap px-4">Qalb-e-Dua</h1>
+               {/* QALB-E-DUA Title fixed to stay on one line */}
+               <h1 className="text-3xl font-heading font-bold text-[#D4AF37] tracking-wider drop-shadow-lg text-center uppercase whitespace-nowrap px-4">Qalb-e-Dua</h1>
             </div>
             <div className="flex-1 rounded-t-[4rem] -mt-8 p-8 pb-32 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto pt-4 space-y-4 text-center">
                 {MENU_ITEMS.map((item) => (
                     <button key={item.id} onClick={() => setActivePageId(item.pageId)} style={{ backgroundColor: theme.cardBg, color: theme.text, border: `4px double ${theme.accent}` }} className="w-full p-4 rounded-2xl flex flex-col items-center justify-center transition-all shadow-sm active:scale-95 group">
-                      <span className="font-heading text-base tracking-wide uppercase font-sans font-bold">{item.label}</span>
+                      <span className="font-heading text-base tracking-wide uppercase">{item.label}</span>
                       {item.subtext && <span className="mt-1 text-[10px] opacity-40 uppercase tracking-[0.2em] font-sans text-center">{item.subtext}</span>}
                     </button>
                 ))}
