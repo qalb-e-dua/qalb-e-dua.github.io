@@ -27,46 +27,45 @@
           height: 100%;
           display: flex;
           flex-direction: column;
-          background-color: #0B1E3F;
       }
 
+      /* FIX: Pushes header down so Notch doesn't touch the text */
       .app-header {
           background-color: #0B1E3F;
-          padding-top: env(safe-area-inset-top);
+          padding-top: calc(env(safe-area-inset-top) + 15px);
+          padding-bottom: 15px;
           flex-shrink: 0;
           z-index: 100;
-          border-bottom: 1px solid rgba(212, 175, 55, 0.15);
       }
       
       .header-content {
-          height: 50px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 0 16px;
+          justify-content: center;
+          position: relative;
+          width: 100%;
+          height: 30px;
       }
 
       .main-content {
           flex: 1;
           overflow-y: auto;
           background-color: #FCFBF4;
-          border-top-left-radius: 30px;
-          border-top-right-radius: 30px;
+          border-top-left-radius: 35px;
+          border-top-right-radius: 35px;
           -webkit-overflow-scrolling: touch;
       }
 
-      /* INDEX BAR STYLING */
       .index-bar {
           display: flex;
           overflow-x: auto;
-          padding: 8px 12px;
-          gap: 8px;
+          padding: 10px 15px;
+          gap: 10px;
           background: rgba(0,0,0,0.2);
-          border-top: 1px solid rgba(255,255,255,0.05);
+          scrollbar-width: none;
       }
       .index-bar::-webkit-scrollbar { display: none; }
 
-      /* FOOTER - ONLY FOR IPHONE BOTTOM LINE */
       .app-footer {
           background-color: #0B1E3F;
           height: env(safe-area-inset-bottom);
@@ -74,10 +73,20 @@
       }
 
       .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
-      .nav-target { scroll-margin-top: 20px; }
-      .animate-in { animation: fadeIn 0.25s ease-out; }
+      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.3; }
+      .animate-in { animation: fadeIn 0.3s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      
+      /* Settings Modal */
+      .modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.7);
+          z-index: 200;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+      }
     </style>
 </head>
 <body>
@@ -100,7 +109,6 @@
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12', subtext: 'Quranic' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13', subtext: 'Ghaus-e-Azam' },
       ];
-
       const createNameEntry = (num, arabic, english) => [
         { type: 'allah-name', number: num, arabic: arabic, english: english }
       ];
@@ -2068,90 +2076,78 @@
       // FULL SMART UI (Restored Index & Allah Names)
       // ==========================================
 
-      // 1. Icons
-      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
-      const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
+      const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconBack = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
 
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
+        const [showSettings, setShowSettings] = useState(false);
         const scrollRef = useRef(null);
 
-        // This fixes the "Blank Page" bug by resetting scroll when you go back or change pages
         useEffect(() => {
           if (scrollRef.current) scrollRef.current.scrollTop = 0;
-          window.scrollTo(0,0);
         }, [activePageId]);
 
-        // 2. BLOCK RENDERER (Handles Allah's Names, Arabic, Titles, etc.)
-        const renderBlock = (block, idx, cardVariant) => {
+        const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
           switch (block.type) {
-            case 'arabic': case 'arabic-green': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2" style={{ color: block.type === 'arabic-green' ? '#2e7d32' : '#2D241E', fontSize: '32px' }}>{block.text}</p>; 
+            case 'arabic': case 'arabic-indopak':
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2 text-[#2D241E]" style={{ fontSize: '32px' }}>{block.text}</p>; 
+            case 'arabic-green':
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2 text-[#2e7d32]" style={{ fontSize: '32px' }}>{block.text}</p>; 
             case 'text':
               return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium text-[#2D241E]" style={{ fontSize: '18px' }}>{block.text}</p>; 
             case 'section-title': 
-              return <h3 id={block._jumpId} key={idx} className="nav-target text-center font-heading font-bold text-[13px] tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase text-[#D4AF37] pt-4">{block.text}</h3>;
-            case 'title-green': 
-              return <h2 id={block._jumpId} key={idx} className="nav-target font-arabic font-bold text-center mb-2 text-[#d63384] pt-4" style={{ fontSize: '34px' }}>{block.text}</h2>;
-            case 'count-badge': 
-              return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-widest">{block.text}</span></div>;
-            case 'hr': 
-              return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
+              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase text-[#D4AF37] pt-2">{block.text}</h3>;
             case 'allah-name': 
               return (
                 <div key={idx} className="mb-8 border-b border-gray-100 pb-4 text-center px-2"> 
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-1">
                     <span className="font-bold text-lg text-[#8B0000]">{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: '38px' }}>{block.arabic}</span>
                   </div>
-                  <div className="font-bold opacity-60 text-sm text-[#8B0000] uppercase tracking-tighter">{block.english}</div>
+                  <div className="font-bold opacity-60 text-[13px] text-[#8B0000] uppercase">{block.english}</div>
                 </div>
               );
-            case 'flower-icon': 
-              return <div key={idx} className="text-center text-2xl my-4 text-[#2e7d32]">{block.text}</div>;
+            case 'flower-icon': return <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">{block.text}</div>;
+            case 'hr': return <div key={idx} className="h-px w-1/4 mx-auto bg-[#D4AF37]/20 my-8" />;
             default: return null;
           }
         };
 
-        // 3. PAGE GENERATOR (Includes Index/Jump Bar)
         const renderPage = () => {
           const page = PAGES_DATA[activePageId];
-          if (!page) return null;
-
           const jumps = [];
           let jId = 0;
-          page.cards.forEach(card => {
-            card.content.forEach(block => {
-              if (block.type === 'section-title' || block.type === 'title-green') {
-                const uid = `nav-${activePageId}-${jId++}`;
-                block._jumpId = uid;
-                jumps.push({ text: block.text, id: uid });
-              }
-            });
-          });
+          page?.cards.forEach(card => card.content.forEach(block => {
+            if (block.type === 'section-title') {
+              const uid = `nav-${jId++}`;
+              block._jumpId = uid;
+              jumps.push({ text: block.text, id: uid });
+            }
+          }));
 
           return (
             <Fragment>
               <div className="app-header">
                 <div className="header-content">
-                  <button onClick={() => setActivePageId(null)} className="active:opacity-40 p-1"><IconBack /></button>
-                  <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-white flex-1 text-center truncate px-4">{page.title}</h1>
-                  <button className="p-1"><IconSettings /></button>
+                  <button onClick={() => setActivePageId(null)} className="absolute left-0 p-2"><IconBack /></button>
+                  <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-white">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-0 p-2"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
-                  <div className="index-bar no-scrollbar">
+                  <div className="index-bar">
                     {jumps.map((t, i) => (
-                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth'})}} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase bg-black/10 active:bg-[#D4AF37]/20">{t.text}</button>
+                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth'})}} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/30 text-[#D4AF37] uppercase bg-black/10">{t.text}</button>
                     ))}
                   </div>
                 )}
               </div>
-              <main ref={scrollRef} className="main-content">
-                <div className="max-w-md mx-auto p-5 pb-32">
+              <main ref={scrollRef} className="main-content animate-in">
+                <div className="max-w-md mx-auto p-5 pb-10">
                   {page.cards.map((card, idx) => (
-                    <div key={idx} className="mb-8 p-6 border-[3.5px] border-double border-[#D4AF37]/40 rounded-[2.2rem] bg-white shadow-sm animate-in">
-                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, card.variant))}
+                    <div key={idx} style={{backgroundColor: card.variant === 'rabbana' ? '#1F2937' : '#FFF'}} className="mb-6 p-6 border-[3px] border-double border-[#D4AF37]/40 rounded-[2rem] shadow-sm">
+                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
                   ))}
                 </div>
@@ -2160,17 +2156,18 @@
           );
         };
 
-        // 4. MENU GENERATOR
         const renderMenu = () => (
           <Fragment>
-            <div className="app-header h-[80px] flex items-center justify-center relative">
-               <h1 className="font-heading font-bold text-2xl text-[#D4AF37] tracking-widest uppercase mt-4">Qalb-e-Dua</h1>
-               <button className="absolute right-6 top-12"><IconSettings /></button>
+            <div className="app-header">
+               <div className="header-content">
+                 <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase">Qalb-e-Dua</h1>
+                 <button onClick={() => setShowSettings(true)} className="absolute right-0 p-2"><IconSettings /></button>
+               </div>
             </div>
             <main ref={scrollRef} className="main-content">
-              <div className="max-w-md mx-auto p-6 pt-10 space-y-4">
+              <div className="max-w-md mx-auto p-6 pt-8 space-y-3">
                 {MENU_ITEMS.map((item) => (
-                  <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="w-full p-6 rounded-2xl border-[3.5px] border-double border-[#D4AF37] bg-white active:scale-[0.96] transition-all shadow-sm flex flex-col items-center">
+                  <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="w-full p-5 rounded-2xl border-[3px] border-double border-[#D4AF37] bg-white active:scale-[0.97] transition-all shadow-sm flex flex-col items-center">
                     <span className="font-heading text-[15px] font-bold text-[#2D241E] uppercase tracking-wide">{item.label}</span>
                     {item.subtext && <span className="text-[9px] opacity-40 uppercase tracking-widest mt-1">{item.subtext}</span>}
                   </button>
@@ -2181,9 +2178,18 @@
         );
 
         return (
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full bg-[#0B1E3F]">
             {activePageId ? renderPage() : renderMenu()}
             <footer className="app-footer"></footer>
+
+            {showSettings && (
+              <div className="modal-overlay" onClick={() => setShowSettings(false)}>
+                <div className="w-full max-w-sm bg-white rounded-t-[30px] p-8 pb-12 animate-in" onClick={e => e.stopPropagation()}>
+                  <h3 className="text-center font-heading font-bold text-lg mb-6 text-[#0B1E3F]">SETTINGS</h3>
+                  <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#0B1E3F] text-white rounded-xl font-bold">CLOSE</button>
+                </div>
+              </div>
+            )}
           </div>
         );
       };
