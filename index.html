@@ -15,58 +15,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-      /* FORCE EVERYTHING TO BE BLUE BEHIND THE CONTENT */
       html, body { 
           background-color: #0B1E3F !important; 
           margin: 0; padding: 0; 
-          height: 100vh; width: 100vw;
+          height: 100%; width: 100%;
           overflow: hidden; 
           position: fixed;
       }
       #root { height: 100%; display: flex; flex-direction: column; }
 
-      /* HEADER: Pushed down 20px extra so the Notch CANNOT hide it */
       .app-header {
           background-color: #0B1E3F;
-          padding-top: calc(env(safe-area-inset-top) + 15px);
-          padding-bottom: 15px;
+          padding-top: env(safe-area-inset-top);
           flex-shrink: 0;
           z-index: 100;
       }
       .header-content {
-          height: 30px; display: flex; align-items: center;
+          height: 54px; display: flex; align-items: center;
           justify-content: center; position: relative; padding: 0 20px;
       }
-
-      /* MAIN CONTENT: flex-grow forces this to be the biggest part */
       .main-content {
-          flex-grow: 1; 
-          overflow-y: auto;
+          flex: 1; overflow-y: auto;
+          background-color: #FCFBF4;
           border-top-left-radius: 40px; border-top-right-radius: 40px;
           -webkit-overflow-scrolling: touch;
-          background-color: #FCFBF4;
       }
-
-      /* FOOTER: Reduced to 12px. This is the smallest blue line possible */
       .app-footer {
           background-color: #0B1E3F;
-          height: 12px !important; 
+          height: 15px !important; 
           flex-shrink: 0;
       }
-
       .index-bar {
           display: flex; overflow-x: auto; padding: 10px; gap: 8px;
           background: rgba(0,0,0,0.2); scrollbar-width: none;
       }
       .index-bar::-webkit-scrollbar { display: none; }
-
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
-      
-      .modal-overlay {
-          position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-          z-index: 200; display: flex; align-items: flex-end;
-      }
+      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; display: flex; align-items: flex-end; }
       .theme-btn { width: 55px; height: 55px; border-radius: 50%; border: 3px solid #ddd; }
       .theme-btn.active { border-color: #D4AF37; transform: scale(1.15); }
     </style>
@@ -2050,11 +2036,9 @@
 
       };
 
-   // ==========================================
-      // STABLE SMART UI (Fixed 15px Footer & Notch)
-      // ==========================================
+   // (Wait! Make sure you pasted your 2000 lines above this line)
 
-       const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
 
       const THEMES = {
@@ -2107,10 +2091,12 @@
         };
 
         const renderPage = () => {
-          const page = PAGES_DATA[activePageId];
+          const page = PAGES_DATA ? PAGES_DATA[activePageId] : null;
+          if (!page) return <div className="p-20 text-white text-center">Data Missing</div>;
+          
           const jumps = [];
           let jId = 0;
-          page?.cards.forEach(card => card.content.forEach(block => {
+          page.cards.forEach(card => card.content.forEach(block => {
             if (block.type === 'section-title' || block.type === 'title-green') {
               const uid = `nav-${jId++}`;
               block._jumpId = uid;
@@ -2120,21 +2106,21 @@
 
           return (
             <Fragment>
-              <div className="app-header">
+              <div className="app-header shadow-md">
                 <div className="header-content">
                   <button onClick={() => setActivePageId(null)} className="absolute left-4 p-2 active:opacity-50"><IconBack /></button>
                   <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-white truncate px-10 text-center">{page.title}</h1>
                   <button onClick={() => setShowSettings(true)} className="absolute right-4 p-2"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
-                  <div className="index-bar">
+                  <div className="index-bar no-scrollbar">
                     {jumps.map((t, i) => (
                       <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth'})}} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/30 text-[#D4AF37] uppercase bg-black/20">{t.text}</button>
                     ))}
                   </div>
                 )}
               </div>
-              <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
+              <main ref={scrollRef} className="main-content" style={{ backgroundColor: theme.bg }}>
                 <div className="max-w-md mx-auto p-5 pb-20">
                   {page.cards.map((card, idx) => (
                     <div key={idx} style={{backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg}} className="mb-6 p-6 border-[3px] border-double border-[#D4AF37]/40 rounded-[2.2rem] shadow-sm">
@@ -2149,8 +2135,8 @@
 
         const renderMenu = () => (
           <Fragment>
-            <div className="app-header h-[90px] flex items-center justify-center relative">
-               <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase mt-4">Qalb-e-Dua</h1>
+            <div className="app-header h-[85px] flex items-center justify-center relative">
+               <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase mt-4 text-center w-full px-12">Qalb-e-Dua</h1>
                <button onClick={() => setShowSettings(true)} className="absolute right-6 top-10 p-2"><IconSettings /></button>
             </div>
             <main ref={scrollRef} className="main-content" style={{ backgroundColor: theme.bg }}>
@@ -2167,7 +2153,7 @@
         );
 
         return (
-          <div id="root">
+          <div className="flex flex-col h-full overflow-hidden">
             {activePageId ? renderPage() : renderMenu()}
             <footer className="app-footer"></footer>
 
@@ -2184,7 +2170,7 @@
                     </div>
                   </div>
                   <div className="mb-10 text-center">
-                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4">Themes</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4 text-center">Themes</p>
                     <div className="flex justify-around">
                       <button onClick={() => setTheme(THEMES.cream)} className={`theme-btn ${theme.id==='cream'?'active':''}`} style={{backgroundColor:'#FCFBF4'}} />
                       <button onClick={() => setTheme(THEMES.white)} className={`theme-btn ${theme.id==='white'?'active':''}`} style={{backgroundColor:'#FFF'}} />
