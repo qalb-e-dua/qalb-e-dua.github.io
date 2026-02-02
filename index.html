@@ -22,70 +22,52 @@
           overflow: hidden; 
           position: fixed;
       }
+      #root { height: 100%; display: flex; flex-direction: column; background-color: #0B1E3F; }
 
-      #root {
-          height: 100vh; /* Force app to fill the whole screen */
-          display: flex;
-          flex-direction: column;
-      }
-
-      /* HEADER: Notch protection */
       .app-header {
           background-color: #0B1E3F;
-          padding-top: env(safe-area-inset-top);
+          padding-top: calc(env(safe-area-inset-top) + 15px);
+          padding-bottom: 12px;
           flex-shrink: 0;
           z-index: 100;
+          border-bottom: 1px solid rgba(212, 175, 55, 0.15);
       }
-      
       .header-content {
-          height: 54px; 
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          padding: 0 20px;
+          height: 34px; display: flex; align-items: center;
+          justify-content: center; position: relative; padding: 0 20px;
       }
-
-      /* MAIN CONTENT: flex-1 makes it push the footer to the very bottom */
       .main-content {
-          flex: 1; 
-          overflow-y: auto;
+          flex: 1; overflow-y: auto;
           background-color: #FCFBF4;
-          border-top-left-radius: 35px;
-          border-top-right-radius: 35px;
+          border-top-left-radius: 35px; border-top-right-radius: 35px;
           -webkit-overflow-scrolling: touch;
       }
 
-      /* FOOTER: This is your "little blue" bar. It is locked to 25px */
-      .app-footer {
-          background-color: #0B1E3F;
-          height: 25px; 
-          flex-shrink: 0;
-      }
-
+      /* INDEX BAR STYLING */
       .index-bar {
-          display: flex;
-          overflow-x: auto;
-          padding: 10px 15px;
-          gap: 10px;
-          background: rgba(0,0,0,0.2);
-          scrollbar-width: none;
+          display: flex; overflow-x: auto; padding: 10px; gap: 8px;
+          background: rgba(0,0,0,0.2); scrollbar-width: none;
       }
       .index-bar::-webkit-scrollbar { display: none; }
+      
+      /* THIS FIXES THE INDEX JUMP POSITION */
+      .nav-target { scroll-margin-top: 20px; }
+
+      .app-footer {
+          background-color: #0B1E3F;
+          height: 15px !important; flex-shrink: 0;
+      }
 
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
+      .animate-in { animation: fadeIn 0.25s ease-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       
       .modal-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0,0,0,0.7);
-          z-index: 200;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
+          position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+          z-index: 200; display: flex; align-items: flex-end;
       }
-      .theme-btn { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #eee; }
+      .theme-btn { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #ddd; }
       .theme-btn.active { border-color: #D4AF37; transform: scale(1.1); }
     </style>
 </head>
@@ -2073,7 +2055,7 @@
 
       };
 
-       const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+     const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
 
       const THEMES = {
@@ -2105,9 +2087,9 @@
             case 'text':
               return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium px-2" style={{ color: theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
             case 'section-title': 
-              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase text-[#D4AF37] pt-2">{block.text}</h3>;
+              return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-[13px] tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase text-[#D4AF37] pt-2">{block.text}</h3>;
             case 'title-green': 
-              return <h2 id={blockId} key={idx} className="font-arabic font-bold text-center mb-2 text-[#d63384] pt-4" style={{ fontSize: '34px' }}>{block.text}</h2>;
+              return <h2 id={blockId} key={idx} className="nav-target font-arabic font-bold text-center mb-2 text-[#d63384] pt-4" style={{ fontSize: '34px' }}>{block.text}</h2>;
             case 'allah-name': 
               return (
                 <div key={idx} className="mb-8 border-b border-gray-100 pb-4 text-center px-2"> 
@@ -2129,9 +2111,11 @@
           const page = PAGES_DATA[activePageId];
           const jumps = [];
           let jId = 0;
+          
+          // GENERATE JUMP IDS FOR THE INDEX
           page?.cards.forEach(card => card.content.forEach(block => {
             if (block.type === 'section-title' || block.type === 'title-green') {
-              const uid = `nav-${jId++}`;
+              const uid = `jump-${jId++}`;
               block._jumpId = uid;
               jumps.push({ text: block.text, id: uid });
             }
@@ -2141,23 +2125,23 @@
             <Fragment>
               <div className="app-header shadow-md">
                 <div className="header-content">
-                  <button onClick={() => setActivePageId(null)} className="absolute left-5"><IconBack /></button>
-                  <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-white truncate px-10 text-center">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="absolute right-5"><IconSettings /></button>
+                  <button onClick={() => setActivePageId(null)} className="absolute left-4 p-2 active:opacity-40"><IconBack /></button>
+                  <h1 className="font-heading font-bold text-[13px] tracking-widest uppercase text-white truncate px-10 text-center">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-4 p-2"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
                   <div className="index-bar">
                     {jumps.map((t, i) => (
-                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth'})}} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/30 text-[#D4AF37] uppercase bg-black/10">{t.text}</button>
+                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth'})}} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/30 text-[#D4AF37] uppercase bg-black/10 active:bg-[#D4AF37]/40 transition-colors">{t.text}</button>
                     ))}
                   </div>
                 )}
               </div>
-              <main ref={scrollRef} className="main-content" style={{ backgroundColor: theme.bg }}>
+              <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
                 <div className="max-w-md mx-auto p-5 pb-10">
                   {page.cards.map((card, idx) => (
-                    <div key={idx} style={{backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg}} className="mb-6 p-6 border-[3px] border-double border-[#D4AF37]/40 rounded-[2.2rem] shadow-sm animate-in">
-                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, card.variant, block._jumpId))}
+                    <div key={idx} style={{backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg}} className="mb-6 p-6 border-[3px] border-double border-[#D4AF37]/40 rounded-[2.2rem] shadow-sm">
+                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
                   ))}
                 </div>
@@ -2168,11 +2152,9 @@
 
         const renderMenu = () => (
           <Fragment>
-            <div className="app-header">
-               <div className="header-content">
-                 <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase mt-4">Qalb-e-Dua</h1>
-                 <button onClick={() => setShowSettings(true)} className="absolute right-6 top-8"><IconSettings /></button>
-               </div>
+            <div className="app-header h-[85px] flex items-center justify-center relative">
+               <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase mt-4 text-center w-full px-12">Qalb-e-Dua</h1>
+               <button onClick={() => setShowSettings(true)} className="absolute right-6 top-10 p-2"><IconSettings /></button>
             </div>
             <main ref={scrollRef} className="main-content" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto p-6 pt-10 space-y-4">
@@ -2194,28 +2176,25 @@
 
             {showSettings && (
               <div className="modal-overlay" onClick={() => setShowSettings(false)}>
-                <div className="w-full max-w-sm bg-white rounded-t-[35px] p-8 pb-12 animate-in" onClick={e => e.stopPropagation()} style={{ backgroundColor: theme.bg, color: theme.text }}>
+                <div className="w-full max-w-sm bg-white rounded-t-[40px] p-8 pb-12 animate-in" onClick={e => e.stopPropagation()} style={{ backgroundColor: theme.bg, color: theme.text }}>
                   <h3 className="text-center font-heading font-bold text-lg mb-8 tracking-widest">SETTINGS</h3>
-                  
                   <div className="mb-8 text-center">
-                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4">Font Size</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4 text-center font-sans">Font Size</p>
                     <div className="flex items-center justify-between bg-black/5 rounded-2xl p-2">
-                       <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-14 h-14 bg-white rounded-xl shadow-sm text-black font-bold text-2xl">-</button>
+                       <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-14 h-14 bg-white rounded-xl shadow-sm text-black font-bold text-2xl active:scale-90">-</button>
                        <span className="font-arabic text-2xl font-bold">بِسْمِ</span>
-                       <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-14 h-14 bg-white rounded-xl shadow-sm text-black font-bold text-2xl">+</button>
+                       <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-14 h-14 bg-white rounded-xl shadow-sm text-black font-bold text-2xl active:scale-90">+</button>
                     </div>
                   </div>
-
                   <div className="mb-10 text-center">
-                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4">Background</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4 text-center font-sans">Themes</p>
                     <div className="flex justify-around">
                       <button onClick={() => setTheme(THEMES.cream)} className={`theme-btn ${theme.id==='cream'?'active':''}`} style={{backgroundColor:'#FCFBF4'}} />
                       <button onClick={() => setTheme(THEMES.white)} className={`theme-btn ${theme.id==='white'?'active':''}`} style={{backgroundColor:'#FFF'}} />
                       <button onClick={() => setTheme(THEMES.dark)} className={`theme-btn ${theme.id==='dark'?'active':''}`} style={{backgroundColor:'#121212'}} />
                     </div>
                   </div>
-
-                  <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#D4AF37] text-white rounded-2xl font-bold">CLOSE</button>
+                  <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#D4AF37] text-white rounded-2xl font-bold font-sans">CLOSE</button>
                 </div>
               </div>
             )}
