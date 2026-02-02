@@ -25,16 +25,16 @@
     <style>
       /* FIX WHITE GAP: Background navy blue on HTML tag */
       html { 
-          background-color: #0B1E3F !important; 
+          background-color: #0B1E3F !important; /* This ensures the very top status bar area is navy blue */
           scroll-behavior: smooth; 
           padding: 0;
           margin: 0;
           height: 100%; /* Explicitly make html fill full height */
       }
       body { 
-          /* The body background color was #FCFBF4, which caused the white gap. */
-          /* Changed to the app's primary navy blue to cover the top safe area. */
-          background-color: #0B1E3F; 
+          /* Reverted body background to original #FCFBF4. */
+          /* The 'html' background will cover the status bar, and the React components will handle their backgrounds. */
+          background-color: #FCFBF4; 
           margin: 0; 
           padding: 0; 
           min-height: 100vh; 
@@ -54,7 +54,6 @@
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       
       /* Ensure safe area insets are respected for top and bottom */
-      /* Note: The .safe-top class needs to be applied to the actual header element in your HTML. */
       .safe-top { padding-top: env(safe-area-inset-top); }
       .safe-bottom-padding { padding-bottom: env(safe-area-inset-bottom); }
     </style>
@@ -2062,7 +2061,8 @@
         const [showSettings, setShowSettings] = useState(false);
         const [currentThemeId, setCurrentThemeId] = useState('cream');
         const [fontScale, setFontScale] = useState(0);
-        const [selectedPrayer, setSelectedPrayer] = useState(null);
+        // Removed `selectedPrayer` state to disable the popup entirely as requested.
+        // const [selectedPrayer, setSelectedPrayer] = useState(null); 
 
         const theme = THEMES[currentThemeId] || THEMES.cream;
         const arabicSize = 32 + (fontScale * 2);
@@ -2074,13 +2074,14 @@
           if (cardVariant === 'rabbana') { textColor = (block.type && block.type.startsWith('arabic')) ? '#D4AF37' : '#FFFFFF';
           } else if (block.type === 'arabic-green') { textColor = '#2e7d32'; }
 
-          const handleSelect = () => { setSelectedPrayer(null); setTimeout(() => setSelectedPrayer({ title: pageTitle }), 50); };
+          // Removed handleSelect as the popup is being removed.
+          // const handleSelect = () => { setSelectedPrayer(null); setTimeout(() => setSelectedPrayer({ title: pageTitle }), 50); };
 
           switch (block.type) {
             case 'arabic': case 'arabic-green': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" onClick={handleSelect} className="font-arabic mb-6 text-center cursor-pointer active:bg-black/5 rounded-xl transition-all font-bold px-1" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>;
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-1" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>; // Removed cursor-pointer and active styles
             case 'text':
-              return <p key={idx} onClick={handleSelect} className="text-center font-sans mb-4 opacity-80 leading-relaxed cursor-pointer font-medium px-1" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
+              return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium px-1" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>; // Removed cursor-pointer and active styles
             case 'section-title': 
               return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase" style={{ color: theme.accent }}>{block.text}</h3>;
             case 'title-green': 
@@ -2088,7 +2089,7 @@
             case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter inline-block shadow-sm">{block.text}</span></div>;
             case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
             case 'allah-name': return (
-                <div key={idx} onClick={handleSelect} className="mb-8 border-b border-gray-100 pb-4 text-center cursor-pointer active:bg-black/5 rounded-xl px-1">
+                <div key={idx} className="mb-8 border-b border-gray-100 pb-4 text-center px-1"> {/* Removed cursor-pointer and active styles */}
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
@@ -2102,6 +2103,8 @@
         };
 
         const renderPage = () => {
+          // IMPORTANT: PAGES_DATA MUST BE DEFINED globally or passed here for this to work.
+          // If PAGES_DATA is not defined, this will cause a runtime error.
           const page = PAGES_DATA[activePageId];
           if (!page) return null;
 
@@ -2120,6 +2123,7 @@
 
           return (
             <div className="min-h-screen relative animate-in" style={{ backgroundColor: theme.bg }}>
+              {/* === FIX APPLIED HERE: Added 'safe-top' class to the sticky header for the page === */}
               <div className="sticky top-0 z-30 shadow-xl safe-top" style={{ backgroundColor: theme.headerBg }}>
                   <div className="flex items-center justify-between p-4 text-white text-center">
                       <button onClick={() => setActivePageId(null)} className="p-2 active:scale-75"><IconBack /></button>
@@ -2139,7 +2143,7 @@
                   </div>
               </div>
               
-              <div className="max-w-4xl mx-auto px-1 py-6 space-y-10 pb-40">
+              <div className="max-w-4xl mx-auto px-1 py-6 space-y-10 pb-40 safe-bottom-padding"> 
                   {page.cards && page.cards.map((card, idx) => (
                     <div key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-5 sm:p-10 shadow-sm relative overflow-hidden animate-in">
                       <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/5 rounded-bl-full"></div>
@@ -2148,30 +2152,19 @@
                   ))}
               </div>
 
-              {selectedPrayer && (
-                <div className="fixed bottom-10 left-6 right-6 z-50 animate-in">
-                  <div className="max-w-md mx-auto bg-white shadow-2xl rounded-full p-2 flex items-center justify-between border border-[#D4AF37]">
-                    <div className="flex items-center gap-6 ml-10 overflow-hidden text-center flex-1">
-                        <div className="flex flex-col truncate">
-                            <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4AF37]">Reading Verse</span>
-                            <span className="text-[11px] font-bold text-gray-500 uppercase truncate font-sans">{selectedPrayer.title}</span>
-                        </div>
-                    </div>
-                    <button onClick={() => setSelectedPrayer(null)} className="p-4 mr-2 text-gray-300 active:text-red-400"><IconClose /></button>
-                  </div>
-                </div>
-              )}
+              {/* Removed the entire selectedPrayer popup as requested */}
             </div>
           );
         };
 
         const renderMenu = () => (
+          // === FIX APPLIED HERE: Added 'safe-top' class to the header for the main menu ===
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: theme.headerBg }}>
             <div className="pt-16 pb-8 safe-top relative text-center">
                <button onClick={() => setShowSettings(true)} className="absolute top-12 right-8 text-[#D4AF37] active:scale-75 transition-transform"><IconSettings /></button>
                <h1 className="text-2xl font-heading font-bold text-[#D4AF37] tracking-widest drop-shadow-lg text-center uppercase whitespace-nowrap px-4">Qalb-e-Dua</h1>
             </div>
-            <div className="flex-1 rounded-t-[4rem] -mt-8 p-8 pb-32 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
+            <div className="flex-1 rounded-t-[4rem] -mt-8 p-8 pb-32 overflow-y-auto safe-bottom-padding" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto pt-4 space-y-4 text-center">
                 {MENU_ITEMS.map((item) => (
                     <button key={item.id} onClick={() => setActivePageId(item.pageId)} style={{ backgroundColor: theme.cardBg, color: theme.text, border: `4px double ${theme.accent}` }} className="w-full p-5 rounded-2xl flex flex-col items-center justify-center transition-all shadow-sm active:scale-95 group">
