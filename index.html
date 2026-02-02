@@ -24,13 +24,12 @@
       }
 
       #root {
-          height: 100%;
+          height: 100vh; /* Force app to fill the whole screen */
           display: flex;
           flex-direction: column;
-          background-color: #0B1E3F; /* The background of the whole app */
       }
 
-      /* HEADER: Notch protection only at the top */
+      /* HEADER: Notch protection */
       .app-header {
           background-color: #0B1E3F;
           padding-top: env(safe-area-inset-top);
@@ -44,17 +43,24 @@
           align-items: center;
           justify-content: center;
           position: relative;
+          padding: 0 20px;
       }
 
-      /* MAIN CONTENT: No bottom blue bar, cream goes to the end */
+      /* MAIN CONTENT: flex-1 makes it push the footer to the very bottom */
       .main-content {
-          flex: 1;
+          flex: 1; 
           overflow-y: auto;
           background-color: #FCFBF4;
           border-top-left-radius: 35px;
           border-top-right-radius: 35px;
           -webkit-overflow-scrolling: touch;
-          padding-bottom: 40px; /* Space for the iPhone home line */
+      }
+
+      /* FOOTER: This is your "little blue" bar. It is locked to 25px */
+      .app-footer {
+          background-color: #0B1E3F;
+          height: 25px; 
+          flex-shrink: 0;
       }
 
       .index-bar {
@@ -2090,11 +2096,10 @@
           if (scrollRef.current) scrollRef.current.scrollTop = 0;
         }, [activePageId]);
 
-        const renderBlock = (block, idx, cardVariant, blockId) => {
+        const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
           const aSize = 32 + (fontScale * 2);
           const eSize = 18 + (fontScale * 1);
-
           switch (block.type) {
             case 'arabic': case 'arabic-indopak':
               return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2" style={{ color: theme.text, fontSize: `${aSize}px` }}>{block.text}</p>; 
@@ -2138,10 +2143,10 @@
           return (
             <Fragment>
               <div className="app-header shadow-md">
-                <div className="header-content px-4">
-                  <button onClick={() => setActivePageId(null)} className="absolute left-4"><IconBack /></button>
-                  <h1 className="font-heading font-bold text-[13px] tracking-widest uppercase text-white truncate px-8 text-center">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="absolute right-4"><IconSettings /></button>
+                <div className="header-content">
+                  <button onClick={() => setActivePageId(null)} className="absolute left-5"><IconBack /></button>
+                  <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-white truncate px-10 text-center">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-5"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
                   <div className="index-bar">
@@ -2168,8 +2173,8 @@
           <Fragment>
             <div className="app-header">
                <div className="header-content">
-                 <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase text-center mt-2">Qalb-e-Dua</h1>
-                 <button onClick={() => setShowSettings(true)} className="absolute right-6 top-2"><IconSettings /></button>
+                 <h1 className="font-heading font-bold text-[22px] text-[#D4AF37] tracking-widest uppercase mt-4">Qalb-e-Dua</h1>
+                 <button onClick={() => setShowSettings(true)} className="absolute right-6 top-8"><IconSettings /></button>
                </div>
             </div>
             <main ref={scrollRef} className="main-content" style={{ backgroundColor: theme.bg }}>
@@ -2188,6 +2193,7 @@
         return (
           <div className="flex flex-col h-full bg-[#0B1E3F]">
             {activePageId ? renderPage() : renderMenu()}
+            <footer className="app-footer"></footer>
 
             {showSettings && (
               <div className="modal-overlay" onClick={() => setShowSettings(false)}>
