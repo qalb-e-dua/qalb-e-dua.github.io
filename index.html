@@ -23,31 +23,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
+      /* Ensure HTML and BODY take full height and don't scroll themselves */
       html { 
-          background-color: #0B1E3F !important; 
+          background-color: #0B1E3F !important; /* This sets the very top color */
           scroll-behavior: smooth; 
           padding: 0;
           margin: 0;
           height: 100%; 
-          /* CRITICAL: Ensure no scroll on html */
-          overflow: hidden; 
+          overflow: hidden; /* Prevent HTML from scrolling */
       }
       body { 
-          background-color: #0B1E3F; 
+          background-color: #FCFBF4; /* Reverted to your original content background color */
           margin: 0; 
           padding: 0; 
-          height: 100%; /* Use height: 100% instead of min-height: 100vh for stability */
-          overflow: hidden; /* CRITICAL: Ensure no scroll on body */
+          height: 100%; 
+          overflow: hidden; /* Prevent BODY from scrolling */
           -webkit-tap-highlight-color: transparent; 
           -webkit-overflow-scrolling: touch;
       }
 
-      /* New style for the root app container to handle scrolling */
+      /* CRITICAL: Make the #root div the flex container for your app */
       #root {
-          height: 100%; /* Ensure #root fills the entire body height */
-          display: flex; /* Use flexbox to correctly size children */
-          flex-direction: column;
-          overflow: hidden; /* Prevent #root from scrolling */
+          height: 100%; /* #root now fills the entire viewport */
+          display: flex; /* Makes #root a flex container */
+          flex-direction: column; /* Stacks children vertically */
+          overflow: hidden; /* Prevents #root itself from scrolling */
       }
       
       /* Target jump points with offset so header doesn't cover them */
@@ -2052,7 +2052,7 @@
       // STABLE SMART UI (Fixed Index & Top Gaps)
       // ==========================================
 
-      const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
       const IconClose = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>;
 
@@ -2080,9 +2080,9 @@
 
           switch (block.type) {
             case 'arabic': case 'arabic-green': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-1" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>;
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-1" style={{ color: textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>; 
             case 'text':
-              return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium px-1" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>;
+              return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium px-1" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>; 
             case 'section-title': 
               return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase" style={{ color: theme.accent }}>{block.text}</h3>;
             case 'title-green': 
@@ -2090,7 +2090,7 @@
             case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-tighter inline-block shadow-sm">{block.text}</span></div>;
             case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
             case 'allah-name': return (
-                <div key={idx} className="mb-8 border-b border-gray-100 pb-4 text-center px-1">
+                <div key={idx} className="mb-8 border-b border-gray-100 pb-4 text-center px-1"> 
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
@@ -2120,9 +2120,9 @@
           });
 
           return (
-            // Flex column to make header fixed and content scrollable
+            // This container now explicitly fills the space and manages its own scroll
             <div className="flex flex-col h-full relative animate-in" style={{ backgroundColor: theme.bg }}>
-              {/* This header is fixed at the top */}
+              {/* Header is fixed at the top, includes safe-top padding */}
               <div className="sticky top-0 z-30 shadow-xl safe-top" style={{ backgroundColor: theme.headerBg }}>
                   <div className="flex items-center justify-between p-4 text-white text-center">
                       <button onClick={() => setActivePageId(null)} className="p-2 active:scale-75" style={{ color: theme.text }}><IconBack /></button>
@@ -2141,7 +2141,7 @@
                   </div>
               </div>
               
-              {/* This content area is now scrollable */}
+              {/* This is the main content area, now set to scroll */}
               <div className="flex-1 max-w-4xl mx-auto px-1 py-6 space-y-10 pb-40 overflow-y-auto safe-bottom-padding" style={{ backgroundColor: theme.bg }}> 
                   {page.cards && page.cards.map((card, idx) => (
                     <div key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-5 sm:p-10 shadow-sm relative overflow-hidden animate-in">
@@ -2155,13 +2155,14 @@
         };
 
         const renderMenu = () => (
-          // Adjusted to ensure the container is full height and content scrolls within
-          <div className="flex flex-col h-full" style={{ backgroundColor: theme.headerBg }}>
+          // This container now explicitly fills the space and manages its own scroll
+          <div className="flex flex-col h-full" style={{ backgroundColor: theme.headerBg }}> {/* Added h-full here */}
+            {/* Header is fixed at the top, includes safe-top padding */}
             <div className="pt-16 pb-8 safe-top relative text-center">
                <button onClick={() => setShowSettings(true)} className="absolute top-12 right-8 text-[#D4AF37] active:scale-75 transition-transform"><IconSettings /></button>
                <h1 className="text-2xl font-heading font-bold text-[#D4AF37] tracking-widest drop-shadow-lg text-center uppercase whitespace-nowrap px-4">Qalb-e-Dua</h1>
             </div>
-            {/* Main menu content is scrollable */}
+            {/* Main menu content is now scrollable */}
             <div className="flex-1 rounded-t-[4rem] -mt-8 p-8 pb-32 overflow-y-auto safe-bottom-padding" style={{ backgroundColor: theme.bg }}>
               <div className="max-w-md mx-auto pt-4 space-y-4 text-center">
                 {MENU_ITEMS.map((item) => (
