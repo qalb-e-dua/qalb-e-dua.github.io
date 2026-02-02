@@ -22,21 +22,18 @@
           overflow: hidden; 
           position: fixed;
       }
-
       #root {
-          height: 100vh;
+          height: 100%;
           display: flex;
           flex-direction: column;
+          background-color: #0B1E3F;
       }
-
-      /* FIXED TOP: Protects title from Notch */
       .app-header {
           background-color: #0B1E3F;
           padding-top: env(safe-area-inset-top);
           flex-shrink: 0;
           z-index: 100;
       }
-      
       .header-content {
           height: 54px; 
           display: flex;
@@ -45,8 +42,6 @@
           position: relative;
           padding: 0 20px;
       }
-
-      /* MAIN CONTENT: Grows to fill screen */
       .main-content {
           flex: 1; 
           overflow-y: auto;
@@ -54,14 +49,11 @@
           border-top-right-radius: 35px;
           -webkit-overflow-scrolling: touch;
       }
-
-      /* FIXED BOTTOM: Exactly 15px as requested */
       .app-footer {
           background-color: #0B1E3F;
           height: 15px; 
           flex-shrink: 0;
       }
-
       .index-bar {
           display: flex;
           overflow-x: auto;
@@ -71,21 +63,11 @@
           scrollbar-width: none;
       }
       .index-bar::-webkit-scrollbar { display: none; }
-
       .font-heading { font-family: 'Cinzel', serif; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
       .animate-in { animation: fadeIn 0.25s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      
-      .modal-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0,0,0,0.7);
-          z-index: 200;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-      }
+      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: flex; align-items: flex-end; }
       .theme-btn { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #eee; }
       .theme-btn.active { border-color: #D4AF37; transform: scale(1.1); }
     </style>
@@ -110,6 +92,7 @@
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12', subtext: 'Quranic' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13', subtext: 'Ghaus-e-Azam' },
       ];
+
       const createProphetName = (num, arabic, english) => [
         { type: 'allah-name', number: num, arabic: arabic, english: english }
       ];
@@ -2069,11 +2052,11 @@
 
       };
 
-     // ==========================================
-      // FULL SMART UI (Restored Index & Allah Names)
+   // ==========================================
+      // STABLE SMART UI (Fixed 15px Footer & Notch)
       // ==========================================
 
-   const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
 
       const THEMES = {
@@ -2115,7 +2098,7 @@
                     <span className="font-bold text-lg text-[#8B0000]">{block.number}</span>
                     <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${aSize + 6}px` }}>{block.arabic}</span>
                   </div>
-                  <div className="font-bold opacity-60 text-[13px] text-[#8B0000] uppercase">{block.english}</div>
+                  <div className="font-bold opacity-60 text-[13px] text-[#8B0000] uppercase tracking-tighter">{block.english}</div>
                 </div>
               );
             case 'flower-icon': return <div key={idx} className="text-center text-xl my-4 text-[#2e7d32]">{block.text}</div>;
@@ -2127,9 +2110,11 @@
 
         const renderPage = () => {
           const page = PAGES_DATA[activePageId];
+          if (!page) return <div className="p-10 text-white text-center">Data Error: Page Not Found</div>;
+          
           const jumps = [];
           let jId = 0;
-          page?.cards.forEach(card => card.content.forEach(block => {
+          page.cards.forEach(card => card.content.forEach(block => {
             if (block.type === 'section-title' || block.type === 'title-green') {
               const uid = `nav-${jId++}`;
               block._jumpId = uid;
@@ -2188,7 +2173,7 @@
         );
 
         return (
-          <div className="flex flex-col h-full bg-[#0B1E3F]">
+          <div className="flex flex-col h-full">
             {activePageId ? renderPage() : renderMenu()}
             <footer className="app-footer"></footer>
 
@@ -2196,7 +2181,6 @@
               <div className="modal-overlay" onClick={() => setShowSettings(false)}>
                 <div className="w-full max-w-sm bg-white rounded-t-[35px] p-8 pb-12 animate-in" onClick={e => e.stopPropagation()} style={{ backgroundColor: theme.bg, color: theme.text }}>
                   <h3 className="text-center font-heading font-bold text-lg mb-8 tracking-widest">SETTINGS</h3>
-                  
                   <div className="mb-8 text-center">
                     <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4">Font Size</p>
                     <div className="flex items-center justify-between bg-black/5 rounded-2xl p-2">
@@ -2205,7 +2189,6 @@
                        <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-14 h-14 bg-white rounded-xl shadow-sm text-black font-bold text-2xl">+</button>
                     </div>
                   </div>
-
                   <div className="mb-10 text-center">
                     <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-4">Background</p>
                     <div className="flex justify-around">
@@ -2214,7 +2197,6 @@
                       <button onClick={() => setTheme(THEMES.dark)} className={`theme-btn ${theme.id==='dark'?'active':''}`} style={{backgroundColor:'#121212'}} />
                     </div>
                   </div>
-
                   <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#D4AF37] text-white rounded-2xl font-bold">CLOSE</button>
                 </div>
               </div>
