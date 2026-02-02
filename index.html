@@ -3,72 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
-    <meta name="apple-mobile-web-app-title" content="Qalb-e-Dua">
     <meta name="theme-color" content="#0B1E3F">
-    
     <title>Qalb-e-Dua</title>
-    
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjZDNkRBIi8+PHN0b3Agb2ZZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNjA2NCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTSAyNTYgODAgUSAxMzYgMjQwIDEzNiAzMzAgQSAxMjAgMTIwIDAgMCAwIDM3NiAzMzAgUSAzNzYgMjQwIDI1NiA4MCBaIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAxODAgTCAyNTYgMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNIDI1NiAzMDAgUSAyMDAgMzAwIDIwMCAyNTAgUSAyMDAgMjIwIDIzMCAyMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2apPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjIwNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+PHNpcmNsZSBjeT0iMjA1IiBjeD0iMjQ1IiByPSIxMCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN5PSIyMDUiIGN4PSIzNDUiIHI9IjEwIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0gMjU2IDI4MCBRIDMxMCAyODAgMzEwIDIzMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxMCIgZmlsbD0ibm9uZSINCiAgICAgICAgICAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTSAxODAgMzYwIFEgMjU2IDM5MCAzMzIgMzYwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC44Ii8+PHRleHQgeD0iMjU2IiB5PSI0NjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNjAwIiBmb250LXNpemU9IjQyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmciPSIyIj5xdWxiIGUgRHVhPC90ZXh0Pjwvc3ZnPg==">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-      /* FIX 1: STOP GAPS & BOUNCING */
-      html { 
+      html, body { 
           background-color: #0B1E3F !important; 
-          height: 100%; 
-          overflow: hidden; 
-      }
-      body { 
-          background-color: #0B1E3F !important;
           margin: 0; padding: 0; 
-          height: 100%; 
+          height: 100%; width: 100%;
           overflow: hidden; 
-          -webkit-tap-highlight-color: transparent; 
+          position: fixed; /* Stops the screen from moving up/down */
       }
 
       #root {
-          height: 100%; 
-          display: flex; 
-          flex-direction: column; 
-          overflow: hidden; 
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          background-color: #0B1E3F;
       }
 
-      /* FIX 2: STOP HIDDEN TITLE (NOTCH PROTECTION) */
-      .header-safe-area {
-        background-color: #0B1E3F;
-        padding-top: env(safe-area-inset-top); /* Pushes title below the notch */
-        flex-shrink: 0;
-        z-index: 100;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      /* HEADER: Slimmer and perfectly centered */
+      .app-header {
+          background-color: #0B1E3F;
+          padding-top: env(safe-area-inset-top);
+          flex-shrink: 0;
+          z-index: 100;
+          border-bottom: 1px solid rgba(212, 175, 55, 0.15);
       }
       
-      .scroll-container {
-        flex: 1;
-        overflow-y: auto;
-        background-color: #FCFBF4; /* Your original Cream color */
-        -webkit-overflow-scrolling: touch;
+      .header-content {
+          height: 54px; /* Slimmer height */
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 16px;
+      }
+
+      /* CONTENT: Cream background with rounded top */
+      .main-content {
+          flex: 1;
+          overflow-y: auto;
+          background-color: #FCFBF4;
+          border-top-left-radius: 24px;
+          border-top-right-radius: 24px;
+          -webkit-overflow-scrolling: touch;
+      }
+
+      /* BOTTOM BAR: Fixed thin blue space */
+      .app-footer {
+          background-color: #0B1E3F;
+          height: env(safe-area-inset-bottom); /* Only takes the iPhone line space */
+          flex-shrink: 0;
       }
 
       .font-heading { font-family: 'Cinzel', serif; }
-      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.4; }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      .animate-in { animation: fadeIn 0.3s ease-out; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
+      .animate-in { animation: fadeIn 0.25s ease-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div id="root"></div>
     <script type="text/babel">
-      const { useState, useEffect, Fragment } = React;
+      const { useState, useEffect, Fragment, useRef } = React;
 
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
@@ -85,6 +90,7 @@
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12', subtext: 'Quranic' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13', subtext: 'Ghaus-e-Azam' },
       ];
+
       const createNameEntry = (num, arabic, english) => [
         { type: 'allah-name', number: num, arabic: arabic, english: english }
       ];
@@ -2048,151 +2054,92 @@
 
       };
 
-       // ==========================================
-      // STABLE SMART UI (Fixed Index & Top Gaps)
-      // ==========================================
-
-      const IconSettings = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
-      const IconBack = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
-      const IconClose = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>;
+      // ICON COMPONENTS
+      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
 
       const THEMES = {
-        cream: { id: 'cream', bg: '#FCFBF4', text: '#2D241E', headerBg: '#0B1E3F', cardBg: '#FFF', accent: '#D4AF37' }, 
-        white: { id: 'white', bg: '#FFFFFF', text: '#000000', headerBg: '#0B1E3F', cardBg: '#FFF', accent: '#D4AF37' }, 
-        dark: { id: 'dark', bg: '#121212', text: '#E0E0E0', headerBg: '#1E1E1E', cardBg: '#1E293B', accent: '#D4AF37' }
+        cream: { id: 'cream', bg: '#FCFBF4', text: '#2D241E', headerBg: '#0B1E3F', cardBg: '#FFF', accent: '#D4AF37' }
       };
 
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
-        const [showSettings, setShowSettings] = useState(false);
-        const [currentThemeId, setCurrentThemeId] = useState('cream');
-        const [fontScale, setFontScale] = useState(0);
+        const scrollRef = useRef(null);
 
-        const theme = THEMES[currentThemeId] || THEMES.cream;
-        const arabicSize = 32 + (fontScale * 2);
-        const englishSize = 18 + (fontScale * 1);
+        // FIX: Scroll to top every time you change pages to stop the blank screen bug
+        useEffect(() => {
+          if (scrollRef.current) {
+            scrollRef.current.scrollTop = 0;
+          }
+        }, [activePageId]);
 
-        const renderContentBlock = (block, idx, cardVariant, pageTitle, blockId) => {
+        const theme = THEMES.cream;
+
+        const renderContentBlock = (block, idx, cardVariant) => {
           if (!block) return null;
-          let textColor = block.textColor || theme.text;
-          if (cardVariant === 'rabbana') { textColor = (block.type && block.type.startsWith('arabic')) ? '#D4AF37' : '#FFFFFF'; }
-          
           switch (block.type) {
-            case 'arabic': case 'arabic-green': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-1" style={{ color: block.type === 'arabic-green' ? '#2e7d32' : textColor, fontSize: `${arabicSize}px` }}>{block.text}</p>; 
+            case 'arabic': case 'arabic-green':
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2 text-[#2D241E]" style={{ fontSize: '32px' }}>{block.text}</p>; 
             case 'text':
-              return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium px-1" style={{ color: textColor, fontSize: `${englishSize}px` }}>{block.text}</p>; 
+              return <p key={idx} className="text-center font-sans mb-4 opacity-80 leading-relaxed font-medium text-[#2D241E]" style={{ fontSize: '18px' }}>{block.text}</p>; 
             case 'section-title': 
-              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase pt-4" style={{ color: theme.accent }}>{block.text}</h3>;
-            case 'title-green': 
-              return <h2 id={blockId} key={idx} className="font-arabic font-bold text-center mb-2 text-[#d63384] pt-4" style={{ fontSize: '34px' }}>{block.text}</h2>;
-            case 'count-badge': return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#0B1E3F] text-[#D4AF37] uppercase tracking-widest inline-block shadow-sm">{block.text}</span></div>;
-            case 'hr': return <div key={idx} className="h-px w-1/3 mx-auto bg-[#D4AF37]/20 my-8" />;
-            case 'allah-name': return (
-                <div key={idx} className="mb-8 border-b border-gray-100 pb-4 text-center px-1"> 
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-bold text-lg" style={{ color: '#8B0000' }}>{block.number}</span>
-                    <span className="font-arabic font-bold text-[#1a237e]" style={{ fontSize: `${arabicSize + 4}px` }}>{block.arabic}</span>
-                  </div>
-                  <div className="font-bold opacity-60 font-sans text-center text-sm" style={{ color: '#8B0000' }}>{block.english}</div>
-                </div>
-              );
+              return <h3 key={idx} className="text-center font-heading font-bold text-sm tracking-widest mb-6 pb-2 border-b border-[#D4AF37]/20 uppercase text-[#D4AF37] pt-2">{block.text}</h3>;
             default: return null;
           }
         };
 
-        const renderPage = () => {
-          const page = PAGES_DATA[activePageId];
-          if (!page) return null;
-
-          const allJumpTargets = [];
-          let targetIndex = 0;
-          page.cards.forEach((card) => {
-            card.content.forEach((block) => {
-              if (block.type === 'section-title' || block.type === 'title-green') {
-                const uniqueId = `dua-jump-${targetIndex++}`;
-                block._jumpId = uniqueId;
-                allJumpTargets.push({ text: block.text, id: uniqueId });
-              }
-            });
-          });
-
-          return (
-            <div className="flex flex-col h-full relative animate-in" style={{ backgroundColor: theme.bg }}>
-              {/* FIXED HEADER WITH NOTCH PROTECTION */}
-              <div className="header-safe-area shadow-xl">
-                  <div className="flex items-center justify-between p-4 h-16">
-                      <button onClick={() => setActivePageId(null)} className="p-2 active:scale-75"><IconBack /></button>
-                      <h1 className="font-heading font-bold text-xs tracking-[0.2em] uppercase truncate px-4 flex-1 text-center text-white">{page.title}</h1>
-                      <button onClick={() => setShowSettings(true)} className="p-2 active:scale-75"><IconSettings /></button>
-                  </div>
-                  {allJumpTargets.length > 0 && (
-                    <div className="flex overflow-x-auto p-2 gap-2 bg-black/20 no-scrollbar border-t border-white/5">
-                      {allJumpTargets.map((target, i) => (
-                        <button key={i} onClick={() => {
-                          const el = document.getElementById(target.id);
-                          if(el) el.scrollIntoView({behavior:'smooth', block: 'start'});
-                        }} className="whitespace-nowrap px-5 py-1.5 rounded-full text-[10px] font-bold border border-[#D4AF37]/40 text-[#D4AF37] uppercase">
-                          {target.text}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-              </div>
-              
-              {/* SCROLLABLE CONTENT */}
-              <div className="scroll-container px-2 py-6 space-y-10 pb-32"> 
-                  {page.cards && page.cards.map((card, idx) => (
-                    <div key={idx} style={{ backgroundColor: card.variant === 'rabbana' ? '#1F2937' : theme.cardBg, border: `4px double ${theme.accent}`, borderRadius: '2.5rem' }} className="p-6 shadow-sm mx-auto max-w-2xl">
-                      {card.content && card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant, page.title, block._jumpId))}
-                    </div>
-                  ))}
-              </div>
-            </div>
-          );
-        };
-
-        const renderMenu = () => (
-          <div className="flex flex-col h-full bg-[#0B1E3F]">
-            {/* FIXED HOME HEADER WITH NOTCH PROTECTION */}
-            <div className="header-safe-area pb-12 relative text-center">
-               <button onClick={() => setShowSettings(true)} className="absolute top-1/2 right-6 -translate-y-1/2 mt-4 text-[#D4AF37] active:scale-75"><IconSettings /></button>
-               <h1 className="text-2xl font-heading font-bold text-[#D4AF37] tracking-widest pt-10 uppercase">Qalb-e-Dua</h1>
-            </div>
-
-            {/* MENU CONTENT SCROLLS SEPARATELY */}
-            <div className="flex-1 rounded-t-[3.5rem] -mt-8 p-6 overflow-y-auto" style={{ backgroundColor: theme.bg }}>
-              <div className="max-w-md mx-auto pt-8 space-y-4">
-                {MENU_ITEMS.map((item) => (
-                    <button key={item.id} onClick={() => setActivePageId(item.pageId)} style={{ backgroundColor: theme.cardBg, color: theme.text, border: `4px double ${theme.accent}` }} className="w-full p-6 rounded-2xl flex flex-col items-center justify-center transition-all shadow-sm active:scale-95">
-                      <span className="font-heading text-base tracking-wide uppercase font-bold">{item.label}</span>
-                      {item.subtext && <span className="mt-1 text-[10px] opacity-40 uppercase tracking-widest">{item.subtext}</span>}
-                    </button>
-                ))}
-              </div>
-              <div className="h-20"></div>
-            </div>
-          </div>
-        );
-
         return (
           <Fragment>
-            {activePageId ? renderPage() : renderMenu()}
-            {showSettings && (
-              <div className="fixed inset-0 z-[200] flex items-end justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowSettings(false)}>
-                  <div className="w-full max-w-sm bg-white rounded-t-[2.5rem] p-8 pb-12 shadow-2xl animate-in" style={{ backgroundColor: theme.id === 'dark' ? '#1E293B' : '#FFF', color: theme.id === 'dark' ? '#FFF' : '#000' }} onClick={(e) => e.stopPropagation()}>
-                      <div className="flex justify-between items-center mb-8"><h3 className="font-heading font-bold text-xl uppercase tracking-widest flex-1 text-center">Settings</h3><button onClick={() => setShowSettings(false)} className="p-2 opacity-50"><IconClose /></button></div>
-                      <div className="mb-10 text-center"><p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-40">Theme</p><div className="flex justify-around">{['cream', 'white', 'dark'].map(t => (<button key={t} onClick={() => setCurrentThemeId(t)} className={`w-14 h-14 rounded-full border-4 ${currentThemeId === t ? 'border-[#D4AF37] scale-110 shadow-lg' : 'border-gray-100'}`} style={{ backgroundColor: THEMES[t].bg }} />))}</div></div>
-                      <div className="text-center"><p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-40">Arabic Size</p><div className="flex items-center justify-between bg-gray-50 dark:bg-slate-800 rounded-3xl p-2"><button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="p-4 active:scale-75"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14"/></svg></button><span className="font-arabic text-2xl font-bold">بِسْمِ</span><button onClick={() => setFontScale(s => Math.min(s+4, 16))} className="p-4 active:scale-75"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M5 12h14"/></svg></button></div></div>
-                  </div>
-              </div>
-            )}
+            {/* TOP BAR */}
+            <header className="app-header">
+                <div className="header-content">
+                    {activePageId ? (
+                      <button onClick={() => setActivePageId(null)} className="active:opacity-50"><IconBack /></button>
+                    ) : <div className="w-6" />}
+                    
+                    <h1 className="font-heading font-bold text-[15px] tracking-[0.15em] uppercase text-white">
+                      {activePageId ? PAGES_DATA[activePageId]?.title : "Qalb-e-Dua"}
+                    </h1>
+                    
+                    <button className="active:scale-90 transition-transform"><IconSettings /></button>
+                </div>
+            </header>
+
+            {/* MAIN AREA */}
+            <main ref={scrollRef} className="main-content">
+                <div className="max-w-md mx-auto p-5 pb-20">
+                    {activePageId ? (
+                      <div className="animate-in">
+                          {PAGES_DATA[activePageId]?.cards.map((card, idx) => (
+                            <div key={idx} className="mb-6 p-6 border-[3px] border-double border-[#D4AF37]/30 rounded-[2rem] bg-white shadow-sm">
+                              {card.content.map((block, bIdx) => renderContentBlock(block, bIdx, card.variant))}
+                            </div>
+                          ))}
+                      </div>
+                    ) : (
+                      <div className="space-y-3 pt-4 animate-in">
+                        {MENU_ITEMS.map((item) => (
+                          <button 
+                            key={item.id} 
+                            onClick={() => setActivePageId(item.pageId)}
+                            className="w-full p-5 rounded-2xl border-[3px] border-double border-[#D4AF37] bg-white active:scale-[0.97] transition-all shadow-sm flex flex-col items-center"
+                          >
+                            <span className="font-heading text-[14px] font-bold text-[#2D241E] uppercase tracking-wide">{item.label}</span>
+                            {item.subtext && <span className="text-[9px] opacity-40 uppercase tracking-widest mt-1">{item.subtext}</span>}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                </div>
+            </main>
+
+            {/* THIN BOTTOM BAR */}
+            <footer className="app-footer"></footer>
           </Fragment>
         );
       };
 
-      const container = document.getElementById('root');
-      const root = ReactDOM.createRoot(container);
+      const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
     </script>
 </body>
