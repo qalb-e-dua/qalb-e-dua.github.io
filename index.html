@@ -8,31 +8,21 @@
     <meta name="theme-color" content="#051F22">
     <title>Qalb-e-Dua</title>
 
-    <!-- 1. INSTANT CSS - This runs before any scripts -->
+    <!-- 1. INSTANT CSS - This stops the white screen instantly -->
     <style>
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
-      html, body { 
-          background-color: #051F22 !important; 
-          margin: 0; padding: 0; height: 100%; width: 100%;
-          overflow: hidden; position: fixed;
-      }
-      #splash-overlay {
-          position: fixed; inset: 0; background: #051F22;
-          display: flex; flex-direction: column; align-items: center; justify-content: center;
-          z-index: 9999;
-      }
+      html, body { background-color: #051F22 !important; margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; position: fixed; }
+      #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
       .loader-logo { font-family: serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
-      
-      /* Basic styles so the menu looks okay while loading */
       #root { height: 100%; display: flex; flex-direction: column; }
-      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; }
+      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; border-bottom: 1px solid rgba(197, 160, 89, 0.3); }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
       .main-content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
       .mihrab-container { border: 2px solid var(--gold); border-bottom: none; margin: 20px; margin-top: 10px; border-radius: 150px 150px 20px 20px; padding: 50px 20px 40px 20px; min-height: 80vh; }
       .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: serif; font-weight: 700; font-size: 14px; }
       .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; }
       .app-footer { height: 15px !important; flex-shrink: 0; }
-      .font-arabic { font-family: serif; line-height: 2.2; }
+      .font-arabic { font-family: 'Scheherazade New', serif; line-height: 2.2; }
       .animate-in { animation: fadeIn 0.4s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
       .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; display: flex; align-items: flex-end; }
@@ -41,28 +31,25 @@
     </style>
 </head>
 <body>
-    <!-- THIS IS SHOWN INSTANTLY -->
     <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
     <div id="root"></div>
 
-    <!-- 2. DATA IN NORMAL SCRIPT - Fast for GitHub to read -->
     <script>
       const MENU_ITEMS = [
-        { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
+        { id: 'm1', label: 'Opening Dua', pageId: 'p1' }, 
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
-        { id: 'm3', label: 'Names of Prophet ﷺ', pageId: 'p3' },
+        { id: 'm3', label: 'Names of Prophet ﷺ', pageId: 'p3' }, 
         { id: 'm4', label: 'Dorood (Salawat)', pageId: 'p4' },
-        { id: 'm5', label: 'Prayers after Salah', pageId: 'p5' },
+        { id: 'm5', label: 'Prayers after Salah', pageId: 'p5' }, 
         { id: 'm6', label: 'Duas when Visiting Graves', pageId: 'p6' },
-        { id: 'm7', label: 'Prayers of the Prophet ﷺ', pageId: 'p7' },
+        { id: 'm7', label: 'Prayers of the Prophet ﷺ', pageId: 'p7' }, 
         { id: 'm8', label: "Du'a for Shifa", pageId: 'p8' },
-        { id: 'm9', label: 'Victory & Protection', pageId: 'p9' },
+        { id: 'm9', label: 'Victory & Protection', pageId: 'p9' }, 
         { id: 'm10', label: 'Dhikr (Remembrance)', pageId: 'p10' },
-        { id: 'm11', label: 'Morning & Evening Adhkar', pageId: 'p11' },
+        { id: 'm11', label: 'Morning & Evening Adhkar', pageId: 'p11' }, 
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13' },
       ];
-
       const PAGES_DATA = {
       const createNameEntry = (num, arabic, english) => [
         { type: 'allah-name', number: num, arabic: arabic, english: english }
@@ -2027,7 +2014,7 @@
       };
     </script>
 
-    <!-- HEAVY SCRIPTS MOVED TO BOTTOM FOR SPEED -->
+    <!-- SCRIPTS AT BOTTOM TO PREVENT WHITE SCREEN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -2064,6 +2051,7 @@
 
         useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId]);
 
+        // This removes the ۞ symbol from all text automatically
         const clean = (t) => t ? t.replace(/۞/g, '') : '';
 
         const renderBlock = (block, idx, blockId) => {
@@ -2114,7 +2102,7 @@
 
           return (
             <Fragment>
-              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
+              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg}}>
                 <div className="header-content">
                   <button onClick={() => setActivePageId(null)} className="absolute left-5 active:opacity-40 p-1"><IconBack /></button>
                   <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-[#C5A059]">{page.title}</h1>
@@ -2147,7 +2135,7 @@
 
         const renderMenu = () => (
           <Fragment>
-            <div className="app-header" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
+            <div className="app-header" style={{backgroundColor: '#051F22'}}>
                <div className="header-content">
                  <h1 className="font-heading font-bold text-[22px] text-[#C5A059] tracking-widest uppercase">Qalb-e-Dua</h1>
                  <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1 active:scale-90"><IconSettings /></button>
