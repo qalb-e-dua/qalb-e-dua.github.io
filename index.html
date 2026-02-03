@@ -8,40 +8,31 @@
     <meta name="theme-color" content="#051F22">
     <title>Qalb-e-Dua</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-
+    <!-- 1. INSTANT CSS - This runs before any scripts -->
     <style>
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
-
-      /* PREVENT WHITE FLASH */
       html, body { 
           background-color: #051F22 !important; 
-          margin: 0; padding: 0; 
-          height: 100%; width: 100%;
+          margin: 0; padding: 0; height: 100%; width: 100%;
           overflow: hidden; position: fixed;
       }
-
-      /* INSTANT SPLASH SCREEN */
       #splash-overlay {
           position: fixed; inset: 0; background: #051F22;
           display: flex; flex-direction: column; align-items: center; justify-content: center;
-          z-index: 9999; transition: opacity 0.5s ease;
+          z-index: 9999;
       }
-      .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
-
+      .loader-logo { font-family: serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
+      
+      /* Basic styles so the menu looks okay while loading */
       #root { height: 100%; display: flex; flex-direction: column; }
-      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; }
+      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
       .main-content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
       .mihrab-container { border: 2px solid var(--gold); border-bottom: none; margin: 20px; margin-top: 10px; border-radius: 150px 150px 20px 20px; padding: 50px 20px 40px 20px; min-height: 80vh; }
-      .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+      .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: serif; font-weight: 700; font-size: 14px; }
       .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; }
       .app-footer { height: 15px !important; flex-shrink: 0; }
-      .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
+      .font-arabic { font-family: serif; line-height: 2.2; }
       .animate-in { animation: fadeIn 0.4s ease-out; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
       .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; display: flex; align-items: flex-end; }
@@ -49,15 +40,13 @@
       .theme-btn.active { border-color: var(--gold); transform: scale(1.1); }
     </style>
 </head>
-<body style="background-color: #051F22;">
-    <div id="splash-overlay">
-        <div class="loader-logo">QALB-E-DUA</div>
-    </div>
+<body>
+    <!-- THIS IS SHOWN INSTANTLY -->
+    <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
     <div id="root"></div>
 
-    <script type="text/babel">
-      const { useState, useEffect, Fragment, useRef } = React;
-
+    <!-- 2. DATA IN NORMAL SCRIPT - Fast for GitHub to read -->
+    <script>
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
@@ -2039,7 +2028,20 @@
       };
 
       
- const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+}; // End of your data
+    </script>
+
+    <!-- HEAVY SCRIPTS MOVED TO BOTTOM FOR SPEED -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+    <script type="text/babel">
+      const { useState, useEffect, Fragment, useRef } = React;
+
+      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
 
       const THEMES = {
@@ -2058,8 +2060,9 @@
         useEffect(() => {
           const splash = document.getElementById('splash-overlay');
           if (splash) {
+            splash.style.transition = 'opacity 0.4s ease';
             splash.style.opacity = '0';
-            setTimeout(() => { splash.style.display = 'none'; }, 500);
+            setTimeout(() => { splash.style.display = 'none'; }, 400);
           }
         }, []);
 
@@ -2115,7 +2118,7 @@
 
           return (
             <Fragment>
-              <div className="app-header" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
+              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
                 <div className="header-content">
                   <button onClick={() => setActivePageId(null)} className="absolute left-5 active:opacity-40 p-1"><IconBack /></button>
                   <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-[#C5A059]">{page.title}</h1>
