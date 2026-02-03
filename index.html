@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
-    <!-- Apple PWA Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
     <meta name="theme-color" content="#051F22">
     <title>Qalb-e-Dua</title>
 
-    <!-- 1. INSTANT STYLES - This stops the white color immediately -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
+
+      /* PREVENT WHITE FLASH */
       html, body { 
           background-color: #051F22 !important; 
-          margin: 0; padding: 0; height: 100%; width: 100%;
+          margin: 0; padding: 0; 
+          height: 100%; width: 100%;
           overflow: hidden; position: fixed;
       }
+
+      /* INSTANT SPLASH SCREEN */
       #splash-overlay {
           position: fixed; inset: 0; background: #051F22;
           display: flex; flex-direction: column; align-items: center; justify-content: center;
-          z-index: 9999;
+          z-index: 9999; transition: opacity 0.5s ease;
       }
       .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
+
       #root { height: 100%; display: flex; flex-direction: column; }
       .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
@@ -39,20 +48,16 @@
       .theme-btn { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #444; }
       .theme-btn.active { border-color: var(--gold); transform: scale(1.1); }
     </style>
-
-    <!-- Load external files -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
+<body style="background-color: #051F22;">
+    <div id="splash-overlay">
+        <div class="loader-logo">QALB-E-DUA</div>
+    </div>
     <div id="root"></div>
 
-    <!-- 2. DATA IN NORMAL SCRIPT - GitHub can load this much faster than Babel -->
-    <script>
+    <script type="text/babel">
+      const { useState, useEffect, Fragment, useRef } = React;
+
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
@@ -68,6 +73,8 @@
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13' },
       ];
+
+      const PAGES_DATA = {
       const createNameEntry = (num, arabic, english) => [
         { type: 'allah-name', number: num, arabic: arabic, english: english }
       ];
@@ -2032,11 +2039,7 @@
       };
 
       
- <!-- 3. React App logic only - Babel will now run much faster -->
-    <script type="text/babel">
-      const { useState, useEffect, Fragment, useRef } = React;
-
-      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+ const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
 
       const THEMES = {
@@ -2056,7 +2059,7 @@
           const splash = document.getElementById('splash-overlay');
           if (splash) {
             splash.style.opacity = '0';
-            setTimeout(() => { splash.style.display = 'none'; }, 400);
+            setTimeout(() => { splash.style.display = 'none'; }, 500);
           }
         }, []);
 
@@ -2112,7 +2115,7 @@
 
           return (
             <Fragment>
-              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
+              <div className="app-header" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
                 <div className="header-content">
                   <button onClick={() => setActivePageId(null)} className="absolute left-5 active:opacity-40 p-1"><IconBack /></button>
                   <h1 className="font-heading font-bold text-[14px] tracking-widest uppercase text-[#C5A059]">{page.title}</h1>
