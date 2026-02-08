@@ -2278,29 +2278,30 @@
 
         const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
-          // FIX: Reduced base size to 26 so words fit on fewer lines
-          const aSize = 26 + (fontScale * 2);
+          const aSize = 28 + (fontScale * 2); 
           const eSize = 16 + (fontScale * 1);
           switch (block.type) {
             case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-[13px] mb-4 pb-2 border-b border-[#C5A059]/20 uppercase text-[#C5A059]">{block.text}</h3>;
+              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] mb-4 pb-2 border-b border-[#C5A059]/20 uppercase text-[#C5A059]">{block.text}</h3>;
             
             case 'arabic': case 'arabic-indopak':
-              // THE FIX: lineHeight 1.8 and px-0 makes it fit in 1-2 lines and stay clean
+              // FIX: px-0 and lineHeight 1.8 pulls text into 1-2 lines and keeps it clean
               return <p key={idx} dir="rtl" className="font-arabic mb-4 text-center font-bold px-0" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, lineHeight: '1.8' }}>{clean(block.text)}</p>; 
             
             case 'arabic-green':
               return <p key={idx} dir="rtl" className="font-arabic mb-4 text-center font-bold px-0 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, lineHeight: '1.8' }}>{clean(block.text)}</p>; 
             
             case 'text':
+              // FIX: English spreads out wide to use fewer lines
               return <p key={idx} className="text-center font-sans mb-8 opacity-90 leading-relaxed font-medium px-0" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
             
             case 'hr': 
+              // FIX: Long thin divider line
               return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-8" />;
 
             case 'allah-name': 
               return (
-                <div key={idx} className="mb-6 border-b border-white/5 pb-4 text-center"> 
+                <div key={idx} className="mb-6 border-b border-black/5 pb-4 text-center"> 
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-bold text-lg text-[#FF4444]">{block.number}</span>
                     <span className="font-arabic font-bold text-[#4488FF]" style={{ fontSize: '38px' }}>{clean(block.arabic)}</span>
@@ -2309,9 +2310,7 @@
                 </div>
               );
             case 'subtitle-green':
-              return <p key={idx} dir="rtl" className="text-center font-arabic mb-6 text-[#2D8A4E] text-xl px-4">{clean(block.text)}</p>;
-            case 'count-badge': 
-              return <div key={idx} className="flex justify-center mb-6"><span className="px-4 py-1.5 rounded-full text-[10px] font-bold border border-[#C5A059] text-[#C5A059] uppercase bg-black/5">{block.text}</span></div>;
+              return <p key={idx} dir="rtl" className="text-center font-arabic mb-6 text-[#2D8A4E] text-xl">{clean(block.text)}</p>;
             default: return null;
           }
         };
@@ -2352,10 +2351,10 @@
               </div>
               
               <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
-                {/* THE FIX: px-2 container gives more horizontal space */}
+                {/* FIX: Wider container (px-2) makes text fit on 1-2 lines */}
                 <div className="max-w-md mx-auto px-2 pt-6 pb-20">
                   {page.cards.map((card, idx) => (
-                    // THE FIX: p-3 padding makes the box wider for the text
+                    // FIX: Smaller card padding (p-3) gives more room for text
                     <div key={idx} className="mb-8 p-3 border border-[#C5A059]/20 rounded-[1.5rem]" style={{ backgroundColor: theme.card }}>
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
@@ -2395,17 +2394,18 @@
                   <h3 className="text-center font-heading font-bold text-lg mb-8 text-[#C5A059]">SETTINGS</h3>
                   <div className="mb-10 text-center">
                     <p className="text-[10px] font-bold text-[#C5A059] uppercase tracking-widest mb-4">Font Size</p>
-                    <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2 border border-white/5">
+                    <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
                        <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 bg-white/5 rounded-xl text-white text-2xl">-</button>
                        <span className="font-arabic text-2xl text-white">بِسْمِ</span>
                        <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 bg-white/5 rounded-xl text-white font-bold text-2xl">+</button>
                     </div>
                   </div>
+                  {/* COLOR SETTINGS RESTORED */}
                   <div className="mb-10 text-center">
                     <p className="text-[10px] font-bold text-[#C5A059] uppercase tracking-widest mb-4">Color Theme</p>
                     <div className="flex justify-around">
                       {Object.values(THEMES).map(t => (
-                        <button key={t.id} onClick={() => setTheme(t)} className={`theme-btn ${theme.id===t.id?'active':''}`} style={{backgroundColor: t.bg}} />
+                        <button key={t.id} onClick={() => setTheme(t)} className={`w-12 h-12 rounded-full border-2 ${theme.id===t.id?'border-[#C5A059]':'border-transparent opacity-50'}`} style={{backgroundColor: t.bg}} />
                       ))}
                     </div>
                   </div>
