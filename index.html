@@ -2278,39 +2278,39 @@
 
         const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
-          const aSize = 32 + (fontScale * 2);
-          const eSize = 17 + (fontScale * 1);
+          const aSize = 34 + (fontScale * 2);
+          const eSize = 18 + (fontScale * 1);
           switch (block.type) {
             case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] mb-6 pb-2 border-b border-[#C5A059]/30 uppercase text-[#C5A059]">{block.text}</h3>;
+              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] tracking-widest mb-8 pb-2 border-b border-[#C5A059]/20 uppercase text-[#C5A059] pt-2">{block.text}</h3>;
             
             case 'arabic': case 'arabic-indopak':
-              // FIX: leading-[1.2] pulls the Arabic lines together (Line Sorter)
-              return <p key={idx} dir="rtl" className="font-arabic mb-3 text-center font-bold px-1 leading-[1.2]" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
+              // ARABIC LINE SORTER: leading-[1.4] for professional tight spacing
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-1 leading-[1.4]" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
             
             case 'arabic-green':
-              return <p key={idx} dir="rtl" className="font-arabic mb-3 text-center font-bold px-1 text-[#2D8A4E] leading-[1.2]" style={{ fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-1 text-[#2D8A4E] leading-[1.4]" style={{ fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
             
             case 'text':
-              // FIX: Wider padding (px-2) so English uses fewer lines
-              return <p key={idx} className="text-center font-sans mb-6 opacity-90 leading-snug font-medium px-2" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
+              // ENGLISH TRANSLATION: wider horizontal room
+              return <p key={idx} className="text-center font-sans mb-10 opacity-90 leading-relaxed font-medium px-2" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
             
             case 'hr': 
-              // FIX: Thin divider line exactly like your Quran picture
-              return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-8" />;
+              // THIN DIVIDER LINE
+              return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/10 my-10" />;
 
             case 'allah-name': 
               return (
-                <div key={idx} className="mb-6 border-b border-white/5 pb-3 text-center"> 
-                  <div className="flex justify-between items-center">
+                <div key={idx} className="mb-8 border-b border-white/5 pb-4 text-center"> 
+                  <div className="flex justify-between items-center mb-1">
                     <span className="font-bold text-lg text-[#FF4444]">{block.number}</span>
-                    <span className="font-arabic font-bold text-[#4488FF]" style={{ fontSize: '36px' }}>{clean(block.arabic)}</span>
+                    <span className="font-arabic font-bold text-[#4488FF]" style={{ fontSize: '40px' }}>{clean(block.arabic)}</span>
                   </div>
-                  <div className="font-bold opacity-60 text-[12px] text-[#FF4444] uppercase">{block.english}</div>
+                  <div className="font-bold opacity-60 text-[13px] text-[#FF4444] uppercase">{block.english}</div>
                 </div>
               );
             case 'subtitle-green':
-              return <p key={idx} dir="rtl" className="text-center font-arabic mb-4 text-[#2D8A4E] text-xl">{clean(block.text)}</p>;
+              return <p key={idx} dir="rtl" className="text-center font-arabic mb-8 text-[#2D8A4E] text-2xl px-4">{clean(block.text)}</p>;
             default: return null;
           }
         };
@@ -2329,16 +2329,17 @@
 
           return (
             <Fragment>
-              <div className="flex flex-col w-full sticky top-0 z-50 shadow-sm" style={{backgroundColor: theme.bg}}>
-                <div className="flex items-center justify-center relative w-full h-14 px-4 border-b border-white/5">
-                  <button onClick={() => setActivePageId(null)} className="absolute left-4 p-1"><IconBack /></button>
+              <div className="flex flex-col w-full sticky top-0 z-50 shadow-md" style={{backgroundColor: theme.bg}}>
+                {/* SAFE AREA HEADER FIX */}
+                <div className="flex items-end justify-center relative w-full h-24 pb-4 px-4 border-b border-[#C5A059]/10">
+                  <button onClick={() => setActivePageId(null)} className="absolute left-4 bottom-4 p-2"><IconBack /></button>
                   <h1 className="font-heading font-bold text-[14px] uppercase text-[#C5A059] tracking-widest">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="absolute right-4 p-1"><IconSettings /></button>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-4 bottom-4 p-2"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
-                  <div className="index-bar flex items-center gap-2 overflow-x-auto py-2 px-3 no-scrollbar border-b border-white/5" style={{backgroundColor: 'rgba(0,0,0,0.2)'}}>
+                  <div className="index-bar flex items-center gap-3 overflow-x-auto py-3 px-4 no-scrollbar" style={{backgroundColor: 'rgba(0,0,0,0.3)'}}>
                     {jumps.map((t, i) => (
-                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth', block:'center'})}} 
+                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth', block:'start'})}} 
                         className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border uppercase"
                         style={{ borderColor: '#C5A059', color: '#C5A059' }}>
                         {t.text}
@@ -2349,10 +2350,9 @@
               </div>
               
               <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
-                <div className="max-w-md mx-auto px-2 pt-4 pb-20">
+                <div className="max-w-md mx-auto px-4 pt-6 pb-24">
                   {page.cards.map((card, idx) => (
-                    // FIX: Reduced padding (p-4) to allow text to be wider and shorter
-                    <div key={idx} className="mb-6 p-4 border border-[#C5A059]/10 rounded-[1.5rem]" style={{ backgroundColor: theme.card }}>
+                    <div key={idx} className="mb-8 p-6 border border-[#C5A059]/10 rounded-[2.5rem]" style={{ backgroundColor: theme.card }}>
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
                   ))}
@@ -2364,15 +2364,16 @@
 
         const renderMenu = () => (
           <Fragment>
-            <div className="flex items-center justify-center h-16 w-full sticky top-0 z-50" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.2)'}}>
-               <h1 className="font-heading font-bold text-xl text-[#C5A059] uppercase tracking-widest">Qalb-e-Dua</h1>
-               <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1"><IconSettings /></button>
+            {/* SAFE AREA MENU HEADER FIX */}
+            <div className="flex items-end justify-center sticky top-0 z-50 h-28 w-full pb-6 px-6" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.2)'}}>
+               <h1 className="font-heading font-bold text-2xl text-[#C5A059] tracking-[0.2em] uppercase">Qalb-e-Dua</h1>
+               <button onClick={() => setShowSettings(true)} className="absolute right-6 bottom-6 p-2"><IconSettings /></button>
             </div>
             <main className="main-content" style={{backgroundColor: '#051F22'}}>
-              <div className="mihrab-container px-4 pt-6">
+              <div className="mihrab-container px-6 pt-20"> {/* PT-20 pushed buttons down away from arch line */}
                 <div className="max-w-md mx-auto">
                   {MENU_ITEMS.map((item) => (
-                    <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="dua-btn mb-3 py-4 text-lg">{item.label}</button>
+                    <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="dua-btn mb-5 py-6 text-lg tracking-wide">{item.label}</button>
                   ))}
                 </div>
               </div>
