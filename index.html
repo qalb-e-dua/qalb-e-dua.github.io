@@ -2241,7 +2241,7 @@
           ]
         }
 }; // End of your data
-</script>
+ </script>
 <!-- 3. React App logic only - Babel will now run much faster -->
 <script type="text/babel">
 const { useState, useEffect, Fragment, useRef } = React;
@@ -2287,16 +2287,16 @@ const App = () => {
         return <p key={idx} dir="rtl" className="font-arabic mb-6 text-[#2D8A4E] text-xl px-2" style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{clean(block.text)}</p>;
 
       case 'arabic': case 'arabic-indopak':
-        // Reverted to original px-1
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-1" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
+        // MODIFIED: Re-introducing px-4 for shorter lines as per new image
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
 
       case 'arabic-green':
-        // Reverted to original px-1
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-1 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
+        // MODIFIED: Re-introducing px-4 for shorter lines as per new image
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
 
       case 'text':
-        // Reverted to original px-2
-        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-2" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.7' }}>{block.text}</p>;
+        // MODIFIED: Re-introducing px-4 for shorter lines as per new image (changed from original px-2)
+        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-4" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.7' }}>{block.text}</p>;
 
       case 'reference-small':
         return <p key={idx} className="text-center text-[11px] mb-6 opacity-50 italic px-4" style={{ color: theme.id === 'cream' ? '#666' : theme.text }}>{block.text}</p>;
