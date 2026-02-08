@@ -2241,12 +2241,12 @@
           ]
         }
 
-   </script>
+     }; // End of your data
+     </script>
 
     <!-- 3. React App logic only - Babel will now run much faster -->
     <script type="text/babel">
       const { useState, useEffect, Fragment, useRef } = React;
-
 
       const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
@@ -2282,81 +2282,46 @@
           const eSize = 18 + (fontScale * 1);
           switch (block.type) {
             case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-[13px] tracking-[0.2em] mb-12 pb-4 border-b border-[#C5A059]/20 uppercase text-[#C5A059] pt-2">{block.text}</h3>;
+              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] mb-4 pb-2 border-b border-[#C5A059]/30 uppercase text-[#C5A059]">{block.text}</h3>;
             
             case 'arabic': case 'arabic-indopak':
-              // CLEAN FIX: Increased leading to [2.2] so marks don't look "dirty"
-              return <p key={idx} dir="rtl" className="font-arabic mb-10 text-center font-bold px-4 leading-[2.2] tracking-normal" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
+              // FIX: Tightest spacing for the Arabic Line
+              return <p key={idx} dir="rtl" className="font-arabic mb-2 text-center font-bold px-0 leading-[1.2]" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
             
             case 'arabic-green':
-              return <p key={idx} dir="rtl" className="font-arabic mb-10 text-center font-bold px-4 text-[#2D8A4E] leading-[2.2]" style={{ fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
+              return <p key={idx} dir="rtl" className="font-arabic mb-2 text-center font-bold px-0 text-[#2D8A4E] leading-[1.2]" style={{ fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
             
             case 'text':
-              // CLEAN FIX: Added opacity and max-width for an elegant look
-              return <p key={idx} className="text-center font-sans mb-12 opacity-80 leading-relaxed font-medium px-6 max-w-[90%] mx-auto" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
+              // FIX: Tightest spacing for the English Line
+              return <p key={idx} className="text-center font-sans mb-4 opacity-90 leading-tight font-medium px-0" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
             
-            case 'reference-small':
-              return <p key={idx} className="text-center text-[11px] mt-[-20px] mb-10 opacity-40 italic px-4 uppercase tracking-wider" style={{color: theme.id === 'cream' ? '#666' : theme.text}}>{block.text}</p>;
-
             case 'hr': 
-              // CLEAN FIX: Ultra-thin divider line with extra space
-              return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/10 my-16" />;
+              // FIX: Professional Divider Line (Line 3)
+              return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/30 my-6" />;
 
             case 'subtitle-green':
-              return <p key={idx} dir="rtl" className="text-center font-arabic mb-10 text-[#2D8A4E] text-2xl px-4">{clean(block.text)}</p>;
-            
-            case 'allah-name': 
-              return (
-                <div key={idx} className="mb-12 border-b border-white/5 pb-6 text-center"> 
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-bold text-lg text-[#FF4444]">{block.number}</span>
-                    <span className="font-arabic font-bold text-[#4488FF]" style={{ fontSize: '42px' }}>{clean(block.arabic)}</span>
-                  </div>
-                  <div className="font-bold opacity-50 text-[12px] text-[#FF4444] uppercase tracking-widest">{block.english}</div>
-                </div>
-              );
-            case 'count-badge': 
-              return <div key={idx} className="flex justify-center mb-10"><span className="px-6 py-2 rounded-full text-[10px] font-bold border border-[#C5A059]/40 text-[#C5A059] uppercase bg-white/5 tracking-widest">{block.text}</span></div>;
+              return <p key={idx} dir="rtl" className="text-center font-arabic mb-4 text-[#2D8A4E] text-xl">{clean(block.text)}</p>;
             default: return null;
           }
         };
 
         const renderPage = () => {
           const page = PAGES_DATA[activePageId];
-          const jumps = [];
-          let jId = 0;
-          page?.cards.forEach(card => card.content.forEach(block => {
-            if (block.type === 'section-title' || block.type === 'title-green') {
-              const uid = `nav-${activePageId}-${jId++}`;
-              block._jumpId = uid;
-              jumps.push({ text: block.text, id: uid });
-            }
-          }));
-
           return (
             <Fragment>
-              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.2)'}}>
+              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
                 <div className="header-content">
-                  <button onClick={() => setActivePageId(null)} className="absolute left-5 active:opacity-40 p-1"><IconBack /></button>
-                  <h1 className="font-heading font-bold text-[13px] tracking-[0.2em] uppercase text-[#C5A059]">{page.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="absolute right-5 active:opacity-40 p-1"><IconSettings /></button>
+                  <button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button>
+                  <h1 className="font-heading font-bold text-[14px] uppercase text-[#C5A059]">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
                 </div>
-                {jumps.length > 0 && (
-                  <div className="index-bar" style={{backgroundColor: theme.id === 'cream' ? '#fcfcfc' : 'rgba(0,0,0,0.3)'}}>
-                    {jumps.map((t, i) => (
-                      <button key={i} onClick={() => {document.getElementById(t.id)?.scrollIntoView({behavior:'smooth'})}} 
-                        className="whitespace-nowrap px-4 py-2 rounded-full text-[9px] font-bold border uppercase tracking-wider"
-                        style={{ borderColor: '#C5A059', color: '#C5A059', background: theme.id === 'cream' ? '#fff' : 'transparent' }}>
-                        {t.text}
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
               <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
-                <div className="max-w-md mx-auto px-4 pt-8 pb-24">
+                {/* FIX: Wider container for laptop and mobile */}
+                <div className="max-w-md mx-auto px-1 pt-4 pb-20">
                   {page.cards.map((card, idx) => (
-                    <div key={idx} className="mb-10 p-8 md:p-12 border border-[#C5A059]/10 rounded-[3rem]" style={{ backgroundColor: theme.card }}>
+                    // FIX: Removed padding (p-2) so Arabic can spread out and use fewer lines
+                    <div key={idx} className="mb-4 p-2 border border-[#C5A059]/20 rounded-[1.2rem]" style={{ backgroundColor: theme.card }}>
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
                   ))}
@@ -2368,15 +2333,15 @@
 
         const renderMenu = () => (
           <Fragment>
-            <div className="app-header" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.2)'}}>
+            <div className="app-header" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
                <div className="header-content">
-                 <h1 className="font-heading font-bold text-[20px] text-[#C5A059] tracking-[0.3em] uppercase">Qalb-e-Dua</h1>
-                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1 active:scale-90"><IconSettings /></button>
+                 <h1 className="font-heading font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
+                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1"><IconSettings /></button>
                </div>
             </div>
-            <main className="main-content animate-in" style={{backgroundColor: '#051F22'}}>
+            <main className="main-content" style={{backgroundColor: '#051F22'}}>
               <div className="mihrab-container">
-                <div className="max-w-md mx-auto px-6">
+                <div className="max-w-md mx-auto">
                   {MENU_ITEMS.map((item) => (
                     <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="dua-btn">{item.label}</button>
                   ))}
@@ -2389,30 +2354,6 @@
         return (
           <div className="flex flex-col h-full" style={{ backgroundColor: activePageId ? theme.bg : '#051F22' }}>
             {activePageId ? renderPage() : renderMenu()}
-            <footer className="app-footer" style={{ backgroundColor: activePageId ? theme.bg : '#051F22' }}></footer>
-
-            {showSettings && (
-              <div className="modal-overlay" onClick={() => setShowSettings(false)}>
-                <div className="w-full max-w-sm bg-[#06282d] rounded-t-[50px] p-10 pb-16 shadow-2xl border-t border-[#C5A059]/20 animate-in" onClick={e => e.stopPropagation()}>
-                  <h3 className="text-center font-heading font-bold text-sm mb-10 tracking-[0.3em] text-[#C5A059] uppercase">Settings</h3>
-                  <div className="mb-12 text-center"><p className="text-[9px] font-bold text-[#C5A059] opacity-60 uppercase tracking-[0.2em] mb-6">Text Size</p>
-                    <div className="flex items-center justify-between bg-black/40 rounded-3xl p-3 border border-white/5">
-                       <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-14 h-14 bg-white/5 rounded-2xl text-white font-light text-3xl active:bg-white/10">-</button>
-                       <span className="font-arabic text-3xl text-white">بِسْمِ</span>
-                       <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-14 h-14 bg-white/5 rounded-2xl text-white font-light text-3xl active:bg-white/10">+</button>
-                    </div>
-                  </div>
-                  <div className="mb-12 text-center"><p className="text-[9px] font-bold text-[#C5A059] opacity-60 uppercase tracking-[0.2em] mb-6">Background Theme</p>
-                    <div className="flex justify-around gap-4">
-                      {Object.values(THEMES).map(t => (
-                        <button key={t.id} onClick={() => setTheme(t)} className={`w-14 h-14 rounded-2xl border-2 transition-all ${theme.id===t.id?'border-[#C5A059] scale-110':'border-white/10 opacity-50'}`} style={{backgroundColor:t.bg}} />
-                      ))}
-                    </div>
-                  </div>
-                  <button onClick={() => setShowSettings(false)} className="w-full py-5 bg-[#C5A059] text-[#051F22] rounded-3xl font-bold text-xs tracking-widest uppercase">Save Changes</button>
-                </div>
-              </div>
-            )}
           </div>
         );
       };
@@ -2420,3 +2361,5 @@
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
     </script>
+</body>
+</html>
