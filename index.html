@@ -2276,9 +2276,9 @@ const App = () => {
 
   const renderBlock = (block, idx, blockId) => {
     if (!block) return null;
-    // Adjusted aSize and eSize slightly if needed to match image, and ensure minimal fontScale impact for base
-    const aSize = 32 + (fontScale * 2); // Adjusted base font size for Arabic
-    const eSize = 16 + (fontScale * 1); // Adjusted base font size for English
+    // Adjusted aSize and eSize slightly for a more balanced appearance, as per your reference images.
+    const aSize = 34 + (fontScale * 2); // Arabic base font size, allowing user scale
+    const eSize = 18 + (fontScale * 1); // English base font size, allowing user scale
 
     switch (block.type) {
       case 'section-title': case 'title-green':
@@ -2288,18 +2288,19 @@ const App = () => {
         return <p key={idx} dir="rtl" className="font-arabic mb-6 text-[#2D8A4E] text-xl px-2" style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{clean(block.text)}</p>;
 
       case 'arabic': case 'arabic-indopak':
-        // MODIFIED: Adjusted px value to match line breaking from new image (more padding means shorter lines)
-        // MODIFIED: Adjusted lineHeight for tighter vertical spacing as seen in the image
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'1.8' }}>{clean(block.text)}</p>;
+        // MODIFIED: Adjusted px value to px-2 (from px-4) for slightly longer lines,
+        // but still shorter than original px-1, aiming for "nice and beautiful short lines".
+        // MODIFIED: Adjusted lineHeight to 1.9 for better vertical compactness.
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-2" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'1.9' }}>{clean(block.text)}</p>;
 
       case 'arabic-green':
-        // MODIFIED: Adjusted px value and lineHeight to match new image
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'1.8' }}>{clean(block.text)}</p>;
+        // MODIFIED: Adjusted px value to px-2 and lineHeight to 1.9
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-2 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'1.9' }}>{clean(block.text)}</p>;
 
       case 'text':
-        // MODIFIED: Adjusted px value to match line breaking from new image (more padding means shorter lines)
-        // MODIFIED: Adjusted lineHeight for tighter vertical spacing as seen in the image
-        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-4" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.5' }}>{block.text}</p>;
+        // MODIFIED: Adjusted px value to px-3 (from px-4) for English, to be less aggressive.
+        // MODIFIED: Adjusted lineHeight to 1.6 for better vertical compactness.
+        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-3" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.6' }}>{block.text}</p>;
 
       case 'reference-small':
         return <p key={idx} className="text-center text-[11px] mb-6 opacity-50 italic px-4" style={{ color: theme.id === 'cream' ? '#666' : theme.text }}>{block.text}</p>;
