@@ -2246,7 +2246,7 @@
 <script type="text/babel">
 const { useState, useEffect, Fragment, useRef } = React;
 
-const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l-.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
 const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
 
 const THEMES = {
@@ -2274,130 +2274,33 @@ const App = () => {
 
   const clean = (t) => t ? t.replace(/۞/g, '') : '';
 
-  // Helper function to parse Tailwind classes from a string and merge with new styles
-  const mergeTailwindStyles = (baseStyleObj, tailwindString) => {
-    const newStyle = { ...baseStyleObj };
-    if (!tailwindString) return newStyle;
-
-    const classArray = tailwindString.split(' ');
-    classArray.forEach(cls => {
-        if (cls.startsWith('text-')) {
-            // This is a simplified example. For full Tailwind parsing, you'd need a library.
-            // But for font-size, we can try to extract.
-            if (cls.match(/^text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)$/)) {
-                // We're letting aSize/eSize handle font size, so we might want to ignore text-Xxl here
-            }
-        }
-        if (cls.startsWith('leading-')) {
-            // Try to override lineHeight based on 'leading-' classes if present
-            if (cls === 'leading-none') newStyle.lineHeight = '1';
-            else if (cls === 'leading-tight') newStyle.lineHeight = '1.25';
-            else if (cls === 'leading-snug') newStyle.lineHeight = '1.375';
-            else if (cls === 'leading-normal') newStyle.lineHeight = '1.5';
-            else if (cls === 'leading-relaxed') newStyle.lineHeight = '1.625';
-            else if (cls === 'leading-loose') newStyle.lineHeight = '1.75'; // Your current default
-        }
-        // If there are other style-related classes (e.g., specific padding, width)
-        // they would need similar parsing or be managed carefully.
-    });
-    return newStyle;
-  };
-
   const renderBlock = (block, idx, blockId) => {
     if (!block) return null;
-    const aSize = 34 + (fontScale * 2); // Arabic base font size
-    const eSize = 18 + (fontScale * 1); // English base font size
-
-    // Base styles for line breaking and spacing, aiming for the image reference
-    const baseArabicStyle = {
-      color: theme.id === 'cream' ? '#000' : theme.text,
-      fontSize: `${aSize}px`,
-      textAlign: 'justify',
-      textJustify: 'inter-word',
-      lineHeight: '1.8', // Adjusted for tighter spacing as in the image
-      paddingLeft: '1.25rem', // px-5 equivalent to better match image's shorter lines
-      paddingRight: '1.25rem' // px-5 equivalent
-    };
-
-    const baseEnglishStyle = { color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign: 'left', lineHeight: '1.4', whiteSpace: 'normal', overflowWrap: 'break-word', wordBreak: 'break-word', paddingLeft: '0.75rem', paddingRight: '0.75rem' };
-    };
-
-    // This handles merging block.style with our new base styles.
-    // block.style is a string, needs to be converted to object.
-    // For simplicity, we'll convert relevant parts to objects and merge.
-    const getMergedStyle = (baseStyle, blockStyleString) => {
-        const merged = { ...baseStyle };
-        if (!blockStyleString) return merged;
-
-        // Parse blockStyleString (e.g., "text-center text-2xl mb-4 leading-loose")
-        // and try to extract values that would override our baseStyle.
-        // This is a simplified parser for known Tailwind classes.
-        const classes = blockStyleString.split(' ');
-        classes.forEach(cls => {
-            if (cls.startsWith('leading-')) {
-                if (cls === 'leading-none') merged.lineHeight = '1';
-                else if (cls === 'leading-tight') merged.lineHeight = '1.25';
-                else if (cls === 'leading-snug') merged.lineHeight = '1.375';
-                else if (cls === 'leading-normal') merged.lineHeight = '1.5';
-                else if (cls === 'leading-relaxed') merged.lineHeight = '1.625';
-                else if (cls === 'leading-loose') merged.lineHeight = '1.75';
-                // Add more as needed if specific line-heights are set in block.style
-            }
-            // For font-size, we assume aSize/eSize are primary, but block.style might override.
-            if (cls.match(/^text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)$/)) {
-                // If block.style explicitly sets font size, it will take precedence.
-                // We're letting the block.style define font size, or our aSize/eSize if no text-XXL is found.
-                // This means the block.style text-XXL would dictate fontSize if present.
-                // To force our aSize/eSize, we must ensure our `fontSize` property is set *after* parsing the block's style string, or more cleanly, ensure block.style only contains non-conflicting styles.
-            }
-        });
-
-        // Also, convert actual inline CSS if block.style is like "color: red; font-size: 16px;"
-        // This won't handle Tailwind classes, only direct CSS properties.
-        try {
-            const tempDiv = document.createElement('div');
-            tempDiv.style.cssText = blockStyleString; // This is a hacky way to parse inline CSS
-            for (const prop in tempDiv.style) {
-                if (tempDiv.style[prop] && typeof tempDiv.style[prop] === 'string') {
-                    // This is too broad, will merge ALL styles. Need a more specific parser for known CSS props
-                    // For now, only merge if it's explicitly a line-height or padding-related property
-                    if (prop === 'lineHeight') merged.lineHeight = tempDiv.style[prop];
-                    if (prop === 'paddingLeft') merged.paddingLeft = tempDiv.style[prop];
-                    if (prop === 'paddingRight') merged.paddingRight = tempDiv.style[prop];
-                    if (prop === 'fontSize') merged.fontSize = tempDiv.style[prop];
-                    // Add other properties you want to prioritize from block.style
-                }
-            }
-        } catch (e) { /* ignore */ }
-
-        return merged;
-    };
+    // Adjusted aSize and eSize slightly for a more balanced appearance, as per your reference images.
+    const aSize = 34 + (fontScale * 2); // Arabic base font size, allowing user scale
+    const eSize = 18 + (fontScale * 1); // English base font size, allowing user scale
 
     switch (block.type) {
       case 'section-title': case 'title-green':
-        // No change here for layout titles
         return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-[13px] tracking-widest mb-6 pb-2 border-b border-[#C5A059]/40 uppercase text-[#C5A059] pt-2">{block.text}</h3>;
 
       case 'subtitle-green':
-        // No change here, use existing px-2
         return <p key={idx} dir="rtl" className="font-arabic mb-6 text-[#2D8A4E] text-xl px-2" style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{clean(block.text)}</p>;
 
-      case 'arabic': case 'arabic-indopak': case 'arabic-green':
-        const arabicElementStyle = getMergedStyle(baseArabicStyle, block.style);
-        // Ensure textAlign is also handled if block.style overrides it.
-        if (block.style && block.style.includes('text-center')) {
-             arabicElementStyle.textAlign = 'center';
-             arabicElementStyle.textJustify = 'unset'; // Center aligned usually doesn't need text-justify
-        }
-        return <p key={idx} dir="rtl" className={`font-arabic mb-6 font-bold`} style={arabicElementStyle}>{clean(block.text)}</p>;
+      case 'arabic': case 'arabic-indopak':
+        // MODIFIED: Adjusted px value to px-2 (from px-4) for slightly longer lines,
+        // but still shorter than original px-1, aiming for "nice and beautiful short lines".
+        // MODIFIED: Adjusted lineHeight to 1.9 for better vertical compactness.
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-2" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'1.9' }}>{clean(block.text)}</p>;
+
+      case 'arabic-green':
+        // MODIFIED: Adjusted px value to px-2 and lineHeight to 1.9
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-2 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'1.9' }}>{clean(block.text)}</p>;
 
       case 'text':
-        const englishElementStyle = getMergedStyle(baseEnglishStyle, block.style);
-        if (block.style && block.style.includes('text-center')) {
-             englishElementStyle.textAlign = 'center';
-             englishElementStyle.textJustify = 'unset';
-        }
-        return <p key={idx} className={`font-sans mb-4 opacity-90 font-medium`} style={englishElementStyle}>{block.text}</p>;
+        // MODIFIED: Adjusted px value to px-3 (from px-4) for English, to be less aggressive.
+        // MODIFIED: Adjusted lineHeight to 1.6 for better vertical compactness.
+        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-3" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.6' }}>{block.text}</p>;
 
       case 'reference-small':
         return <p key={idx} className="text-center text-[11px] mb-6 opacity-50 italic px-4" style={{ color: theme.id === 'cream' ? '#666' : theme.text }}>{block.text}</p>;
