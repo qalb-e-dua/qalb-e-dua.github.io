@@ -2246,7 +2246,7 @@
 <script type="text/babel">
 const { useState, useEffect, Fragment, useRef } = React;
 
-const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l-.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
 const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
 
 const THEMES = {
@@ -2276,9 +2276,8 @@ const App = () => {
 
   const renderBlock = (block, idx, blockId) => {
     if (!block) return null;
-    // Adjusted aSize and eSize slightly for a more balanced appearance, as per your reference images.
-    const aSize = 34 + (fontScale * 2); // Arabic base font size, allowing user scale
-    const eSize = 18 + (fontScale * 1); // English base font size, allowing user scale
+    const aSize = 34 + (fontScale * 2);
+    const eSize = 18 + (fontScale * 1);
 
     switch (block.type) {
       case 'section-title': case 'title-green':
@@ -2288,19 +2287,16 @@ const App = () => {
         return <p key={idx} dir="rtl" className="font-arabic mb-6 text-[#2D8A4E] text-xl px-2" style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{clean(block.text)}</p>;
 
       case 'arabic': case 'arabic-indopak':
-        // MODIFIED: Adjusted px value to px-2 (from px-4) for slightly longer lines,
-        // but still shorter than original px-1, aiming for "nice and beautiful short lines".
-        // MODIFIED: Adjusted lineHeight to 1.9 for better vertical compactness.
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-2" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'1.9' }}>{clean(block.text)}</p>;
+        // MODIFIED: Re-introducing px-4 for shorter lines as per new image
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
 
       case 'arabic-green':
-        // MODIFIED: Adjusted px value to px-2 and lineHeight to 1.9
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-2 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'1.9' }}>{clean(block.text)}</p>;
+        // MODIFIED: Re-introducing px-4 for shorter lines as per new image
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
 
       case 'text':
-        // MODIFIED: Adjusted px value to px-3 (from px-4) for English, to be less aggressive.
-        // MODIFIED: Adjusted lineHeight to 1.6 for better vertical compactness.
-        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-3" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.6' }}>{block.text}</p>;
+        // MODIFIED: Re-introducing px-4 for shorter lines as per new image (changed from original px-2)
+        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-4" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.7' }}>{block.text}</p>;
 
       case 'reference-small':
         return <p key={idx} className="text-center text-[11px] mb-6 opacity-50 italic px-4" style={{ color: theme.id === 'cream' ? '#666' : theme.text }}>{block.text}</p>;
