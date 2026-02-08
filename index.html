@@ -2319,13 +2319,7 @@ const App = () => {
       paddingRight: '1.25rem' // px-5 equivalent
     };
 
-    const baseEnglishStyle = {
-      color: theme.id === 'cream' ? '#333' : theme.text,
-      fontSize: `${eSize}px`,
-      textAlign: 'justify',
-      lineHeight: '1.5', // Adjusted for tighter spacing as in the image
-      paddingLeft: '1.25rem', // px-5 equivalent
-      paddingRight: '1.25rem' // px-5 equivalent
+    const baseEnglishStyle = { color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign: 'left', lineHeight: '1.4', whiteSpace: 'normal', overflowWrap: 'break-word', wordBreak: 'break-word', paddingLeft: '0.75rem', paddingRight: '0.75rem' };
     };
 
     // This handles merging block.style with our new base styles.
