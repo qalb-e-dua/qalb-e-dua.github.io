@@ -2240,9 +2240,8 @@
             }
           ]
         }
-
-     }; // End of your data
-     </script>
+}; // End of your data
+    </script>
 <!-- 3. React App logic only - Babel will now run much faster -->
 <script type="text/babel">
 const { useState, useEffect, Fragment, useRef } = React;
@@ -2259,7 +2258,7 @@ const THEMES = {
 const App = () => {
   const [activePageId, setActivePageId] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
-  const [theme, setTheme] = useState(THEMES.teal); // Kept as THEMES.teal as per your request
+  const [theme, setTheme] = useState(THEMES.teal);
   const [fontScale, setFontScale] = useState(0);
   const scrollRef = useRef(null);
 
@@ -2280,6 +2279,9 @@ const App = () => {
     const aSize = 34 + (fontScale * 2);
     const eSize = 18 + (fontScale * 1);
 
+    // This is the aggressive padding for shorter lines
+    const textHorizontalPadding = '4rem'; // This will add 64px padding to left and right
+
     switch (block.type) {
       case 'section-title': case 'title-green':
         return <h3 id={blockId} key={idx} className="nav-target text-center font-heading font-bold text-[13px] tracking-widest mb-6 pb-2 border-b border-[#C5A059]/40 uppercase text-[#C5A059] pt-2">{block.text}</h3>;
@@ -2288,18 +2290,19 @@ const App = () => {
         return <p key={idx} dir="rtl" className="font-arabic mb-6 text-[#2D8A4E] text-xl px-2" style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{clean(block.text)}</p>;
 
       case 'arabic': case 'arabic-indopak':
-        // MODIFIED: Increased padding from px-1 to px-4 to make lines shorter
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
+        // MODIFIED: Applying aggressive padding directly via style for shorter lines
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, textAlign: 'justify', textJustify: 'inter-word', lineHeight:'2.05', paddingLeft: textHorizontalPadding, paddingRight: textHorizontalPadding }}>{clean(block.text)}</p>;
 
       case 'arabic-green':
-        // MODIFIED: Increased padding from px-1 to px-4 to make lines shorter
-        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold px-4 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'2.05' }}>{clean(block.text)}</p>;
+        // MODIFIED: Applying aggressive padding directly via style for shorter lines
+        return <p key={idx} dir="rtl" className="font-arabic mb-6 font-bold text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, textAlign:'justify', textJustify:'inter-word', lineHeight:'2.05', paddingLeft: textHorizontalPadding, paddingRight: textHorizontalPadding }}>{clean(block.text)}</p>;
 
       case 'text':
-        // MODIFIED: Increased padding from px-2 to px-4 to make lines shorter
-        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium px-4" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.7' }}>{block.text}</p>;
+        // MODIFIED: Applying aggressive padding directly via style for shorter lines
+        return <p key={idx} className="font-sans mb-4 opacity-90 font-medium" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px`, textAlign:'justify', lineHeight: '1.7', paddingLeft: textHorizontalPadding, paddingRight: textHorizontalPadding }}>{block.text}</p>;
 
       case 'reference-small':
+        // Kept original px-4 as it wasn't specified for this type
         return <p key={idx} className="text-center text-[11px] mb-6 opacity-50 italic px-4" style={{ color: theme.id === 'cream' ? '#666' : theme.text }}>{block.text}</p>;
 
       case 'flower-icon': return null;
