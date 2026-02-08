@@ -2242,7 +2242,7 @@
         }
 
      }; // End of your data
-     </script>
+  </script>
 
     <!-- 3. React App logic only - Babel will now run much faster -->
     <script type="text/babel">
@@ -2278,29 +2278,42 @@
 
         const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
-          const aSize = 34 + (fontScale * 2);
-          const eSize = 18 + (fontScale * 1);
+          const aSize = 30 + (fontScale * 2); // Slightly smaller base size for better sorting
+          const eSize = 16 + (fontScale * 1);
           switch (block.type) {
             case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] mb-4 pb-2 border-b border-[#C5A059]/30 uppercase text-[#C5A059]">{block.text}</h3>;
+              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[12px] mb-8 text-[#C5A059] uppercase tracking-widest">{block.text}</h3>;
             
             case 'arabic': case 'arabic-indopak':
-              // FIX: Tightest spacing for the Arabic Line
-              return <p key={idx} dir="rtl" className="font-arabic mb-2 text-center font-bold px-0 leading-[1.2]" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
+              // FIX: Leading [1.8] adds space between Arabic lines so it doesn't look "dirty"
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2 leading-[1.8]" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
             
             case 'arabic-green':
-              return <p key={idx} dir="rtl" className="font-arabic mb-2 text-center font-bold px-0 text-[#2D8A4E] leading-[1.2]" style={{ fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
+              return <p key={idx} dir="rtl" className="font-arabic mb-6 text-center font-bold px-2 text-[#2D8A4E] leading-[1.8]" style={{ fontSize: `${aSize}px` }}>{clean(block.text)}</p>; 
             
             case 'text':
-              // FIX: Tightest spacing for the English Line
-              return <p key={idx} className="text-center font-sans mb-4 opacity-90 leading-tight font-medium px-0" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
+              // FIX: Centered translation with breathing room above it
+              return <p key={idx} className="text-center font-sans mb-8 opacity-80 leading-relaxed font-medium px-4" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
             
             case 'hr': 
-              // FIX: Professional Divider Line (Line 3)
-              return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/30 my-6" />;
+              // FIX: This is the thin professional horizontal line from the Quran pictures
+              return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-12" />;
 
             case 'subtitle-green':
-              return <p key={idx} dir="rtl" className="text-center font-arabic mb-4 text-[#2D8A4E] text-xl">{clean(block.text)}</p>;
+              return <p key={idx} dir="rtl" className="text-center font-arabic mb-6 text-[#2D8A4E] text-xl px-4">{clean(block.text)}</p>;
+            
+            case 'allah-name': 
+              return (
+                <div key={idx} className="mb-8 border-b border-white/5 pb-4 text-center"> 
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="font-bold text-lg text-[#FF4444]">{block.number}</span>
+                    <span className="font-arabic font-bold text-[#4488FF]" style={{ fontSize: '38px' }}>{clean(block.arabic)}</span>
+                  </div>
+                  <div className="font-bold opacity-60 text-[12px] text-[#FF4444] uppercase">{block.english}</div>
+                </div>
+              );
+            case 'count-badge': 
+               return <div key={idx} className="flex justify-center mb-8"><span className="px-4 py-1 rounded-full text-[10px] font-bold border border-[#C5A059]/40 text-[#C5A059] uppercase bg-black/10">{block.text}</span></div>;
             default: return null;
           }
         };
@@ -2309,19 +2322,18 @@
           const page = PAGES_DATA[activePageId];
           return (
             <Fragment>
-              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.3)'}}>
+              <div className="app-header shadow-sm" style={{backgroundColor: theme.bg, borderBottom: theme.id === 'cream' ? '1px solid #eee' : '1px solid rgba(197, 160, 89, 0.2)'}}>
                 <div className="header-content">
                   <button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button>
-                  <h1 className="font-heading font-bold text-[14px] uppercase text-[#C5A059]">{page.title}</h1>
+                  <h1 className="font-heading font-bold text-[13px] tracking-widest uppercase text-[#C5A059]">{page.title}</h1>
                   <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
                 </div>
               </div>
               <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
-                {/* FIX: Wider container for laptop and mobile */}
-                <div className="max-w-md mx-auto px-1 pt-4 pb-20">
+                {/* FIX: Container width and padding adjusted for better line sorting */}
+                <div className="max-w-md mx-auto px-4 pt-6 pb-20">
                   {page.cards.map((card, idx) => (
-                    // FIX: Removed padding (p-2) so Arabic can spread out and use fewer lines
-                    <div key={idx} className="mb-4 p-2 border border-[#C5A059]/20 rounded-[1.2rem]" style={{ backgroundColor: theme.card }}>
+                    <div key={idx} className="mb-10 p-6 border border-[#C5A059]/10 rounded-[2.5rem]" style={{ backgroundColor: theme.card }}>
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
                   ))}
@@ -2333,9 +2345,9 @@
 
         const renderMenu = () => (
           <Fragment>
-            <div className="app-header" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
+            <div className="app-header" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.2)'}}>
                <div className="header-content">
-                 <h1 className="font-heading font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
+                 <h1 className="font-heading font-bold text-[22px] text-[#C5A059] tracking-widest uppercase">Qalb-e-Dua</h1>
                  <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1"><IconSettings /></button>
                </div>
             </div>
@@ -2354,6 +2366,14 @@
         return (
           <div className="flex flex-col h-full" style={{ backgroundColor: activePageId ? theme.bg : '#051F22' }}>
             {activePageId ? renderPage() : renderMenu()}
+            {showSettings && (
+              <div className="modal-overlay" onClick={() => setShowSettings(false)}>
+                <div className="w-full max-w-sm bg-[#06282d] rounded-t-[40px] p-8 pb-12 shadow-2xl border-t border-[#C5A059]/30 animate-in" onClick={e => e.stopPropagation()}>
+                  <h3 className="text-center font-heading font-bold text-lg mb-8 tracking-widest text-[#C5A059]">SETTINGS</h3>
+                  <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase">Close</button>
+                </div>
+              </div>
+            )}
           </div>
         );
       };
