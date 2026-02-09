@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" style="background-color: #051F22 !important;">
 <head>
@@ -539,7 +540,7 @@
       { "type": "text", "text": "6. Ruku (bowing): Say Allahu Akbar and bow. In ruku say at least 3 times: Subhana Rabbiyal Azim (Glory be to my Rabb, the Magnificent). Men: back straight, hands on knees; Women: bow gently, arms not spread." },
       { "type": "text", "text": "7. Stand up from ruku: Rise and say: Sami‘Allahu liman hamidah (Allah hears those who praise Him). Then say: Rabbana lakal hamd (Our Rabb, all praise is for You). Stand straight for a moment." },
       { "type": "text", "text": "8. Go to sajdah (prostration): Say Allahu Akbar and go down: Knees first, then hands, then forehead and nose on the ground. Say at least 3 times: Subhana Rabbiyal A‘la (Glory be to my Rabb, the Most High). Men: arms away from body; Women: arms close to body." },
-      { "type": "text", "text": "9. Sit between two sajdahs: Sit and say: Rabbighfir li (My Rabb, forgive me). Then do the second sajdah the same way. This completes one rak‘ah." },
+      { "type": "text", "text": "9. Sit between two sajdahs: Then do the second sajdah the same way. This completes one rak‘ah." },
       { "type": "text", "text": "10. Second rak‘ah: Stand up and repeat: Fatiha, short surah, ruku, sajdah (two times). After the second rak‘ah, sit and read: Attahiyyatu…" },
       { "type": "text", "text": "11. Last rak‘ah (final sitting): In the last sitting, read: Attahiyyatu, Salawat (Durood), Rabbana atina (Our Rabb, give us) or any dua." },
       { "type": "text", "text": "12. End the salah: Turn your head to the right: Assalamu ‘alaykum wa rahmatullah. Then to the left: Assalamu ‘alaykum wa rahmatullah. Your salah is complete." }
@@ -2337,7 +2338,7 @@
    }; // End of your data
 </script>
 
-    <!-- 3. React App logic only - Babel will now run much faster -->
+ <!-- 3. React App logic only - Babel will now run much faster -->
     <script type="text/babel">
       const { useState, useEffect, Fragment, useRef } = React;
 
@@ -2353,6 +2354,7 @@
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
         const [showSettings, setShowSettings] = useState(false);
+        const [showAbout, setShowAbout] = useState(false); 
         const [theme, setTheme] = useState(THEMES.teal);
         const [fontScale, setFontScale] = useState(0);
         const scrollRef = useRef(null);
@@ -2376,22 +2378,14 @@
           switch (block.type) {
             case 'section-title': case 'title-green':
               return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] mb-4 pb-2 border-b border-[#C5A059]/20 uppercase text-[#C5A059]">{block.text}</h3>;
-            
             case 'arabic': case 'arabic-indopak':
-              // FIX: px-0 and lineHeight 1.8 pulls text into 1-2 lines and keeps it clean
               return <p key={idx} dir="rtl" className="font-arabic mb-4 text-center font-bold px-0" style={{ color: theme.id === 'cream' ? '#000' : theme.text, fontSize: `${aSize}px`, lineHeight: '1.8' }}>{clean(block.text)}</p>; 
-            
             case 'arabic-green':
               return <p key={idx} dir="rtl" className="font-arabic mb-4 text-center font-bold px-0 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, lineHeight: '1.8' }}>{clean(block.text)}</p>; 
-            
             case 'text':
-              // FIX: English spreads out wide to use fewer lines
               return <p key={idx} className="text-center font-sans mb-8 opacity-90 leading-relaxed font-medium px-0" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
-            
             case 'hr': 
-              // FIX: Long thin divider line
               return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-8" />;
-
             case 'allah-name': 
               return (
                 <div key={idx} className="mb-6 border-b border-black/5 pb-4 text-center"> 
@@ -2444,10 +2438,8 @@
               </div>
               
               <main ref={scrollRef} className="main-content animate-in" style={{ backgroundColor: theme.bg }}>
-                {/* FIX: Wider container (px-2) makes text fit on 1-2 lines */}
                 <div className="max-w-md mx-auto px-2 pt-6 pb-20">
                   {page.cards.map((card, idx) => (
-                    // FIX: Smaller card padding (p-3) gives more room for text
                     <div key={idx} className="mb-8 p-3 border border-[#C5A059]/20 rounded-[1.5rem]" style={{ backgroundColor: theme.card }}>
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId))}
                     </div>
@@ -2482,27 +2474,57 @@
           <div className="flex flex-col h-full overflow-hidden" style={{ backgroundColor: activePageId ? theme.bg : '#051F22' }}>
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
-              <div className="modal-overlay" onClick={() => setShowSettings(false)}>
+              <div className="modal-overlay" onClick={() => {setShowSettings(false); setShowAbout(false);}}>
                 <div className="w-full max-w-sm bg-[#06282d] rounded-t-[40px] p-8 pb-12 shadow-2xl border-t border-[#C5A059]/30 animate-in" onClick={e => e.stopPropagation()}>
-                  <h3 className="text-center font-heading font-bold text-lg mb-8 text-[#C5A059]">SETTINGS</h3>
-                  <div className="mb-10 text-center">
-                    <p className="text-[10px] font-bold text-[#C5A059] uppercase tracking-widest mb-4">Font Size</p>
-                    <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
-                       <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 bg-white/5 rounded-xl text-white text-2xl">-</button>
-                       <span className="font-arabic text-2xl text-white">بِسْمِ</span>
-                       <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 bg-white/5 rounded-xl text-white font-bold text-2xl">+</button>
-                    </div>
-                  </div>
-                  {/* COLOR SETTINGS RESTORED */}
-                  <div className="mb-10 text-center">
-                    <p className="text-[10px] font-bold text-[#C5A059] uppercase tracking-widest mb-4">Color Theme</p>
-                    <div className="flex justify-around">
-                      {Object.values(THEMES).map(t => (
-                        <button key={t.id} onClick={() => setTheme(t)} className={`w-12 h-12 rounded-full border-2 ${theme.id===t.id?'border-[#C5A059]':'border-transparent opacity-50'}`} style={{backgroundColor: t.bg}} />
-                      ))}
-                    </div>
-                  </div>
-                  <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase tracking-widest">Close</button>
+                  
+                  {!showAbout ? (
+                    <Fragment>
+                      <h3 className="text-center font-heading font-bold text-lg mb-8 text-[#C5A059]">SETTINGS</h3>
+                      <div className="mb-10 text-center">
+                        <p className="text-[10px] font-bold text-[#C5A059] uppercase tracking-widest mb-4">Font Size</p>
+                        <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
+                           <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 bg-white/5 rounded-xl text-white text-2xl">-</button>
+                           <span className="font-arabic text-2xl text-white">بِسْمِ</span>
+                           <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 bg-white/5 rounded-xl text-white font-bold text-2xl">+</button>
+                        </div>
+                      </div>
+                      <div className="mb-10 text-center">
+                        <p className="text-[10px] font-bold text-[#C5A059] uppercase tracking-widest mb-4">Color Theme</p>
+                        <div className="flex justify-around">
+                          {Object.values(THEMES).map(t => (
+                            <button key={t.id} onClick={() => setTheme(t)} className={`w-12 h-12 rounded-full border-2 ${theme.id===t.id?'border-[#C5A059]':'border-transparent opacity-50'}`} style={{backgroundColor: t.bg}} />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <button onClick={() => setShowAbout(true)} className="w-full mb-6 p-4 bg-black/20 border border-[#C5A059]/30 rounded-2xl text-[#C5A059] font-bold uppercase tracking-widest text-sm flex justify-between items-center">
+                        About This App
+                        <span>→</span>
+                      </button>
+
+                      <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase tracking-widest">Close</button>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <div className="flex items-center mb-6">
+                         <button onClick={() => setShowAbout(false)} className="p-1"><IconBack /></button>
+                         <h3 className="flex-1 text-center font-heading font-bold text-lg text-[#C5A059] pr-8">ABOUT</h3>
+                      </div>
+                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto">
+                        <p className="text-[14px] text-white/90 leading-relaxed text-center mb-4">
+                          Thank you for using this app. This app was created to make daily worship easier. In our busy lives, we often pray salah but forget to make duʿāʾ or dhikr, and many supplications are hard to remember. This app collects important duʿāʾs in one place, including duʿāʾs after salah and duʿāʾs of the Prophet Muhammad ﷺ, so they are easy to read anytime on your phone.
+                        </p>
+                        <p className="text-[13px] italic text-[#C5A059] leading-relaxed text-center mb-6">
+                          May Allah forgive any mistakes, accept this effort, and grant its reward to my family who have passed away and to all Muslims, through the wasilah of Prophet Muhammad ﷺ, and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)
+                        </p>
+                        <div className="pt-4 border-t border-[#C5A059]/20">
+                           <p className="text-[10px] text-[#C5A059] uppercase tracking-[2px] text-center mb-1">Created By</p>
+                           <p className="text-[14px] text-white font-bold text-center">Imran Nazamul Hussain Doctor</p>
+                        </div>
+                      </div>
+                      <button onClick={() => setShowAbout(false)} className="w-full p-4 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase tracking-widest">Back to Settings</button>
+                    </Fragment>
+                  )}
                 </div>
               </div>
             )}
@@ -2515,4 +2537,3 @@
     </script>
 </body>
 </html>
-
