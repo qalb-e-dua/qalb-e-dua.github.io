@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,31 +10,33 @@
 
     <style>
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
-      html, body { background-color: #051F22 !important; margin: 0; padding: 0; width: 100%; height: 100%; color: var(--light-gold); overflow: hidden; }
+      html, body { background-color: #051F22 !important; margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
       #root { height: 100%; display: flex; flex-direction: column; }
-      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: #051F22; }
+      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: inherit; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
-      .main-content { flex: 1; overflow-y: auto !important; -webkit-overflow-scrolling: touch; width: 100%; max-width: 500px; margin: 0 auto; }
+      .main-content { flex: 1; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
       .mihrab-container { border: 2px solid var(--gold); border-bottom: none; margin: 20px; margin-top: 10px; border-radius: 150px 150px 20px 20px; padding: 50px 20px 40px 20px; min-height: 80vh; }
-      .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; display: block; }
-      .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; }
+      .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; display: block; width: 100%; }
+      .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
       .index-bar::-webkit-scrollbar { display: none; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
       
-      /* HIGHLIGHTER STYLE */
-      .highlight-verse { color: #2D8A4E !important; font-weight: bold; transform: scale(1.02); transition: all 0.5s ease; }
-      
-      .animate-in { animation: fadeIn 0.4s ease-out; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; display: flex; align-items: flex-end; }
+      /* SALAH & QIBLA CARD STYLES */
+      .salah-card { background: rgba(0,0,0,0.4); border: 1.5px solid var(--gold); border-radius: 30px; padding: 20px; margin-bottom: 25px; text-align: center; }
+      .qibla-compass { width: 90px; height: 90px; margin: 15px auto; position: relative; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
+      .qibla-needle { width: 3px; height: 45px; background: linear-gradient(to top, transparent 50%, var(--gold) 50%); position: absolute; transition: transform 1s ease-out; }
+      .qibla-needle::before { content: '▲'; color: var(--gold); position: absolute; top: -8px; left: -5px; font-size: 12px; }
+
       #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
       .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
+      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: flex-end; }
     </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- ESSENTIAL FOR SALAH TIMES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/adhan@1.1.0/dist/Adhan.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
@@ -61,7 +62,6 @@
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13' },
       ];
-
       const createNameEntry = (num, arabic, english) => [{ type: 'allah-name', number: num, arabic: arabic, english: english }];
       const createProphetName = (num, arabic, english) => [{ type: 'allah-name', number: num, arabic: arabic, english: english }];
 
@@ -340,7 +340,7 @@
             }
           ]
         },
-        'pquran': {
+           'pquran': {
                    title: 'Quran Kareem',
           cards: [
             {
@@ -2889,7 +2889,6 @@
             }
           ]
         }
-
 }; // End of your data
     </script>
 
@@ -2911,91 +2910,52 @@
         const [showAbout, setShowAbout] = useState(false);
         const [theme, setTheme] = useState(THEMES.teal);
         const [fontScale, setFontScale] = useState(0);
-        const [salah, setSalah] = useState({times: null, qibla: 0});
-        
-        // HIGHLIGHTER LOGIC
-        const [isPlaying, setIsPlaying] = useState(false);
-        const [audioTime, setAudioTime] = useState(0);
-        const [activeAudio, setActiveAudio] = useState(null);
-        const audioRef = useRef(new Audio());
+        const [salahData, setSalahData] = useState({ times: null, qibla: 0 });
         const scrollRef = useRef(null);
 
         useEffect(() => {
           const splash = document.getElementById('splash-overlay');
-          if (splash) setTimeout(() => { splash.style.display = 'none'; }, 400);
+          if (splash) setTimeout(() => splash.style.display = 'none', 600);
         }, []);
 
-        useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId]);
-
-        useEffect(() => {
-          const audio = audioRef.current;
-          const updateTime = () => setAudioTime(audio.currentTime);
-          audio.addEventListener('timeupdate', updateTime);
-          audio.addEventListener('ended', () => { setIsPlaying(false); setActiveAudio(null); });
-          return () => { audio.removeEventListener('timeupdate', updateTime); };
-        }, []);
-
+        // HANAFI CALCULATION LOGIC
         useEffect(() => {
           if (activePageId === 'p5') {
             navigator.geolocation.getCurrentPosition((pos) => {
               const coords = new adhan.Coordinates(pos.coords.latitude, pos.coords.longitude);
               const params = adhan.CalculationMethod.MuslimWorldLeague();
-              params.madhab = adhan.Madhab.Hanafi;
-              setSalah({ times: new adhan.PrayerTimes(coords, new Date(), params), qibla: adhan.Qibla(coords) });
-            });
+              params.madhab = adhan.Madhab.Hanafi; // HANAFI FOR ASR
+              const times = new adhan.PrayerTimes(coords, new Date(), params);
+              setSalahData({ times: times, qibla: adhan.Qibla(coords) });
+            }, (err) => alert("Please enable Location to see Salah times"));
           }
         }, [activePageId]);
 
-        const toggleAudio = (url) => {
-          if (activeAudio === url && isPlaying) {
-            audioRef.current.pause();
-            setIsPlaying(false);
-          } else {
-            if (activeAudio !== url) {
-              audioRef.current.src = url;
-              setActiveAudio(url);
-            }
-            audioRef.current.play();
-            setIsPlaying(true);
-          }
-        };
+        useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId]);
 
-        const renderBlock = (block, idx, blockId, cardAudio, allBlocks) => {
+        const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
-          const clean = (t) => t ? t.replace(/۞/g, '') : '';
+          const clean = (t) => t ? String(t).replace(/۞/g, '') : '';
           const aSize = 28 + (fontScale * 2); 
           const eSize = 16 + (fontScale * 1);
 
-          // CHECK IF VERSE SHOULD BE HIGHLIGHTED
-          let isHighlighted = false;
-          if (isPlaying && activeAudio === cardAudio && block.time !== undefined) {
-            const nextVerse = allBlocks.slice(idx + 1).find(b => b.time !== undefined);
-            if (audioTime >= block.time && (!nextVerse || audioTime < nextVerse.time)) {
-              isHighlighted = true;
-            }
-          }
-
           switch (block.type) {
             case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="text-center font-heading font-bold text-[13px] mb-4 pb-2 border-b border-[#C5A059]/20 uppercase text-[#C5A059]">{block.text}</h3>;
-            case 'arabic': case 'arabic-indopak':
-              return <p key={idx} dir="rtl" className={`font-arabic mb-4 text-center font-bold px-0 ${isHighlighted ? 'highlight-verse' : ''}`} style={{ color: isHighlighted ? '#2D8A4E' : (theme.id === 'cream' ? '#000' : theme.text), fontSize: `${aSize}px`, lineHeight: '1.8' }}>{clean(block.text)}</p>; 
-            case 'arabic-green':
-              return <p key={idx} dir="rtl" className="font-arabic mb-4 text-center font-bold px-0 text-[#2D8A4E]" style={{ fontSize: `${aSize}px`, lineHeight: '1.8' }}>{clean(block.text)}</p>; 
+              return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 text-[#C5A059] uppercase">{block.text}</h3>;
+            case 'arabic': case 'arabic-indopak': case 'arabic-green':
+              const arColor = block.type === 'arabic-green' ? '#2D8A4E' : (theme.id === 'cream' ? '#000' : theme.text);
+              return <p key={idx} dir="rtl" className="font-arabic text-center mb-4 px-0" style={{ fontSize: `${aSize}px`, color: arColor }}>{clean(block.text)}</p>;
             case 'text':
-              return <p key={idx} className="text-center font-sans mb-8 opacity-90 leading-relaxed font-medium px-0" style={{ color: theme.id === 'cream' ? '#333' : theme.text, fontSize: `${eSize}px` }}>{block.text}</p>; 
-            case 'hr': return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-8" />;
+              const txtColor = theme.id === 'cream' ? '#333' : theme.text;
+              return <p key={idx} className="text-center mb-8 opacity-90 leading-relaxed px-0 font-medium" style={{ fontSize: `${eSize}px`, color: txtColor }}>{block.text}</p>;
             case 'allah-name': 
               return (
-                <div key={idx} className="mb-6 border-b border-black/5 pb-4 text-center"> 
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="font-bold text-lg text-[#FF4444]">{block.number}</span>
-                    <span className="font-arabic font-bold text-[#4488FF]" style={{ fontSize: '38px' }}>{clean(block.arabic)}</span>
-                  </div>
-                  <div className="font-bold opacity-60 text-[12px] text-[#FF4444] uppercase tracking-widest">{block.english}</div>
+                <div key={idx} className="text-center mb-6 border-b border-white/5 pb-4">
+                  <p className="font-arabic text-3xl" style={{color: theme.id === 'cream' ? '#000' : theme.text}}>{clean(block.arabic)}</p>
+                  <p className="text-sm opacity-60 uppercase" style={{color: theme.id === 'cream' ? '#333' : theme.text}}>{block.english}</p>
                 </div>
               );
-            case 'subtitle-green': return <p key={idx} dir="rtl" className="text-center font-arabic mb-6 text-[#2D8A4E] text-xl">{clean(block.text)}</p>;
+            case 'hr': return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-8" />;
             default: return null;
           }
         };
@@ -3003,116 +2963,118 @@
         const renderPage = () => {
           const page = PAGES_DATA[activePageId];
           const jumps = [];
-          let jId = 0;
+          let jCount = 0;
           page?.cards.forEach(card => card.content.forEach(block => {
             if (block.type === 'section-title' || block.type === 'title-green') {
-              const uid = `nav-${activePageId}-${jId++}`;
-              block._jumpId = uid;
-              jumps.push({ text: block.text, id: uid });
+               const id = `j-${activePageId}-${jCount++}`; block._jId = id; jumps.push({ text: block.text, id });
             }
           }));
 
           return (
-            <Fragment>
-              <div className="flex flex-col w-full sticky top-0 z-50 border-b border-[#C5A059]/10" style={{backgroundColor: theme.bg}}>
-                <div className="app-header">
-                  <div className="header-content">
-                    <button onClick={() => {setActivePageId(null); audioRef.current.pause(); setIsPlaying(false);}} className="absolute left-5 p-1"><IconBack /></button>
-                    <h1 className="font-heading font-bold text-[14px] uppercase text-[#C5A059] tracking-widest">{page.title}</h1>
-                    <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
-                  </div>
+            <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+              <div className="app-header">
+                <div className="header-content">
+                  <button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button>
+                  <h1 className="font-bold text-[12px] text-[#C5A059] uppercase">{page.title}</h1>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
-                  <div className="index-bar px-4 py-2" style={{backgroundColor: theme.id === 'cream' ? '#fcfcfc' : 'rgba(0,0,0,0.4)'}}>
+                  <div className="index-bar" style={{backgroundColor: theme.bg}}>
                     {jumps.map((t, i) => (
-                      <button key={i} onClick={() => document.getElementById(t.id)?.scrollIntoView({behavior:'smooth', block:'center'})} 
-                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] font-bold border uppercase"
-                        style={{ borderColor: '#C5A059', color: '#C5A059' }}>{t.text}</button>
+                      <button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} 
+                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border border-[#C5A059] text-[#C5A059] uppercase font-bold">{t.text}</button>
                     ))}
                   </div>
                 )}
               </div>
-              <main ref={scrollRef} className="main-content animate-in px-4" style={{ backgroundColor: theme.bg }}>
-                <div className="max-w-md mx-auto py-6">
+              <main ref={scrollRef} className="main-content px-4 py-6">
+                <div className="max-w-md mx-auto">
+                  
                   {activePageId === 'p5' && (
-                    <div className="mb-8 bg-black/20 p-5 rounded-[2.5rem] border border-[#C5A059]/20 text-center">
-                       <p className="text-[#C5A059] font-bold text-[10px] uppercase mb-4 tracking-widest">Salah Times & Qibla (Hanafi)</p>
-                       {salah.times ? (
-                         <div className="flex justify-between mb-6 gap-2">
+                    <div className="salah-card">
+                       <p className="text-[10px] font-bold text-[#C5A059] mb-4 uppercase tracking-widest">Salah Times (Hanafi) & Qibla</p>
+                       {salahData.times ? (
+                         <div className="flex justify-between mb-6">
                            {['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].map(p => (
-                             <div key={p} className="flex-1 text-center"><p className="text-[9px] text-[#C5A059] mb-1">{p}</p><p className="text-white font-bold text-[11px]">{moment(salah.times[p.toLowerCase()]).format('hh:mm')}</p></div>
+                             <div key={p} className="text-center">
+                               <p className="text-[9px] text-[#C5A059] mb-1">{p}</p>
+                               <p className="font-bold text-[11px]" style={{color: theme.id==='cream'?'#000':'#FFF'}}>{moment(salahData.times[p.toLowerCase()]).format('hh:mm')}</p>
+                             </div>
                            ))}
                          </div>
-                       ) : <p className="text-[10px] opacity-40 mb-4 uppercase tracking-widest">Calculating...</p>}
-                       <div className="w-16 h-16 mx-auto border-2 border-[#C5A059]/30 rounded-full flex items-center justify-center relative">
-                          <div style={{transform: `rotate(${salah.qibla}deg)`}} className="w-1 h-10 bg-[#C5A059] rounded-full transition-transform duration-1000">
-                             <div className="w-2 h-2 bg-white rounded-full -mt-1 mx-auto border border-[#C5A059]"></div>
-                          </div>
-                       </div>
+                       ) : <p className="text-[10px] opacity-40 mb-6">Calculating local times...</p>}
+                       <div className="qibla-compass"><div className="qibla-needle" style={{transform: `rotate(${salahData.qibla}deg)`}}></div></div>
+                       <p className="text-[8px] font-bold text-[#C5A059] uppercase">Kaaba Direction</p>
                     </div>
                   )}
+
                   {page.cards.map((card, idx) => (
-                    <div key={idx} className="mb-8 p-4 border border-[#C5A059]/20 rounded-3xl" style={{ backgroundColor: theme.card }}>
-                      {card.audio && (
-                        <button onClick={() => toggleAudio(card.audio)} className="w-full mb-6 p-3 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase text-[12px] tracking-widest shadow-lg active:scale-95 transition-transform">
-                          {activeAudio === card.audio && isPlaying ? 'Stop Recitation ❚❚' : 'Play Recitation ▶'}
-                        </button>
-                      )}
-                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jumpId, card.audio, card.content))}
+                    <div key={idx} className="mb-8 p-5 border border-[#C5A059]/20 rounded-3xl shadow-lg" style={{backgroundColor: theme.card}}>
+                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jId))}
                     </div>
                   ))}
                 </div>
               </main>
-            </Fragment>
+            </div>
           );
         };
 
         const renderMenu = () => (
-          <Fragment>
-            <div className="app-header" style={{backgroundColor: '#051F22', borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
-               <div className="header-content">
-                 <h1 className="font-heading font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
+          <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: '#051F22'}}>
+            <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
+               <div className="header-content"><h1 className="font-heading font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
                  <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1 active:scale-90"><IconSettings /></button>
                </div>
             </div>
-            <main className="main-content" style={{backgroundColor: '#051F22'}}>
+            <main className="main-content">
               <div className="mihrab-container">
                 <div className="max-w-md mx-auto">
-                  {MENU_ITEMS.map((item) => (
-                    <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="dua-btn">{item.label}</button>
-                  ))}
+                  {MENU_ITEMS.map(item => <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="dua-btn">{item.label}</button>)}
                 </div>
               </div>
             </main>
-          </Fragment>
+          </div>
         );
 
         return (
-          <div id="root" style={{ backgroundColor: activePageId ? theme.bg : '#051F22' }}>
+          <div id="root" style={{backgroundColor: activePageId ? theme.bg : '#051F22'}}>
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
-              <div className="modal-overlay" onClick={() => {setShowSettings(false); setShowAbout(false);}}>
-                <div className="w-full max-w-sm bg-[#06282d] rounded-t-[40px] p-8 pb-12 animate-in mx-auto" onClick={e => e.stopPropagation()}>
+              <div className="modal-overlay" onClick={() => setShowSettings(false)}>
+                <div className="w-full max-w-sm bg-[#06282d] rounded-t-[40px] p-8 pb-12 mx-auto shadow-2xl" onClick={e => e.stopPropagation()}>
                   {!showAbout ? (
                     <Fragment>
                       <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase">Settings</h3>
-                      <div className="mb-8 text-center"><p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p><div className="flex items-center justify-between bg-black/30 rounded-2xl p-2"><button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button><span className="font-arabic text-2xl text-white">بِسْمِ</span><button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 text-white text-2xl">+</button></div></div>
-                      <div className="mb-10 text-center"><p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest">Color Theme</p><div className="flex justify-around">{Object.values(THEMES).map(t => <button key={t.id} onClick={() => setTheme(t)} className={`w-12 h-12 rounded-full border-2 ${theme.id===t.id?'border-[#C5A059]':'border-transparent opacity-50'}`} style={{backgroundColor: t.bg}} />)}</div></div>
-                      <button onClick={() => setShowAbout(true)} className="w-full mb-6 p-4 border border-[#C5A059]/30 rounded-2xl text-[#C5A059] font-bold text-sm flex justify-between uppercase tracking-widest">About <span>→</span></button>
-                      <button onClick={() => setShowSettings(false)} className="w-full p-4 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase tracking-widest">Close</button>
+                      <div className="mb-8 text-center"><p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p>
+                        <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
+                           <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button>
+                           <span className="text-white font-arabic text-xl">بِسْمِ</span>
+                           <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 text-white text-2xl">+</button>
+                        </div>
+                      </div>
+                      <div className="mb-10 text-center">
+                        <p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest">Color Theme</p>
+                        <div className="flex justify-around">
+                          {Object.values(THEMES).map(t => (
+                            <button key={t.id} onClick={() => setTheme(t)} className={`w-12 h-12 rounded-full border-2 ${theme.id===t.id?'border-[#C5A059]':'border-transparent opacity-50'}`} style={{backgroundColor: t.bg}} />
+                          ))}
+                        </div>
+                      </div>
+                      <button onClick={() => setShowAbout(true)} className="dua-btn mb-6 uppercase text-[12px] tracking-widest">About This App →</button>
+                      <button onClick={() => setShowSettings(false)} className="dua-btn font-bold uppercase">CLOSE</button>
                     </Fragment>
                   ) : (
                     <Fragment>
                       <div className="flex items-center mb-6"><button onClick={() => setShowAbout(false)} className="p-1"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
-                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto">
-                        <p className="text-sm text-white/90 text-center mb-4">Thank you for using this app. Created to make daily worship easier, collecting important duʿāʾs and dhikr in one place.</p>
-                        <p className="text-[12px] italic text-[#C5A059] text-center mb-6">May Allah grant its reward to my family and all Muslims, as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)</p>
+                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm">
+                        <p className="mb-4">Thank you for using this app. Created by Imran Nazamul Hussain Doctor to support daily worship. This app collects important duʿāʾs in one place.</p>
+                        <p className="italic text-[#C5A059] mb-6">May Allah grant its reward to my family who have passed away and to all Muslims, as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)</p>
                         <div className="pt-4 border-t border-[#C5A059]/20 text-center">
                           <p className="text-[10px] text-[#C5A059] uppercase tracking-widest">Created By</p>
                           <p className="text-white font-bold">Imran Nazamul Hussain Doctor</p>
                         </div>
                       </div>
-                      <button onClick={() => setShowAbout(false)} className="w-full p-4 bg-[#C5A059] text-[#051F22] rounded-2xl font-bold uppercase tracking-widest">Back</button>
+                      <button onClick={() => setShowAbout(false)} className="dua-btn font-bold">Back</button>
                     </Fragment>
                   )}
                 </div>
