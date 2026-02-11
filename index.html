@@ -10,7 +10,7 @@
 
     <style>
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
-      html, body { background-color: #051F22 !important; margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
+      html, body { background-color: #051F22 !important; margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; color: var(--light-gold); }
       #root { height: 100%; display: flex; flex-direction: column; }
       .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: inherit; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
@@ -21,11 +21,10 @@
       .index-bar::-webkit-scrollbar { display: none; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
       
-      /* SALAH & QIBLA CARD STYLES */
-      .salah-card { background: rgba(0,0,0,0.4); border: 1.5px solid var(--gold); border-radius: 30px; padding: 20px; margin-bottom: 25px; text-align: center; }
-      .qibla-compass { width: 90px; height: 90px; margin: 15px auto; position: relative; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
-      .qibla-needle { width: 3px; height: 45px; background: linear-gradient(to top, transparent 50%, var(--gold) 50%); position: absolute; transition: transform 1s ease-out; }
-      .qibla-needle::before { content: '▲'; color: var(--gold); position: absolute; top: -8px; left: -5px; font-size: 12px; }
+      .salah-card { background: rgba(0,0,0,0.4); border: 1.5px solid var(--gold); border-radius: 30px; padding: 20px; margin-bottom: 25px; text-align: center; color: white; }
+      .qibla-circle { width: 100px; height: 100px; margin: 15px auto; position: relative; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
+      .qibla-needle { width: 3px; height: 50px; background: #FFD700; position: absolute; bottom: 50%; transform-origin: bottom center; transition: transform 1s ease-out; box-shadow: 0 0 10px gold; }
+      .qibla-needle::after { content: '▲'; color: gold; position: absolute; top: -10px; left: -6px; font-size: 12px; }
 
       #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
       .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
@@ -36,16 +35,13 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- ESSENTIAL FOR SALAH TIMES -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    
+    <!-- FIX: RELIABLE CDNS FOR SALAH MATH -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/adhan@1.1.0/dist/Adhan.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
-    <div id="root"></div>
-
-    <script>
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
@@ -2910,7 +2906,11 @@
         const [showAbout, setShowAbout] = useState(false);
         const [theme, setTheme] = useState(THEMES.teal);
         const [fontScale, setFontScale] = useState(0);
-        const [salahData, setSalahData] = useState({ times: null, qibla: 0 });
+        
+        // SALAH ENGINE STATE
+        const [salahData, setSalahData] = useState({ times: null, qibla: 0, status: "Waiting for GPS..." });
+        const audioRef = useRef(new Audio());
+        const [playingUrl, setPlayingUrl] = useState(null);
         const scrollRef = useRef(null);
 
         useEffect(() => {
@@ -2918,20 +2918,43 @@
           if (splash) setTimeout(() => splash.style.display = 'none', 600);
         }, []);
 
-        // HANAFI CALCULATION LOGIC
-        useEffect(() => {
-          if (activePageId === 'p5') {
-            navigator.geolocation.getCurrentPosition((pos) => {
-              const coords = new adhan.Coordinates(pos.coords.latitude, pos.coords.longitude);
-              const params = adhan.CalculationMethod.MuslimWorldLeague();
-              params.madhab = adhan.Madhab.Hanafi; // HANAFI FOR ASR
-              const times = new adhan.PrayerTimes(coords, new Date(), params);
-              setSalahData({ times: times, qibla: adhan.Qibla(coords) });
-            }, (err) => alert("Please enable Location to see Salah times"));
+        const calculateSalah = () => {
+          if (!navigator.geolocation) {
+            setSalahData(prev => ({...prev, status: "GPS not supported on this browser"}));
+            return;
           }
+
+          setSalahData(prev => ({...prev, status: "Accessing GPS..."}));
+
+          navigator.geolocation.getCurrentPosition((pos) => {
+            try {
+              const { latitude, longitude } = pos.coords;
+              const coords = new adhan.Coordinates(latitude, longitude);
+              const params = adhan.CalculationMethod.MuslimWorldLeague();
+              params.madhab = adhan.Madhab.Hanafi; // HANAFI
+              
+              const prayerTimes = new adhan.PrayerTimes(coords, new Date(), params);
+              const qiblaDir = adhan.Qibla(coords);
+              
+              setSalahData({ times: prayerTimes, qibla: qiblaDir, status: "Success" });
+            } catch (err) {
+              setSalahData(prev => ({...prev, status: "Calculation error"}));
+            }
+          }, (err) => {
+            setSalahData(prev => ({...prev, status: "Location Permission Denied"}));
+          }, { timeout: 10000 });
+        };
+
+        useEffect(() => {
+          if (activePageId === 'p5') { calculateSalah(); }
         }, [activePageId]);
 
         useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId]);
+
+        const toggleAudio = (url) => {
+          if (playingUrl === url) { audioRef.current.pause(); setPlayingUrl(null); }
+          else { audioRef.current.src = url; audioRef.current.play(); setPlayingUrl(url); }
+        };
 
         const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
@@ -2974,7 +2997,7 @@
             <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
               <div className="app-header">
                 <div className="header-content">
-                  <button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button>
+                  <button onClick={() => {setActivePageId(null); audioRef.current.pause(); setPlayingUrl(null);}} className="absolute left-5 p-1"><IconBack /></button>
                   <h1 className="font-bold text-[12px] text-[#C5A059] uppercase">{page.title}</h1>
                   <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
                 </div>
@@ -2990,11 +3013,13 @@
               <main ref={scrollRef} className="main-content px-4 py-6">
                 <div className="max-w-md mx-auto">
                   
+                  {/* SALAH & QIBLA INTERFACE */}
                   {activePageId === 'p5' && (
                     <div className="salah-card">
                        <p className="text-[10px] font-bold text-[#C5A059] mb-4 uppercase tracking-widest">Salah Times (Hanafi) & Qibla</p>
+                       
                        {salahData.times ? (
-                         <div className="flex justify-between mb-6">
+                         <div className="flex justify-between mb-8">
                            {['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].map(p => (
                              <div key={p} className="text-center">
                                <p className="text-[9px] text-[#C5A059] mb-1">{p}</p>
@@ -3002,14 +3027,27 @@
                              </div>
                            ))}
                          </div>
-                       ) : <p className="text-[10px] opacity-40 mb-6">Calculating local times...</p>}
-                       <div className="qibla-compass"><div className="qibla-needle" style={{transform: `rotate(${salahData.qibla}deg)`}}></div></div>
-                       <p className="text-[8px] font-bold text-[#C5A059] uppercase">Kaaba Direction</p>
+                       ) : (
+                         <div className="mb-6">
+                            <p className="text-[11px] mb-2">{salahData.status}</p>
+                            <button onClick={calculateSalah} className="dua-btn py-2 text-[10px]">Grant Permission / Retry</button>
+                         </div>
+                       )}
+
+                       <div className="qibla-circle">
+                          <div className="qibla-needle" style={{transform: `rotate(${salahData.qibla}deg)`}}></div>
+                          <p className="absolute bottom-1 text-[8px] font-bold text-[#C5A059]">KABAH</p>
+                       </div>
                     </div>
                   )}
 
                   {page.cards.map((card, idx) => (
                     <div key={idx} className="mb-8 p-5 border border-[#C5A059]/20 rounded-3xl shadow-lg" style={{backgroundColor: theme.card}}>
+                      {card.audio && (
+                         <button onClick={() => toggleAudio(card.audio)} className="dua-btn mb-6 bg-[#C5A059] text-[#051F22] font-bold">
+                           {playingUrl === card.audio ? 'Stop Recitation ❚❚' : 'Play Recitation ▶'}
+                         </button>
+                      )}
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jId))}
                     </div>
                   ))}
@@ -3023,7 +3061,7 @@
           <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: '#051F22'}}>
             <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
                <div className="header-content"><h1 className="font-heading font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
-                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1 active:scale-90"><IconSettings /></button>
+                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1"><IconSettings /></button>
                </div>
             </div>
             <main className="main-content">
@@ -3045,7 +3083,8 @@
                   {!showAbout ? (
                     <Fragment>
                       <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase">Settings</h3>
-                      <div className="mb-8 text-center"><p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p>
+                      <div className="mb-8 text-center">
+                        <p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p>
                         <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
                            <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button>
                            <span className="text-white font-arabic text-xl">بِسْمِ</span>
@@ -3061,14 +3100,14 @@
                         </div>
                       </div>
                       <button onClick={() => setShowAbout(true)} className="dua-btn mb-6 uppercase text-[12px] tracking-widest">About This App →</button>
-                      <button onClick={() => setShowSettings(false)} className="dua-btn font-bold uppercase">CLOSE</button>
+                      <button onClick={() => setShowSettings(false)} className="dua-btn font-bold">CLOSE</button>
                     </Fragment>
                   ) : (
                     <Fragment>
                       <div className="flex items-center mb-6"><button onClick={() => setShowAbout(false)} className="p-1"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
                       <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm">
                         <p className="mb-4">Thank you for using this app. Created by Imran Nazamul Hussain Doctor to support daily worship. This app collects important duʿāʾs in one place.</p>
-                        <p className="italic text-[#C5A059] mb-6">May Allah grant its reward to my family who have passed away and to all Muslims, as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)</p>
+                        <p className="italic text-[#C5A059] mb-6">May Allah accept this effort through the wasilah of Prophet Muhammad ﷺ, and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)</p>
                         <div className="pt-4 border-t border-[#C5A059]/20 text-center">
                           <p className="text-[10px] text-[#C5A059] uppercase tracking-widest">Created By</p>
                           <p className="text-white font-bold">Imran Nazamul Hussain Doctor</p>
