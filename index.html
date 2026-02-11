@@ -338,7 +338,8 @@
                    title: 'Quran Kareem',
           cards: [
             {
-              audio: 'https://server8.mp3quran.net/afs/048.mp3', // Al Fath
+              audio1: 'https://server8.mp3quran.net/afs/048.mp3', // Alafasy
+              audio2: 'https://server10.mp3quran.net/minsh/048.mp3', // Al-Minshawi
               content: [
                 { type: 'section-title', text: 'AL FATH (THE VICTORY)' },
 
@@ -410,7 +411,8 @@
             },
             {
             
-                 audio: 'https://server8.mp3quran.net/afs/055.mp3', // Ar Rahman
+                audio1: 'https://server8.mp3quran.net/afs/055.mp3', // Alafasy
+              audio2: 'https://server10.mp3quran.net/minsh/055.mp3', // Al-Minshawi
               content: [
                 { type: 'section-title', text: 'AL RAHMAN' },
                 { type: 'text', text: '(Revealed at Medinah - contains 78 verses - 3 Sections)' },
@@ -577,9 +579,9 @@
               ]
             },
             {
-              audio: 'https://server8.mp3quran.net/afs/056.mp3', // Al Waqiah
-              content: [
-                { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
+              audio1: 'https://server8.mp3quran.net/afs/056.mp3', // Alafasy
+audio2: 'https://server10.mp3quran.net/minsh/056.mp3', // Minshawi
+content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' }, 
                 { type: 'text', text: '(Revealed at Mecca - contains 96 verses)' },
                 { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' },
                 { type: 'text', text: 'Allah - beginning with the name of - the Most Gracious, the Most Merciful' },
@@ -780,9 +782,9 @@
                ]
             },
             {
-              audio: 'https://server8.mp3quran.net/afs/067.mp3', // Al Mulk
-              content: [
-                { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
+              audio1: 'https://server8.mp3quran.net/afs/067.mp3', // Alafasy
+audio2: 'https://server10.mp3quran.net/minsh/067.mp3', // Minshawi
+content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' }, 
                 { type: 'text', text: '(Revealed at Mecca - contains 30 verses)' },
                 { type: 'arabic', text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' },
                 { type: 'text', text: 'Allah - beginning with the name of - the Most Gracious, the Most Merciful' },
@@ -847,10 +849,11 @@
                 { type: 'text', text: '29] Proclaim, “He only is the Most Gracious – we have accepted faith in Him and have relied only upon Him; so you will now realise who is in open error.”' },
                 { type: 'arabic', text: 'قُلْ أَرَأَيْتُمْ إِنْ أَصْبَحَ مَاؤُكُمْ غَوْرًا فَمَن يَأْتِيكُم بِمَاءٍ مَّعِينٍ' },
                 { type: 'text', text: '30] Say, “What is your opinion - if in the morning all your water were to sink into the earth, then who is such who can bring you water flowing before you?”' }
-               ]
+              ]
             },
             {
-              audio: 'https://server8.mp3quran.net/afs/073.mp3', // Al Muzzammil
+              audio1: 'https://server8.mp3quran.net/afs/073.mp3', // Alafasy
+              audio2: 'https://server10.mp3quran.net/minsh/073.mp3', // Minshawi
               content: [
                 { type: 'section-title', text: 'AL MUZZAMMIL' },
                 { type: 'text', text: '(Revealed at Mecca - contains 20 verses - 2 Sections)' },
@@ -2905,50 +2908,52 @@
         const [theme, setTheme] = useState(THEMES.teal);
         const [fontScale, setFontScale] = useState(0);
         
-        // --- AUDIO STATE ---
-        const [audioTime, setAudioTime] = useState(0);
+        // MULTI-RECITER AUDIO LOGIC
         const [isPlaying, setIsPlaying] = useState(false);
-        const [activeAudio, setActiveAudio] = useState(null);
+        const [activeAudioUrl, setActiveAudioUrl] = useState(null);
         const audioRef = useRef(new Audio());
         const scrollRef = useRef(null);
 
         useEffect(() => {
           const splash = document.getElementById('splash-overlay');
           if (splash) setTimeout(() => splash.style.display = 'none', 600);
-          
+        }, []);
+
+        useEffect(() => {
           const audio = audioRef.current;
-          const update = () => setAudioTime(audio.currentTime);
-          audio.addEventListener('timeupdate', update);
-          audio.addEventListener('ended', () => setIsPlaying(false));
-          return () => audio.removeEventListener('timeupdate', update);
+          const end = () => { setIsPlaying(false); setActiveAudioUrl(null); };
+          audio.addEventListener('ended', end);
+          return () => audio.removeEventListener('ended', end);
         }, []);
 
         useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId]);
 
         const toggleAudio = (url) => {
-          if (activeAudio === url && isPlaying) { audioRef.current.pause(); setIsPlaying(false); }
-          else { if (activeAudio !== url) { audioRef.current.src = url; setActiveAudio(url); } audioRef.current.play(); setIsPlaying(true); }
+          if (activeAudioUrl === url && isPlaying) {
+            audioRef.current.pause();
+            setIsPlaying(false);
+          } else {
+            if (activeAudioUrl !== url) {
+              audioRef.current.src = url;
+              setActiveAudioUrl(url);
+            }
+            audioRef.current.play();
+            setIsPlaying(true);
+          }
         };
 
-        const renderBlock = (block, idx, cardAudio, allBlocks, blockId) => {
+        const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
           const clean = (t) => t ? String(t).replace(/۞/g, '') : '';
           const aSize = 28 + (fontScale * 2); 
           const eSize = 16 + (fontScale * 1);
-          
-          // --- HIGHLIGHTER ---
-          let isHighlighted = false;
-          if (isPlaying && activeAudio === cardAudio && block.time !== undefined) {
-             const nextVerse = allBlocks.slice(idx + 1).find(b => b.time !== undefined);
-             if (audioTime >= block.time && (!nextVerse || audioTime < nextVerse.time)) isHighlighted = true;
-          }
 
           switch (block.type) {
             case 'section-title': case 'title-green':
               return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 text-[#C5A059] uppercase">{block.text}</h3>;
             case 'arabic': case 'arabic-indopak': case 'arabic-green':
-              const arColor = isHighlighted ? '#4ADE80' : (block.type === 'arabic-green' ? '#2D8A4E' : (theme.id === 'cream' ? '#000' : theme.text));
-              return <p key={idx} dir="rtl" className={`font-arabic text-center mb-4 px-0 transition-all duration-300`} style={{ fontSize: `${aSize}px`, color: arColor, fontWeight: isHighlighted ? 'bold' : 'normal' }}>{clean(block.text)}</p>;
+              const arColor = block.type === 'arabic-green' ? '#2D8A4E' : (theme.id === 'cream' ? '#000' : theme.text);
+              return <p key={idx} dir="rtl" className="font-arabic text-center mb-4 px-0" style={{ fontSize: `${aSize}px`, color: arColor }}>{clean(block.text)}</p>;
             case 'text':
               const txtColor = theme.id === 'cream' ? '#333' : theme.text;
               return <p key={idx} className="text-center mb-8 opacity-90 leading-relaxed px-0 font-medium" style={{ fontSize: `${eSize}px`, color: txtColor }}>{block.text}</p>;
@@ -2995,12 +3000,24 @@
                 <div className="max-w-md mx-auto">
                   {page.cards.map((card, idx) => (
                     <div key={idx} className="mb-8 p-5 border border-[#C5A059]/20 rounded-3xl shadow-lg" style={{backgroundColor: theme.card}}>
-                      {card.audio && (
-                         <button onClick={() => toggleAudio(card.audio)} className="dua-btn mb-6 bg-[#C5A059] text-[#051F22] font-bold">
-                           {activeAudio === card.audio && isPlaying ? 'Stop Recitation ❚❚' : 'Play Recitation ▶'}
-                         </button>
+                      
+                      {/* TWO RECITER BUTTONS */}
+                      {(card.audio1 || card.audio2) && (
+                        <div className="flex gap-2 mb-6">
+                           {card.audio1 && (
+                             <button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-2 bg-[#C5A059]/10 border border-[#C5A059]/40 rounded-xl text-[#C5A059] text-[9px] font-bold uppercase tracking-widest">
+                               {activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}
+                             </button>
+                           )}
+                           {card.audio2 && (
+                             <button onClick={() => toggleAudio(card.audio2)} className="flex-1 p-2 bg-[#C5A059]/10 border border-[#C5A059]/40 rounded-xl text-[#C5A059] text-[9px] font-bold uppercase tracking-widest">
+                               {activeAudioUrl === card.audio2 && isPlaying ? 'Minshawi ❚❚' : 'Minshawi ▶'}
+                             </button>
+                           )}
+                        </div>
                       )}
-                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, card.audio, card.content, block._jId))}
+
+                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jId))}
                     </div>
                   ))}
                 </div>
@@ -3035,8 +3052,7 @@
                   {!showAbout ? (
                     <Fragment>
                       <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase">Settings</h3>
-                      <div className="mb-8 text-center">
-                        <p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p>
+                      <div className="mb-8 text-center"><p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p>
                         <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
                            <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button>
                            <span className="text-white font-arabic text-xl">بِسْمِ</span>
@@ -3057,9 +3073,9 @@
                   ) : (
                     <Fragment>
                       <div className="flex items-center mb-6"><button onClick={() => setShowAbout(false)} className="p-1"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
-                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm">
-                        <p className="mb-4">Thank you for using this app. This app was created to make daily worship easier. In our busy lives, we often pray salah but forget to make duʿāʾ or dhikr. This app collects important duʿāʾs in one place so they are easy to read anytime on your phone.</p>
-                        <p className="italic text-[#C5A059] mb-6">May Allah grant its reward to my family who have passed away and to all Muslims, through the wasilah of Prophet Muhammad ﷺ, and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)</p>
+                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm leading-relaxed">
+                        <p className="mb-4">Thank you for using this app. Created by Imran Nazamul Hussain Doctor to support daily worship. This app collects important duʿāʾs in one place.</p>
+                        <p className="italic text-[#C5A059] mb-6">May Allah grant its reward to my family who have passed away and to all Muslims, as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)</p>
                         <div className="pt-4 border-t border-[#C5A059]/20 text-center">
                           <p className="text-[10px] text-[#C5A059] uppercase tracking-widest">Created By</p>
                           <p className="text-white font-bold">Imran Nazamul Hussain Doctor</p>
