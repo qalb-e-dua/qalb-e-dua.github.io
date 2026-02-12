@@ -3405,9 +3405,9 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           ]
         }
 }; // End of your data
-    </script>
+</script>
 
-<script type="text/babel">
+   <script type="text/babel">
       const { useState, useEffect, Fragment, useRef } = React;
 
       // ICONS
@@ -3425,12 +3425,13 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
-        const [selectedSurahIdx, setSelectedSurahIdx] = useState(null); // Fixed: To track which surah is open
+        const [selectedSurahIdx, setSelectedSurahIdx] = useState(null);
         const [showSettings, setShowSettings] = useState(false);
         const [showAbout, setShowAbout] = useState(false);
         const [theme, setTheme] = useState(THEMES.standard);
         const [fontScale, setFontScale] = useState(0);
         const [isDarkMode, setIsDarkMode] = useState(true);
+        const [showTranslation, setShowTranslation] = useState(true); // Translation Toggle State
         
         const [isPlaying, setIsPlaying] = useState(false);
         const [activeAudioUrl, setActiveAudioUrl] = useState(null);
@@ -3564,11 +3565,16 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
                       )}
                     </div>
                   )}
-                  {card?.content.map((block, bIdx) => (
-                    <div key={bIdx} className="verse-row">
-                      {renderBlock(block, bIdx, block._jId)}
-                    </div>
-                  ))}
+                  {card?.content.map((block, bIdx) => {
+                    // Conditional rendering: Hide English if toggle is OFF
+                    if (block.type === 'text' && !showTranslation) return null;
+                    
+                    return (
+                      <div key={bIdx} className={`verse-row ${activeAudioUrl && isPlaying ? 'highlight-verse' : ''}`}>
+                        {renderBlock(block, bIdx, block._jId)}
+                      </div>
+                    );
+                  })}
                   <div className="h-24" />
                 </div>
               </main>
@@ -3661,12 +3667,23 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
                   {!showAbout ? (
                     <Fragment>
                       <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase tracking-widest">Settings</h3>
-                      <div className="flex items-center justify-between mb-8 px-4">
+                      
+                      {/* Dark Mode Toggle */}
+                      <div className="flex items-center justify-between mb-4 px-4">
                         <span className="text-white text-sm font-bold uppercase">Dark Mode</span>
                         <div onClick={() => setIsDarkMode(!isDarkMode)} className={`w-14 h-7 rounded-full relative transition-colors ${isDarkMode?'bg-[#C5A059]':'bg-gray-600'}`}>
                           <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${isDarkMode?'right-1':'left-1'}`} />
                         </div>
                       </div>
+
+                      {/* English Translation Toggle (Only shows when in Quran page) */}
+                      <div className="flex items-center justify-between mb-8 px-4">
+                        <span className="text-white text-sm font-bold uppercase">English Translation</span>
+                        <div onClick={() => setShowTranslation(!showTranslation)} className={`w-14 h-7 rounded-full relative transition-colors ${showTranslation?'bg-[#C5A059]':'bg-gray-600'}`}>
+                          <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${showTranslation?'right-1':'left-1'}`} />
+                        </div>
+                      </div>
+
                       <div className="mb-8 px-4">
                         <p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest text-center">Font Size</p>
                         <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2 border border-white/5">
@@ -3675,6 +3692,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
                            <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 text-white text-2xl">+</button>
                         </div>
                       </div>
+                      
                       <div className="mb-10 px-4">
                         <p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest text-center">Theme Mode</p>
                         <div className="grid grid-cols-2 gap-3">
