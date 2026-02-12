@@ -1281,27 +1281,80 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         { type: 'section-title', text: 'Durood Nariya' },
         { type: 'arabic', text: 'اللَّهُمَّ صَلِّ صَلَاةً كَامِلَةً ❁ وَسَلِّمْ سَلَامًا تَامًّا ❁ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ الَّذِي تَنْحَلُّ بِهِ الْعُقَدُ ❁ وَتَنْفَرِجُ بِهِ الْكُرَبُ ❁ وَتُقْضَىٰ بِهِ الْحَوَائِجُ ❁ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ ❁ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيمِ ❁ وَعَلىٰ آلِهِ وَصَحْبِهِ ❁ فِي كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُومٍ لَكَ ❁' },
         { type: 'text', text: 'O Allah, send a perfect prayer and complete greeting of peace upon our master Muhammad — the one by whom problems are solved, and anxieties are relieved, and needs are fulfilled, and aspirations are attained and good endings are received, and by whose noble face the clouds give rain — and upon his Family and Companions, with every glance and every breath, by the number of everything that is known to You.' },
-        { type: 'hr' },
-        
-
-        // As Salat al-Kaamil STARTS HERE
-        { type: 'section-title', text: 'As Salat al-Kaamil' },
-        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ كَمَا لَا نِهَايَةَ لِكَمَالِكَ وَعَدَدَ كَمَالِهِ' },
-        { type: 'hr' },
-
-        { type: 'arabic', text: 'يَا رَبِّ بِالمُصْطَفَى بَلِّغْ مَقَاصِدَنَا' },
-        { type: 'arabic', text: 'وَارْفَعْ وَبَاءً أَتَى بِالكَرْبِ وَالسَّقَمِ' },
-        { type: 'arabic', text: 'وَالْطُفْ بِنَا وَاشْفِ مَرْضَانَا عَلَى عَجَلٍ' },
-        { type: 'arabic', text: 'وَاغْفِرْ لَنَا مَا مَضَى يَا وَاسِعَ الكَرَمِ' },
-        { type: 'arabic', text: '(٣)' },
-
-      ]
-    }
-  ]
+               { type: 'hr' },
+            ]
+        },
+        // As Salat al-Kaamil STARTS HERE (now correctly wrapped in a card)
+        {
+            variant: 'default',
+            content: [
+                { type: 'section-title', text: 'As Salat al-Kaamil' },
+                { type: 'arabic', text: 'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ كَمَا لَا نِهَايَةَ لِكَمَالِكَ وَعَدَدَ كَمَالِهِ' },
+                { type: 'hr' },
+                { type: 'arabic', text: 'يَا رَبِّ بِالمُصْطَفَى بَلِّغْ مَقَاصِدَنَا' },
+                { type: 'arabic', text: 'وَارْفَعْ وَبَاءً أَتَى بِالكَرْبِ وَالسَّقَمِ' },
+                { type: 'arabic', text: 'وَالْطُفْ بِنَا وَاشْفِ مَرْضَانَا عَلَى عَجَلٍ' },
+                { type: 'arabic', text: 'وَاغْفِرْ لَنَا مَا مَضَى يَا وَاسِعَ الكَرَمِ' },
+                { type: 'arabic', text: '(٣)' },
+            ]
+        },
+        // --- NEW SALAWAT SECTIONS START HERE ---
+        {
+            variant: 'image',
+            image: 'Salawat_of_Shukr.jpg', // Placeholder, replace with actual image path
+            content: [
+                { type: 'section-title', text: 'Salawat of Shukr (Thankfulness)' },
+                { type: 'arabic-indopak', text: 'اللَّهُمَّ يَا شَكُورًا لِعِبَادِهِ الْمُؤْمِنِينَ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ أَفْضَلِ الشَّاكِرِينَ صَلَاةً تُلْحِقُنَا بِالْقَلِيلِ الَّذِينَ قُلْتَ فِيهِمْ ﴿ وَقَلِيلٌ مِنْ عِبَادِيَ الشَّكُورُ ﴾ وَارْزُقْنَا بِالصَّلَاةِ عَلَيْهِ شُكْرًا لَكَ عَلَى نِعْمَتِهِ وَمَا أَوْصَلْتَ إِلَيْنَا مِنْ أَيَادِيهِ وَمِنَّتِهِ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ' },
+                { type: 'text', text: 'O Allah, O You who are Most Grateful to His believing servants,\nsend blessings upon our master Muhammad, the most excellent\nof those who show gratitude. A blessing that admits us among\nthe few about whom You said: “And few of My servants are truly\ngrateful.” [Qur’an 34:13] And grant us — by virtue of sending\nblessings upon him — gratitude to You for His favour, and for\nall that You have delivered to us of His acts of generosity and grace.\nAnd send blessings upon his family and companions, and grant peace.' }
+            ]
+        },
+        {
+            variant: 'image', // Corrected: Added missing 'variant'
+            image: 'Salawat_to_ease_finding_a_spouse.jpg', // Placeholder, replace with actual image path
+            content: [
+                { type: 'section-title', text: 'Salawat to ease finding a spouse' },
+                { type: 'text', text: 'written by Shaykh Muhammad al-Yaqoubi' },
+                { type: 'arabic-indopak', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تُسَهِّلُ الزَّوَاجَ' },
+                { type: 'text', text: 'Allāhumma ṣalli ʿalā Sayyidinā Muḥammadin ṣalātan tusahhiluz-zawāja\nO Allah, we beseech you to bless our master Muhammad, his Family, and his Companions\nwith blessings that ease marriage' },
+                { type: 'arabic-indopak', text: 'لِلشَّبَابِ * وَتَجْلِبُ الْخُطَّابَ لِلْبَنَاتِ إِلَى الْأَبْوَابِ' },
+                { type: 'text', text: 'lish-shabāb. Wa tajlibul khuṭṭāba lil banāti ilāl abwāb\nfor our single brothers, bring suitors to our young women' },
+                { type: 'arabic-indopak', text: 'وَتَجْمَعُ الْمُحِبِّينَ بِالْأَحْبَابِ * وَاللَّهُ يَرْزُقُ مَنْ يَشَاءُ' },
+                { type: 'text', text: 'Wa tajmaʿ ul muḥibbīna bil aḥbāb. Wallāhu yarzuqu may-yashāʾu\nand unite people with their beloved ones; for Allah provides for whom He wills' },
+                { type: 'arabic-indopak', text: 'بِغَيْرِ حِسَابٍ * وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+                { type: 'text', text: 'bighayri ḥisāb. Wa ʿalā ālihī wa ṣaḥbihī ajmaʿīn\nwithout measure.' }
+            ]
+        },
+        {
+            variant: 'image',
+            image: 'Salawat_of_Imam_Hasan_al_Basri.jpg',
+            content: [
+                { type: 'section-title', text: 'Salawat of Imam Hasan al-Basri' },
+                { type: 'text', text: 'Anyone who wants their cup full at the Hawd of RasulAllah ﷺ should recite this salawat' },
+                { type: 'arabic-indopak', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ' },
+                { type: 'text', text: 'Allāhumma ṣalli ʿalā Sayyidinā Muḥammadin wa ʿalā ālihī\nO Allah, bless our master Muhammad, his Family' },
+                { type: 'arabic-indopak', text: 'وَأَصْحَابِهِ وَأَوْلَادِهِ وَأَزْوَاجِهِ وَذُرِّيَّتِهِ' },
+                { type: 'text', text: 'wa aṣḥābihī wa awlādihī wa azwājihī wa dhurriyyatihī\nhis Companions, his children, his wives, his descendants,' },
+                { type: 'arabic-indopak', text: 'وَأَهْلِ بَيْتِهِ وَأَصْهَارِهِ وَأَنْصَارِهِ وَأَشْيَاعِهِ' },
+                { type: 'text', text: 'wa ahli baytihī wa aṣhārīhī wa anṣārihī wa ashyāʾihī\nhis household, his sons in-law, his supporters, his followers' },
+                { type: 'arabic-indopak', text: 'وَمُحِبِّيهِ وَعَلَيْنَا مَعَهُمْ أَجْمَعِينَ' },
+                { type: 'text', text: 'wa muḥibbīhi, wa ʿalaynā maʿahum ajmaʿīn\nhis nation, and those who love him and bless us along with them.' }
+            ]
+        },
+        {
+            variant: 'image', // Corrected: Added missing 'variant'
+            image: 'Salawat_from_Dalail_al_Khayrat.jpg', // Placeholder, replace with actual image path
+            content: [
+                { type: 'section-title', text: 'Salawat from Dala’il al Khayrat' },
+                { type: 'text', text: 'The Prophet ﷺ said:\n“The person who prays for me is provided with light on the Bridge, and whoever is\nprovided with light on the Bridge will not be amongst the people of the Fire.”', style: 'italic text-center mb-4' },
+                { type: 'arabic-indopak', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ\nعَدَدَ مَا فِي عِلْمِ اللَّهِ صَلَاةً\nدَائِمَةً بِدَوَامِ مُلْكِ اللَّهِ' },
+                { type: 'text', text: 'O Allāh, bless our master Muhammad, that in\nnumber are equal to the things that exist in\nthe knowledge of Allāh and continue so long\nas the dominion of Allāh remains.' }
+            ]
+        }
+    ]
 },
 'p5': {
-  id: 'p5', 
-  title: 'Prayers after Salah', 
+    id: 'p5',
+    title: 'Prayers after Salah',
    "cards": [
       {
         "variant": "default",
@@ -2755,71 +2808,142 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           ]
         },
         'p10': {
-          id: 'p10',
-          title: 'Dhikr (Remembrance)',
-          cards: [
-              {
-                  variant: 'default',
-                  content: [
-                      { type: 'section-title', text: 'Tasbih Fatimah' },
-                      { type: 'text', text: 'Recite 33 times:' },
-                      { type: 'arabic-indopak', text: 'سُبْحَانَ اللَّهِ' },
-                      { type: 'text', text: 'SubhanAllah (Glory be to Allah)' },
-                      { type: 'hr' },
-                      { type: 'text', text: 'Recite 33 times:' },
-                      { type: 'arabic-indopak', text: 'الْحَمْدُ لِلَّهِ' },
-                      { type: 'text', text: 'Alhamdulillah (Praise be to Allah)' },
-                      { type: 'hr' },
-                      { type: 'text', text: 'Recite 34 times:' },
-                      { type: 'arabic-indopak', text: 'اللَّهُ أَكْبَرُ' },
-                      { type: 'text', text: 'Allahu Akbar (Allah is the Greatest)' },
-                      { type: 'hr' },
-                      { type: 'section-title', text: 'Best of Dhikr' },
-                      { type: 'arabic-indopak', text: 'لَا إِلَٰهَ إِلَّا ٱللَّٰهُ' },
-                      { type: 'text', text: 'La ilaha illallah (There is no deity but Allah)' }
-                  ]
-              },
-              {
-                  variant: 'default',
-                  content: [
-                      { type: 'section-title', text: 'Remembrance of Allah' },
-                      { type: 'arabic-indopak', text: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ' },
-                      { type: 'text', text: 'SubhanAllahi wa bihamdihi (Glory is to Allah and to Him is praise).' },
-                      { type: 'hr' },
-                      { type: 'arabic-indopak', text: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ' },
-                      { type: 'text', text: 'SubhanAllahi wa bihamdihi, SubhanAllahil Azeem (Glory is to Allah and to Him is praise, Glory is to Allah the Magnificent).' },
-                      { type: 'hr' },
-                      { type: 'arabic-indopak', text: 'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ' },
-                      { type: 'text', text: 'La hawla wa la quwwata illa billah (There is no power and no strength except with Allah).' }
-                  ]
-              },
-              {
-                  variant: 'default',
-                  content: [
-                      { type: 'section-title', text: 'Seeking Forgiveness' },
-                      { type: 'arabic-indopak', text: 'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ' },
-                      { type: 'text', text: 'Astaghfirullah wa atubu ilaih (I seek forgiveness from Allah and turn to Him in repentance)' }
-                  ]
-              },
-              // --- NEW SECTION: DUA-E-GHAUSIA ---
-              {
-                  variant: 'default',
-                  content: [
-                      { type: 'section-title', text: 'Dua-e-Ghausia' },
-                      { type: 'text', text: 'This is the supplication that the mother of Hazrat Ghaus-e-Azam (may Allah have mercy on him) taught him to protect against every kind of hardship, calamity, or distress.' },
-                      { type: 'text', text: "Hazrat Ghaus-e-Azam (may Allah have mercy on him) said, 'Whatever I have received, I have received through this supplication.'", style: 'italic mb-4 text-sm opacity-80' },
-                      
-                      { type: 'arabic-indopak', text: 'دُعَائِ غَوْثِيَّه', style: 'text-center text-3xl mb-4 text-[#1e3a8a] font-bold' },
-                      
-                      { type: 'arabic-indopak', text: 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِیْمِ' },
-                      { type: 'arabic-indopak', text: 'الصَّلٰوۃُ وَالسَّلَامُ عَلَیْکَ یَا رَسُوْلَ اللهِ' },
-                      { type: 'hr' },
-                      { type: 'arabic-indopak', text: 'اللّٰهُ كَافِي، قَصَدْتُ الْكَافِي\nوَجَدْتُ الْكَافِي، لِكُلِّ كَافِي\nكَفَانِي الْكَافِي، وَنِعْمَ الْحَمْدُ', style: 'text-center text-2xl leading-loose font-bold' },
-                      { type: 'text', text: 'Allahu Kaafi, Qasad-tul Kaafi\nWajad-tul Kaafi, Likullin Kaafi\nKafa-nil Kaafi, Wa ni\'mal Hamd', style: 'text-center text-sm opacity-70 mt-2' }
-                  ]
-              }
-          ]
+    id: 'p10',
+    title: 'Dhikr & Supplications', // Updated title to reflect the additional content
+    cards: [
+        {
+            variant: 'default',
+            content: [
+                { type: 'section-title', text: 'Tasbih Fatimah' },
+                { type: 'text', text: 'Recite 33 times:' },
+                { type: 'arabic-indopak', text: 'سُبْحَانَ اللَّهِ' },
+                { type: 'text', text: 'SubhanAllah (Glory be to Allah)' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite 33 times:' },
+                { type: 'arabic-indopak', text: 'الْحَمْدُ لِلَّهِ' },
+                { type: 'text', text: 'Alhamdulillah (Praise be to Allah)' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite 34 times:' },
+                { type: 'arabic-indopak', text: 'اللَّهُ أَكْبَرُ' },
+                { type: 'text', text: 'Allahu Akbar (Allah is the Greatest)' },
+                { type: 'hr' },
+                { type: 'section-title', text: 'Best of Dhikr' },
+                { type: 'arabic-indopak', text: 'لَا إِلَٰهَ إِلَّا ٱللَّٰهُ' },
+                { type: 'text', text: 'La ilaha illallah (There is no deity but Allah)' }
+            ]
         },
+        {
+            variant: 'default',
+            content: [
+                { type: 'section-title', text: 'Remembrance of Allah' },
+                { type: 'arabic-indopak', text: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ' },
+                { type: 'text', text: 'SubhanAllahi wa bihamdihi (Glory is to Allah and to Him is praise).' },
+                { type: 'hr' },
+                { type: 'arabic-indopak', text: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ' },
+                { type: 'text', text: 'SubhanAllahi wa bihamdihi, SubhanAllahil Azeem (Glory is to Allah and to Him is praise, Glory is to Allah the Magnificent).' },
+                { type: 'hr' },
+                { type: 'arabic-indopak', text: 'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ' },
+                { type: 'text', text: 'La hawla wa la quwwata illa billah (There is no power and no strength except with Allah).' }
+            ]
+        },
+        {
+            variant: 'default',
+            content: [
+                { type: 'section-title', text: 'Seeking Forgiveness' },
+                { type: 'arabic-indopak', text: 'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ' },
+                { type: 'text', text: 'Astaghfirullah wa atubu ilaih (I seek forgiveness from Allah and turn to Him in repentance)' }
+            ]
+        },
+        // --- DUA-E-GHAUSIA ---
+        {
+            variant: 'default',
+            content: [
+                { type: 'section-title', text: 'Dua-e-Ghausia' },
+                { type: 'text', text: 'This is the supplication that the mother of Hazrat Ghaus-e-Azam (may Allah have mercy on him) taught him to protect against every kind of hardship, calamity, or distress.' },
+                { type: 'text', text: "Hazrat Ghaus-e-Azam (may Allah have mercy on him) said, 'Whatever I have received, I have received through this supplication.'", style: 'italic mb-4 text-sm opacity-80' },
+                
+                { type: 'arabic-indopak', text: 'دُعَائِ غَوْثِيَّه', style: 'text-center text-3xl mb-4 text-[#1e3a8a] font-bold' },
+                
+                { type: 'arabic-indopak', text: 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِیْمِ' },
+                { type: 'arabic-indopak', text: 'الصَّلٰوۃُ وَالسَّلَامُ عَلَیْکَ یَا رَسُوْلَ اللهِ' },
+                { type: 'hr' },
+                { type: 'arabic-indopak', text: 'اللّٰهُ كَافِي، قَصَدْتُ الْكَافِي\nوَجَدْتُ الْكَافِي، لِكُلِّ كَافِي\nكَفَانِي الْكَافِي، وَنِعْمَ الْحَمْدُ', style: 'text-center text-2xl leading-loose font-bold' },
+                { type: 'text', text: 'Allahu Kaafi, Qasad-tul Kaafi\nWajad-tul Kaafi, Likullin Kaafi\nKafa-nil Kaafi, Wa ni\'mal Hamd', style: 'text-center text-sm opacity-70 mt-2' }
+            ]
+        },
+        // --- NEW SECTION: Al-Latifiyyah ---
+        {
+            variant: 'image', // Assuming you want to display the image for Al-Latifiyyah directly
+            image: 'Al-Latifiyyah.jpg', // You would replace this with the actual image path or data URI
+            content: [
+                { type: 'section-title', text: 'Al-Latifiyyah' },
+                { type: 'text', text: 'Al-Latifiyyah is traditionally read in moments of need, difficulty, or subtle hardship, in keeping with the nature of the Divine Name al-Latif, Whose kindness manifests with subtlety, gentleness, and unseen care' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Once:' },
+                { type: 'arabic-indopak', text: 'أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ' },
+                { type: 'text', text: 'Aʿūdu billāhis-Samīʿil-ʿAlīmi minash-Shayṭā-nir Rajīm\nI seek refuge in Allāh, the All-Hearing, the All-Knowing,\nfrom Satan, the rejected one.' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Once:' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِیْمِ' },
+                { type: 'text', text: 'Bis-mil-lāhir Raḥmā-nir Raḥīm\nIn the Name of Allāh, most Gracious, most Merciful.' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Once:' },
+                { type: 'arabic-indopak', text: 'اللَّهُ لَطِيفٌ بِعِبَادِهِ يَرْزُقُ مَنْ يَشَاءُ وَهُوَ الْقَوِيُّ الْعَزِيزُ' },
+                { type: 'text', text: 'Allāhu Laṭīfum biʿibādihi yarzuqu man yashāʾu wa Huwal Qawiyyul ʿAzīz\nAllāh is kind to His servants; He gives sustenance to whom\nHe pleases, and He is the All-Powerful, the All-Mighty.\n[Surah Ash-Shūra, 42:19]' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite One Thousand Times:' },
+                { type: 'arabic-indopak', text: 'يَا لَطِيفُ' },
+                { type: 'text', text: 'Yā Laṭīfu\nO Most Kind and Gentle One' },
+                 { type: 'hr' },
+                { type: 'text', text: 'Recite Three Times:' },
+                { type: 'arabic-indopak', text: 'يَا لَطِيفًا بِخَلْقِهِ يَا عَلِيمًا بِخَلْقِهِ يَا خَبِيرًا بِخَلْقِهِ\nأَلْطُفْ بِنَا يَا لَطِيفُ يَا عَلِيمُ يَا خَبِيرُ' },
+                { type: 'text', text: 'Yā Laṭīfam bi-khalqihi Yā ʿAlīmam bi-khalqihi Yā Khabīram bi-khalqih\nUlṭuf binā Yā Laṭīfu Yā ʿAlīmu Yā Khabīr\nO Most Kind to Your creation, O All-Knowing of Your creation, O All-Aware of Your\ncreation. Be kind (and gentle) to us, O Most Kind, O All-Knowing, O All-Aware.' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Once:' },
+                { type: 'arabic-indopak', text: 'اَللّٰهُمَّ يَا مَنْ لَطَفْتَ فِي خَلْقِ السَّمٰوَاتِ وَالْأَرْضِ\nوَلَطَفْتَ بِالْأَجِنَّةِ فِي بُطُوْنِ أُمَّهَاتِهَا أَلْطُفْ بِنَا لُطْفًا يَلِيقُ\nبِكَرَمِكَ وَرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِيْنَ، يَا اللهُ' },
+                { type: 'text', text: 'Allāhumma yā man laṭafta fī khalqis-samāwāti wal-arḍi\nwa laṭafta bil-ajin-nati fī buṭūni ummahātihā ulṭuf binā luṭfan yalīqu\nbi karamika wa raḥmatika Yā Arḥamar-Rāḥimīn, Yā Allāh\nO Allāh, You who showed gentleness in the creation of the heavens and the\nearth, and showed gentleness to the unborn in the wombs of their mothers.\nShow us a gentleness befitting Your generosity and Your mercy,\nO Most Merciful of the merciful, O Allāh.' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Once:' },
+                { type: 'arabic-indopak', text: 'اَللّٰهُمَّ يَا مَنْ جَعَلْتَ الصَّلَاةَ عَلَى النَّبِيِّ مِنَ الْقُرُبَاتِ\nتَتَقَرَّبُ إِلَيْكَ بِكُلِّ صَلَاةٍ صُلِّيَتْ عَلَيْهِ\nمِنْ أَوَّلِ النَّشْأَةِ إِلَىٰ مَا لَا نِهَايَةَ لَهُ مِنَ الْكَمَالَاتِ' },
+                { type: 'text', text: 'Allāhumma yā man jaʿaltas-ṣalāta ʿalan-nabiyyi minal-qurubāti\ntataqarrabu ilayka bi-kulli ṣalātin ṣulliyat ʿalayhi\nmin awwalin-nashʾati ilā mā lā nihāyata lahu minal-kamālāt\nO Allāh, You who made sending blessings upon the Prophet a means\nof nearness to You, we draw close to You through every prayer sent upon him,\nfrom the beginning of creation to endless perfection.' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Three Times:' },
+                { type: 'arabic-indopak', text: 'بِسْمِ اللهِ مَا شَاءَ اللَّهُ لَا يَسُوْقُ الْخَيْرَ إِلَّا اللَّهُ\nبِسْمِ اللَّهِ مَا شَاءَ اللَّهُ لَا يَصْرِفُ السُّوْءَ إِلَّا اللَّهُ\nبِسْمِ اللَّهِ مَا شَاءَ اللَّهُ وَمَا بِكُمْ مِنْ نِعْمَةٍ فَمِنَ اللَّهِ\nبِسْمِ اللَّهِ مَا شَاءَ اللَّهُ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ' },
+                { type: 'text', text: 'Bismillāhi mā shāʾAllāhu lā yasūqul-khayra illallāh\nBismillāhi mā shāʾAllāhu lā yaṣrifu as-sūʾa illallāh\nBismillāhi mā shāʾAllāhu wa mā bikum min niʿmatin faminallāh\nBismillāhi mā shāʾAllāhu lā ḥawla wa lā quwwata illā billāh\nIn the Name of Allāh – whatever Allāh wills; none brings good except Allāh.\nIn the Name of Allāh – whatever Allāh wills; None repels harm except Allāh.\nIn the Name of Allāh – whatever Allāh wills; Every blessing you have is from Allāh.\nIn the Name of Allāh – whatever Allāh wills; There is no power and no strength\nexcept through Allāh.' },
+                { type: 'hr' },
+                { type: 'text', text: 'Recite Once:' },
+                { type: 'arabic-indopak', text: 'وَصَلَّى اللَّهُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلَّمَ' },
+                { type: 'text', text: 'Wa ṣallallāhu ʿalā Sayyidinā Muḥammadin wa ʿalā ālihī wa ṣaḥbihī wa sallam\nMay Allāh bless our master Muhammad, his family, and his companions,\nand grant them peace.' },
+                { type: 'text', text: 'Make duʿāʾ for yourself, your parents, your Shaykh,\nyour fellow brethren on this path, and all Muslims.', style: 'italic mt-4' }
+            ]
+        },
+        // --- NEW SECTION: Ayatul Karimah ---
+        {
+            variant: 'image', // Assuming you want to display the image for Ayatul Karimah directly
+            image: 'Ayatul_Karimah.jpg', // You would replace this with the actual image path or data URI
+            content: [
+                { type: 'section-title', text: 'Ayatul Karimah' },
+                { type: 'arabic-indopak', text: 'لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ\nإِنِّي كُنْتُ مِنَ الظَّالِمِينَ', style: 'text-center text-3xl mb-4 font-bold' },
+                { type: 'text', text: 'Lā ilāha illā anta subḥānaka\ninnī kuntu minaz-ẓālimīn', style: 'text-center text-sm opacity-70 mt-2' },
+                { type: 'text', text: '[None has the right to be worshipped but You (O Allah)],\nGlorified (and Exalted) are You [above all that (evil)\nthey associate with You]. Truly, I have been of the wrong-doers.', style: 'text-center italic mt-2' },
+                { type: 'text', text: '[Al Anbiya : 87]', style: 'text-center text-xs opacity-60 mt-1' }
+            ]
+        },
+        // --- NEW SECTION: Hand Your Affairs to Allah ---
+        {
+            variant: 'image', // Assuming you want to display the image for Hand Your Affairs to Allah directly
+            image: 'Hand_Your_Affairs_to_Allah.jpg', // You would replace this with the actual image path or data URI
+            content: [
+                { type: 'section-title', text: 'Hand Your Affairs to Allāh' },
+                { type: 'text', text: 'Are you unable to find a solution or a way out of a problem or dilemma?', style: 'text-center text-lg mb-4' },
+                { type: 'text', text: 'Repeat the following verse of the Qur’an 100 times every day', style: 'text-center italic mb-4' },
+                { type: 'arabic-indopak', text: 'وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ\nإِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ', style: 'text-center text-3xl leading-loose font-bold' },
+                { type: 'text', text: 'And I entrust my tasks to Allāh\nIndeed, Allāh sees the bondmen', style: 'text-center text-lg mt-4' },
+                { type: 'text', text: '[Surah Ghafir, 40:44]', style: 'text-center text-xs opacity-60 mt-1' }
+            ]
+        }
+    ]
+},
        'p11': {
     id: 'p11',
     title: 'Morning & Evening Adhkar',
