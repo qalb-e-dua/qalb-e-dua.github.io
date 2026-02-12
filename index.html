@@ -15,13 +15,30 @@
       .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: inherit; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
       .main-content { flex: 1; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
+      
+      /* YOUR ORIGINAL MIHRAB DESIGN - KEPT AS IS */
       .mihrab-container { border: 2px solid var(--gold); border-bottom: none; margin: 20px; margin-top: 10px; border-radius: 150px 150px 20px 20px; padding: 50px 20px 40px 20px; min-height: 80vh; }
       .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; display: block; width: 100%; }
+      
+      /* NEW QURAN LIST CARD STYLE (Image 5 style) */
+      .surah-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 160, 89, 0.3); margin: 8px 16px; border-radius: 12px; display: flex; align-items: center; padding: 15px; }
+      .surah-num-box { width: 45px; height: 45px; border: 2px solid var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-weight: bold; margin-right: 15px; font-size: 16px; }
+      .surah-info { display: flex; flex-direction: column; }
+      .surah-en-name { color: var(--light-gold); font-size: 18px; font-weight: bold; }
+      .surah-v-count { color: rgba(197, 160, 89, 0.7); font-size: 11px; text-transform: uppercase; }
+      .surah-ar-name { font-family: 'Amiri', serif; color: var(--light-gold); font-size: 26px; margin-left: auto; }
+
+      /* ALTERNATING ROWS FOR QURAN READING (Image 6 style) */
+      .verse-row { padding: 25px 20px; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
+      .verse-row:nth-child(even) { background: rgba(255, 255, 255, 0.04); }
+      
+      /* FLOATING BUTTONS (Image 6 style) */
+      .floating-controls { position: fixed; bottom: 30px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 50; }
+      .f-btn { pointer-events: auto; width: 50px; height: 45px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); color: #000; }
+
       .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
       .index-bar::-webkit-scrollbar { display: none; }
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
-      
-      /* HIGHLIGHT STYLE (STABLE) */
       .highlight-verse { color: #4ADE80 !important; font-weight: bold !important; transition: all 0.3s ease; }
       
       #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
@@ -56,6 +73,18 @@
         { id: 'm12', label: '40 Rabbana Duas', pageId: 'p12' },
         { id: 'm13', label: 'Khatm-e-Qadiriyah', pageId: 'p13' },
       ];
+
+      // Surah List Metadata
+      const SURAHS_LIST = [
+        { id: 36, name: "Yaa-Seen", ar: "يس", verses: 83, pageId: 'pquran_36' },
+        { id: 48, name: "Al Fath", ar: "الفتح", verses: 29, pageId: 'pquran_48' },
+        { id: 55, name: "Ar-Rahman", ar: "الرحمن", verses: 78, pageId: 'pquran_55' },
+        { id: 56, name: "Al-Waqi'ah", ar: "الواقعة", verses: 96, pageId: 'pquran_56' },
+        { id: 67, name: "Al-Mulk", ar: "الملك", verses: 30, pageId: 'pquran_67' },
+        { id: 73, name: "Al-Muzzammil", ar: "المزمل", verses: 20, pageId: 'pquran_73' }
+      ];
+
+      // Helper Functions
       const createNameEntry = (num, arabic, english) => [{ type: 'allah-name', number: num, arabic: arabic, english: english }];
       const createProphetName = (num, arabic, english) => [{ type: 'allah-name', number: num, arabic: arabic, english: english }];
 
@@ -2504,9 +2533,94 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         { type: 'arabic', text: 'لَا إِلٰهَ إِلَّا اللهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ،' },
         { type: 'arabic', text: 'لَا إِلٰهَ إِلَّا اللهُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ' }
       ]
+    }, // This closes the 'A prayer to be recited when ill' card
+    // --- NEW DU'A SECTIONS START HERE ---
+    {
+        variant: 'image', // Assuming image variant for these Du'as
+        image: 'Dua_of_Gratitude.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "87. Du'a of Gratitude" }, // Numbered
+            { type: 'text', text: 'of Prophet Sulayman عليه السلام' },
+            { type: 'arabic-indopak', text: 'رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ' },
+            { type: 'text', text: 'Rabbi awziʿnī an ashkura niʿmataka-llatī\nanʿamta ʿalayya wa ʿalā wālidayya' },
+            { type: 'text', text: 'My Lord! Inspire me to give thanks for Your blessing\nwith which You have blessed me and my parents' },
+            { type: 'text', text: '[Al Naml : 19]', style: 'text-xs opacity-60 mt-1' }
+        ]
+    },
+    {
+        variant: 'image',
+        image: 'Dua_for_Acceptance.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "88. Du'a for Acceptance" }, // Numbered
+            { type: 'text', text: 'of Prophet Ibrahim and Prophet Ismael عليه السلام' },
+            { type: 'arabic-indopak', text: 'رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ' },
+            { type: 'text', text: 'Rabbanā taqabbal minnā innaka\nantas-samīʿul ʿalīm' },
+            { type: 'text', text: 'Our Lord! Accept (this service) from us.\nVerily! You are the All-Hearer, the All-Knower' },
+            { type: 'text', text: '[Baqarah : 127]', style: 'text-xs opacity-60 mt-1' }
+        ]
+    },
+    {
+        variant: 'image',
+        image: 'Dua_in_Sadness.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "89. Du'a in Sadness" }, // Numbered
+            { type: 'text', text: 'of Prophet Yaqub عليه السلام' },
+            { type: 'arabic-indopak', text: 'إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ\nوَأَعْلَمُ مِنَ اللَّهِ مَا لَا تَعْلَمُونَ' },
+            { type: 'text', text: 'Innamā ashkū baththī wa ḥuznī ilallāhi\nwa aʿlamu minallāhi mā lā taʿlamūn' },
+            { type: 'text', text: 'I present my case of my anguish and grief only to\nAllah. I know from Allah what you do not know.' },
+            { type: 'text', text: '[Yusuf : 86]', style: 'text-xs opacity-60 mt-1' }
+        ]
+    },
+    {
+        variant: 'image',
+        image: 'Dua_for_Forgiveness.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "90. Du'a for Forgiveness" }, // Numbered
+            { type: 'text', text: 'of Prophet Ibrāhīm عليه السلام' },
+            { type: 'arabic-indopak', text: 'رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ\nوَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ' },
+            { type: 'text', text: 'Rabbana-ghfir lī wa li wālidayya\nwa lil mu’minīna yawma yaqūmul ḥisāb' },
+            { type: 'text', text: 'Our Lord! Forgive me and my parents, and all\nthe faithful, on the day when the reckoning is held.' },
+            { type: 'text', text: '[Ibrahim : 41]', style: 'text-xs opacity-60 mt-1' }
+        ]
+    },
+    {
+        variant: 'image',
+        image: 'Dua_for_Parents.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "91. Du'a for Parents" }, // Numbered
+            { type: 'text', text: 'of Prophet Ibrāhīm عليه السلام' },
+            { type: 'arabic-indopak', text: 'رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا' },
+            { type: 'text', text: 'Rabbi-rḥamhumā kamā Rabbayānī ṣaghīrā' },
+            { type: 'text', text: 'My Lord! Bestow on them Your Mercy as\nthey did bring me up when I was small.' },
+            { type: 'text', text: '[Al-Isra : 24]', style: 'text-xs opacity-60 mt-1' }
+        ]
+    },
+    {
+        variant: 'image',
+        image: 'Dua_of_Hope.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "92. Du'a of Hope" }, // Numbered
+            { type: 'text', text: 'of Prophet Zakariya عليه السلام' },
+            { type: 'arabic-indopak', text: 'وَلَمْ أَكُنْ بِدُعَائِكَ رَبِّ شَقِيًّا' },
+            { type: 'text', text: 'Wa lam akum bi duʿāʾika rabbi shaqiyya' },
+            { type: 'text', text: 'Never have I, my Lord, been disappointed\nin supplicating You!' },
+            { type: 'text', text: '[Maryam : 4]', style: 'text-xs opacity-60 mt-1' }
+        ]
+    },
+    {
+        variant: 'image',
+        image: 'Dua_for_Guidance.jpg', // Placeholder, replace with actual image path
+        content: [
+            { type: 'section-title', text: "93. Du'a for Guidance" }, // Numbered
+            { type: 'text', text: 'of Prophet Ibrahim and Prophet Ismael عليه السلام' },
+            { type: 'arabic-indopak', text: 'رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ\nوَمِنْ ذُرِّيَّتِنَا أُمَّةً مُسْلِمَةً لَكَ' },
+            { type: 'text', text: 'Rabbanā wa-jʿalnā muslimayni laka\nwa min dhurriyyātinā ummatam muslimatal lak' },
+            { type: 'text', text: 'Our Lord! And make us submissive unto You\nand our offspring a nation submissive unto You.' },
+            { type: 'text', text: '[Baqarah : 128]', style: 'text-xs opacity-60 mt-1' }
+        ]
     }
-  ]
-},
+  ] // This closes the 'cards' array for the page
+}, // This closes the page object (e.g., 'p7')
 'p8': {
   id: 'p8',
   title: "Du'a for Shifa",
@@ -3293,26 +3407,31 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 }; // End of your data
     </script>
 
-    <script type="text/babel">
+<script type="text/babel">
       const { useState, useEffect, Fragment, useRef } = React;
 
-      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
-      const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
+      // ICONS
+      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
+      const IconMenu = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>;
+      const IconFont = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>;
 
       const THEMES = {
-        teal: { id: 'teal', bg: '#051F22', text: '#E2D1A7', card: '#06282d', accent: '#C5A059' },
-        dark: { id: 'dark', bg: '#121212', text: '#E0E0E0', card: '#1E1E1E', accent: '#D4AF37' },
-        cream: { id: 'cream', bg: '#FCFBF4', text: '#2D241E', card: '#FFF', accent: '#C5A059' }
+        standard: { id: 'standard', bg: '#051F22', text: '#E2D1A7', card: '#06282d', accent: '#C5A059', name: 'Standard' },
+        elegant: { id: 'elegant', bg: '#0D3B33', text: '#E2D1A7', card: '#114D43', accent: '#C5A059', name: 'Elegant' },
+        sepia: { id: 'sepia', bg: '#4B3621', text: '#F5E6D3', card: '#5D4329', accent: '#D4AF37', name: 'Sepia' },
+        monochrome: { id: 'monochrome', bg: '#1A1A1A', text: '#E0E0E0', card: '#262626', accent: '#FFFFFF', name: 'Monochrome' }
       };
 
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
+        const [selectedSurahIdx, setSelectedSurahIdx] = useState(null); // Fixed: To track which surah is open
         const [showSettings, setShowSettings] = useState(false);
         const [showAbout, setShowAbout] = useState(false);
-        const [theme, setTheme] = useState(THEMES.teal);
+        const [theme, setTheme] = useState(THEMES.standard);
         const [fontScale, setFontScale] = useState(0);
+        const [isDarkMode, setIsDarkMode] = useState(true);
         
-        // MULTI-RECITER AUDIO LOGIC
         const [isPlaying, setIsPlaying] = useState(false);
         const [activeAudioUrl, setActiveAudioUrl] = useState(null);
         const audioRef = useRef(new Audio());
@@ -3320,7 +3439,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 
         useEffect(() => {
           const splash = document.getElementById('splash-overlay');
-          if (splash) setTimeout(() => splash.style.display = 'none', 600);
+          if (splash) setTimeout(() => splash.style.display = 'none', 800);
         }, []);
 
         useEffect(() => {
@@ -3330,7 +3449,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           return () => audio.removeEventListener('ended', end);
         }, []);
 
-        useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId]);
+        useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId, selectedSurahIdx]);
 
         const toggleAudio = (url) => {
           if (activeAudioUrl === url && isPlaying) {
@@ -3354,26 +3473,114 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 
           switch (block.type) {
             case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 text-[#C5A059] uppercase">{block.text}</h3>;
+              return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 uppercase" style={{color: theme.accent}}>{block.text}</h3>;
             case 'arabic': case 'arabic-indopak': case 'arabic-green':
-              const arColor = block.type === 'arabic-green' ? '#2D8A4E' : (theme.id === 'cream' ? '#000' : theme.text);
+              const arColor = block.type === 'arabic-green' ? '#4ADE80' : theme.text;
               return <p key={idx} dir="rtl" className="font-arabic text-center mb-4 px-0" style={{ fontSize: `${aSize}px`, color: arColor }}>{clean(block.text)}</p>;
             case 'text':
-              const txtColor = theme.id === 'cream' ? '#333' : theme.text;
-              return <p key={idx} className="text-center mb-8 opacity-90 leading-relaxed px-0 font-medium" style={{ fontSize: `${eSize}px`, color: txtColor }}>{block.text}</p>;
+              return <p key={idx} className="text-center mb-8 opacity-90 leading-relaxed px-0 font-medium" style={{ fontSize: `${eSize}px`, color: theme.text }}>{block.text}</p>;
             case 'allah-name': 
               return (
                 <div key={idx} className="text-center mb-6 border-b border-white/5 pb-4">
-                  <p className="font-arabic text-3xl" style={{color: theme.id === 'cream' ? '#000' : theme.text}}>{clean(block.arabic)}</p>
-                  <p className="text-sm opacity-60 uppercase" style={{color: theme.id === 'cream' ? '#333' : theme.text}}>{block.english}</p>
+                  <p className="font-arabic text-3xl" style={{color: theme.text}}>{clean(block.arabic)}</p>
+                  <p className="text-sm opacity-60 uppercase" style={{color: theme.text}}>{block.english}</p>
                 </div>
               );
-            case 'hr': return <div key={idx} className="h-[0.5px] w-full bg-[#C5A059]/20 my-8" />;
+            case 'hr': return <div key={idx} className="h-[0.5px] w-full my-8" style={{backgroundColor: theme.accent, opacity: 0.2}} />;
             default: return null;
           }
         };
 
-        const renderPage = () => {
+        const renderQuranIndex = () => (
+          <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+            <div className="app-header">
+              <div className="header-content" style={{color: theme.accent}}>
+                <button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button>
+                <h1 className="font-bold text-[12px] uppercase">Quran Kareem</h1>
+                <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
+              </div>
+            </div>
+            <main className="main-content py-4">
+              <div className="max-w-md mx-auto">
+                {SURAHS_LIST.map((surah, i) => (
+                  <div key={i} onClick={() => setSelectedSurahIdx(i)} className="surah-card">
+                    <div className="surah-num-box">{surah.id}</div>
+                    <div className="surah-info">
+                      <span className="surah-en-name">{surah.name}</span>
+                      <span className="surah-v-count">{surah.verses} Verses</span>
+                    </div>
+                    <div className="surah-ar-name">{surah.ar}</div>
+                  </div>
+                ))}
+              </div>
+            </main>
+          </div>
+        );
+
+        const renderQuranReading = () => {
+          const quranData = PAGES_DATA['pquran'];
+          const card = quranData?.cards[selectedSurahIdx];
+          const surahMeta = SURAHS_LIST[selectedSurahIdx];
+          
+          const jumps = [];
+          let jCount = 0;
+          card?.content.forEach(block => {
+             if (block.type === 'section-title' || block.type === 'title-green') {
+               const id = `j-q-${jCount++}`; block._jId = id; jumps.push({ text: block.text, id });
+             }
+          });
+
+          return (
+            <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+              <div className="app-header">
+                <div className="header-content" style={{color: theme.accent}}>
+                  <button onClick={() => {setSelectedSurahIdx(null); audioRef.current.pause(); setIsPlaying(false);}} className="absolute left-5 p-1"><IconBack /></button>
+                  <h1 className="font-bold text-[12px] uppercase">{surahMeta?.name}</h1>
+                  <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
+                </div>
+                {jumps.length > 0 && (
+                  <div className="index-bar">
+                    {jumps.map((t, i) => (
+                      <button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} 
+                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border uppercase font-bold" 
+                        style={{borderColor: theme.accent, color: theme.accent}}>{t.text}</button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <main ref={scrollRef} className="main-content">
+                <div className="max-w-2xl mx-auto">
+                  {(card?.audio1 || card?.audio2) && (
+                    <div className="flex gap-3 p-4">
+                      {card.audio1 && (
+                        <button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-3 bg-white/5 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>
+                          {activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}
+                        </button>
+                      )}
+                      {card.audio2 && (
+                        <button onClick={() => toggleAudio(card.audio2)} className="flex-1 p-3 bg-white/5 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>
+                          {activeAudioUrl === card.audio2 && isPlaying ? 'Minshawi ❚❚' : 'Minshawi ▶'}
+                        </button>
+                      )}
+                    </div>
+                  )}
+                  {card?.content.map((block, bIdx) => (
+                    <div key={bIdx} className="verse-row">
+                      {renderBlock(block, bIdx, block._jId)}
+                    </div>
+                  ))}
+                  <div className="h-24" />
+                </div>
+              </main>
+              <div className="floating-controls">
+                <button onClick={() => {setSelectedSurahIdx(null); setActivePageId(null);}} className="f-btn"><IconMenu /></button>
+                <button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button>
+              </div>
+            </div>
+          );
+        };
+
+        const renderStandardPage = () => {
           const page = PAGES_DATA[activePageId];
           const jumps = [];
           let jCount = 0;
@@ -3386,41 +3593,32 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           return (
             <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
               <div className="app-header">
-                <div className="header-content">
+                <div className="header-content" style={{color: theme.accent}}>
                   <button onClick={() => {setActivePageId(null); audioRef.current.pause(); setIsPlaying(false);}} className="absolute left-5 p-1"><IconBack /></button>
-                  <h1 className="font-bold text-[12px] text-[#C5A059] uppercase">{page.title}</h1>
+                  <h1 className="font-bold text-[12px] uppercase">{page?.title}</h1>
                   <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
                 </div>
                 {jumps.length > 0 && (
-                  <div className="index-bar" style={{backgroundColor: theme.bg}}>
+                  <div className="index-bar">
                     {jumps.map((t, i) => (
                       <button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} 
-                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border border-[#C5A059] text-[#C5A059] uppercase font-bold">{t.text}</button>
+                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border uppercase font-bold"
+                        style={{borderColor: theme.accent, color: theme.accent}}>{t.text}</button>
                     ))}
                   </div>
                 )}
               </div>
               <main ref={scrollRef} className="main-content px-4 py-6">
                 <div className="max-w-md mx-auto">
-                  {page.cards.map((card, idx) => (
-                    <div key={idx} className="mb-8 p-5 border border-[#C5A059]/20 rounded-3xl shadow-lg" style={{backgroundColor: theme.card}}>
-                      
-                      {/* TWO RECITER BUTTONS */}
-                      {(card.audio1 || card.audio2) && (
-                        <div className="flex gap-2 mb-6">
-                           {card.audio1 && (
-                             <button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-2 bg-[#C5A059]/10 border border-[#C5A059]/40 rounded-xl text-[#C5A059] text-[9px] font-bold uppercase tracking-widest">
-                               {activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}
-                             </button>
-                           )}
-                           {card.audio2 && (
-                             <button onClick={() => toggleAudio(card.audio2)} className="flex-1 p-2 bg-[#C5A059]/10 border border-[#C5A059]/40 rounded-xl text-[#C5A059] text-[9px] font-bold uppercase tracking-widest">
-                               {activeAudioUrl === card.audio2 && isPlaying ? 'Minshawi ❚❚' : 'Minshawi ▶'}
-                             </button>
-                           )}
-                        </div>
+                  {page?.cards.map((card, idx) => (
+                    <div key={idx} className="mb-8 p-5 border rounded-3xl shadow-lg" style={{backgroundColor: theme.card, borderColor: `${theme.accent}33`}}>
+                      {card.audio1 && (
+                         <div className="flex gap-2 mb-6">
+                            <button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-2 bg-black/10 border rounded-xl text-[9px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>
+                              {activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}
+                            </button>
+                         </div>
                       )}
-
                       {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jId))}
                     </div>
                   ))}
@@ -3433,8 +3631,8 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         const renderMenu = () => (
           <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: '#051F22'}}>
             <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
-               <div className="header-content"><h1 className="font-heading font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
-                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1"><IconSettings /></button>
+               <div className="header-content"><h1 className="font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
+                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1" style={{color: '#C5A059'}}><IconSettings /></button>
                </div>
             </div>
             <main className="main-content">
@@ -3447,39 +3645,59 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           </div>
         );
 
+        const renderPage = () => {
+          if (activePageId === 'pquran') {
+            return selectedSurahIdx !== null ? renderQuranReading() : renderQuranIndex();
+          }
+          return renderStandardPage();
+        };
+
         return (
           <div id="root" style={{backgroundColor: activePageId ? theme.bg : '#051F22'}}>
             {activePageId ? renderPage() : renderMenu()}
             {showSettings && (
               <div className="modal-overlay" onClick={() => setShowSettings(false)}>
-                <div className="w-full max-w-sm bg-[#06282d] rounded-t-[40px] p-8 pb-12 mx-auto shadow-2xl" onClick={e => e.stopPropagation()}>
+                <div className="settings-modal mx-auto" onClick={e => e.stopPropagation()}>
                   {!showAbout ? (
                     <Fragment>
-                      <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase">Settings</h3>
-                      <div className="mb-8 text-center"><p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest">Font Size</p>
-                        <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2">
+                      <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase tracking-widest">Settings</h3>
+                      <div className="flex items-center justify-between mb-8 px-4">
+                        <span className="text-white text-sm font-bold uppercase">Dark Mode</span>
+                        <div onClick={() => setIsDarkMode(!isDarkMode)} className={`w-14 h-7 rounded-full relative transition-colors ${isDarkMode?'bg-[#C5A059]':'bg-gray-600'}`}>
+                          <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${isDarkMode?'right-1':'left-1'}`} />
+                        </div>
+                      </div>
+                      <div className="mb-8 px-4">
+                        <p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest text-center">Font Size</p>
+                        <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2 border border-white/5">
                            <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button>
                            <span className="text-white font-arabic text-xl">بِسْمِ</span>
                            <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 text-white text-2xl">+</button>
                         </div>
                       </div>
-                      <div className="mb-10 text-center">
-                        <p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest">Color Theme</p>
-                        <div className="flex justify-around">
+                      <div className="mb-10 px-4">
+                        <p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest text-center">Theme Mode</p>
+                        <div className="grid grid-cols-2 gap-3">
                           {Object.values(THEMES).map(t => (
-                            <button key={t.id} onClick={() => setTheme(t)} className={`w-12 h-12 rounded-full border-2 ${theme.id===t.id?'border-[#C5A059]':'border-transparent opacity-50'}`} style={{backgroundColor: t.bg}} />
+                            <button key={t.id} onClick={() => setTheme(t)} className={`p-3 rounded-xl border flex items-center gap-3 ${theme.id===t.id?'border-[#C5A059] bg-[#C5A059]/10':'border-white/10 bg-black/20'}`}>
+                              <div className="w-4 h-4 rounded-full border border-white/40 flex items-center justify-center">
+                                {theme.id === t.id && <div className="w-2 h-2 rounded-full bg-[#C5A059]" />}
+                              </div>
+                              <span className="text-white text-[10px] font-bold uppercase">{t.name}</span>
+                              <div className="ml-auto w-4 h-4 rounded" style={{backgroundColor: t.bg}} />
+                            </button>
                           ))}
                         </div>
                       </div>
-                      <button onClick={() => setShowAbout(true)} className="dua-btn mb-6 uppercase text-[12px] tracking-widest">About This App →</button>
+                      <button onClick={() => setShowAbout(true)} className="dua-btn mb-6 uppercase text-[12px]">About This App →</button>
                       <button onClick={() => setShowSettings(false)} className="dua-btn font-bold">CLOSE</button>
                     </Fragment>
                   ) : (
                     <Fragment>
-                      <div className="flex items-center mb-6"><button onClick={() => setShowAbout(false)} className="p-1"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
+                      <div className="flex items-center mb-6"><button onClick={() => setShowAbout(false)} className="p-1 text-[#C5A059]"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
                       <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm leading-relaxed">
                         <p className="mb-4">Thank you for using this app. A collection of important du a's and dhikr gathered in one place to support daily worship and remembrance of Allah.</p>
-                        <p className="italic text-[#C5A059] mb-6">May Allah forgive any mistakes, accept this effort, and grant its reward to my family who have passed away and to all Muslims, through the wasilah of Prophet Muhammad (ﷺ) and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah)))</p>
+                        <p className="italic text-[#C5A059] mb-6">May Allah forgive any mistakes, accept this effort, and grant its reward to my family who have passed away and to all Muslims, through the wasilah of Prophet Muhammad (ﷺ) and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah))</p>
                         <div className="pt-4 border-t border-[#C5A059]/20 text-center">
                           <p className="text-[10px] text-[#C5A059] uppercase tracking-widest">Created By</p>
                           <p className="text-white font-bold">Imran Nazamul Hussain Doctor</p>
