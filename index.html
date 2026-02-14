@@ -1883,7 +1883,8 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 
     { type: 'text', style: 'dua-style', text: '19. O Allah, In every step we take today, grant us the ability to keep Your pleasure in mind, And in every word we speak, grant us truth and humility. Grant peace to our hearts, patience to our tongues, and light to our faces, O Allah. Bring good people into our lives and place beautiful feelings in our hearts. Provide us sustenance through halal means, and make our happiness come from You. We hand over today to Your forgiveness, and tomorrow to Your mercy.' },
 
-    { "type": "text", "text": "20. Closing praise: All praise is due to Allah, Lord of the worlds, and may peace and blessings be upon our master Muhammad, and upon his family and all his companions." }
+    { type: 'arabic', text: '20. ٱلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، وَٱلصَّلَّاةُ وَٱلسَّلَامُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
+   { "type": "text", "text": "20. Closing praise: All praise is due to Allah, Lord of the worlds, and may peace and blessings be upon our master Muhammad, and upon his family and all his companions." }
        ]
       },
       {
@@ -3688,7 +3689,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 }; // End of your data
 </script>
 
-   <script type="text/babel">
+<script type="text/babel">
       const { useState, useEffect, Fragment, useRef } = React;
 
       // ICONS
@@ -3696,6 +3697,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
       const IconMenu = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>;
       const IconFont = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>;
+      const IconBookmark = () => <svg width="45" height="45" viewBox="0 0 24 24" fill="#C5A059" stroke="#C5A059" strokeWidth="1.5"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>;
 
       const THEMES = {
         standard: { id: 'standard', bg: '#051F22', text: '#E2D1A7', card: '#06282d', accent: '#C5A059', name: 'Standard' },
@@ -3704,15 +3706,40 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         monochrome: { id: 'monochrome', bg: '#1A1A1A', text: '#E0E0E0', card: '#262626', accent: '#FFFFFF', name: 'Monochrome' }
       };
 
+      const CALC_METHODS = [
+        { id: 1, name: "Karachi (India/Pakistan)" },
+        { id: 3, name: "London/Europe (MWL)" },
+        { id: 2, name: "ISNA (North America)" },
+        { id: 4, name: "Umm Al-Qura (Saudi Arabia)" },
+        { id: 5, name: "Egyptian Authority" },
+        { id: 12, name: "France (UOIF - 12 degrees)" }
+      ];
+
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
         const [selectedSurahIdx, setSelectedSurahIdx] = useState(null);
+        const [isReadingMode, setIsReadingMode] = useState(false);
+        const [targetId, setTargetId] = useState(null);
+        const [showBookmarkAlert, setShowBookmarkAlert] = useState(false);
+        const [bookmarks, setBookmarks] = useState(() => {
+            const saved = localStorage.getItem('qalb_favs_vFinal_v3');
+            return saved ? JSON.parse(saved) : [];
+        });
+
+        // SALAH SETTINGS
+        const [city, setCity] = useState(localStorage.getItem('qalb_city') || "London");
+        const [tempCity, setTempCity] = useState("");
+        const [method, setMethod] = useState(parseInt(localStorage.getItem('qalb_method')) || 3);
+        const [isHanafi, setIsHanafi] = useState(localStorage.getItem('qalb_hanafi') === 'true');
+        const [prayerData, setPrayerData] = useState(null);
+        const [currentTime, setCurrentTime] = useState(new Date());
+
         const [showSettings, setShowSettings] = useState(false);
         const [showAbout, setShowAbout] = useState(false);
         const [theme, setTheme] = useState(THEMES.standard);
         const [fontScale, setFontScale] = useState(0);
         const [isDarkMode, setIsDarkMode] = useState(true);
-        const [showTranslation, setShowTranslation] = useState(true); // Translation Toggle State
+        const [showTranslation, setShowTranslation] = useState(true); 
         
         const [isPlaying, setIsPlaying] = useState(false);
         const [activeAudioUrl, setActiveAudioUrl] = useState(null);
@@ -3722,221 +3749,169 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         useEffect(() => {
           const splash = document.getElementById('splash-overlay');
           if (splash) setTimeout(() => splash.style.display = 'none', 800);
+          const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+          return () => clearInterval(timer);
         }, []);
 
         useEffect(() => {
-          const audio = audioRef.current;
-          const end = () => { setIsPlaying(false); setActiveAudioUrl(null); };
-          audio.addEventListener('ended', end);
-          return () => audio.removeEventListener('ended', end);
-        }, []);
+          fetch(`https://api.aladhan.com/v1/timingsByAddress?address=${city}&method=${method}&school=${isHanafi ? 1 : 0}`)
+            .then(res => res.json()).then(data => { if(data.data) setPrayerData(data.data); });
+        }, [city, method, isHanafi]);
 
-        useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, [activePageId, selectedSurahIdx]);
+        useEffect(() => {
+          localStorage.setItem('qalb_favs_final_v3', JSON.stringify(bookmarks));
+          localStorage.setItem('qalb_city', city);
+          localStorage.setItem('qalb_method', method);
+          localStorage.setItem('qalb_hanafi', isHanafi);
+        }, [bookmarks, city, method, isHanafi]);
+
+        useEffect(() => {
+          if (isReadingMode && targetId) {
+            const el = document.getElementById(targetId);
+            if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+          } else if (scrollRef.current) {
+            scrollRef.current.scrollTop = 0;
+          }
+        }, [isReadingMode, targetId, selectedSurahIdx, activePageId]);
 
         const toggleAudio = (url) => {
-          if (activeAudioUrl === url && isPlaying) {
-            audioRef.current.pause();
-            setIsPlaying(false);
-          } else {
-            if (activeAudioUrl !== url) {
-              audioRef.current.src = url;
-              setActiveAudioUrl(url);
+          if (activeAudioUrl === url && isPlaying) { audioRef.current.pause(); setIsPlaying(false); }
+          else { if (activeAudioUrl !== url) { audioRef.current.src = url; setActiveAudioUrl(url); } audioRef.current.play(); setIsPlaying(true); }
+        };
+
+        const handleSave = (title, pId, tId) => {
+            const bKey = `${pId}|${title}`;
+            if (!bookmarks.some(b => b.key === bKey)) {
+                setBookmarks([...bookmarks, { key: bKey, pageId: pId, title: title, targetId: tId }]);
+                setShowBookmarkAlert(true); setTimeout(() => setShowBookmarkAlert(false), 2000);
             }
-            audioRef.current.play();
-            setIsPlaying(true);
-          }
         };
 
         const renderBlock = (block, idx, blockId) => {
           if (!block) return null;
           const clean = (t) => t ? String(t).replace(/۞/g, '') : '';
-          const aSize = 28 + (fontScale * 2); 
-          const eSize = 16 + (fontScale * 1);
-
+          const aSize = 28 + (fontScale * 2); const eSize = 16 + (fontScale * 1);
           switch (block.type) {
-            case 'section-title': case 'title-green':
-              return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 uppercase" style={{color: theme.accent}}>{block.text}</h3>;
+            case 'section-title': case 'title-green': return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 uppercase" style={{color: theme.accent}}>{block.text}</h3>;
             case 'arabic': case 'arabic-indopak': case 'arabic-green':
               const arColor = block.type === 'arabic-green' ? '#4ADE80' : theme.text;
               return <p key={idx} dir="rtl" className="font-arabic text-center mb-4 px-0" style={{ fontSize: `${aSize}px`, color: arColor }}>{clean(block.text)}</p>;
-            case 'text':
-              return <p key={idx} className="text-center mb-8 opacity-90 leading-relaxed px-0 font-medium" style={{ fontSize: `${eSize}px`, color: theme.text }}>{block.text}</p>;
-            case 'allah-name': 
-              return (
-                <div key={idx} className="text-center mb-6 border-b border-white/5 pb-4">
-                  <p className="font-arabic text-3xl" style={{color: theme.text}}>{clean(block.arabic)}</p>
-                  <p className="text-sm opacity-60 uppercase" style={{color: theme.text}}>{block.english}</p>
-                </div>
-              );
+            case 'text': if (!showTranslation) return null; return <p key={idx} className="text-center mb-8 opacity-90 leading-relaxed px-0 font-medium" style={{ fontSize: `${eSize}px`, color: theme.text }}>{block.text}</p>;
+            case 'allah-name': return (<div key={idx} className="text-center mb-6 border-b border-white/5 pb-4"><p className="font-arabic text-3xl" style={{color: theme.text}}>{clean(block.arabic)}</p><p className="text-sm opacity-60 uppercase" style={{color: theme.accent}}>{block.english}</p></div>);
             case 'hr': return <div key={idx} className="h-[0.5px] w-full my-8" style={{backgroundColor: theme.accent, opacity: 0.2}} />;
             default: return null;
           }
         };
 
+        // --- SALAH DASHBOARD ---
+        const renderSalahTimes = () => {
+          if (!prayerData) return <div className="flex items-center justify-center h-full text-white">Loading...</div>;
+          const t = prayerData.timings;
+          const schedule = [{n:'Fajr', t:t.Fajr}, {n:'Sunrise', t:t.Sunrise}, {n:'Dhuhr', t:t.Dhuhr}, {n:'Asr', t:t.Asr}, {n:'Maghrib', t:t.Maghrib}, {n:'Isha', t:t.Isha}];
+          return (
+            <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+              <div className="app-header"><div className="header-content" style={{color: theme.accent}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase">Salah Times</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
+              <main className="main-content px-6">
+                <div className="max-w-md mx-auto py-4">
+                  <div className="flex bg-black/20 rounded-2xl p-1 border border-white/10 mb-6">
+                    <input type="text" placeholder="Your City Name..." className="flex-1 bg-transparent px-4 py-2 text-white text-sm outline-none" value={tempCity} onChange={e=>setTempCity(e.target.value)} />
+                    <button onClick={() => setCity(tempCity)} className="bg-[#C5A059] text-black px-4 py-2 rounded-xl font-bold uppercase text-[10px]">Search</button>
+                  </div>
+                  <div className="bg-[#06282d] border border-[#C5A059] rounded-[40px] p-8 text-center mb-6 shadow-2xl">
+                    <p className="text-[#C5A059] uppercase tracking-widest text-[10px] mb-2">{city}, {prayerData.date.readable}</p>
+                    <h2 className="text-white text-5xl font-bold mb-4">{currentTime.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</h2>
+                    <div className="text-[10px] text-white/50 uppercase mb-2">Calculation Method</div>
+                    <select className="bg-black/40 border border-white/10 rounded-lg p-2 text-[#C5A059] text-[11px] uppercase font-bold outline-none w-full" value={method} onChange={e=>setMethod(parseInt(e.target.value))}>
+                        {CALC_METHODS.map(m => <option key={m.id} value={m.id} className="bg-[#051F22]">{m.name}</option>)}
+                    </select>
+                  </div>
+                  <div className="flex items-center justify-between bg-black/20 p-4 rounded-3xl mb-6 border border-white/5">
+                    <span className="text-white text-[10px] uppercase font-bold">Asr Juristic: {isHanafi ? 'Hanafi' : 'Standard'}</span>
+                    <button onClick={() => setIsHanafi(!isHanafi)} className="text-[#C5A059] text-[10px] font-bold underline px-3">TOGGLE</button>
+                  </div>
+                  <div className="space-y-3">
+                    {schedule.map((item, i) => (
+                      <div key={i} className="flex items-center justify-between bg-[#06282d]/50 p-5 rounded-[25px] border border-white/5 shadow-md">
+                        <span className="text-white font-bold text-md">{item.n}</span>
+                        <span className="text-[#C5A059] font-bold text-xl">{item.t}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="h-20" />
+                </div>
+              </main>
+            </div>
+          );
+        };
+
         const renderQuranIndex = () => (
           <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
-            <div className="app-header">
-              <div className="header-content" style={{color: theme.accent}}>
-                <button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button>
-                <h1 className="font-bold text-[12px] uppercase">Quran Kareem</h1>
-                <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
-              </div>
-            </div>
-            <main className="main-content py-4">
-              <div className="max-w-md mx-auto">
-                {SURAHS_LIST.map((surah, i) => (
-                  <div key={i} onClick={() => setSelectedSurahIdx(i)} className="surah-card">
-                    <div className="surah-num-box">{surah.id}</div>
-                    <div className="surah-info">
-                      <span className="surah-en-name">{surah.name}</span>
-                      <span className="surah-v-count">{surah.verses} Verses</span>
-                    </div>
-                    <div className="surah-ar-name">{surah.ar}</div>
-                  </div>
-                ))}
-              </div>
-            </main>
+            <div className="app-header"><div className="header-content" style={{color: theme.accent}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase">Quran Kareem</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
+            <main className="main-content py-4"><div className="max-w-md mx-auto">{SURAHS_LIST.map((surah, i) => (<div key={i} onClick={() => setSelectedSurahIdx(i)} className="surah-card"><div className="surah-num-box">{surah.id}</div><div className="surah-info"><span className="surah-en-name">{surah.name}</span><span className="surah-v-count">{surah.verses} Verses</span></div><div className="surah-ar-name">{surah.ar}</div></div>))}</div></main>
           </div>
         );
 
         const renderQuranReading = () => {
-          const quranData = PAGES_DATA['pquran'];
-          const card = quranData?.cards[selectedSurahIdx];
-          const surahMeta = SURAHS_LIST[selectedSurahIdx];
-          
-          const jumps = [];
-          let jCount = 0;
-          card?.content.forEach(block => {
-             if (block.type === 'section-title' || block.type === 'title-green') {
-               const id = `j-q-${jCount++}`; block._jId = id; jumps.push({ text: block.text, id });
-             }
-          });
-
+          const qData = PAGES_DATA['pquran']; const card = qData?.cards[selectedSurahIdx]; const surahMeta = SURAHS_LIST[selectedSurahIdx];
+          const jumps = []; let jCount = 0; card?.content.forEach(block => { if (block.type.includes('title')) { const id = `j-q-${jCount++}`; block._jId = id; jumps.push({ text: block.text, id }); } });
           return (
             <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
-              <div className="app-header">
-                <div className="header-content" style={{color: theme.accent}}>
-                  <button onClick={() => {setSelectedSurahIdx(null); audioRef.current.pause(); setIsPlaying(false);}} className="absolute left-5 p-1"><IconBack /></button>
-                  <h1 className="font-bold text-[12px] uppercase">{surahMeta?.name}</h1>
-                  <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
-                </div>
-                {jumps.length > 0 && (
-                  <div className="index-bar">
-                    {jumps.map((t, i) => (
-                      <button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} 
-                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border uppercase font-bold" 
-                        style={{borderColor: theme.accent, color: theme.accent}}>{t.text}</button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <main ref={scrollRef} className="main-content">
-                <div className="max-w-2xl mx-auto">
-                  {(card?.audio1 || card?.audio2) && (
-                    <div className="flex gap-3 p-4">
-                      {card.audio1 && (
-                        <button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-3 bg-white/5 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>
-                          {activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}
-                        </button>
-                      )}
-                      {card.audio2 && (
-                        <button onClick={() => toggleAudio(card.audio2)} className="flex-1 p-3 bg-white/5 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>
-                          {activeAudioUrl === card.audio2 && isPlaying ? 'Minshawi ❚❚' : 'Minshawi ▶'}
-                        </button>
-                      )}
-                    </div>
-                  )}
-                  {card?.content.map((block, bIdx) => {
-                    // Conditional rendering: Hide English if toggle is OFF
-                    if (block.type === 'text' && !showTranslation) return null;
-                    
-                    return (
-                      <div key={bIdx} className={`verse-row ${activeAudioUrl && isPlaying ? 'highlight-verse' : ''}`}>
-                        {renderBlock(block, bIdx, block._jId)}
-                      </div>
-                    );
-                  })}
-                  <div className="h-24" />
-                </div>
-              </main>
-              <div className="floating-controls">
-                <button onClick={() => {setSelectedSurahIdx(null); setActivePageId(null);}} className="f-btn"><IconMenu /></button>
-                <button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button>
-              </div>
+              <div className="app-header"><div className="header-content" style={{color: theme.accent}}><button onClick={() => setSelectedSurahIdx(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase">{surahMeta?.name}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div>
+              {jumps.length > 0 && (<div className="index-bar">{jumps.map((t, i) => (<button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border uppercase font-bold" style={{borderColor: theme.accent, color: theme.accent}}>{t.text}</button>))}</div>)}</div>
+              <main ref={scrollRef} className="main-content"><div className="max-w-2xl mx-auto">{(card?.audio1 || card?.audio2) && (<div className="flex gap-3 p-4">{card.audio1 && (<button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-3 bg-white/5 border rounded-xl text-[10px] uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl===card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}</button>)}{card.audio2 && (<button onClick={() => toggleAudio(card.audio2)} className="flex-1 p-3 bg-white/5 border rounded-xl text-[10px] uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl===card.audio2 && isPlaying ? 'Minshawi ❚❚' : 'Minshawi ▶'}</button>)}</div>)}{card?.content.map((block, bIdx) => (<div key={bIdx} className="verse-row">{renderBlock(block, bIdx, block._jId)}</div>))}<div className="h-24" /></div></main>
             </div>
           );
         };
 
         const renderStandardPage = () => {
           const page = PAGES_DATA[activePageId];
-          const jumps = [];
-          let jCount = 0;
-          page?.cards.forEach(card => card.content.forEach(block => {
-            if (block.type === 'section-title' || block.type === 'title-green') {
-               const id = `j-${activePageId}-${jCount++}`; block._jId = id; jumps.push({ text: block.text, id });
-            }
-          }));
-
           return (
             <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
-              <div className="app-header">
-                <div className="header-content" style={{color: theme.accent}}>
-                  <button onClick={() => {setActivePageId(null); audioRef.current.pause(); setIsPlaying(false);}} className="absolute left-5 p-1"><IconBack /></button>
-                  <h1 className="font-bold text-[12px] uppercase">{page?.title}</h1>
-                  <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
-                </div>
-                {jumps.length > 0 && (
-                  <div className="index-bar">
-                    {jumps.map((t, i) => (
-                      <button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} 
-                        className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border uppercase font-bold"
-                        style={{borderColor: theme.accent, color: theme.accent}}>{t.text}</button>
-                    ))}
-                  </div>
-                )}
+              {showBookmarkAlert && (<div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none"><div className="bg-black/70 p-10 rounded-full animate-bounce"><IconBookmark /></div></div>)}
+              <div className="app-header"><div className="header-content" style={{color: theme.accent}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase">{page?.title}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
+              <main ref={scrollRef} className="main-content px-4 py-6"><div className="max-w-md mx-auto">{page?.cards.map((card, idx) => (<div key={idx} id={`dua-${idx}`} onDoubleClick={() => { const t = card.content.find(b => b.type.includes('title'))?.text || page.title; handleSave(t, activePageId, `dua-${idx}`); }} className="mb-8 p-6 border rounded-[32px] shadow-xl" style={{backgroundColor: theme.card, borderColor: `${theme.accent}33`}}>{card.content.map((block, bIdx) => renderBlock(block, bIdx))}</div>))}<div className="h-40" /></div></main>
+              <div className="floating-controls"><button onClick={() => setActivePageId(null)} className="f-btn"><IconMenu /></button><button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button></div>
+            </div>
+          );
+        };
+
+        const renderIndexedPage = () => {
+          const page = PAGES_DATA[activePageId]; const allTitles = [];
+          page?.cards.forEach((card, cardIdx) => { 
+            card.content.forEach((block, blockIdx) => { if (block.type.includes('title')) { const uid = `dua-${cardIdx}-${blockIdx}`; block._jId = uid; allTitles.push({ id: uid, text: block.text, cIdx: cardIdx }); } }); 
+            if (!card.content.some(b => b.type.includes('title'))) { const id = `dua-${cardIdx}-0`; card.content[0]._jId = id; allTitles.push({ id: id, text: `Part ${cardIdx + 1}`, cIdx: cardIdx }); } 
+          });
+          if (!isReadingMode) {
+            return (
+              <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+                <div className="app-header"><div className="header-content" style={{color: theme.accent}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase">{page?.title}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
+                <main className="main-content py-4"><div className="max-w-md mx-auto px-4">{allTitles.map((item, i) => (<div key={i} onClick={() => { setTargetId(item.id); setIsReadingMode(true); }} className="surah-card cursor-pointer mb-3"><div className="surah-num-box">{i+1}</div><div className="surah-info"><span className="surah-en-name">{item.text}</span><span className="surah-v-count">Tap to Read</span></div><div className="surah-ar-name text-xl opacity-20">◈</div></div>))}</div></main>
               </div>
-              <main ref={scrollRef} className="main-content px-4 py-6">
-                <div className="max-w-md mx-auto">
-                  {page?.cards.map((card, idx) => (
-                    <div key={idx} className="mb-8 p-5 border rounded-3xl shadow-lg" style={{backgroundColor: theme.card, borderColor: `${theme.accent}33`}}>
-                      {card.audio1 && (
-                         <div className="flex gap-2 mb-6">
-                            <button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-2 bg-black/10 border rounded-xl text-[9px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>
-                              {activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}
-                            </button>
-                         </div>
-                      )}
-                      {card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jId))}
-                    </div>
-                  ))}
-                </div>
-              </main>
+            );
+          }
+          return (
+            <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+              {showBookmarkAlert && (<div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none"><div className="bg-black/70 p-10 rounded-full animate-bounce"><IconBookmark /></div></div>)}
+              <div className="app-header"><div className="header-content" style={{color: theme.accent}}><button onClick={() => setIsReadingMode(false)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase">{page?.title}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
+              <main ref={scrollRef} className="main-content px-4 py-6"><div className="max-w-md mx-auto">{page?.cards.map((card, idx) => (<div key={idx} id={`dua-${idx}`} onDoubleClick={() => { const t = card.content.find(b => b.type.includes('title'))?.text || `Dua ${idx+1}`; handleSave(t, activePageId, `dua-${idx}`); }} className="mb-8 p-6 border rounded-[32px] shadow-xl" style={{backgroundColor: theme.card, borderColor: `${theme.accent}33`}}>{card.audio1 && (<button onClick={() => toggleAudio(card.audio1)} className="w-full p-2 mb-6 bg-black/10 border rounded-xl text-[9px] font-bold uppercase tracking-widest" style={{borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl===card.audio1 && isPlaying ? 'Playing ❚❚' : 'Listen ▶'}</button>)}{card.content.map((block, bIdx) => renderBlock(block, bIdx, block._jId))}</div>))}<div className="h-40" /></div></main>
+              <div className="floating-controls"><button onClick={() => setIsReadingMode(false)} className="f-btn"><IconMenu /></button><button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button></div>
             </div>
           );
         };
 
         const renderMenu = () => (
           <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: '#051F22'}}>
-            <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}>
-               <div className="header-content"><h1 className="font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1>
-                 <button onClick={() => setShowSettings(true)} className="absolute right-6 p-1" style={{color: '#C5A059'}}><IconSettings /></button>
-               </div>
-            </div>
-            <main className="main-content">
-              <div className="mihrab-container">
-                <div className="max-w-md mx-auto">
-                  {MENU_ITEMS.map(item => <button key={item.id} onClick={() => setActivePageId(item.pageId)} className="dua-btn">{item.label}</button>)}
-                </div>
-              </div>
-            </main>
+            <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}><div className="header-content"><h1 className="font-bold text-[22px] text-[#C5A059] uppercase">Qalb-e-Dua</h1><button onClick={() => setShowSettings(true)} className="absolute right-6 p-1" style={{color: '#C5A059'}}><IconSettings /></button></div></div>
+            <main className="main-content"><div className="mihrab-container"><div className="max-w-md mx-auto">{MENU_ITEMS.map(item => <button key={item.id} onClick={() => { setActivePageId(item.pageId); setIsReadingMode(false); }} className="dua-btn">{item.label}</button>)}<button onClick={() => setActivePageId('psalah')} className="dua-btn" style={{backgroundColor: 'rgba(197,160,89,0.1)'}}>🕌 Prayer Times</button></div></div></main>
           </div>
         );
 
         const renderPage = () => {
-          if (activePageId === 'pquran') {
-            return selectedSurahIdx !== null ? renderQuranReading() : renderQuranIndex();
-          }
-          return renderStandardPage();
+          if (activePageId === 'psalah') return renderSalahTimes();
+          if (activePageId === 'pquran') return selectedSurahIdx !== null ? renderQuranReading() : renderQuranIndex();
+          const originals = ['p1', 'p2', 'p3', 'p4', 'p13'];
+          if (originals.includes(activePageId)) return renderStandardPage();
+          return renderIndexedPage();
         };
 
         return (
@@ -3948,60 +3923,23 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
                   {!showAbout ? (
                     <Fragment>
                       <h3 className="text-center font-bold text-[#C5A059] mb-8 uppercase tracking-widest">Settings</h3>
-                      
-                      {/* Dark Mode Toggle */}
-                      <div className="flex items-center justify-between mb-4 px-4">
-                        <span className="text-white text-sm font-bold uppercase">Dark Mode</span>
-                        <div onClick={() => setIsDarkMode(!isDarkMode)} className={`w-14 h-7 rounded-full relative transition-colors ${isDarkMode?'bg-[#C5A059]':'bg-gray-600'}`}>
-                          <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${isDarkMode?'right-1':'left-1'}`} />
+                      <div className="flex items-center justify-between mb-4 px-4"><span className="text-white text-sm font-bold uppercase">English Translation</span><div onClick={() => setShowTranslation(!showTranslation)} className={`w-14 h-7 rounded-full relative transition-colors ${showTranslation?'bg-[#C5A059]':'bg-gray-600'}`}><div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${showTranslation?'right-1':'left-1'}`} /></div></div>
+                      <div className="mb-8 px-4"><p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest text-center">Font Size</p><div className="flex items-center justify-between bg-black/30 rounded-2xl p-2 border border-white/5"><button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button><span className="text-white font-arabic text-xl">بِسْمِ</span><button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 text-white text-2xl">+</button></div></div>
+                      <div className="mb-6 px-4">
+                        <p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest text-center">Saved Duas</p>
+                        <div className="max-h-[140px] overflow-y-auto space-y-2">
+                           {bookmarks.length === 0 ? <p className="text-white/30 text-[10px] text-center italic">Empty</p> : 
+                            bookmarks.map((b) => (<button key={b.key} onClick={() => { setActivePageId(b.pageId); setIsReadingMode(true); setTargetId(b.targetId); setShowSettings(false); }} className="w-full text-left bg-white/5 p-3 rounded-xl text-white text-[11px] border border-white/10 flex justify-between"><span>{b.title}</span><span className="text-[#C5A059] opacity-50">→</span></button>))}
                         </div>
                       </div>
-
-                      {/* English Translation Toggle (Only shows when in Quran page) */}
-                      <div className="flex items-center justify-between mb-8 px-4">
-                        <span className="text-white text-sm font-bold uppercase">English Translation</span>
-                        <div onClick={() => setShowTranslation(!showTranslation)} className={`w-14 h-7 rounded-full relative transition-colors ${showTranslation?'bg-[#C5A059]':'bg-gray-600'}`}>
-                          <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${showTranslation?'right-1':'left-1'}`} />
-                        </div>
-                      </div>
-
-                      <div className="mb-8 px-4">
-                        <p className="text-[10px] text-[#C5A059] uppercase mb-4 tracking-widest text-center">Font Size</p>
-                        <div className="flex items-center justify-between bg-black/30 rounded-2xl p-2 border border-white/5">
-                           <button onClick={() => setFontScale(s => Math.max(s-2, -6))} className="w-12 h-12 text-white text-2xl">-</button>
-                           <span className="text-white font-arabic text-xl">بِسْمِ</span>
-                           <button onClick={() => setFontScale(s => Math.min(s+2, 14))} className="w-12 h-12 text-white text-2xl">+</button>
-                        </div>
-                      </div>
-                      
-                      <div className="mb-10 px-4">
-                        <p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest text-center">Theme Mode</p>
-                        <div className="grid grid-cols-2 gap-3">
-                          {Object.values(THEMES).map(t => (
-                            <button key={t.id} onClick={() => setTheme(t)} className={`p-3 rounded-xl border flex items-center gap-3 ${theme.id===t.id?'border-[#C5A059] bg-[#C5A059]/10':'border-white/10 bg-black/20'}`}>
-                              <div className="w-4 h-4 rounded-full border border-white/40 flex items-center justify-center">
-                                {theme.id === t.id && <div className="w-2 h-2 rounded-full bg-[#C5A059]" />}
-                              </div>
-                              <span className="text-white text-[10px] font-bold uppercase">{t.name}</span>
-                              <div className="ml-auto w-4 h-4 rounded" style={{backgroundColor: t.bg}} />
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      <button onClick={() => setShowAbout(true)} className="dua-btn mb-6 uppercase text-[12px]">About This App →</button>
+                      <div className="mb-8 px-4"><p className="text-[10px] font-bold text-[#C5A059] uppercase mb-4 tracking-widest text-center">Theme Mode</p><div className="grid grid-cols-2 gap-3">{Object.values(THEMES).map(t => (<button key={t.id} onClick={() => setTheme(t)} className={`p-3 rounded-xl border flex items-center gap-3 ${theme.id===t.id?'border-[#C5A059] bg-[#C5A059]/10':'border-white/10 bg-black/20'}`}><span className="text-white text-[10px] font-bold uppercase">{t.name}</span><div className="ml-auto w-4 h-4 rounded" style={{backgroundColor: t.bg}} /></button>))}</div></div>
+                      <button onClick={() => setShowAbout(true)} className="dua-btn mb-6 uppercase text-[12px]">About →</button>
                       <button onClick={() => setShowSettings(false)} className="dua-btn font-bold">CLOSE</button>
                     </Fragment>
                   ) : (
                     <Fragment>
                       <div className="flex items-center mb-6"><button onClick={() => setShowAbout(false)} className="p-1 text-[#C5A059]"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
-                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm leading-relaxed">
-                        <p className="mb-4">Thank you for using this app. A collection of important du a's and dhikr gathered in one place to support daily worship and remembrance of Allah.</p>
-                        <p className="italic text-[#C5A059] mb-6">May Allah forgive any mistakes, accept this effort, and grant its reward to my family who have passed away and to all Muslims, through the wasilah of Prophet Muhammad (ﷺ) and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah))</p>
-                        <div className="pt-4 border-t border-[#C5A059]/20 text-center">
-                          <p className="text-[10px] text-[#C5A059] uppercase tracking-widest">Created By</p>
-                          <p className="text-white font-bold">Imran Nazamul Hussain Doctor</p>
-                        </div>
-                      </div>
+                      <div className="mb-8 p-4 bg-black/20 rounded-2xl border border-[#C5A059]/10 max-h-[350px] overflow-y-auto text-center text-white/90 text-sm leading-relaxed"><p className="mb-4">Thank you for using this app. A collection of important du a's and dhikr gathered in one place to support daily worship and remembrance of Allah.</p><p className="italic text-[#C5A059] mb-6">May Allah forgive any mistakes, accept this effort, and grant its reward to my family who have passed away and to all Muslims, through the wasilah of Prophet Muhammad (ﷺ) and as sadaqah in the name of Shaykh Abdul Qadir Jilani (rahimahullah))</p><div className="pt-4 border-t border-[#C5A059]/20 text-center"><p className="text-[10px] text-[#C5A059] uppercase tracking-widest">Created By</p><p className="text-white font-bold">Imran Nazamul Hussain Doctor</p></div></div>
                       <button onClick={() => setShowAbout(false)} className="dua-btn">Back</button>
                     </Fragment>
                   )}
@@ -4015,5 +3953,3 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
     </script>
-</body>
-</html>
