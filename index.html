@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +13,13 @@
       #root { height: 100%; display: flex; flex-direction: column; }
       .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: inherit; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
-      .main-content { flex: 1; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
+      
+      /* Ensure the main-content can scroll within its container */
+      .main-content {
+          flex-grow: 1;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+      }
       
       /* YOUR ORIGINAL MIHRAB DESIGN - KEPT AS IS */
       .mihrab-container {
@@ -52,6 +57,38 @@
       #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
       .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
       .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: flex-end; }
+
+     
+      }
+
+
+      /* Page Transition Styles */
+      .page-transition-wrapper {
+        position: absolute; /* Essential for transitions between full-page components */
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-out;
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* When a new page comes in, it's initially styled by these */
+      .page-transition-enter-active {
+        opacity: 0;
+        transform: translateX(100%); /* Slide in from right */
+      }
+
+      /* After the new page enters, it transitions to its final state (opacity 1, translateX 0) */
+      .page-transition-wrapper {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* When a page exits, it transitions to these styles */
+      .page-transition-exit-active {
+        opacity: 0;
+        transform: translateX(-100%); /* Slide out to left */
+      }
     </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -63,7 +100,6 @@
 <body>
     <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
     <div id="root"></div>
-
      <script>
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
@@ -6480,7 +6516,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'Hizb An‑Nasr' },
+                 { type: 'title-green', text: 'Hizb an‑Naṣr — Litany of Victory' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 // Explanation for Hizb An-Nasr
                 { type: 'text', text: 'Meaning: “The Litany of Victory” or “The Prayer for Divine Help and Triumph.”' },
@@ -6511,7 +6547,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'Hizbul‑ikhfā' },
+                { type: 'title-green', text: 'Hizbul‑Ikhfā’ — Litany of Concealment' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nاحْتَجَبْتُ بِنُورِ اللَّهِ الدَّائِمِ الْكَامِلِ ۞ وَتَحَصَّنْتُ بِحِصْنِ اللَّهِ الْقَوِيِّ الشَّامِلِ ۞ وَرَمَيْتُ مَنْ بَغَىٰ عَلَيَّ بِسَهْمِ اللَّهِ وَسَيْفِهِ الْقَاتِلِ ۞ اللَّهُمَّ يَا غَالِبًا عَلَى أَمْرِهِ ۞ وَيَا قَائِمًا فَوْقَ خَلْقِهِ ۞ وَحَائِلًا بَيْنَ الْمَرْءِ وَقَلْبِهِ ۞ حُلْ بَيْنِي وَبَيْنَ الشَّيْطَانِ وَنَزْغِهِ ۞ وَبَيْنَ مَنْ لَا طَاقَةَ لِي بِهِ مِنْ خَلْقِكَ أَجْمَعِينَ ۞ اللَّهُمَّ كُفَّ عَنِّي أَلْسِنَتَهُمْ ۞ وَاغْلُلْ أَيْدِيَهُمْ وَأَرْجُلَهُمْ ۞ وَارْبِطْ عَلَى قُلُوبِهِمْ ۞ وَاجْعَلْ بَيْنِي وَبَيْنَهُمْ سَدًّا مِنْ نُورِ عَظَمَتِكَ ۞ وَحِجَابًا مِنْ قُوَّتِكَ ۞ وَجُنْدًا مِنْ سُلْطَانِكَ ۞ إِنَّكَ حَيٌّ قَادِرٌ مُقْتَدِرٌ قَهَّارٌ ۞ اللَّهُمَّ اغْشِ عَنِّي أَبْصَارَ الْأَشْرَارِ وَالظَّلَمَةِ لَا أُبَالِي بِأَبْصَارِهِمْ ۞ ﴿يَكَادُ سَنَا بَرْقِهِ يَذْهَبُ بِالْأَبْصَارِ ۞ يُقَلِّبُ اللَّهُ اللَّيْلَ وَالنَّهَارَ إِنَّ فِي ذَٰلِكَ لَعْبَرَةً لِأُولِي الْأَبْصَارِ﴾ ۞ بِسْمِ اللَّهِ ﴿كهيعص﴾ بِسْمِ اللَّهِ ﴿حم عسق﴾ ۞ ﴿كَمَاءٍ أَنْزَلْنَاهُ مِنَ السَّمَاءِ فَاخْتَلَطَ بِهِ نَبَاتُ الْأَرْضِ فَأَصْبَحَ هَشِيمًا تَذْرُوهُ الرِّيَاحُ﴾ ۞ ﴿هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمَٰنُ الرَّحِيمُ﴾ ۞ ﴿يَوْمَ الْآزِفَةِ إِذِ الْقُلُوبُ لَدَى الْحَنَاجِرِ كَاظِمِينَ مَا لِلظَّالِمِينَ مِنْ حَمِيمٍ وَلَا شَفِيعٍ يُطَاعُ﴾ ۞ ﴿عَلِمَتْ نَفْسٌ مَا أَحْضَرَتْ ۞ فَلَا أُقْسِمُ بِالْخُنَّسِ ۞ الْجَوَارِ الْكُنَّسِ ۞ وَاللَّيْلِ إِذَا عَسْعَسَ ۞ وَالصُّبْحِ إِذَا تَنَفَّسَ﴾ ۞ ﴿ص وَالْقُرْآنِ ذِي الذِّكْرِ ۞ بَلِ الَّذِينَ كَفَرُوا فِي عِزَّةٍ وَشِقَاقٍ﴾' },
                 { type: 'hr' },
@@ -6528,7 +6564,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'Hizb Al‑Kifayah' },
+                { type: 'title-green', text: 'Hizb Al‑Kifayah-The Litany of Sufficiency' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' },
                 { type: 'arabic-green', text: '﴿هُوَ اللَّهُ الَّذِي لَا إِلَهَ إِلَّا هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمَنُ الرَّحِيمُ ۞ هُوَ اللَّهُ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ ۞ سُبْحَانَ اللَّهِ عَمَّا يُشْرِكُونَ ۞ هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ لَهُ الْأَسْمَاءُ الْحُسْنَى ۞ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ وَهُوَ الْعَزِيزُ الْحَكِيمُ﴾' },
@@ -6541,7 +6577,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'Al‑hizb Al‑Masoon' },
+                { type: 'title-green', text: 'Al‑hizb Al‑Masoon-protected from harm' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'آمَنْتُ بِاللَّهِ ۞ وَدَخَلْتُ فِي كَنَفِ اللَّهِ ۞ وَتَحَصَّنْتُ بِكِتَابِ اللَّهِ وَآيَاتِ اللَّهِ ۞ وَاسْتَجَرْتُ بِرَسُولِ اللَّهِ سَيِّدِنَا مُحَمَّدِ بْنِ عَبْدِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ ۞ اللَّهُ أَكْبَرُ ۞ اللَّهُ أَكْبَرُ مِمَّا أَخَافُ وَأَحْذَرُ ۞ أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ ۞ بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ ۞ حَسْبِيَ اللَّهُ وَنِعْمَ الْوَكِيلُ ۞ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ ۞ بِسْمِ اللَّهِ عَلَى نَفْسِي وَدِينِي وَأَهْلِي وَمَالِي وَعِيَالِي وَأَصْحَابِي ۞ وَعَلَى كُلِّ شَيْءٍ أَعْطَانِيهِ رَبِّي ۞ اللَّهُ الْحَافِظُ الْكَافِي ۞ بِسْمِ اللَّهِ بَابُنَا ۞ تَبَارَكَ حِيطَانُنَا ۞ يس سَقْفُنَا ۞ ﴿وَاللَّهُ مِنْ وَرَائِهِمْ مُحِيطٌ ۞ بَلْ هُوَ قُرْآنٌ مَجِيدٌ ۞ فِي لَوْحٍ مَحْفُوظٍ﴾' },
                 { type: 'arabic-green', text: 'سِتْرُ الْعَرْشِ مَسْبُولٌ عَلَيْنَا ۞ وَعَيْنُ اللَّهِ نَاظِرَةٌ إِلَيْنَا ۞ بِحَوْلِ اللَّهِ لَا يُقْدَرُ عَلَيْنَا ۞ مَا شَاءَ اللَّهُ لَا قُوَّةَ إِلَّا بِاللَّهِ ۞ لَا نَخْشَى مِنْ أَحَدٍ بِأَلْفِ ﴿قُلْ هُوَ اللَّهُ أَحَدٌ ۞ اللَّهُ الصَّمَدُ ۞ لَمْ يَلِدْ وَلَمْ يُولَدْ ۞ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ﴾ ۞ اللَّهُمَّ احْفَظْنِي فِي لَيْلِي وَنَهَارِي ۞ وَظَعْنِي وَأَسْفَارِي ۞ وَنَوْمِي وَيَقَظَتِي ۞ وَحَرَكَاتِي وَسَكَنَاتِي ۞ وَذَهَابِي وَإِيَابِي ۞ وَحُضُورِي وَغِيَابِي ۞ مِنْ كُلِّ سُوءٍ وَبَلَاءٍ وَهَمٍّ وَغَمٍّ وَنَكَدٍ وَرَمَدٍ وَوَجَعٍ وَصُدَاعٍ وَأَلَمٍ وَصَمَمٍ وَآفَةٍ وَعَاهَةٍ وَفِتْنَةٍ وَمُصِيبَةٍ وَعَدُوٍّ وَحَاسِدٍ وَمَاكِرٍ وَسَاحِرٍ وَطَارِقٍ وَحَارِقٍ وَخَائِنٍ وَسَارِقٍ وَحَاكِمٍ وَظَالِمٍ وَقَاضٍ وَسُلْطَانٍ ۞ وَاحْرُسْنِي وَنَجِّنِي مِنْ جَمِيعِ الشَّيَاطِينِ وَالْجِنِّ وَالْإِنْسِ ۞ وَمِنْ جَمِيعِ الْخَلْقِ وَالْبَشَرِ وَالْأُنْثَى وَالذَّكَرِ ۞ وَمِنَ الْحَيَّةِ وَالْعَقْرَبِ وَالذَّبِيبِ وَالْهَوَامِّ وَالطَّيْرِ وَالْوَحْشِ ۞ يَا بَارِئَ الْأَنَامِ ۞ يَا حَيُّ يَا قَيُّومُ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ ۞ ﴿فَسَيَكْفِيكَهُمُ اللَّهُ وَهُوَ السَّمِيعُ الْعَلِيمُ﴾ ۞ ﴿سَلَامٌ عَلَى نُوحٍ فِي الْعَالَمِينَ﴾ ۞ ﴿سَلَامٌ عَلَى الْأَنْبِيَاءِ وَالْمُرْسَلِينَ﴾ ۞ ﴿كهيعص﴾ ﴿حم عسق﴾ كِفَايَةٌ وَحِمَايَةٌ ۞ وَحِفْظٌ لَنَا وَوِقَايَةٌ' },
@@ -6551,7 +6587,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             {
               variant: 'green',
               content: [
-                { type: 'title-green', text: 'Hizb at‑tawassul' },
+                { type: 'title-green', text: 'Hizb at‑tawassul-Intercession' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'اللَّهُمَّ إِنِّي أَتَوَسَّلُ بِكَ إِلَيْكَ ۞ اللَّهُمَّ إِنِّي أُقْسِمُ بِكَ عَلَيْكَ ۞ اللَّهُمَّ كَمَا كُنْتَ دَلِيلِي عَلَيْكَ فَكُنْ شَفِيعِي إِلَيْكَ ۞ اللَّهُمَّ إِنَّ حَسَنَاتِي مِنْ عَطَائِكَ ۞ وَسَيِّئَاتِي مِنْ قَضَائِكَ ۞ فَجِدِ اللَّهُمَّ بِمَا أَعْطَيْتَ عَلَىٰ بِمَا بِهِ قَضَيْتَ ۞ حَتَّىٰ تَمْحُوَ ذَلِكَ بِذَلِكَ ۞ لَا لِمَنْ أَطَاعَكَ فِيمَا أَطَاعَكَ فِيهِ لَهُ الشُّكْرُ ۞ وَلَا لِمَنْ عَصَاكَ فِيمَا عَصَاكَ فِيهِ لَهُ الْعُذْرُ ۞ ﴿لِأَنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ ۞ لَا يُسْأَلُ عَمَّا يَفْعَلُ وَهُمْ يُسْأَلُونَ﴾ ۞ اللَّهُمَّ لَوْلَا عَطَاؤُكَ لَكُنْتُ مِنَ الْغَاوِينَ ۞ وَلَوْلَا قَضَاؤُكَ لَكُنْتُ مِنَ الْغَاوِينَ ۞ وَأَنْتَ أَجَلُّ وَأَعْظَمُ وَأَعْظَمُ وَأَعْزُّ وَأَكْرَمُ مِنْ أَنْ تُطَاعَ إِلَّا بِإِذْنِكَ وَرِضَاكَ ۞ أَوْ أَنْ تُعْصَىٰ إِلَّا بِحُكْمِكَ وَقَضَائِكَ ۞ إِلَهِي مَا أَطَعْتُكَ حَتَّىٰ رَضِيتَ ۞ وَلَا عَصَيْتُكَ حَتَّىٰ قَضَيْتَ ۞ أَطَعْتُكَ بِإِرَادَتِكَ وَالْمِنَّةُ لَكَ عَلَيَّ ۞ وَعَصَيْتُكَ بِتَقْدِيرِكَ وَالْحُجَّةُ لَكَ عَلَيَّ ۞ فَبِوُجُوبِ حُجَّتِكَ وَانْقِطَاعِ حُجَّتِي إِلَّا مَا رَحِمْتَنِي ۞ وَبِفَقْرِي إِلَيْكَ وَغِنَاكَ عَنِّي إِلَّا مَا كَفَيْتَنِي ۞ يَا أَرْحَمَ الرَّاحِمِينَ' },
                 { type: 'hr' },
@@ -6561,6 +6597,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             {
                variant: 'green',
               content: [
+                { type: 'title-green', text: 'Dua of Tawakkul (Trust in Allah)' },
                 { type: 'flower-icon', text: '❁ ❁ ❁' },
                 { type: 'arabic-green', text: 'عَبْدًا لَا يَمْلِكُ دُنْيَا وَلَا أُخْرَى ۞ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ ۞ وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلَّمَ ۞' }
               ]
