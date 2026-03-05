@@ -12,8 +12,13 @@
       /* --- NEW FONT DEFINITIONS ADDED HERE --- */
       /* If you download the actual font files, put them in a folder named "fonts" next to this file */
       @font-face { font-family: 'IndoPakCustom'; src: local('PDMS_Saleem_QuranFont'), url('fonts/indopak.ttf') format('truetype'); }
-      @font-face { font-family: 'UthmaniTSCustom'; src: local('Uthmani_TS'), url('fonts/uthmanits.ttf') format('truetype'); }
-      @font-face { font-family: 'KFGQPCCustom'; src: local('KFGQPC Uthman Taha Naskh'), url('fonts/kfgqpc.ttf') format('truetype'); }
+     
+      @font-face {
+    font-family: 'KFGQPCNaskh'; /* This is the name you'll use to apply the font later */
+    src: url('../fonts/kfgqpc.ttf') format('truetype'); /* This tells the browser where to find the font file */
+    font-weight: normal;
+    font-style: normal;
+}
       /* --------------------------------------- */
 
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
@@ -1320,7 +1325,7 @@
       "audio1": "https://server8.mp3quran.net/afs/003.mp3",
       "audio2": "https://server10.mp3quran.net/minsh/003.mp3",
       "content": [
-        { "type": "section-title", "text": "All- IMRAN (THE FAMILY OF I`MRAN)" },
+        { "type": "section-title", "text": "Al- IMRAN (THE FAMILY OF I`MRAN)" },
         { "type": "text", "text": "(Revealed at Medinah - contains 200 verses - Para 3)" },
         {
           "type": "arabic",
@@ -7631,12 +7636,10 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         monochrome: { id: 'monochrome', bg: '#1A1A1A', text: '#E0E0E0', card: '#262626', accent: '#FFFFFF', name: 'Monochrome' }
       };
 
-      // --- NEW ARABIC FONTS OBJECT ---
+     // --- NEW ARABIC FONTS OBJECT ---
       const ARABIC_FONTS = {
         indopak: { id: 'indopak', name: 'IndoPak', family: '"IndoPakCustom", "Scheherazade New", "Amiri", serif' },
-        uthmanits: { id: 'uthmanits', name: 'Uthmani TS', family: '"UthmaniTSCustom", "Amiri Quran", "Amiri", serif' },
-        kfgqpc: { id: 'kfgqpc', name: 'KFGQPC', family: '"KFGQPCCustom", "Amiri", serif' },
-        ksa: { id: 'ksa', name: 'KSA Regular', family: '"Amiri", serif' }
+        kfgqpc: { id: 'kfgqpc', name: 'KFGQPC', family: '"KFGQPCCustom", "Amiri", serif' }
       };
 
       const App = () => {
