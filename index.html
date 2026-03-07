@@ -32,14 +32,31 @@
       .surah-ar-name { font-family: 'Amiri', serif; color: var(--light-gold); font-size: 26px; margin-left: auto; }
 
       /* ============================================================== */
-      /* FIXED GLOBAL READING SPACING (NO MORE HUGE GAPS OR BOXES)      */
+      /* STANDARD LIST READING SPACING (When Translation is ON)         */
       /* ============================================================== */
       .verse-row { 
           padding: 5px 10px; 
           border-bottom: none !important; 
           background: transparent !important;
+          display: block;
       }
       .verse-row:nth-child(even) { background: transparent !important; }
+
+      /* ============================================================== */
+      /* NEW: MUSHAF MODE (When Translation is OFF)                     */
+      /* ============================================================== */
+      .mushaf-container {
+          direction: rtl;
+          text-align: center;
+          padding: 10px 15px;
+      }
+      .mushaf-item {
+          display: inline;
+      }
+      .mushaf-item.block-force {
+          display: block;
+          width: 100%;
+      }
 
       /* BEAUTIFUL VERSE NUMBER CIRCLES (FOR ENGLISH DIGITS) */
       .quran-verse-circle {
@@ -58,7 +75,7 @@
       }
       /* ============================================================== */
 
-      .floating-controls { position: fixed; bottom: 30px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 50; }
+      .floating-controls { position: fixed; bottom: 15px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 50; }
       .f-btn { pointer-events: auto; width: 50px; height: 45px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); color: #000; }
 
       .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
@@ -7600,14 +7617,13 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 }; // End of your data
 </script>
 
+</script>
 <script type="text/babel">
       const { useState, useEffect, useRef, Fragment } = React;
 
-       // ICONS
-        const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+      const IconSettings = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l-.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
       const IconBack = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>;
-      const IconMenu = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>;
-      const IconFont = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>;
+      const IconHome = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
       const IconBookmark = () => <svg width="45" height="45" viewBox="0 0 24 24" fill="#C5A059" stroke="#C5A059" strokeWidth="1.5"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>;
       const IconMenuBookmark = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>;
       const IconDelete = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d4d" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>;
@@ -7654,6 +7670,12 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             return text;
       };
 
+      const isCardLayoutPage = (title) => {
+          if (!title) return false;
+          const t = title.toLowerCase();
+          return t.includes('names of allah') || t.includes('names of prophet') || t.includes('asma');
+      };
+
       const App = () => {
         const [activePageId, setActivePageId] = useState(null);
         const [selectedSurahIdx, setSelectedSurahIdx] = useState(null);
@@ -7661,6 +7683,8 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         const [targetId, setTargetId] = useState(null);
         const [showBookmarkAlert, setShowBookmarkAlert] = useState(false);
         const [actionMenu, setActionMenu] = useState(null);
+
+        const [jumpVerse, setJumpVerse] = useState("");
 
         const [bookmarks, setBookmarks] = useState(() => {
             const saved = localStorage.getItem('qalb_faves_final_v12');
@@ -7730,7 +7754,69 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         const decreaseLineHeight = () => setLineHeight(prev => Number(Math.max(1.0, prev - 0.1).toFixed(1)));
         const increaseLineHeight = () => setLineHeight(prev => Number(Math.min(3.0, prev + 0.1).toFixed(1)));
 
-        const renderBlock = (block, idx, blockId, cardContentArray) => {
+        // VERY SMART JUMP FUNCTION (Checks Auto-Counter, English Text, and Hardcoded Numbers)
+        const handleJumpToVerse = (e) => {
+            e.preventDefault();
+            if(!jumpVerse) return;
+            const targetVerse = jumpVerse.trim();
+            const quranData = typeof PAGES_DATA !== 'undefined' ? PAGES_DATA['pquran'] : null;
+            const card = quranData?.cards[selectedSurahIdx];
+            if(!card) return;
+
+            let counter = 1;
+            let foundIdx = -1;
+            
+            for(let i=0; i<card.content.length; i++) {
+                const block = card.content[i];
+                if (block.type.startsWith('arabic')) {
+                    // Check if Arabic has the hardcoded number
+                    let hasHardcoded = false;
+                    const parts = block.text.split(/([۝﴿﴾]?\s*[٠-٩۰-۹0-9]+\s*[۝﴿﴾]?)/g);
+                    for(let part of parts) {
+                        if(/[٠-٩۰-۹0-9]/.test(part)) {
+                            hasHardcoded = true;
+                            if(toEnglishDigits(part.replace(/[^٠-٩۰-۹0-9]/g, '')) === targetVerse) { foundIdx = i; break; }
+                        }
+                    }
+                    if(foundIdx !== -1) break;
+                    
+                    // Check English text or Auto-Counter
+                    if(!hasHardcoded) {
+                        let foundEng = false;
+                        for(let j=i+1; j<=i+2 && j<card.content.length; j++) {
+                            if(card.content[j].type === 'text') {
+                                const match = card.content[j].text.match(/^\[?(\d+)\]?[\s.-]+/);
+                                if(match) {
+                                    counter = parseInt(match[1]) + 1;
+                                    if(match[1] === targetVerse) foundIdx = i;
+                                    foundEng = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(foundIdx !== -1) break;
+                        
+                        if(!foundEng) {
+                            const isBismillah = block.text.includes('بِسْمِ') && block.text.includes('رَّحْمَـٰنِ');
+                            if(!isBismillah && block.text.trim().length > 0) {
+                                if(counter.toString() === targetVerse) { foundIdx = i; break; }
+                                counter++;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if(foundIdx !== -1) {
+                const el = document.getElementById(`q-${foundIdx}`);
+                if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Verse " + targetVerse + " not found.");
+            }
+            setJumpVerse("");
+        };
+
+        const renderBlock = (block, idx, blockId, isCleanLayout, isMushafMode, extractedNum) => {
           if (!block) return null;
           const aSize = 28 + (fontScale * 2); 
           const eSize = 16 + (fontScale * 1);
@@ -7738,77 +7824,77 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 
           const clean = (t) => t ? String(t).replace(/۞/g, '') : '';
 
-          let extractedNum = null;
-          if (cardContentArray) {
-              for (let i = idx + 1; i <= idx + 2 && i < cardContentArray.length; i++) {
-                  if (cardContentArray[i].type === 'text') {
-                      const match = cardContentArray[i].text.match(/^\[?(\d+)\]?\s/);
-                      if (match) { extractedNum = match[1]; }
-                      break; 
-                  }
-              }
-          }
-
           switch (block.type) {
             case 'title':
             case 'section-title': 
             case 'title-green': 
-              return <h3 id={blockId} key={idx} className="text-center font-bold text-[18px] mb-2 mt-6 uppercase tracking-widest" style={{color: theme.accent}}>{clean(block.text)}</h3>;
+              if (isCleanLayout) {
+                 return <div id={blockId} key={idx} className="block w-full text-center font-bold text-[18px] mb-2 mt-6 uppercase tracking-widest" style={{color: theme.accent}}>{clean(block.text)}</div>;
+              }
+              return <h3 id={blockId} key={idx} className="text-center font-bold text-[13px] mb-4 uppercase" style={{color: theme.accent}}>{block.text}</h3>;
             
-            // --- ADDED MISSING FLOWER ICON AND COUNT BADGE HERE ---
             case 'flower-icon':
-              return (
-                <div key={idx} className="text-center my-3 text-xl opacity-60" style={{color: theme.accent}}>
-                    {block.text}
-                </div>
-              );
+              return <div key={idx} className="block w-full text-center my-3 text-xl opacity-60" style={{color: theme.accent}}>{block.text}</div>;
 
             case 'count-badge':
               return (
-                <div key={idx} className="flex justify-center my-4">
-                    <span className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border shadow-sm" style={{color: theme.accent, borderColor: theme.accent, backgroundColor: `${theme.accent}15`}}>
+                <div key={idx} className="flex justify-center mb-6 mt-2 w-full">
+                    <span className="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest border shadow-sm" style={{color: theme.accent, borderColor: theme.accent, backgroundColor: `${theme.accent}15`}}>
                         {block.text}
                     </span>
                 </div>
               );
-            // ------------------------------------------------------
 
             case 'arabic': 
             case 'arabic-indopak': 
             case 'arabic-green':
-              const arColor = block.type === 'arabic-green' ? '#4ADE80' : theme.text;
-              return (
-                <p key={idx} dir="rtl" className="text-center mb-1 px-3" style={{ fontFamily: activeFontFamily, fontSize: `${aSize}px`, color: arColor, lineHeight: lineHeight }}>
-                    {formatArabicWithEnglishNumbers(clean(block.text), extractedNum)}
-                </p>
-              );
+              if (isCleanLayout) {
+                  const arColor = block.type === 'arabic-green' ? '#4ADE80' : theme.text;
+                  
+                  // IF MUSHAF MODE (Translation OFF), we return an INLINE SPAN!
+                  if (isMushafMode) {
+                      return (
+                          <span className="inline px-1 leading-[2.5]" style={{ fontFamily: activeFontFamily, fontSize: `${aSize}px`, color: arColor }}>
+                              {formatArabicWithEnglishNumbers(clean(block.text), extractedNum)}
+                          </span>
+                      );
+                  }
+
+                  // IF LIST MODE (Translation ON)
+                  return (
+                    <p key={idx} dir="rtl" className="text-center mb-1 px-3" style={{ fontFamily: activeFontFamily, fontSize: `${aSize}px`, color: arColor, lineHeight: lineHeight }}>
+                        {formatArabicWithEnglishNumbers(clean(block.text), extractedNum)}
+                    </p>
+                  );
+              }
+              const origArColor = block.type === 'arabic-green' ? '#4ADE80' : theme.text;
+              return <p key={idx} dir="rtl" className="text-center mb-4 px-4" style={{ fontFamily: activeFontFamily, fontSize: `${aSize}px`, color: origArColor, lineHeight: lineHeight }}>{clean(block.text)}</p>;
             
             case 'text': 
               if (!showTranslation) return null; 
-              
-              let englishText = clean(block.text);
-              let engVerseNum = null;
-              const match = englishText.match(/^\[?(\d+)\]?\s*(.*)/);
-              if (match) {
-                  engVerseNum = match[1];
-                  englishText = match[2];
-              }
+              if (isCleanLayout) {
+                  let englishText = clean(block.text);
+                  let engVerseNum = null;
+                  const match = englishText.match(/^\[?(\d+)\]?[\s.-]+(.*)/);
+                  if (match) { engVerseNum = match[1]; englishText = match[2]; }
 
-              return (
-                <Fragment key={idx}>
-                  <p className="text-center mt-2 mb-3 px-6" style={{ fontSize: `${eSize}px`, color: theme.text, lineHeight: lineHeight, fontFamily: '"Georgia", serif', opacity: 0.85 }}>
-                    {engVerseNum && <span className="inline-flex items-center justify-center w-[22px] h-[22px] border rounded-full text-[10px] mr-2 mb-0.5" style={{borderColor: theme.text, opacity: 0.5}}>{engVerseNum}</span>}
-                    {englishText}
-                  </p>
-                  <div className="w-1/3 mx-auto h-[1px] my-5" style={{ backgroundColor: theme.text, opacity: 0.1 }} />
-                </Fragment>
-              );
+                  return (
+                    <Fragment key={idx}>
+                      <p className="text-center mt-2 mb-3 px-6" style={{ fontSize: `${eSize}px`, color: theme.text, lineHeight: lineHeight, fontFamily: '"Georgia", serif', opacity: 0.85 }}>
+                        {engVerseNum && <span className="inline-flex items-center justify-center w-[22px] h-[22px] border rounded-full text-[10px] mr-2 mb-0.5" style={{borderColor: theme.text, opacity: 0.5}}>{engVerseNum}</span>}
+                        {englishText}
+                      </p>
+                      <div className="w-1/3 mx-auto h-[1px] my-5" style={{ backgroundColor: theme.text, opacity: 0.1 }} />
+                    </Fragment>
+                  );
+              }
+              return <p key={idx} className="text-center mb-8 opacity-80 px-0 font-medium" style={{ fontSize: `${eSize}px`, color: theme.text, lineHeight: lineHeight }}>{block.text}</p>;
             
             case 'allah-name': 
-              return (<div key={idx} className="text-center mb-6 border-b border-white/5 pb-4"><p className="text-3xl" style={{fontFamily: activeFontFamily, color: theme.text, lineHeight: lineHeight}}>{clean(block.arabic)}</p><p className="text-sm uppercase mt-2" style={{color: theme.accent}}>{block.english}</p></div>);
+              return (<div key={idx} className="text-center mb-6 border-b border-white/5 pb-4 w-full"><p className="text-3xl" style={{fontFamily: activeFontFamily, color: theme.text, lineHeight: lineHeight}}>{clean(block.arabic)}</p><p className="text-sm opacity-60 uppercase mt-2" style={{color: theme.accent}}>{block.english}</p></div>);
             
             case 'hr': 
-              return <div key={idx} className="h-[0.5px] w-full my-8" style={{backgroundColor: theme.accent, opacity: 0.2}} />;
+              return <div key={idx} className="h-[0.5px] w-full my-8 block" style={{backgroundColor: theme.accent, opacity: 0.2}} />;
             
             default: return null;
           }
@@ -7825,8 +7911,10 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           const quranData = typeof PAGES_DATA !== 'undefined' ? PAGES_DATA['pquran'] : null; 
           const card = quranData?.cards[selectedSurahIdx]; 
           const surahMeta = SURAHS_LIST[selectedSurahIdx];
-          const jumps = []; let jCount = 0; card?.content.forEach(block => { if (block.type.includes('title')) { const id = `j-q-${jCount++}`; block._jId = id; jumps.push({ text: block.text, id }); } });
+          const isMushafMode = !showTranslation;
           
+          let autoVerseCounter = 1;
+
           return (
             <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
               <div className="app-header" style={{borderBottom: `1px solid ${theme.text}15`}}>
@@ -7835,46 +7923,149 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
                     <h1 className="font-bold text-[12px] uppercase tracking-widest">{surahMeta?.name}</h1>
                     <button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button>
                 </div>
-                {jumps.length > 0 && (<div className="index-bar">{jumps.map((t, i) => (<button key={i} onClick={() => document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'center'})} className="whitespace-nowrap px-4 py-1.5 rounded-full text-[10px] border uppercase font-bold" style={{borderColor: theme.accent, color: theme.accent}}>{toEnglishDigits(t.text)}</button>))}</div>)}
               </div>
               
               <main ref={scrollRef} className="main-content"><div className="max-w-2xl mx-auto py-4">
+                
+                <form onSubmit={handleJumpToVerse} className="flex gap-2 px-4 mb-4 justify-center items-center">
+                    <input type="number" value={jumpVerse} onChange={(e) => setJumpVerse(e.target.value)} placeholder="Verse #" className="bg-transparent border border-opacity-30 rounded-lg text-sm px-4 py-2 text-center w-24 focus:outline-none" style={{borderColor: theme.accent, color: theme.text}} />
+                    <button type="submit" className="px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-widest" style={{backgroundColor: `${theme.accent}20`, color: theme.accent, border: `1px solid ${theme.accent}`}}>Jump</button>
+                </form>
+
                 {(card?.audio1 || card?.audio2) && (<div className="flex gap-3 px-4 pb-6 mb-2 border-b" style={{borderColor: `${theme.text}10`}}>
                   {card.audio1 && (<button onClick={() => toggleAudio(card.audio1)} className="flex-1 p-3 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{backgroundColor: `${theme.accent}10`, borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl === card.audio1 && isPlaying ? 'Alafasy ❚❚' : 'Alafasy ▶'}</button>)}
                   {card.audio2 && (<button onClick={() => toggleAudio(card.audio2)} className="flex-1 p-3 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{backgroundColor: `${theme.accent}10`, borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl === card.audio2 && isPlaying ? 'Minshawi ❚❚' : 'Minshawi ▶'}</button>)}
-              </div>)}
+                </div>)}
               
-              {card?.content.map((block, bIdx, arr) => (
-                  <div key={bIdx} className="verse-row cursor-pointer active:opacity-70 transition-opacity" onClick={() => openBookmarkMenu(block, surahMeta?.name, 'pquran', block._jId || `q-${bIdx}`)}>
-                      {renderBlock(block, bIdx, block._jId, arr)}
-                  </div>
-              ))}
-              <div className="h-24" /></div></main>
-              <div className="floating-controls"><button onClick={() => {setSelectedSurahIdx(null); setActivePageId(null);}} className="f-btn"><IconMenu /></button><button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button></div>
+                {/* MUSHAF WRAPPER CONTAINER */}
+                <div className={isMushafMode ? "mushaf-container" : ""}>
+                    {card?.content.map((block, bIdx, arr) => {
+                        // AUTO COUNTER LOGIC
+                        let extractedNum = null;
+                        if (block.type.startsWith('arabic')) {
+                            if (/[٠-٩۰-۹0-9]/.test(block.text)) { extractedNum = null; } 
+                            else {
+                                let foundEng = false;
+                                for (let j = bIdx + 1; j <= bIdx + 2 && j < arr.length; j++) {
+                                    if (arr[j].type === 'text') {
+                                        const match = arr[j].text.match(/^\[?(\d+)\]?[\s.-]+/);
+                                        if (match) { extractedNum = match[1]; autoVerseCounter = parseInt(match[1]) + 1; foundEng = true; break; }
+                                    }
+                                }
+                                if (!foundEng) {
+                                    const isBismillah = block.text.includes('بِسْمِ') && block.text.includes('رَّحْمَـٰنِ');
+                                    if (!isBismillah && block.text.trim().length > 0) { extractedNum = autoVerseCounter.toString(); autoVerseCounter++; }
+                                }
+                            }
+                        }
+
+                        const isTitleOrBlock = block.type.includes('title') || block.type === 'hr' || block.type === 'flower-icon' || block.type === 'count-badge';
+                        const wrapperClass = isMushafMode 
+                            ? (isTitleOrBlock ? "mushaf-item block-force" : "mushaf-item cursor-pointer transition-opacity")
+                            : "verse-row cursor-pointer active:opacity-70 transition-opacity";
+
+                        return (
+                            <div key={bIdx} id={`q-${bIdx}`} className={wrapperClass} onClick={() => openBookmarkMenu(block, surahMeta?.name, 'pquran', block._jId || `q-${bIdx}`)}>
+                                {renderBlock(block, bIdx, block._jId, true, isMushafMode, extractedNum)}
+                            </div>
+                        );
+                    })}
+                </div>
+                
+                <div className="flex justify-between px-4 mt-8 mb-10 border-t pt-6" style={{borderColor: `${theme.text}15`}}>
+                    {selectedSurahIdx > 0 ? (
+                        <button onClick={() => { setSelectedSurahIdx(selectedSurahIdx - 1); if(scrollRef.current) scrollRef.current.scrollTop = 0; }} className="px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest border transition-all" style={{borderColor: theme.accent, color: theme.accent}}>
+                            ← Previous Surah
+                        </button>
+                    ) : <div />}
+
+                    {selectedSurahIdx < SURAHS_LIST.length - 1 ? (
+                        <button onClick={() => { setSelectedSurahIdx(selectedSurahIdx + 1); if(scrollRef.current) scrollRef.current.scrollTop = 0; }} className="px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest border transition-all" style={{backgroundColor: `${theme.accent}15`, borderColor: theme.accent, color: theme.accent}}>
+                            Next Surah →
+                        </button>
+                    ) : <div />}
+                </div>
+
+              </div></main>
+              
+              <div className="floating-controls">
+                <button onClick={() => {setSelectedSurahIdx(null); setActivePageId(null);}} className="f-btn"><IconHome /></button>
+                <button onClick={() => setShowSettings(true)} className="f-btn"><span className="font-bold text-[18px]">S</span></button>
+              </div>
             </div>
           );
         };
 
         const renderStandardPage = () => {
           const page = typeof PAGES_DATA !== 'undefined' ? PAGES_DATA[activePageId] : null;
+          const isCardLayout = isCardLayoutPage(page?.title);
+          const cleanLayout = !isCardLayout;
+          const isMushafMode = cleanLayout && !showTranslation;
+
           return (
             <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
               {showBookmarkAlert && (<div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none"><div className="bg-black/70 p-10 rounded-full animate-bounce"><IconBookmark /></div></div>)}
               <div className="app-header" style={{borderBottom: `1px solid ${theme.text}15`}}><div className="header-content" style={{color: theme.text}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase tracking-widest">{page?.title || 'Loading'}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
-              <main ref={scrollRef} className="main-content px-2 py-6"><div className="max-w-2xl mx-auto">
-                  {page?.cards?.map((card, idx) => (
-                      <div key={idx} id={`dua-${idx}`} onClick={() => openBookmarkMenu(card, page.title, activePageId, `dua-${idx}`)} className="mb-6 py-6 cursor-pointer active:opacity-90 transition-opacity">
-                          {card.content.map((block, bIdx, arr) => renderBlock(block, bIdx, null, arr))}
-                      </div>
-                  ))}
+              <main ref={scrollRef} className="main-content px-4 py-6"><div className="max-w-md mx-auto">
+                  {page?.cards?.map((card, idx) => {
+                      let autoVerseCounter = 1;
+
+                      return (
+                        <div key={idx} id={`dua-${idx}`} onClick={() => openBookmarkMenu(card, page.title, activePageId, `dua-${idx}`)} 
+                             className={cleanLayout ? "mb-6 py-6 cursor-pointer active:opacity-90 transition-all rounded-3xl" : "mb-8 p-6 border rounded-[32px] shadow-xl cursor-pointer active:opacity-90 transition-all"} 
+                             style={isCardLayout ? {backgroundColor: theme.card, borderColor: `${theme.accent}33`} : {}}>
+                            
+                            {card.audio1 && (<div className={cleanLayout ? "px-6 mb-8" : "mb-6"}><button onClick={(e) => { e.stopPropagation(); toggleAudio(card.audio1); }} className={cleanLayout ? "w-full p-3 border rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all" : "w-full p-2 bg-black/10 border rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all"} style={{borderColor: theme.accent, color: theme.accent, backgroundColor: cleanLayout ? `${theme.accent}10` : undefined}}>{activeAudioUrl === card.audio1 && isPlaying ? 'Playing ❚❚' : 'Listen ▶'}</button></div>)}
+
+                            <div className={isMushafMode ? "mushaf-container" : ""}>
+                                {card.content.map((block, bIdx, arr) => {
+                                    let extractedNum = null;
+                                    if (cleanLayout && block.type.startsWith('arabic')) {
+                                        if (/[٠-٩۰-۹0-9]/.test(block.text)) { extractedNum = null; } 
+                                        else {
+                                            let foundEng = false;
+                                            for (let j = bIdx + 1; j <= bIdx + 2 && j < arr.length; j++) {
+                                                if (arr[j].type === 'text') {
+                                                    const match = arr[j].text.match(/^\[?(\d+)\]?[\s.-]+/);
+                                                    if (match) { extractedNum = match[1]; autoVerseCounter = parseInt(match[1]) + 1; foundEng = true; break; }
+                                                }
+                                            }
+                                            if (!foundEng) {
+                                                const isBismillah = block.text.includes('بِسْمِ') && block.text.includes('رَّحْمَـٰنِ');
+                                                if (!isBismillah && block.text.trim().length > 0) { extractedNum = autoVerseCounter.toString(); autoVerseCounter++; }
+                                            }
+                                        }
+                                    }
+
+                                    const isTitleOrBlock = block.type.includes('title') || block.type === 'hr' || block.type === 'flower-icon' || block.type === 'count-badge';
+                                    const wrapperClass = isMushafMode 
+                                        ? (isTitleOrBlock ? "mushaf-item block-force" : "mushaf-item cursor-pointer transition-opacity")
+                                        : (cleanLayout ? "verse-row cursor-pointer active:opacity-70 transition-opacity" : "block");
+
+                                    return (
+                                        <div key={bIdx} className={wrapperClass}>
+                                            {renderBlock(block, bIdx, null, cleanLayout, isMushafMode, extractedNum)}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                      );
+                  })}
                   <div className="h-40" /></div></main>
-              <div className="floating-controls"><button onClick={() => setActivePageId(null)} className="f-btn"><IconMenu /></button><button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button></div>
+              
+              <div className="floating-controls">
+                <button onClick={() => setActivePageId(null)} className="f-btn"><IconHome /></button>
+                <button onClick={() => setShowSettings(true)} className="f-btn"><span className="font-bold text-[18px]">S</span></button>
+              </div>
             </div>
           );
         };
 
         const renderIndexedPage = () => {
           const page = typeof PAGES_DATA !== 'undefined' ? PAGES_DATA[activePageId] : null; 
+          const cleanLayout = !isCardLayoutPage(page?.title);
+          const isMushafMode = cleanLayout && !showTranslation;
           const allTitles = [];
           
           page?.cards?.forEach((card, cardIdx) => { 
@@ -7895,24 +8086,74 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
               {showBookmarkAlert && (<div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none"><div className="bg-black/70 p-10 rounded-full animate-bounce"><IconBookmark /></div></div>)}
               <div className="app-header" style={{borderBottom: `1px solid ${theme.text}15`}}><div className="header-content" style={{color: theme.text}}><button onClick={() => setIsReadingMode(false)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase tracking-widest">{page?.title || 'Loading'}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
               <main ref={scrollRef} className="main-content px-2 py-6"><div className="max-w-2xl mx-auto">
-                  {page?.cards?.map((card, idx) => (
-                    <div key={idx} id={`dua-${idx}`} onClick={() => openBookmarkMenu(card, page.title, activePageId, card.content[0]?._jId || `dua-${idx}`)} className="mb-6 py-6 cursor-pointer active:opacity-90 transition-opacity">
-                      {card.audio1 && (<div className="px-6 mb-8"><button onClick={(e) => { e.stopPropagation(); toggleAudio(card.audio1); }} className="w-full p-3 border rounded-xl text-[10px] font-bold uppercase tracking-widest" style={{backgroundColor: `${theme.accent}10`, borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl === card.audio1 && isPlaying ? 'Playing ❚❚' : 'Listen ▶'}</button></div>)}
-                      {card.content.map((block, bIdx, arr) => (<div key={bIdx}>{renderBlock(block, bIdx, block._jId, arr)}</div>))}
-                    </div>
-                  ))}
+                  {page?.cards?.map((card, idx) => {
+                      let autoVerseCounter = 1;
+                      return (
+                        <div key={idx} id={`dua-${idx}`} onClick={() => openBookmarkMenu(card, page.title, activePageId, card.content[0]?._jId || `dua-${idx}`)} 
+                             className={cleanLayout ? "mb-6 py-6 cursor-pointer active:opacity-90 transition-all rounded-3xl" : "mb-8 p-6 border rounded-[32px] shadow-xl cursor-pointer active:opacity-90 transition-all"} 
+                             style={cleanLayout ? {} : {backgroundColor: theme.card, borderColor: `${theme.accent}33`}}>
+                          
+                          {card.audio1 && (<div className={cleanLayout ? "px-6 mb-8" : "mb-6"}><button onClick={(e) => { e.stopPropagation(); toggleAudio(card.audio1); }} className={cleanLayout ? "w-full p-3 border rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all" : "w-full p-2 bg-black/10 border rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all"} style={{borderColor: theme.accent, color: theme.accent, backgroundColor: cleanLayout ? `${theme.accent}10` : undefined}}>{activeAudioUrl === card.audio1 && isPlaying ? 'Playing ❚❚' : 'Listen ▶'}</button></div>)}
+                          
+                          <div className={isMushafMode ? "mushaf-container" : ""}>
+                              {card.content.map((block, bIdx, arr) => {
+                                  let extractedNum = null;
+                                  if (cleanLayout && block.type.startsWith('arabic')) {
+                                      if (/[٠-٩۰-۹0-9]/.test(block.text)) { extractedNum = null; } 
+                                      else {
+                                          let foundEng = false;
+                                          for (let j = bIdx + 1; j <= bIdx + 2 && j < arr.length; j++) {
+                                              if (arr[j].type === 'text') {
+                                                  const match = arr[j].text.match(/^\[?(\d+)\]?[\s.-]+/);
+                                                  if (match) { extractedNum = match[1]; autoVerseCounter = parseInt(match[1]) + 1; foundEng = true; break; }
+                                              }
+                                          }
+                                          if (!foundEng) {
+                                              const isBismillah = block.text.includes('بِسْمِ') && block.text.includes('رَّحْمَـٰنِ');
+                                              if (!isBismillah && block.text.trim().length > 0) { extractedNum = autoVerseCounter.toString(); autoVerseCounter++; }
+                                          }
+                                      }
+                                  }
+
+                                  const isTitleOrBlock = block.type.includes('title') || block.type === 'hr' || block.type === 'flower-icon' || block.type === 'count-badge';
+                                  const wrapperClass = isMushafMode 
+                                      ? (isTitleOrBlock ? "mushaf-item block-force" : "mushaf-item cursor-pointer transition-opacity")
+                                      : (cleanLayout ? "verse-row cursor-pointer active:opacity-70 transition-opacity" : "block");
+
+                                  return (
+                                      <div key={bIdx} className={wrapperClass}>
+                                          {renderBlock(block, bIdx, block._jId, cleanLayout, isMushafMode, extractedNum)}
+                                      </div>
+                                  );
+                              })}
+                          </div>
+                        </div>
+                      )
+                  })}
                   <div className="h-40" /></div></main>
-              <div className="floating-controls"><button onClick={() => setIsReadingMode(false)} className="f-btn"><IconMenu /></button><button onClick={() => setShowSettings(true)} className="f-btn"><IconFont /></button></div>
+              
+              <div className="floating-controls">
+                <button onClick={() => setIsReadingMode(false)} className="f-btn"><IconHome /></button>
+                <button onClick={() => setShowSettings(true)} className="f-btn"><span className="font-bold text-[18px]">S</span></button>
+              </div>
             </div>
           );
         };
 
-        const renderMenu = () => (
-          <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: '#051F22'}}>
-            <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}><div className="header-content"><h1 className="font-bold text-[22px] text-[#C5A059] uppercase tracking-widest">Qalb-e-Dua</h1><button onClick={() => setShowSettings(true)} className="absolute right-6 p-1" style={{color: '#C5A059'}}><IconSettings /></button></div></div>
-            <main className="main-content"><div className="mihrab-container"><div className="max-w-md mx-auto">{MENU_ITEMS.map(item => <button key={item.id} onClick={() => { setActivePageId(item.pageId); setIsReadingMode(false); setTargetId(null); }} className="dua-btn">{item.label}</button>)}</div></div></main>
-          </div>
-        );
+        const renderMenu = () => {
+          return (
+            <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: '#051F22'}}>
+              <div className="app-header" style={{borderBottom: '1px solid rgba(197, 160, 89, 0.3)'}}><div className="header-content"><h1 className="font-bold text-[22px] text-[#C5A059] uppercase tracking-widest">Qalb-e-Dua</h1><button onClick={() => setShowSettings(true)} className="absolute right-6 p-1" style={{color: '#C5A059'}}><IconSettings /></button></div></div>
+              <main className="main-content">
+                  <div className="mihrab-container pt-8">
+                      <div className="max-w-md mx-auto">
+                          {MENU_ITEMS.map(item => <button key={item.id} onClick={() => { setActivePageId(item.pageId); setIsReadingMode(false); setTargetId(null); }} className="dua-btn">{item.label}</button>)}
+                      </div>
+                  </div>
+              </main>
+            </div>
+          );
+        };
 
         const renderPage = () => {
           if (activePageId === 'pquran') return selectedSurahIdx !== null ? renderQuranReading() : renderQuranIndex();
@@ -7928,7 +8169,6 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
           <div id="root" style={{backgroundColor: activePageId ? theme.bg : '#051F22'}}>
             {activePageId ? renderPage() : renderMenu()}
             
-            {/* Bottom Tap Menu for Bookmarking */}
             {actionMenu && (
                 <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-black/60 backdrop-blur-sm" onClick={() => setActionMenu(null)}>
                     <div className="w-full max-w-md bg-[#18181b] rounded-t-3xl p-6 shadow-2xl" style={{ borderTop: `1px solid ${theme.accent}40` }} onClick={e => e.stopPropagation()}>
