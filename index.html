@@ -62,17 +62,21 @@
       /* FLOATING CONTROLS: Pushed to the absolute bottom!              */
       /* ============================================================== */
      .floating-controls { 
-    position: fixed; 
-    bottom: 0; /* Moves it to the absolute bottom */
-    padding-bottom: 0; /* Removes the extra gap under the buttons */
+    position: fixed !important; 
+    bottom: 0 !important; 
+    padding-bottom: 0 !important; /* This is the fix. It removes the iPhone gap. */
+    margin-bottom: 0 !important; 
+
+    /* Keeps your layout the same */
     left: 0; 
     right: 0; 
     display: flex; 
     justify-content: space-between; 
     padding-left: 15px; 
     padding-right: 15px; 
-    pointer-events: auto; /* Makes the buttons clickable */
-    z-index: 50; 
+    
+    pointer-events: auto; 
+    z-index: 50;  
 }
       .f-btn { pointer-events: auto; width: 50px; height: 45px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); color: #000; }
 
