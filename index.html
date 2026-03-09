@@ -8064,12 +8064,12 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
               <div className="app-header" style={{borderBottom: `1px solid ${theme.text}15`}}><div className="header-content" style={{color: theme.text}}><button onClick={() => setIsReadingMode(false)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase tracking-widest">{page?.title || 'Loading'}</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
               
               {/* Applies clean layout (removes verse-row borders) if cleanLayout is true */}
-              <main ref={scrollRef} className={`main-content px-2 py-6 ${cleanLayout ? 'clean-layout-mode' : ''}`}>
+              <main ref={scrollRef} className={`main-content px-2 py-2 ${cleanLayout ? 'clean-layout-mode' : ''}`}>
                   <div className="max-w-2xl mx-auto">
                   {page?.cards?.map((card, idx) => {
                       return (
                         <div key={idx} id={`dua-${idx}`} onClick={() => openBookmarkMenu(card, page.title, activePageId, card.content[0]?._jId || `dua-${idx}`)} 
-                             className={cleanLayout ? “mb-2 py-2 cursor-pointer active:opacity-90 transition-all" : "mb-8 p-6 border rounded-[32px] shadow-xl cursor-pointer active:opacity-90 transition-all"} 
+                             className={cleanLayout ? "mb-2 py-2 cursor-pointer active:opacity-90 transition-all" : "mb-8 p-6 border rounded-[32px] shadow-xl cursor-pointer active:opacity-90 transition-all"} 
                              style={cleanLayout ? {} : {backgroundColor: theme.card, borderColor: `${theme.accent}33`}}>
                           
                           {card.audio1 && (<div className="mb-6"><button type="button" onClick={(e) => { e.stopPropagation(); toggleAudio(card.audio1); }} className="w-full p-2 bg-black/10 border rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all" style={{borderColor: theme.accent, color: theme.accent}}>{activeAudioUrl === card.audio1 && isPlaying ? 'Playing ❚❚' : 'Listen ▶'}</button></div>)}
