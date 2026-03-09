@@ -61,25 +61,22 @@
       /* ============================================================== */
       /* FLOATING CONTROLS: Pushed to the absolute bottom!              */
       /* ============================================================== */
-     .floating-controls { 
-    position: fixed; 
-    bottom: 0; 
+     floating-controls { 
+    position: fixed !important; 
+    bottom: 0 !important; /* This forces it to the very bottom edge */
     left: 0; 
     right: 0; 
     
-    /* Layout */
+    /* This makes sure there is no extra space under the button */
+    margin-bottom: 0 !important; 
+    padding-bottom: env(safe-area-inset-bottom) !important; 
+    
     display: flex; 
-    justify-content: space-around; /* Spaces buttons like Twitter */
+    justify-content: space-around; 
     align-items: center; 
     
-    /* Look & Feel */
-    height: 60px; 
-    background-color: #000000; /* Use #FFFFFF if your site is light mode */
-    border-top: 1px solid #333333; /* The thin line above the menu */
-    
-    /* Mobile Fixes */
-    padding-bottom: env(safe-area-inset-bottom); /* Fixes gap on iPhones */
-    pointer-events: auto; /* Makes sure you can click the buttons */
+    height: 60px; /* You can make this 50px if you want it even thinner/lower */
+    pointer-events: auto; 
     z-index: 999; 
 }
       .f-btn { pointer-events: auto; width: 50px; height: 45px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); color: #000; }
