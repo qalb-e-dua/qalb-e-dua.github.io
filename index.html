@@ -61,23 +61,18 @@
       /* ============================================================== */
       /* FLOATING CONTROLS: Pushed to the absolute bottom!              */
       /* ============================================================== */
-     floating-controls { 
-    position: fixed !important; 
-    bottom: 0 !important; /* This forces it to the very bottom edge */
+     .floating-controls { 
+    position: fixed; 
+    bottom: 0; /* Moves it to the absolute bottom */
+    padding-bottom: 0; /* Removes the extra gap under the buttons */
     left: 0; 
     right: 0; 
-    
-    /* This makes sure there is no extra space under the button */
-    margin-bottom: 0 !important; 
-    padding-bottom: env(safe-area-inset-bottom) !important; 
-    
     display: flex; 
-    justify-content: space-around; 
-    align-items: center; 
-    
-    height: 60px; /* You can make this 50px if you want it even thinner/lower */
-    pointer-events: auto; 
-    z-index: 999; 
+    justify-content: space-between; 
+    padding-left: 15px; 
+    padding-right: 15px; 
+    pointer-events: auto; /* Makes the buttons clickable */
+    z-index: 50; 
 }
       .f-btn { pointer-events: auto; width: 50px; height: 45px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); color: #000; }
 
