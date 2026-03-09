@@ -61,15 +61,27 @@
       /* ============================================================== */
       /* FLOATING CONTROLS: Pushed to the absolute bottom!              */
       /* ============================================================== */
-      .floating-controls { 
-          position: fixed; 
-          bottom: 10px; 
-          padding-bottom: calc(env(safe-area-inset-bottom) + 5px); 
-          left: 0; right: 0; 
-          display: flex; justify-content: space-between; 
-          padding-left: 15px; padding-right: 15px; 
-          pointer-events: none; z-index: 50; 
-      }
+     .floating-controls { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    
+    /* Layout */
+    display: flex; 
+    justify-content: space-around; /* Spaces buttons like Twitter */
+    align-items: center; 
+    
+    /* Look & Feel */
+    height: 60px; 
+    background-color: #000000; /* Use #FFFFFF if your site is light mode */
+    border-top: 1px solid #333333; /* The thin line above the menu */
+    
+    /* Mobile Fixes */
+    padding-bottom: env(safe-area-inset-bottom); /* Fixes gap on iPhones */
+    pointer-events: auto; /* Makes sure you can click the buttons */
+    z-index: 999; 
+}
       .f-btn { pointer-events: auto; width: 50px; height: 45px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); color: #000; }
 
       .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
