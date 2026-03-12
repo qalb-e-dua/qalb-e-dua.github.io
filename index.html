@@ -7772,8 +7772,10 @@ useEffect(() => {
   }, [selectedSurahIdx]);
   useEffect(() => {
     if (isReadingMode && targetId) { 
-        const el = document.getElementById(targetId); 
-        if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' }); 
+        setTimeout(() => {
+            const el = document.getElementById(targetId); 
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+        }, 400);
     }
   }, [isReadingMode, targetId, selectedSurahIdx, activePageId]);
 useEffect(() => {
@@ -7835,64 +7837,74 @@ useEffect(() => {
   const decreaseLineHeight = () => setLineHeight(prev => Number(Math.max(1.0, prev - 0.1).toFixed(1)));
   const increaseLineHeight = () => setLineHeight(prev => Number(Math.min(3.0, prev + 0.1).toFixed(1)));
 
-  const handleJumpToVerse = (e) => {
-      e.preventDefault();
-      if(!jumpVerse) return;
-      const targetVerse = jumpVerse.trim();
-      const quranData = typeof PAGES_DATA !== 'undefined' ? PAGES_DATA['pquran'] : null;
-      const card = quranData?.cards[selectedSurahIdx];
-      if(!card) return;
+const handleJumpToVerse = (e) => {
+            e.preventDefault();
+            if(!jumpVerse) return;
+            const targetVerse = jumpVerse.trim();
+            const quranData = typeof PAGES_DATA !== 'undefined' ? PAGES_DATA['pquran'] : null;
+            const card = quranData?.cards[selectedSurahIdx];
+            if(!card) return;
 
-      let counter = 1;
-      let foundIdx = -1;
-      
-      for(let i=0; i<card.content.length; i++) {
-          const block = card.content[i];
-          if (block.type.startsWith('arabic')) {
-              let hasHardcoded = false;
-              const parts = block.text.split(/([۝﴿﴾]?\s*[٠-٩۰-۹0-9]+\s*[۝﴿﴾]?)/g);
-              for(let part of parts) {
-                  if(/[٠-٩۰-۹0-9]/.test(part)) {
-                      hasHardcoded = true;
-                      if(toEnglishDigits(part.replace(/[^٠-٩۰-۹0-9]/g, '')) === targetVerse) { foundIdx = i; break; }
-                  }
-              }
-              if(foundIdx !== -1) break;
-              
-              if(!hasHardcoded) {
-                  let foundEng = false;
-                  for(let j=i+1; j<=i+2 && j<card.content.length; j++) {
-                      if(card.content[j].type === 'text') {
-                          const match = card.content[j].text.match(/^[^0-9a-zA-Z]*(\d+)[^0-9a-zA-Z]+/);
-                          if(match) {
-                              counter = parseInt(match[1]) + 1;
-                              if(match[1] === targetVerse) foundIdx = i;
-                              foundEng = true;
-                              break;
-                          }
-                      }
-                  }
-                  if(foundIdx !== -1) break;
-                  
-                  if(!foundEng) {
-                      const isBismillah = block.text.includes('بِسْمِ') || block.text.includes('بسم');
-                      if(!isBismillah && block.text.trim().length > 0) {
-                          if(counter.toString() === targetVerse) { foundIdx = i; break; }
-                          counter++;
-                      }
-                  }
-              }
-          }
-      }
-      
-      if(foundIdx !== -1) {
-          const el = document.getElementById(`q-${foundIdx}`);
-          if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-          alert("Verse " + targetVerse + " not found.");
-      }
-      setJumpVerse("");
-  };
+            let counter = 1;
+            let foundIdx = -1;
+            
+            for(let i=0; i<card.content.length; i++) {
+                const block = card.content[i];
+                if (block.type.startsWith('arabic')) {
+                    let hasHardcoded = false;
+                    const parts = block.text.split(/([۝﴿﴾]?\s*[٠-٩۰-۹0-9]+\s*[۝﴿﴾]?)/g);
+                    for(let part of parts) {
+                        if(/[٠-٩۰-۹0-9]/.test(part)) {
+                            hasHardcoded = true;
+                            if(toEnglishDigits(part.replace(/[^٠-٩۰-۹0-9]/g, '')) === targetVerse) { foundIdx = i; break; }
+                        }
+                    }
+                    if(foundIdx !== -1) break;
+                    
+                    if(!hasHardcoded) {
+                        let foundEng = false;
+                        for(let j=i+1; j<=i+2 && j<card.content.length; j++) {
+                            if(card.content[j].type === 'text') {
+                                // UPGRADED SCANNER TO FIND JUMP VERSES
+                                const match = card.content[j].text.match(/^[\s\[{:]*(\d+)[\s\]}:.-]+/);
+                                if(match) {
+                                    counter = parseInt(match[1]) + 1;
+                                    if(match[1] === targetVerse) foundIdx = i;
+                                    foundEng = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(foundIdx !== -1) break;
+                        
+                        if(!foundEng) {
+                            const isBismillah = block.text.includes('بِسْمِ') || block.text.includes('بسم');
+                            if(!isBismillah && block.text.trim().length > 0) {
+                                if(counter.toString() === targetVerse) { foundIdx = i; break; }
+                                counter++;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if(foundIdx !== -1) {
+                const el = document.getElementById(`ayah-${targetVerse}`) || document.getElementById(`q-${foundIdx}`);
+                if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Move the gold highlight and audio to the jumped verse!
+                if (typeof setPlayingAyah === 'function') setPlayingAyah(parseInt(targetVerse));
+                if (typeof isPlaying !== 'undefined' && isPlaying && typeof playingReciter !== 'undefined' && playingReciter) {
+                    if (audioRef && audioRef.current) {
+                        audioRef.current.pause();
+                        setTimeout(() => { setIsPlaying(true); }, 100);
+                    }
+                }
+            } else {
+                alert("Verse " + targetVerse + " not found.");
+            }
+            setJumpVerse("");
+        };
 
   const renderBlock = (block, idx, blockId, isCleanLayout, isMushafMode, extractedNum) => {
     if (!block) return null;
@@ -7985,7 +7997,7 @@ useEffect(() => {
   const renderQuranIndex = () => (
     <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
       <div className="app-header" style={{borderBottom: `1px solid ${theme.text}15`}}><div className="header-content" style={{color: theme.text}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase tracking-widest">Quran Kareem</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
-      <main className="main-content py-4"><div className="max-w-md mx-auto">{SURAHS_LIST.map((surah, i) => (<div key={i} onClick={() => setSelectedSurahIdx(i)} className="surah-card cursor-pointer active:opacity-70 border" style={{backgroundColor: theme.card, borderColor: `${theme.text}20`}}><div className="surah-num-box" style={{color: theme.accent, borderColor: theme.accent}}>{surah.id}</div><div className="surah-info"><span className="surah-en-name" style={{color: theme.text}}>{surah.name}</span><span className="surah-v-count" style={{color: theme.text, opacity: 0.6}}>{surah.verses} Verses</span></div><div className="surah-ar-name" style={{color: theme.text}}>{surah.ar}</div></div>))}</div></main>
+      <main className="main-content py-4"><div className="max-w-md mx-auto">{SURAHS_LIST.map((surah, i) => (<div key={i} onClick={() => { setSelectedSurahIdx(i); setTargetId(null); }} className="surah-card cursor-pointer active:opacity-70 border" style={{backgroundColor: theme.card, borderColor: `${theme.text}20`}}><div className="surah-num-box" style={{color: theme.accent, borderColor: theme.accent}}>{surah.id}</div><div className="surah-info"><span className="surah-en-name" style={{color: theme.text}}>{surah.name}</span><span className="surah-v-count" style={{color: theme.text, opacity: 0.6}}>{surah.verses} Verses</span></div><div className="surah-ar-name" style={{color: theme.text}}>{surah.ar}</div></div>))}</div></main>
     </div>
   );
 
@@ -8334,7 +8346,7 @@ useEffect(() => {
                   
                   <div className="max-h-[60vh] overflow-y-auto space-y-4 px-2 pb-2">
                       {bookmarks.length === 0 ? <p className="text-white/30 text-[12px] text-center italic mt-10">No bookmarks saved yet.</p> : bookmarks.map((b) => (
-                          <div key={b.key} className="w-full rounded-2xl border mb-2 overflow-hidden shadow-lg relative cursor-pointer active:scale-[0.98] transition-transform" style={{ backgroundColor: theme.card, borderColor: `${theme.accent}30` }} onClick={() => { setActivePageId(b.pageId); setIsReadingMode(true); setTargetId(b.targetId); closeAllModals(); }}>
+                          <div key={b.key} className="w-full rounded-2xl border mb-2 overflow-hidden shadow-lg relative cursor-pointer active:scale-[0.98] transition-transform" style={{ backgroundColor: theme.card, borderColor: `${theme.accent}30` }} onClick={() => { setActivePageId(b.pageId); if (b.pageId === 'pquran') { const sIdx = typeof SURAHS_LIST !== 'undefined' ? SURAHS_LIST.findIndex(s => s.name.toLowerCase() === b.title.toLowerCase()) : -1; if (sIdx !== -1) setSelectedSurahIdx(sIdx); } setIsReadingMode(true); setTargetId(b.targetId); closeAllModals(); }}>
                               <div className="flex justify-between items-start p-4 pb-3">
                                   <div className="flex items-center gap-3 pr-2">
                                       <div className="font-bold text-xs px-3 py-2 rounded-xl" style={{ backgroundColor: theme.accent, color: theme.bg }}>{b.title.substring(0,3).toUpperCase()}</div>
