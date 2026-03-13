@@ -7768,7 +7768,7 @@ useEffect(() => {
       setIsPlaying(false);
       setPlayingAyah(null);
       setPlayingReciter(null);
-      setTimeout(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, 50);
+      setTimeout(() => { if (scrollRef.current && !targetId) scrollRef.current.scrollTop = 0; }, 50);
   }, [selectedSurahIdx]);
   useEffect(() => {
     if (isReadingMode && targetId) { 
@@ -7995,7 +7995,7 @@ const handleJumpToVerse = (e) => {
   };
 
   const renderQuranIndex = () => (
-    <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
+   <div className="flex flex-col h-full overflow-hidden" style={{backgroundColor: theme.bg}}>
       <div className="app-header" style={{borderBottom: `1px solid ${theme.text}15`}}><div className="header-content" style={{color: theme.text}}><button onClick={() => setActivePageId(null)} className="absolute left-5 p-1"><IconBack /></button><h1 className="font-bold text-[12px] uppercase tracking-widest">Quran Kareem</h1><button onClick={() => setShowSettings(true)} className="absolute right-5 p-1"><IconSettings /></button></div></div>
       <main className="main-content py-4"><div className="max-w-md mx-auto">{SURAHS_LIST.map((surah, i) => (<div key={i} onClick={() => { setSelectedSurahIdx(i); setTargetId(null); }} className="surah-card cursor-pointer active:opacity-70 border" style={{backgroundColor: theme.card, borderColor: `${theme.text}20`}}><div className="surah-num-box" style={{color: theme.accent, borderColor: theme.accent}}>{surah.id}</div><div className="surah-info"><span className="surah-en-name" style={{color: theme.text}}>{surah.name}</span><span className="surah-v-count" style={{color: theme.text, opacity: 0.6}}>{surah.verses} Verses</span></div><div className="surah-ar-name" style={{color: theme.text}}>{surah.ar}</div></div>))}</div></main>
     </div>
@@ -8091,7 +8091,7 @@ const handleJumpToVerse = (e) => {
                   const dynamicId = extractedNum ? `ayah-${extractedNum}` : `q-${bIdx}`;
 
                   return (
-                      <div key={bIdx} id={dynamicId} className={wrapperClass} style={highlightStyle} onClick={() => openBookmarkMenu(block, surahMeta?.name, 'pquran', block._jId || `q-${bIdx}`)}>
+                      <div key={bIdx} id={dynamicId} className={wrapperClass} style={highlightStyle} onClick={() => openBookmarkMenu(block, surahMeta?.name, 'pquran', dynamicId)}>
                           {renderBlock(block, bIdx, block._jId, true, isMushafMode, extractedNum)}
                       </div>
                   );
@@ -8318,6 +8318,7 @@ const handleJumpToVerse = (e) => {
     <div id="root" style={{backgroundColor: activePageId ? theme.bg : '#051F22'}}>
       {activePageId ? renderPage() : renderMenu()}
       
+      {/* Action Menu Modal */}
       {actionMenu && (
           <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-black/60 backdrop-blur-sm" onClick={() => setActionMenu(null)}>
               <div className="w-full max-w-md bg-[#18181b] rounded-t-3xl p-6 shadow-2xl" style={{ borderTop: `1px solid ${theme.accent}40` }} onClick={e => e.stopPropagation()}>
@@ -8333,17 +8334,16 @@ const handleJumpToVerse = (e) => {
           </div>
       )}
 
+      {/* Settings Modal */}
       {showSettings && (
         <div className="modal-overlay" onClick={closeAllModals}>
           <div className="settings-modal mx-auto max-h-[90vh] overflow-y-auto pb-8 w-full max-w-md bg-[#0A0A0A] rounded-t-[40px] p-6 shadow-2xl" onClick={e => e.stopPropagation()}>
-            
             {showBookmarksList ? (
                <Fragment>
                   <div className="flex items-center mb-6">
                       <button type="button" onClick={() => setShowBookmarksList(false)} className="p-1 text-[#C5A059]"><IconBack /></button>
                       <h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">Saved Bookmarks</h3>
                   </div>
-                  
                   <div className="max-h-[60vh] overflow-y-auto space-y-4 px-2 pb-2">
                       {bookmarks.length === 0 ? <p className="text-white/30 text-[12px] text-center italic mt-10">No bookmarks saved yet.</p> : bookmarks.map((b) => (
                           <div key={b.key} className="w-full rounded-2xl border mb-2 overflow-hidden shadow-lg relative cursor-pointer active:scale-[0.98] transition-transform" style={{ backgroundColor: theme.card, borderColor: `${theme.accent}30` }} onClick={() => { setActivePageId(b.pageId); if (b.pageId === 'pquran') { const sIdx = typeof SURAHS_LIST !== 'undefined' ? SURAHS_LIST.findIndex(s => s.name.toLowerCase() === b.title.toLowerCase()) : -1; if (sIdx !== -1) setSelectedSurahIdx(sIdx); } setIsReadingMode(true); setTargetId(b.targetId); closeAllModals(); }}>
@@ -8352,25 +8352,19 @@ const handleJumpToVerse = (e) => {
                                       <div className="font-bold text-xs px-3 py-2 rounded-xl" style={{ backgroundColor: theme.accent, color: theme.bg }}>{b.title.substring(0,3).toUpperCase()}</div>
                                       <h4 className="font-bold text-sm leading-tight line-clamp-2" style={{ color: theme.text }}>{b.title}</h4>
                                   </div>
-                                  <button type="button" onClick={(e) => { e.stopPropagation(); removeBookmark(b.key); }} className="p-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl transition-colors">
-                                      <IconDelete />
-                                  </button>
+                                  <button type="button" onClick={(e) => { e.stopPropagation(); removeBookmark(b.key); }} className="p-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl transition-colors"><IconDelete /></button>
                               </div>
                               {b.arabic && (
                                   <div className="px-4 py-4 mx-3 mb-3 rounded-xl border" style={{ backgroundColor: theme.bg, borderColor: `${theme.accent}15` }}>
                                       <p className="font-arabic text-right text-[22px] leading-relaxed line-clamp-2" dir="rtl" style={{ fontFamily: ARABIC_FONTS[arabicFont]?.family, color: theme.text }}>{b.arabic}</p>
                                   </div>
                               )}
-                              <div className="px-5 pb-4 flex items-center gap-2 text-[11px] opacity-60" style={{ color: theme.text }}>
-                                  <IconCalendar />
-                                  <span>{b.date || 'Saved Bookmark'}</span>
-                              </div>
+                              <div className="px-5 pb-4 flex items-center gap-2 text-[11px] opacity-60" style={{ color: theme.text }}><IconCalendar /><span>{b.date || 'Saved Bookmark'}</span></div>
                           </div>
                       ))}
                   </div>
                   <button type="button" onClick={() => setShowBookmarksList(false)} className="dua-btn mt-6">Back to Settings</button>
                </Fragment>
-            
             ) : showAbout ? (
               <Fragment>
                 <div className="flex items-center mb-6"><button type="button" onClick={(e) => { e.stopPropagation(); setShowAbout(false); }} className="p-1 text-[#C5A059]"><IconBack /></button><h3 className="flex-1 text-center font-bold text-[#C5A059] pr-8 uppercase tracking-widest">About</h3></div>
