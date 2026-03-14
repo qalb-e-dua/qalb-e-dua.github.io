@@ -1,6 +1,7 @@
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #051F22;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -15,8 +16,23 @@
       @font-face { font-family: 'KFGQPCNaskh'; src: url('fonts/kfgqpc.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 
       :root { --teal: #051F22; --gold: #C5A059; --light-gold: #E2D1A7; }
-      html, body { background-color: #051F22 !important; margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
-      #root { height: 100%; display: flex; flex-direction: column; }
+
+      /* Removed !important so that White/Sepia themes can work inside */
+      html, body { 
+        background-color: #051F22; 
+        margin: 0; 
+        padding: 0; 
+        height: 100%; 
+        width: 100%; 
+        overflow: hidden; 
+      }
+
+      #root { 
+        background-color: #051F22; 
+        height: 100%; 
+        display: flex; 
+        flex-direction: column; 
+      }
       
       .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: inherit; }
       .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
