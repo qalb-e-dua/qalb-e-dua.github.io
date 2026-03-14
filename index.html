@@ -98,11 +98,12 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#051F22">
 </head>
-<body>
-    <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
-    <div id="root"></div>
-    <script>
+<body style="background-color: #051F22; margin: 0; padding: 0;">
+    <div id="splash-overlay" style="background-color: #051F22;"><div class="loader-logo">QALB-E-DUA</div></div>
+    <div id="root" style="background-color: #051F22; min-height: 100vh;"></div>
+    <script type="text/babel">
       const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
