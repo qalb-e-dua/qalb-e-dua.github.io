@@ -9,7 +9,7 @@
     <title>Qalb-e-Dua</title>
 
     <style>
-    /* --- FONT DEFINITIONS --- */
+      /* --- FONT DEFINITIONS --- */
       @font-face { font-family: 'IndoPakCustom'; src: local('PDMS_Saleem_QuranFont'), url('fonts/indopak.ttf') format('truetype'); }
       @font-face { font-family: 'KFGQPCNaskh'; src: url('fonts/kfgqpc.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 
@@ -17,59 +17,13 @@
       html, body { background-color: #051F22 !important; margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
       #root { height: 100%; display: flex; flex-direction: column; }
       
-      /* Updated header to ensure settings icon is positioned correctly */
-      .app-header {
-          padding-top: calc(env(safe-area-inset-top) + 15px);
-          padding-bottom: 10px;
-          flex-shrink: 0;
-          z-index: 100;
-          background: inherit;
-          position: relative; /* Added to position children absolutely */
-      }
-      .header-content {
-          height: 34px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-      }
-      /* Ensure the settings icon is positioned absolutely within the header */
-      .settings-icon { /* Assuming you have a class for your settings icon */
-          position: absolute;
-          right: 20px; /* Adjust as needed */
-          top: calc(env(safe-area-inset-top) + 15px); /* Align with header top */
-          font-size: 24px; /* Adjust size as needed */
-          color: var(--gold); /* Adjust color as needed */
-          z-index: 101;
-      }
-
+      .app-header { padding-top: calc(env(safe-area-inset-top) + 15px); padding-bottom: 10px; flex-shrink: 0; z-index: 100; background: inherit; }
+      .header-content { height: 34px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
       .main-content { flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
       
-      /* MODIFIED: Reduced padding-top to lessen the gap above buttons */
-      .mihrab-container {
-          border: 2px solid var(--gold);
-          border-bottom: none;
-          margin: 20px;
-          margin-top: 10px;
-          border-radius: 150px 150px 20px 20px;
-          padding: 35px 30px 40px 30px; /* Reduced padding-top from 85px to 35px */
-          min-height: 80vh;
-      }
-      .dua-btn {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1.5px solid var(--gold);
-          border-radius: 40px 10px 40px 10px;
-          padding: 18px 10px;
-          margin-bottom: 15px;
-          width: 100%;
-          color: var(--light-gold);
-          font-family: 'Cinzel', serif;
-          font-weight: 700;
-          font-size: 14px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-          text-align: center;
-          display: block;
-      }
+      /* FIXED HOME SCREEN BORDER: padding-top changed to 85px so buttons don't touch the curve! */
+      .mihrab-container { border: 2px solid var(--gold); border-bottom: none; margin: 20px; margin-top: 10px; border-radius: 150px 150px 20px 20px; padding: 85px 30px 40px 30px; min-height: 80vh; }
+      .dua-btn { background: rgba(255, 255, 255, 0.03); border: 1.5px solid var(--gold); border-radius: 40px 10px 40px 10px; padding: 18px 10px; margin-bottom: 15px; width: 100%; color: var(--light-gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; display: block; }
       
       .surah-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 160, 89, 0.3); margin: 8px 16px; border-radius: 12px; display: flex; align-items: center; padding: 15px; }
       .surah-num-box { width: 45px; height: 45px; border: 2px solid var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-weight: bold; margin-right: 15px; font-size: 16px; }
