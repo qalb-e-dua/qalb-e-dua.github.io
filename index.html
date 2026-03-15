@@ -185,19 +185,21 @@ align-items: flex-end;
 <!-- React root -->
 <div id="root" style="height:100vh; background-color:#051F22;"></div>
 
+<script type="text/javascript">
 window.addEventListener("load", function () {
   const splash = document.getElementById("splash-overlay");
   if (splash) {
+    splash.style.opacity = 0; // fade out
     setTimeout(() => {
-      splash.style.display = "none";
-    }, 300);
+      splash.style.display = "none"; // remove after fade
+    }, 500); // matches CSS transition
   }
 });
 </script>
 
 <!-- Your React app script -->
 <script type="text/babel">
-      const MENU_ITEMS = [
+const MENU_ITEMS = [
         { id: 'm1', label: 'Opening Dua', pageId: 'p1' },
         { id: 'm2', label: 'Names of Allah', pageId: 'p2' },
         { id: 'quran', label: '📖 Quran Kareem', pageId: 'pquran' },
