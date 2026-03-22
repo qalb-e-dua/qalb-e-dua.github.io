@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,19 +88,26 @@
       
       .font-arabic { font-family: 'Scheherazade New', 'Amiri', serif; line-height: 2.2; }
       
-      #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
+      #splash-overlay { display: none !important; }
       .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
       .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: flex-end; }
     </style>
+
+    <!-- STEP 1: ADD THE COLOR HERE -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="background-color: #051F22; margin: 0; padding: 0;">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Cinzel:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="splash-overlay"><div class="loader-logo">QALB-E-DUA</div></div>
+
+    <div id="splash-overlay">
+        <div class="loader-logo">QALB-E-DUA</div>
+    </div>
+
     <div id="root"></div>
     <script>
       const MENU_ITEMS = [
@@ -132,44 +140,22 @@
         { id: 67, name: "Al-Mulk", ar: "الملك", verses: 30, origin: "Makkiyah", para: 29 },
         { id: 73, name: "Al-Muzzammil", ar: "المزمل", verses: 20, origin: "Makkiyah", para: 29 },
         { id: 78, name: "Al Naba", ar: "النبأ", verses: 40, origin: "Makkiyah", para: 30 },
-        { id: 79, name: "Al Naziy'aat", ar: "النازعات", verses: 46, origin: "Makkiyah", para: 30 },
-        { id: 80, name: "Al Absa ", ar: "عبس", verses: 42, origin: "Makkiyah", para: 30 },
-        { id: 81, name: "AT-Takwir ", ar: "التكوير‎", verses: 29, origin: "Makkiyah", para: 30 },
-        { id: 82, name: "AL-Infitaar ", ar: "الانفطار‎", verses: 19, origin: "Makkiyah", para: 30 },
-        { id: 83, name: "AL-Mutaffifin ", ar: "المطففين‎‎", verses: 36, origin: "Makkiyah", para: 30 },
-        { id: 84, name: "AL-Inshiqaaq ", ar: "الانشقاق‎", verses: 25, origin: "Makkiyah", para: 30 },
-        { id: 85, name: "AL Burooj ", ar: "البروج", verses: 22, origin: "Makkiyah", para: 30 },
-        { id: 86, name: "AL Tariq ", ar: "الطارق", verses: 17, origin: "Makkiyah", para: 30 },
-        { id: 87, name: "AL A'laa ", ar: "الأعلى", verses: 19, origin: "Makkiyah", para: 30 },
-        { id: 88, name: "AL Ghaashiya", ar: "الغاشية", verses: 26, origin: "Makkiyah", para: 30 },
-        { id: 89, name: "AL Fajr ", ar: "الفجر", verses: 30, origin: "Makkiyah", para: 30 },
-        { id: 90, name: "AL Balad ", ar: "البلد", verses: 20, origin: "Makkiyah", para: 30 },
-        { id: 91, name: "Ad Shams ", ar: "الشمس", verses: 15, origin: "Makkiyah", para: 30 },
-        { id: 92, name: "AL Lail ", ar: "الليل", verses: 21, origin: "Makkiyah", para: 30 },
-        { id: 93, name: "AL Duha ", ar: "الضحى", verses: 11, origin: "Makkiyah", para: 30 },
-        { id: 94, name: "AL Ash-sharh ", ar: "الشرح", verses: 8, origin: "Makkiyah", para: 30 },
-        { id: 95, name: "AL Tin", ar: "التين", verses: 8, origin: "Makkiyah", para: 30 },
-        { id: 96, name: "AL Alaq ", ar: "العلق", verses: 19, origin: "Makkiyah", para: 30 },
-        { id: 97, name: "AL Qadr ", ar: "القدر", verses: 5, origin: "Makkiyah", para: 30 },
-        { id: 98, name: "AL Bayyina ", ar: "البينة", verses: 8, origin: "Madaniyah", para: 30 },
-        { id: 99, name: "AL Zalzala ", ar: "الزلزلة", verses: 8, origin: "Madaniyah", para: 30 },
-       { id: 100, name: "AL Adiyaat ", ar: "العاديات", verses: 11, origin: "Makkiyah", para: 30 },
-       { id: 101, name: "AL Qaria`A ", ar: "القارعة", verses: 11, origin: "Makkiyah", para: 30 },
-       { id: 102, name: "AL Takaathur ", ar: "التكاثر", verses: 8, origin: "Makkiyah", para: 30 },
-       { id: 103, name: "AL Asr", ar: "العصر", verses: 3, origin: "Makkiyah", para: 30 },
-       { id: 104, name: "AL Humaza", ar: "الهمزة", verses: 9, origin: "Makkiyah", para: 30 },
-       { id: 105, name: "AL Fill", ar: "الفيل", verses: 5, origin: "Makkiyah", para: 30 },
-       { id: 106, name: "AL Quraish", ar: "قريش", verses: 4, origin: "Makkiyah", para: 30 },
-       { id: 107, name: "AL Maa`un", ar: "الماعون", verses: 7, origin: "Makkiyah", para: 30 },
-       { id: 108, name: "AL Kawthar", ar: "الكوثر", verses: 3, origin: "Makkiyah", para: 30 },
-       { id: 109, name: "AL Kafiroon", ar: "الكافرون", verses: 6, origin: "Makkiyah", para: 30 },
-       { id: 110, name: "AL Nasr", ar: "النصر", verses: 3, origin: "Madaniyah", para: 30 },
-       { id: 111, name: "AL Masad", ar: "المسد", verses: 5, origin: "Makkiyah", para: 30 },
-       { id: 112, name: "AL Ikhilas", ar: "الإخلاص", verses: 4, origin: "Makkiyah", para: 30 },
-       { id: 113, name: "AL Falaq", ar: "الفلق", verses: 5, origin: "Makkiyah", para: 30 },
-       { id: 114, name: "AL Naas", ar: "الناس", verses: 6, origin: "Makkiyah", para: 30 }
-]
-        
+        { id: 79, name: "Al Naziyat", ar: "النازعات", verses: 46, origin: "Makkiyah", para: 30 },
+        { id: 80, name: "Al ABASA", ar: "عبس", verses: 42, origin: "Makkiyah", para: 30 },
+        { id: 81, name: "AT-TAKWEER", ar: "التكوير‎", verses: 29, origin: "Makkiyah", para: 30 },
+        { id: 82, name: "AL-INFITAR", ar: "الانفطار‎", verses: 19, origin: "Makkiyah", para: 30 },
+        { id: 83, name: "AL-MUTAFFIFEEN ", ar: "المطففين‎‎", verses: 36, origin: "Makkiyah", para: 30 },
+        { id: 84, name: "AL-INSHIQAQ", ar: "الانشقاق‎", verses: 25, origin: "Makkiyah", para: 30 },
+        { id: 85, name: "AL BUROOJ", ar: "البروج", verses: 22, origin: "Makkiyah", para: 30 },
+        { id: 86, name: "AL TARIQ", ar: "الطارق", verses: 17, origin: "Makkiyah", para: 30 },
+        { id: 87, name: "AL AA’LA", ar: "الأعلى", verses: 19, origin: "Makkiyah", para: 30 },
+        { id: 88, name: "AL GHASHIYAH", ar: "الغاشية", verses: 26, origin: "Makkiyah", para: 30 },
+        { id: 89, name: "AL FAJR", ar: "الفجر", verses: 30, origin: "Makkiyah", para: 30 },
+        { id: 90, name: "AL BALAD", ar: "البلد", verses: 20, origin: "Makkiyah", para: 30 },
+        { id: 91, name: "AL SHAMS", ar: "الشمس", verses: 15, origin: "Makkiyah", para: 30 },
+        { id: 92, name: "AL LAYL", ar: "الليل", verses: 21, origin: "Makkiyah", para: 30 },
+        { id: 93, name: "AL DUHA", ar: "الضحى", verses: 11, origin: "Makkiyah", para: 30 }
+      ];
       // Helper Functions
       const createNameEntry = (num, arabic, english) => [{ type: 'allah-name', number: num, arabic: arabic, english: english }];
       const createProphetName = (num, arabic, english) => [{ type: 'allah-name', number: num, arabic: arabic, english: english }];
@@ -3568,44 +3554,34 @@ content: [
                 { type: 'text', text: ':79] Proclaim, “They will be revived by the One Who created them the first time; and He is the All Knowing of every creation.”' },
                 
                 { type: 'arabic', text: 'ٱلَّذِى جَعَلَ لَكُم مِّنَ ٱلشَّجَرِ ٱلْأَخْضَرِ نَارًا فَإِذَآ أَنتُم مِّنْهُ تُوقِدُونَ' },
-                { type: 'text', text: ':80] “The One Who has created for you fire from the green tree, so you kindle from it.”' },
-                
-                { type: 'arabic', text: 'أَوَلَيْسَ ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ بِقَٰدِرٍ عَلَىٰٓ أَن يَخْلُقَ مِثْلَهُم ۚ بَلَىٰ وَهُوَ ٱلْخَلَّٰقُ ٱلْعَلِيمُ' },
-                { type: 'text', text: ':81] And is it not possible for the One Who created the heavens and the earth to create the likes of them? It is surely possible, why not?' },
-                
-                { type: 'arabic', text: 'إِنَّمَآ أَمْرُهُۥٓ إِذَآ أَرَادَ شَيْـًٔا أَن يَقُولَ لَهُۥ كُن فَيَكُونُ' },
-                { type: 'text', text: ':82] And His only task when He intends a thing is to command it, “Be” - and it thereupon happens!' },
-                
-         { 
-  type: 'text',
-  text: ':83] Therefore Purity is to Him in Whose Hand is the control over all things and it is towards Him that you will be returned.' 
-}
+      { type: 'text', text: ':80] “The One Who has created for you fire from the green tree, so you kindle from it.”' },
+
+      { type: 'arabic', text: 'أَوَلَيْسَ ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ بِقَٰدِرٍ عَلَىٰٓ أَن يَخْلُقَ مِثْلَهُم ۚ بَلَىٰ وَهُوَ ٱلْخَلَّٰقُ ٱلْعَلِيمُ' },
+      { type: 'text', text: ':81] And is it not possible for the One Who created the heavens and the earth to create the likes of them? It is surely possible, why not?' },
+
+      { type: 'arabic', text: 'إِنَّمَآ أَمْرُهُۥٓ إِذَآ أَرَادَ شَيْـًٔا أَن يَقُولَ لَهُۥ كُن فَيَكُونُ' },
+      { type: 'text', text: ':82] And His only task when He intends a thing is to command it, “Be” - and it thereupon happens!' },
+
+      { type: 'arabic', text: 'فَسُبۡحٰنَ الَّذِىۡ بِيَدِهٖ مَلَـكُوۡتُ كُلِّ شَىۡءٍ وَّاِلَيۡهِ تُرۡجَعُوۡنَ' },
+      { type: 'text', text: ':83] Therefore Purity is to Him in Whose Hand is the control over all things and it is towards Him that you will be returned.' }
     ]
-  },
+  }, // <--- This comma connects Surah Yasin to Surah Al-Fath.
+
+  // This is the Al-Fath Surah Object
   {
     audio1: 'https://server8.mp3quran.net/afs/048.mp3',
     audio2: 'https://server10.mp3quran.net/minsh/048.mp3',
     content: [
+      { "type": "section-title", "text": "AL FATH (THE VICTORY)" },
+      { "type": "text", "text": "(Revealed at Medinah - contains 29 verses - Para 48)" },
       {
-        type: 'section-title',
-        text: 'AL FATH (THE VICTORY)'
+        type: 'arabic',
+        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
       },
-      {
-        type: 'text',
-  text: '(Revealed at Medinah - contains 29 verses - Para 48)'
-},
-{
-  type: 'arabic',
-  text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
-},
-{
-  type: 'text',
-  text: 'Allah - beginning with the name of - the Most Gracious, the Most Merciful'
-},
-                { type: 'arabic', text: 'إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا' },
-                { type: 'text', text: '1] We have indeed, for your sake (O dear Prophet Mohammed - peace and blessings be upon him), bestowed a clear victory.' },
-                { type: 'arabic', text: 'لِّيَغْفِرَ لَكَ اللَّهُ مَا تَقَدَّمَ مِن ذَنبِكَ وَمَا تَأَخَّرَ وَيُتِمَّ نِعْمَتَهُ عَلَيْكَ وَيَهْدِيَكَ صِرَاطًا مُّسْتَقِيمًا' },
-                { type: 'text', text: '2] So that Allah may forgive, for your sake, the sins of those before you and those after you, and complete His favours upon you, and to show you the Straight Path.' },
+      { type: 'arabic', text: 'إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا' },
+      { type: 'text', text: '1] We have indeed, for your sake (O dear Prophet Mohammed - peace and blessings be upon him), bestowed a clear victory.' },
+      { type: 'arabic', text: 'لِّيَغْفِرَ لَكَ اللَّهُ مَا تَقَدَّمَ مِن ذَنبِكَ وَمَا تَأَخَّرَ وَيُتِمَّ نِعْمَتَهُ عَلَيْكَ وَيَهْدِيَكَ صِرَاطًا مُّسْتَقِيمًا' },
+      { type: 'text', text: '2] So that Allah may forgive, for your sake, the sins of those before you and those after you, and complete His favours upon you, and to show you the Straight Path.' },
                 { type: 'arabic', text: 'وَيَنصُرَكَ اللَّهُ نَصْرًا عَزِيزًا' },
                 { type: 'text', text: '3] And so that Allah may provide you a great help.' },
                 { type: 'arabic', text: 'هُوَ الَّذِي أَنزَلَ السَّكِينَةَ فِي قُلُوبِ الْمُؤْمِنِينَ لِيَزْدَادُوا إِيمَانًا مَّعَ إِيمَانِهِمْ ۖ وَلِلَّهِ جُنُودُ السَّمَاوَاتِ وَالْأَرْضِ ۚ وَكَانَ اللَّهُ عَلِيمًا حَكِيمًا' },
@@ -5384,511 +5360,6 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         { "type": "arabic", "text": "وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ" },
         { "type": "text", "text": "11 And abundantly proclaim the favours of your Lord" }
 
-      ]
-    },
-    {
-"audio1": "https://server8.mp3quran.net/afs/094.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/094.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL INSHIRAH (THE WIDENING)" },
-        { "type": "text", "text": "(Revealed at Mecca - 8 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ" },
-        { "type": "text", "text": "1 Did We not widen your bosom?" },
-        { "type": "arabic", "text": "وَوَضَعْنَا عَنكَ وِزْرَكَ" },
-        { "type": "text", "text": "2 And relieve you of the burden -" },
-        { "type": "arabic", "text": "الَّذِي أَنقَضَ ظَهْرَكَ" },
-        { "type": "text", "text": "3 Which had broken your back?" },
-        { "type": "arabic", "text": "وَرَفَعْنَا لَكَ ذِكْرَكَ" },
-        { "type": "text", "text": "4 And We have exalted your remembrance for you." },
-        { "type": "arabic", "text": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا" },
-        { "type": "text", "text": "5 So indeed with hardship is ease." },
-        { "type": "arabic", "text": "إِنَّ مَعَ الْعُسْرِ يُسْرًا" },
-        { "type": "text", "text": "6 Indeed with hardship is ease." },
-        { "type": "arabic", "text": "فَإِذَا فَرَغْتَ فَانصَبْ" },
-        { "type": "text", "text": "7 So when you finish the prayer, strive in supplication." },
-        { "type": "arabic", "text": "وَإِلَىٰ رَبِّكَ فَارْغَب" },
-        { "type": "text", "text": "8 And incline towards your Lord." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/095.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/095.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL TEEN (THE OLIVE)" },
-        { "type": "text", "text": "(Revealed at Mecca - 8 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "وَالتِّينِ وَالزَّيْتُونِ" },
-        { "type": "text", "text": "1 By oath of the fig and of the olive," },
-        { "type": "arabic", "text": "وَطُورِ سِينِينَ" },
-        { "type": "text", "text": "2 And by oath of Mount Sinai," },
-        { "type": "arabic", "text": "وَهَٰذَا الْبَلَدِ الْأَمِينِ" },
-        { "type": "text", "text": "3 And by oath of this secure land," },
-        { "type": "arabic", "text": "لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ" },
-        { "type": "text", "text": "4 We have indeed created man in the best shape." },
-        { "type": "arabic", "text": "ثُمَّ رَدَدْنَاهُ أَسْفَلَ سَافِلِينَ" },
-        { "type": "text", "text": "5 We then turned him towards all the lowest of the low states." },
-        { "type": "arabic", "text": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ" },
-        { "type": "text", "text": "6 Except those who accepted faith and did good deeds – for them is an infinite reward." },
-        { "type": "arabic", "text": "فَمَا يُكَذِّبُكَ بَعْدُ بِالدِّينِ" },
-        { "type": "text", "text": "7 So after this, what causes you to deny the judgement?" },
-        { "type": "arabic", "text": "أَلَيْسَ اللَّهُ بِأَحْكَمِ الْحَاكِمِينَ" },
-        { "type": "text", "text": "8 Is not Allah the Greatest Judge upon all judges?" }
-      ]
-    },
-    {
-      
-    "audio1": "https://server8.mp3quran.net/afs/096.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/096.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL A`LAQ (THE CLOT)" },
-        { "type": "text", "text": "(Revealed at Mecca - 19 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ" },
-        { "type": "text", "text": "1 Read with the name of your Lord Who created," },
-        { "type": "arabic", "text": "خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ" },
-        { "type": "text", "text": "2 Created man from a clot." },
-        { "type": "arabic", "text": "اقْرَأْ وَرَبُّكَ الْأَكْرَمُ" },
-        { "type": "text", "text": "3 Read, and your Lord only is the Most Beneficent," },
-        { "type": "arabic", "text": "الَّذِي عَلَّمَ بِالْقَلَمِ" },
-        { "type": "text", "text": "4 The One Who taught to write with the pen." },
-        { "type": "arabic", "text": "عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ" },
-        { "type": "text", "text": "5 The One Who taught man all what he did not know." },
-        { "type": "arabic", "text": "كَلَّا إِنَّ الْإِنسَانَ لَيَطْغَىٰ" },
-        { "type": "text", "text": "6 Yes indeed, man is surely rebellious." },
-        { "type": "arabic", "text": "أَن رَّآهُ اسْتَغْنَىٰ" },
-        { "type": "text", "text": "7 As he considers himself independent!" },
-        { "type": "arabic", "text": "إِنَّ إِلَىٰ رَبِّكَ الرُّجْعَىٰ" },
-        { "type": "text", "text": "8 Indeed towards your Lord only is the return." },
-        { "type": "arabic", "text": "أَرَأَيْتَ الَّذِي يَنْهَىٰ" },
-        { "type": "text", "text": "9 What is your opinion – regarding him who forbids -" },
-        { "type": "arabic", "text": "عَبْدًا إِذَا صَلَّىٰ" },
-        { "type": "text", "text": "10 A bondman when he offers the prayer?" },
-        { "type": "arabic", "text": "أَرَأَيْتَ إِن كَانَ عَلَى الْهُدَىٰ" },
-        { "type": "text", "text": "11 What is your opinion – if he were upon guidance," },
-        { "type": "arabic", "text": "أَوْ أَمَرَ بِالتَّقْوَىٰ" },
-        { "type": "text", "text": "12 He would enjoin piety, so how good it would be!" },
-        { "type": "arabic", "text": "أَرَأَيْتَ إِن كَذَّبَ وَتَوَلَّىٰ" },
-        { "type": "text", "text": "13 What is your opinion – if he denies and turns away, how wretched will be his state!" },
-        { "type": "arabic", "text": "أَلَمْ يَعْلَم بِأَنَّ اللَّهَ يَرَىٰ" },
-        { "type": "text", "text": "14 Did he not realise that Allah is watching?" },
-        { "type": "arabic", "text": "كَلَّا لَئِن لَّمْ يَنتَهِ لَنَسْفَعًا بِالنَّاصِيَةِ" },
-        { "type": "text", "text": "15 Yes certainly, if he does not desist, We will seize him by the forelock." },
-        { "type": "arabic", "text": "نَاصِيَةٍ كَاذِبَةٍ خَاطِئَةٍ" },
-        { "type": "text", "text": "16 A forelock that lies, is sinful." },
-        { "type": "arabic", "text": "فَلْيَدْعُ نَادِيَهُ" },
-        { "type": "text", "text": "17 So let him now call his gang!" },
-        { "type": "arabic", "text": "سَنَدْعُ الزَّبَانِيَةَ" },
-        { "type": "text", "text": "18 We will now call the guards!" },
-        { "type": "arabic", "text": "كَلَّا لَا تُطِعْهُ وَاسْجُدْ وَاقْتَرِبْ ۩" },
-        { "type": "text", "text": "19 Yes indeed; do not listen to him - and prostrate, and become close to Us. (Command of Prostration # 14)" }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/097.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/097.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL QADR (THE DESTINY)" },
-        { "type": "text", "text": "(Revealed at Mecca - 5 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ" },
-        { "type": "text", "text": "1 We have indeed sent down the Qur’an in the Night of Destiny." },
-        { "type": "arabic", "text": "وَمَا أَدْرَاكَ مَا لَيْلَةُ الْقَدْرِ" },
-        { "type": "text", "text": "2 And what have you understood, what the Night of Destiny is!" },
-        { "type": "arabic", "text": "لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ" },
-        { "type": "text", "text": "3 The Night of Destiny is better than a thousand months." },
-        { "type": "arabic", "text": "تَنَزَّلُ الْمَلَائِكَةُ وَالرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍ" },
-        { "type": "text", "text": "4 In it descend the angels and Jibreel, by the command of their Lord – for all works." },
-        { "type": "arabic", "text": "سَلَامٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ" },
-        { "type": "text", "text": "5 It is peace until the rising of dawn." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/098.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/098.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL BAYYINAH (THE CLEAR PROOF)" },
-        { "type": "text", "text": "(Revealed at Medinah - 8 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "لَمْ يَكُنِ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ وَالْمُشْرِكِينَ مُنفَكِّينَ حَتَّىٰ تَأْتِيَهُمُ الْبَيِّنَةُ" },
-        { "type": "text", "text": "1 The disbelieving People of the Book(s) and the polytheists would not have left their religion until the clear proof came to them." },
-        { "type": "arabic", "text": "رَسُولٌ مِّنَ اللَّهِ يَتْلُو صُحُفًا مُّطَهَّرَةً" },
-        { "type": "text", "text": "2 (The clear proof is) the Noble Messenger from Allah, who reads the pure pages." },
-        { "type": "arabic", "text": "فِيهَا كُتُبٌ قَيِّمَةٌ" },
-        { "type": "text", "text": "3 In which are written proper affairs." },
-        { "type": "arabic", "text": "وَمَا تَفَرَّقَ الَّذِينَ أُوتُوا الْكِتَابَ إِلَّا مِن بَعْدِ مَا جَاءَتْهُمُ الْبَيِّنَةُ" },
-        { "type": "text", "text": "4 Nor did the People of the Book(s) get divided until after the clear proof came to them." },
-        { "type": "arabic", "text": "وَمَا أُمِرُوا إِلَّا لِيَعْبُدُوا اللَّهَ مُخْلِصِينَ لَهُ الدِّينَ حُنَفَاءَ وَيُقِيمُوا الصَّلَاةَ وَيُؤْتُوا الزَّكَاةَ ۚ وَذَٰلِكَ دِينُ الْقَيِّمَةِ" },
-        { "type": "text", "text": "5 And they were ordered only to worship Allah, believing purely in Him – devoted solely (to Him), and to establish the prayer and to pay the obligatory charity – and this is the straight religion." },
-        { "type": "arabic", "text": "إِنَّ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ وَالْمُشْرِكِينَ فِي نَارِ جَهَنَّمَ خَالِدِينَ فِيهَا ۚ أُولَٰئِكَ هُمْ شَرُّ الْبَرِيَّةِ" },
-        { "type": "text", "text": "6 Indeed all disbelievers, the People of the Book(s) and the polytheists, are in the fire of hell – they will remain in it for ever; it is they who are the worst among the creation." },
-        { "type": "arabic", "text": "إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أُولَٰئِكَ هُمْ خَيْرُ الْبَرِيَّةِ" },
-        { "type": "text", "text": "7 Indeed those who accepted faith and did good deeds – it is they who are the best among the creation." },
-        { "type": "arabic", "text": "جَزَاؤُهُمْ عِندَ رَبِّهِمْ جَنَّاتُ عَدْنٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ خَالِدِينَ فِيهَا أَبَدًا ۖ رَّضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ ۚ ذَٰلِكَ لِمَنْ خَشِيَ رَبَّهُ" },
-        { "type": "text", "text": "8 Their reward is - with their Lord - everlasting Gardens of Eden beneath which rivers flow, in which they will abide for ever and ever; Allah is pleased with them and they are pleased with Him; this is for one who fears his Lord." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/099.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/099.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL ZILZAL (THE TREMOR)" },
-        { "type": "text", "text": "(Revealed at Medina - 8 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "إِذَا زُلْزِلَتِ الْأَرْضُ زِلْزَالَهَا" },
-        { "type": "text", "text": "1 When the earth is shaken with its appointed tremor." },
-        { "type": "arabic", "text": "وَأَخْرَجَتِ الْأَرْضُ أَثْقَالَهَا" },
-        { "type": "text", "text": "2 And the earth throws out its burdens." },
-        { "type": "arabic", "text": "وَقَالَ الْإِنسَانُ مَا لَهَا" },
-        { "type": "text", "text": "3 And man says, “What has happened to it?”" },
-        { "type": "arabic", "text": "يَوْمَئِذٍ تُحَدِّثُ أَخْبَارَهَا" },
-        { "type": "text", "text": "4 On that day earth will narrate its news," },
-        { "type": "arabic", "text": "بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا" },
-        { "type": "text", "text": "5 Because your Lord sent a command to it." },
-        { "type": "arabic", "text": "يَوْمَئِذٍ يَصْدُرُ النَّاسُ أَشْتَاتًا لِّيُرَوْا أَعْمَالَهُمْ" },
-        { "type": "text", "text": "6 On that day men will return towards their Lord, in different groups, in order to be shown their deeds." },
-        { "type": "arabic", "text": "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ" },
-        { "type": "text", "text": "7 So whoever does a good deed equal to the weight of the minutest particle, will see it." },
-        { "type": "arabic", "text": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ" },
-        { "type": "text", "text": "8 And whoever does an evil deed equal to the weight of the minutest particle, will see it." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/100.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/100.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL A`ADIYAT (THE SPRINTERS)" },
-        { "type": "text", "text": "(Revealed at Mecca - 11 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "وَالْعَادِيَاتِ ضَبْحًا" },
-        { "type": "text", "text": "1 By oath of those that sprint, breathing heavily. (The horses used in Holy War.)" },
-        { "type": "arabic", "text": "فَالْمُورِيَاتِ قَدْحًا" },
-        { "type": "text", "text": "2 Striking stones with their hooves, sparking fire." },
-        { "type": "arabic", "text": "فَالْمُغِيرَاتِ صُبْحًا" },
-        { "type": "text", "text": "3 And by oath of those who raid at dawn." },
-        { "type": "arabic", "text": "فَأَثَرْنَ بِهِ نَقْعًا" },
-        { "type": "text", "text": "4 So thereupon raising dust." },
-        { "type": "arabic", "text": "فَوَسَطْنَ بِهِ جَمْعًا" },
-        { "type": "text", "text": "5 Then penetrate to the centre of the enemy army." },
-        { "type": "arabic", "text": "إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ" },
-        { "type": "text", "text": "6 Indeed man is very ungrateful towards his Lord." },
-        { "type": "arabic", "text": "وَإِنَّهُ عَلَىٰ ذَٰلِكَ لَشَهِيدٌ" },
-        { "type": "text", "text": "7 And indeed he himself is a witness to it." },
-        { "type": "arabic", "text": "وَإِنَّهُ لِحُبِّ الْخَيْرِ لَشَدِيدٌ" },
-        { "type": "text", "text": "8 And indeed he loves wealth to the extreme." },
-        { "type": "arabic", "text": "أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِي الْقُبُورِ" },
-        { "type": "text", "text": "9 So does he not know? When those in the graves are raised," },
-        { "type": "arabic", "text": "وَحُصِّلَ مَا فِي الصُّدُورِ" },
-        { "type": "text", "text": "10 And all what lies in the breasts is opened -" },
-        { "type": "arabic", "text": "إِنَّ رَبَّهُم بِهِمْ يَوْمَئِذٍ لَّخَبِيرٌ" },
-        { "type": "text", "text": "11 On that day their Lord surely knows all about them!" }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/101.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/101.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL QARIA`H (THE TERRIFYING EVENT)" },
-        { "type": "text", "text": "(Revealed at Mecca - 11 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "الْقَارِعَةُ" },
-        { "type": "text", "text": "1 The event that terrifies the hearts!" },
-        { "type": "arabic", "text": "مَا الْقَارِعَةُ" },
-        { "type": "text", "text": "2 What is the event that terrifies the hearts?" },
-        { "type": "arabic", "text": "وَمَا أَدْرَاكَ مَا الْقَارِعَةُ" },
-        { "type": "text", "text": "3 And what have you understood, what the event that terrifies the hearts is!" },
-        { "type": "arabic", "text": "يَوْمَ يَكُونُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوثِ" },
-        { "type": "text", "text": "4 The day when men will be like scattered moths." },
-        { "type": "arabic", "text": "وَتَكُونُ الْجِبَالُ كَالْعِهْنِ الْمَنفُوشِ" },
-        { "type": "text", "text": "5 And mountains will be like flying wool." },
-        { "type": "arabic", "text": "فَأَمَّا مَن ثَقُلَتْ مَوَازِينُهُ" },
-        { "type": "text", "text": "6 So for one whose scales prove heavy," },
-        { "type": "arabic", "text": "فَهُوَ فِي عِيشَةٍ رَّاضِيَةٍ" },
-        { "type": "text", "text": "7 He is therefore in the desired bliss." },
-        { "type": "arabic", "text": "وَأَمَّا مَنْ خَفَّتْ مَوَازِينُهُ" },
-        { "type": "text", "text": "8 And for one whose scales prove light," },
-        { "type": "arabic", "text": "فَأُمُّهُ هَاوِيَةٌ" },
-        { "type": "text", "text": "9 He is in the lap of one that abases." },
-        { "type": "arabic", "text": "وَمَا أَدْرَاكَ مَا هِيَهْ" },
-        { "type": "text", "text": "10 And what have you understood, what the one that abases is!" },
-        { "type": "arabic", "text": "نَارٌ حَامِيَةٌ" },
-        { "type": "text", "text": "11 A flaming fire!" }
-      ]
-    },
-    {
-    "audio1": "https://server8.mp3quran.net/afs/102.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/102.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL TAKASUR (THE EXCESS)" },
-        { "type": "text", "text": "(Revealed at Mecca - 8 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "أَلْهَاكُمُ التَّكَاثُرُ" },
-        { "type": "text", "text": "1 The craving for excess wealth kept you people neglectful." },
-        { "type": "arabic", "text": "حَتَّىٰ زُرْتُمُ الْمَقَابِرَ" },
-        { "type": "text", "text": "2 Until you confronted the graves." },
-        { "type": "arabic", "text": "كَلَّا سَوْفَ تَعْلَمُونَ" },
-        { "type": "text", "text": "3 Yes certainly, you will soon realise!" },
-        { "type": "arabic", "text": "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ" },
-        { "type": "text", "text": "4 Again, yes certainly, you will soon realise!" },
-        { "type": "arabic", "text": "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ الْيَقِينِ" },
-        { "type": "text", "text": "5 Yes certainly, if you had believed with certainty, you would not have craved for wealth." },
-        { "type": "arabic", "text": "لَتَرَوُنَّ الْجَحِيمَ" },
-        { "type": "text", "text": "6 Indeed you will see hell." },
-        { "type": "arabic", "text": "ثُمَّ لَتَرَوُنَّهَا عَيْنَ الْيَقِينِ" },
-        { "type": "text", "text": "7 Again, indeed you will see it with certainty." },
-        { "type": "arabic", "text": "ثُمَّ لَتُسْأَلُنَّ يَوْمَئِذٍ عَنِ النَّعِيمِ" },
-        { "type": "text", "text": "8 Then, on that day, you will surely be questioned regarding the favours." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/103.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/103.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL A`SR (THE ERA)" },
-        { "type": "text", "text": "(Revealed at Mecca - 3 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "وَالْعَصْرِ" },
-        { "type": "text", "text": "1 By oath of this era of yours (O dear Prophet Mohammed – peace and blessings be upon him)." },
-        { "type": "arabic", "text": "إِنَّ الْإِنسَانَ لَفِي خُسْرٍ" },
-        { "type": "text", "text": "2 Indeed man is surely in a loss." },
-        { "type": "arabic", "text": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ" },
-        { "type": "text", "text": "3 Except those who accepted faith, and did good deeds and urged one another to the truth - and urged one another to have patience." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/104.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/104.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL HUMAZAH (THE SLANDERER)" },
-        { "type": "text", "text": "(Revealed at Mecca - 9 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "وَيْلٌ لِّكُلِّ هُمَزَةٍ لُّمَزَةٍ" },
-        { "type": "text", "text": "1 Ruin is for every open slanderer, backbiter." },
-        { "type": "arabic", "text": "الَّذِي جَمَعَ مَالًا وَعَدَّدَهُ" },
-        { "type": "text", "text": "2 Who accumulated wealth and hoarded it, counting." },
-        { "type": "arabic", "text": "يَحْسَبُ أَنَّ مَالَهُ أَخْلَدَهُ" },
-        { "type": "text", "text": "3 Does he think that his wealth will prolong his stay on earth forever?" },
-        { "type": "arabic", "text": "كَلَّا ۖ لَيُنبَذَنَّ فِي الْحُطَمَةِ" },
-        { "type": "text", "text": "4 Never! He will certainly be thrown into the Crushing One." },
-        { "type": "arabic", "text": "وَمَا أَدْرَاكَ مَا الْحُطَمَةُ" },
-        { "type": "text", "text": "5 And what have you understood what the Crushing One is!" },
-        { "type": "arabic", "text": "نَارُ اللَّهِ الْمُوقَدَةُ" },
-        { "type": "text", "text": "6 The fire of Allah, that is ablaze." },
-        { "type": "arabic", "text": "الَّتِي تَطَّلِعُ عَلَى الْأَفْئِدَةِ" },
-        { "type": "text", "text": "7 Which will climb on to the hearts." },
-        { "type": "arabic", "text": "إِنَّهَا عَلَيْهِم مُّؤْصَدَةٌ" },
-        { "type": "text", "text": "8 Indeed it will be shut over them." },
-        { "type": "arabic", "text": "فِي عَمَدٍ مُّمَدَّدَةٍ" },
-        { "type": "text", "text": "9 In extended columns." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/105.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/105.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL FEEL (THE ELEPHANT)" },
-        { "type": "text", "text": "(Revealed at Mecca - 5 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ" },
-        { "type": "text", "text": "1 O dear Prophet (Mohammed - peace and blessings be upon him), did you not see how did your Lord deal with the People of the Elephant?" },
-        { "type": "arabic", "text": "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ" },
-        { "type": "text", "text": "2 Did He not put their scheme into ruin?" },
-        { "type": "arabic", "text": "وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ" },
-        { "type": "text", "text": "3 And send flocks of birds upon them," },
-        { "type": "arabic", "text": "تَرْمِيهِم بِحِجَارَةٍ مِّن سِجِّيلٍ" },
-        { "type": "text", "text": "4 Which hit them with stones of baked clay," },
-        { "type": "arabic", "text": "فَجَعَلَهُمْ كَعَصْفٍ مَّأْكُولٍ" },
-        { "type": "text", "text": "5 So He made them like the leftover devoured leaves of farms?" }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/106.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/106.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL QURAISH (THE TRIBE OF QURAISH)" },
-        { "type": "text", "text": "(Revealed at Mecca - 4 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "لِإِيلَافِ قُرَيْشٍ" },
-        { "type": "text", "text": "1 For giving inclination to the Quraish." },
-        { "type": "arabic", "text": "إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ" },
-        { "type": "text", "text": "2 The inclination during both their travels of winter and summer." },
-        { "type": "arabic", "text": "فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ" },
-        { "type": "text", "text": "3 So they must worship the Lord of this House. (The Ka’aba)" },
-        { "type": "arabic", "text": "الَّذِي أَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ" },
-        { "type": "text", "text": "4 The One Who gave them food in hunger, and bestowed them safety from a great fear." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/107.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/107.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL MAO`ON (THE SMALL UTILITIES)" },
-        { "type": "text", "text": "(Revealed at Mecca - 7 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ" },
-        { "type": "text", "text": "1 Just look at him, who belies the religion!" },
-        { "type": "arabic", "text": "فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ" },
-        { "type": "text", "text": "2 So it is he, who pushes away the orphan," },
-        { "type": "arabic", "text": "وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ" },
-        { "type": "text", "text": "3 And does not urge to feed the needy." },
-        { "type": "arabic", "text": "فَوَيْلٌ لِّلْمُصَلِّينَ" },
-        { "type": "text", "text": "4 So ruin is to those offerers of prayer -" },
-        { "type": "arabic", "text": "الَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ" },
-        { "type": "text", "text": "5 Those who are neglectful of their prayer." },
-        { "type": "arabic", "text": "الَّذِينَ هُمْ يُرَاءُونَ" },
-        { "type": "text", "text": "6 Those who make a display (of their deeds)." },
-        { "type": "arabic", "text": "وَيَمْنَعُونَ الْمَاعُونَ" },
-        { "type": "text", "text": "7 And do not let others ask for small utilities." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/108.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/108.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL KAUSAR (ABUNDANCE / THE POND)" },
-        { "type": "text", "text": "(Revealed at Mecca - 3 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ" },
-        { "type": "text", "text": "1 We have indeed bestowed the Kausar* upon you (O dear prophet Mohammed - peace and blessings be upon him). (*Infinite excellent qualities / the greatest number of followers / the sweet pond on the Day of Resurrection)" },
-        { "type": "arabic", "text": "فَصَلِّ لِرَبِّكَ وَانْحَرْ" },
-        { "type": "text", "text": "2 So offer the prayers for your Lord, and perform the sacrifice." },
-        { "type": "arabic", "text": "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ" },
-        { "type": "text", "text": "3 Indeed it is your enemy who is bereft of all goodness." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/109.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/109.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL KAFIROON (THE DISBELIEVERS)" },
-        { "type": "text", "text": "(Revealed at Mecca - 6 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "قُلْ يَا أَيُّهَا الْكَافِرُونَ" },
-        { "type": "text", "text": "1 Proclaim, (O dear prophet Mohammed - peace and blessings be upon him), “O disbelievers!”" },
-        { "type": "arabic", "text": "لَا أَعْبُدُ مَا تَعْبُدُونَ" },
-        { "type": "text", "text": "2 Neither do I worship what you worship." },
-        { "type": "arabic", "text": "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ" },
-        { "type": "text", "text": "3 Nor do you worship Whom I worship." },
-        { "type": "arabic", "text": "وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ" },
-        { "type": "text", "text": "4 And neither will I ever worship what you worship." },
-        { "type": "arabic", "text": "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ" },
-        { "type": "text", "text": "5 Nor will you worship Whom I worship." },
-        { "type": "arabic", "text": "لَكُمْ دِينُكُمْ وَلِيَ دِينِ" },
-        { "type": "text", "text": "6 For you is your religion, and for me is mine." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/110.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/110.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL NASR (THE HELP)" },
-        { "type": "text", "text": "(Revealed at Medinah - 3 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ" },
-        { "type": "text", "text": "1 When the help and victory of Allah come," },
-        { "type": "arabic", "text": "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا" },
-        { "type": "text", "text": "2 And you see people entering the religion of Allah in multitudes," },
-        { "type": "arabic", "text": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ إِنَّهُ كَانَ تَوَّابًا" },
-        { "type": "text", "text": "3 Then proclaim the Purity of your Lord while praising Him, and seek forgiveness from Him; indeed He is the Most Acceptor of Repentance." }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/111.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/111.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL LAHAB (EMBER)" },
-        { "type": "text", "text": "(Revealed at Mecca – 5 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ" },
-        { "type": "text", "text": "1 May both the hands of Abu Lahab be destroyed – and he is destroyed!" },
-        { "type": "arabic", "text": "مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ" },
-        { "type": "text", "text": "2 His wealth did not benefit him in the least, nor did whatever he earned." },
-        { "type": "arabic", "text": "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ" },
-        { "type": "text", "text": "3 He will soon enter the flaming fire." },
-        { "type": "arabic", "text": "وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ" },
-        { "type": "text", "text": "4 And so will his wife; carrying a bundle of firewood on her head." },
-        { "type": "arabic", "text": "فِي جِيدِهَا حَبْلٌ مِّن مَّسَدٍ" },
-        { "type": "text", "text": "5 A rope made from palm fibre around her neck!" }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/112.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/112.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL IKHLAS (PURITY / SINCERITY)" },
-        { "type": "text", "text": "(Revealed at Mecca - 4 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "قُلْ هُوَ اللَّهُ أَحَدٌ" },
-        { "type": "text", "text": "1 Proclaim (O dear Prophet Mohammed - peace and blessings be upon him), “He is Allah, He is One.”" },
-        { "type": "arabic", "text": "اللَّهُ الصَّمَدُ" },
-        { "type": "text", "text": "2 “Allah is the Un-wanting.” (Perfect, does not require anything.)" },
-        { "type": "arabic", "text": "لَمْ يَلِدْ وَلَمْ يُولَدْ" },
-        { "type": "text", "text": "3 “He has no offspring, nor is He born from anything.”" },
-        { "type": "arabic", "text": "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ" },
-        { "type": "text", "text": "4 “And there is none equal to Him.”" }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/113.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/113.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL FALAQ (THE DAYBREAK)" },
-        { "type": "text", "text": "(Revealed at Mecca - 5 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ" },
-        { "type": "text", "text": "1 Proclaim (O dear Prophet Mohammed – peace and blessings be upon him), “I take refuge of the One Who creates the Daybreak.”" },
-        { "type": "arabic", "text": "مِن شَرِّ مَا خَلَقَ" },
-        { "type": "text", "text": "2 “From the evil of His entire creation.”" },
-        { "type": "arabic", "text": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ" },
-        { "type": "text", "text": "3 “And from the evil of the matter that darkens when it sets.”" },
-        { "type": "arabic", "text": "وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ" },
-        { "type": "text", "text": "4 “And from the evil of the witches who blow into knots.”" },
-        { "type": "arabic", "text": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ" },
-        { "type": "text", "text": "5 “And from the evil of the envier when he is envious of me.”" }
-    ]
-  },
-  {
-    "audio1": "https://server8.mp3quran.net/afs/114.mp3",
-    "audio2": "https://server10.mp3quran.net/minsh/114.mp3",
-    "content": [
-        { "type": "section-title", "text": "AL NAAS (MANKIND)" },
-        { "type": "text", "text": "(Revealed at Mecca - 6 verses -)" },
-        { "type": "arabic", "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { "type": "text", "text": "Allah - beginning with the name of - the Most Gracious, the Most Merciful" },
-        { "type": "arabic", "text": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ" },
-        { "type": "text", "text": "1 Proclaim (O dear Prophet Mohammed – peace and blessings be upon him), “I take refuge of the One Who is the Lord of all mankind.”" },
-        { "type": "arabic", "text": "مَلِكِ النَّاسِ" },
-        { "type": "text", "text": "2 “The King of all mankind.”" },
-        { "type": "arabic", "text": "إِلَٰهِ النَّاسِ" },
-        { "type": "text", "text": "3 “The God of all mankind.”" },
-        { "type": "arabic", "text": "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ" },
-        { "type": "text", "text": "4 “From the evil of the one who instils evil thoughts in the hearts – and stays hidden.”" },
-        { "type": "arabic", "text": "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ" },
-        { "type": "text", "text": "5 “Those who instil evil thoughts into the hearts of men.”" },
-        { "type": "arabic", "text": "مِنَ الْجِنَّةِ وَالنَّاسِ" },
-        { "type": "text", "text": "6 “Among the jinns and men.”" },
-        { "type": "text", "text": "All Praise to Allah – the Lord of the Creation – and countless blessings and peace be upon our Master Prophet Mohammed – the leader of all prophets. With the Grace of Allah," }
-
         ]
       }
     ]
@@ -6037,7 +5508,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
             variant: 'image', // Corrected: Added missing 'variant'
             image: 'Salawat_from_Dalail_al_Khayrat.jpg', // Placeholder, replace with actual image path
             content: [
-                { type: 'section-title', text: 'Salawat from Dala’il al Khayrat' },
+               { type: 'section-title', text: 'Salawat from Dala’il al Khayrat' },
 { type: 'text', text: 'The Prophet ﷺ said:\n“The person who prays for me is provided with light on the Bridge, and whoever is\nprovided with light on the Bridge will not be amongst the people of the Fire.”', style: 'italic text-center mb-4' },
 { type: 'arabic-indopak', text: 'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ\nعَدَدَ مَا فِي عِلْمِ اللَّهِ صَلَاةً\nدَائِمَةً بِدَوَامِ مُلْكِ اللَّهِ' },
 { type: 'text', text: 'O Allāh, bless our master Muhammad, that in\nnumber are equal to the things that exist in\nthe knowledge of Allāh and continue so long\nas the dominion of Allāh remains.' },
@@ -6052,6 +5523,7 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
 
 { type: 'arabic-indopak', text: 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلْخَائِفِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿وَلِمَنْ خَافَ مَقَامَ رَبِّهِ جَنَّتَانِ﴾ ﴿وَأَمَّا مَنْ خَافَ مَقَامَ رَبِّهِ وَنَهَى النَّفْسَ عَنِ الْهَوَىٰ فَإِنَّ الْجَنَّةَ هِيَ الْمَأْوَىٰ﴾.' },
 { type: 'text', text: 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to those in fearful awe of You: “And whoever is in fearful awe of standing before their Lord will have two Gardens;” “and as for whoever is in fearful awe of standing before their Lord and restrains himself from base desires, Paradise will certainly be his home.”' },
+
 { type: 'arabic-indopak', text: 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلْمُتَصَدِّقِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿وَأَن تَصَدَّقُوا خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ﴾ ﴿إِنَّ اللَّهَ يَجْزِي الْمُتَصَدِّقِينَ﴾.' },
 { type: 'text', text: 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to those who are charitable: “to forgive the debt in charity is better for you, if any of you but knew;” and “verily Allah magnificently repays the charitable.”' },
 
@@ -7806,20 +7278,17 @@ content: [ { type: 'section-title', text: 'AL MULK (THE KINGSHIP)' },
         },
         // --- NEW SECTION: Hand Your Affairs to Allah ---
         {
-            variant: 'image', // Assuming you want to display the image for Hand Your Affairs to Allah directly
-            image: 'Hand_Your_Affairs_to_Allah.jpg', // You would replace this with the actual image path or data URI
+            variant: 'default',
             content: [
                 { type: 'section-title', text: 'Hand Your Affairs to Allāh' },
-                { type: 'text', text: 'Are you unable to find a solution or a way out of a problem or dilemma?', style: 'text-center text-lg mb-4' },
-                { type: 'text', text: 'Repeat the following verse of the Qur’an 100 times every day', style: 'text-center italic mb-4' },
-                { type: 'arabic-indopak', text: 'وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ\nإِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ', style: 'text-center text-3xl leading-loose font-bold' },
-                { type: 'text', text: 'And I entrust my tasks to Allāh\nIndeed, Allāh sees the bondmen', style: 'text-center text-lg mt-4' },
-                { type: 'text', text: '[Surah Ghafir, 40:44]', style: 'text-center text-xs opacity-60 mt-1' }
- ]
+                { type: 'text', text: 'Repeat this verse of the Qur’an 100 times every day:' },
+                { type: 'arabic-indopak', text: 'وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ\nإِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ' },
+                { type: 'text', text: '“And I entrust my tasks to Allāh. Indeed, Allāh sees the bondmen.” [Surah Ghafir, 40:44]' }
+            ]
         },
 
         {
-            variant: 'default',
+           variant: 'default',
             content: [
                 { type: 'section-title', text: 'Distress, Sorrow, and Grief Are Removed' },
                 { type: 'text', text: 'Recite 121 times:' },
@@ -8329,7 +7798,7 @@ const App = () => {
   const totalVersesRef = useRef(0);
   const pageIdRef = useRef(null);
 
-  useEffect(() => { const splash = document.getElementById('splash-overlay'); if (splash) setTimeout(() => splash.style.display = 'none', 800); }, []);
+  useEffect(() => { const splash = document.getElementById('splash-overlay'); if (splash) setTimeout(() => splash.style.display = 'none', 0); }, []);
   useEffect(() => { 
       const audio = audioRef.current; 
       const handleEnded = () => { 
