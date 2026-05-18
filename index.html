@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,25 +55,26 @@
 
       .index-bar { display: flex; overflow-x: auto; padding: 10px; gap: 8px; scrollbar-width: none; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
       .index-bar::-webkit-scrollbar { display: none; }
-      
     /* --- IMPROVED ARABIC CLASS --- */
-      .font-arabic { 
-          font-family: 'IndoPakCustom', 'Amiri', serif; 
-          line-height: 2.2 !important; 
-          direction: rtl;
-          text-align: center;
-          font-size: 26px;
-          padding: 10px 0;
-          display: block;
-          -webkit-font-smoothing: antialiased;
-          font-feature-settings: "kern" 1, "liga" 1; 
-          letter-spacing: 0.3px; 
-          word-spacing: 1px;
-          
-          /* Add these two lines here */
-          min-height: 2.2em; 
-          margin-bottom: 10px; 
-      }
+.font-arabic { 
+    font-family: 'IndoPakCustom', 'Amiri', serif; /* Keep this as is, NO !important */
+    line-height: 2.2 !important; 
+    direction: rtl;
+    text-align: center;
+    font-size: 26px;
+    padding: 10px 0;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "kern" 1, "liga" 1; 
+    
+    /* These two lines should NOT be here if they are present */
+    /* letter-spacing: 0.3px; */
+    /* word-spacing: 1px;    */
+    
+    /* The lines you added for height/margin */
+    min-height: 2.2em; 
+    margin-bottom: 10px; 
+}
       
       #splash-overlay { position: fixed; inset: 0; background: #051F22; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
       .loader-logo { font-family: 'Cinzel', serif; color: #C5A059; font-size: 26px; letter-spacing: 4px; font-weight: bold; }
@@ -253,8 +253,8 @@
         { a: "اتَّبِعُوۡا مَنۡ لَّا يَسۡــٴَــلُكُمۡ اَجۡرًا وَّهُمۡ مُّهۡتَدُوۡنَ", e: "“Obey those who do not ask any fee from you, and they are on guidance.”" },
         { a: "وَمَا لِىَ لَاۤ اَعۡبُدُ الَّذِىۡ فَطَرَنِىۡ وَاِلَيۡهِ تُرۡجَعُوۡنَ", e: "“And what is the matter with me that I should not worship Him Who created me, whereas it is towards Him that you are to return?”" },
         { a: "ءَاَ تَّخِذُ مِنۡ دُوۡنِهٖۤ اٰلِهَةً اِنۡ يُّرِدۡنِ الرَّحۡمٰنُ بِضُرٍّ لَّا تُغۡنِ عَنِّىۡ شَفَاعَتُهُمۡ شَيۡـــًٔا وَّلَا يُنۡقِذُوۡنِ", e: "“What! Shall I appoint Gods other than Allah? So that if the Most Gracious should wish me any harm, their intercession would be of no use to me, nor would they be able to save me?”" },
-        { a: "اِنِّىۡۤ اِذًا لَّفِىۡ ضَلٰلٍ مُّبِيۡنٍ", e: "“Undoubtedly, I am then in open error.”" },
-        { a: "اِنِّىۡۤ اٰمَنۡتُ بِرَبِّكُمۡ فَاسۡمَعُوۡنِ", e: "“Indeed I have believed in your Lord, so heed me.”" },
+        { a: "اِنِّىْٓ اِذًا لَّفِىۡ ضَلٰلٍ مُّبِيۡنٍ", e: "“Undoubtedly, I am then in open error.”" },
+        { a: "اِنِّىْٓ اٰمَنْتُ بِرَبِّكُمۡ فَاسۡمَعُوۡنِ", e: "“Indeed I have believed in your Lord, so heed me.”" },
         { a: "قِيۡلَ ادۡخُلِ الۡجَـنَّةَ  ؕ قَالَ يٰلَيۡتَ قَوۡمِىۡ يَعۡلَمُوۡنَ", e: "It was said to him, “Enter Paradise”; he said, “If only my people knew!”" },
         { a: "بِمَا غَفَرَلِىۡ رَبِّىۡ وَجَعَلَنِىۡ مِنَ الۡمُكۡرَمِيۡنَ", e: "“The manner in which my Lord has pardoned me and made me of the honoured ones!”" },
         { a: "وَمَاۤ اَنۡزَلۡنَا عَلٰى قَوۡمِهٖ مِنۡۢ بَعۡدِهٖ مِنۡ جُنۡدٍ مِّنَ السَّمَآءِ وَمَا كُـنَّا مُنۡزِلِيۡنَ", e: "And after him, We did not send down any army from heaven against his people, nor did We intend to send down an army." },
@@ -9909,10 +9909,10 @@ audio1: 'https://server8.mp3quran.net/afs/025.mp3',
                 { type: 'arabic', text: 'ءَأَتَّخِذُ مِن دُونِهِۦٓ ءَالِهَةً إِن يُرِدْنِ ٱلرَّحْمَٰنُ بِضُرٍّ لَّا تُغْنِ عَنِّى شَفَٰعَتُهُمْ شَيْـًٔا وَلَا يُنقِذُونِ' },
                 { type: 'text', text: ':23] “What! Shall I appoint Gods other than Allah? So that if the Most Gracious should wish me any harm, their intercession would be of no use...”' },
                 
-                { type: 'arabic', text: 'إِنِّىٓ إِذًا لَّفِى ضَلَٰلٍ مُّبِينٍ' },
+                { type: 'arabic', text: 'اِنِّىْ اِذًا لَّفِيْ ضَلٰلٍ مُّبِيْنٍ' },
                 { type: 'text', text: ':24] “Undoubtedly, I am then in open error.”' },
                 
-                { type: 'arabic', text: 'إِنِّىٓ ءَامَنتُ بِرَبِّكُمْ فَٱسْمَعُونِ' },
+               { type: 'arabic', text: 'اِنِّىْ اٰمَنْتُ بِرَبِّكُمْ فَاسْمَعُوْنِ' },
                 { type: 'text', text: ':25] “Indeed I have believed in your Lord, so heed me.”' },
                 
                 { type: 'arabic', text: 'قِيلَ ٱدْخُلِ ٱلْجَنَّةَ ۖ قَالَ يَٰلَيْتَ قَوْمِى يَعْلَمُونَ' },
@@ -15895,6 +15895,24 @@ content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
 
 { type: 'arabic', text: 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلشَّاكِرِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿وَاشْكُرُوا نِعْمَتَ اللَّهِ إِن كُنتُمْ إِيَّاهُ تَعْبُدُونَ﴾ ﴿لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ﴾.' },
 { type: 'text', text: 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to the thankful: “And be grateful for the blessing of Allah, if it be Him you truly worship;” “If you are grateful, I will certainly give you more. But if you are ungrateful, surely My punishment is severe.”' },
+
+{ "type": 'arabic', "text": 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلْأُمِّيِّينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿كُنتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ تَأْمُرُونَ بِالْمَعْرُوفِ وَتَنْهَوْنَ عَنِ الْمُنكَرِ﴾.' },
+{ "type": 'text', "text": 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to the unlettered: “You are the best community ever raised for humanity – you encourage good and forbid evil.”' },
+
+{ "type": 'arabic', "text": 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلزَّاهِدِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿ٱلْمَالُ وَٱلْبَنُونَ زِينَةُ ٱلْحَيَوٰةِ ٱلدُّنْيَا وَٱلْبَٰقِيَٰتُ ٱلصَّٰلِحَٰتُ خَيْرٌ عِندَ رَبِّكَ ثَوَابًا وَخَيْرٌ أَمَلًا﴾.' },
+{ "type": 'text', "text": 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to those detached from worldly vanities: “Wealth and children are the adornment of this worldly life, but everlasting good deeds are far better with your Lord in reward and in hope.”' },
+
+{ "type": 'arabic', "text": 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلْفَائِزِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿وَمَن يُطِعِ اللَّهَ وَرَسُولَهُ فَقَدْ فَازَ فَوْزًا عَظِيمًا﴾.' },
+{ "type": 'text', "text": 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to the triumphant: “And whoever obeys Allah and His Messenger has truly achieved a great triumph.”' },
+
+{ "type": 'arabic', "text": 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلسَّائِلِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿فَإِنِّي قَرِيبٌ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ﴾ ﴿أَدْعُونِي أَسْتَجِبْ لَكُمْ﴾.' },
+{ "type": 'text', "text": 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to those who implore You: “I am truly near; I respond to one’s prayer when they call upon Me;” “call upon Me, I will respond to you.”' },
+
+{ "type": 'arabic', "text": 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلْمُصَلِّينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا﴾ ﴿يُؤْتِكُمْ كِفْلَيْنِ مِن رَّحْمَتِهِ وَيَجْعَل لَّكُمْ نُورًا تَمْشُونَ بِهِ وَيَغْفِرْ لَكُمْ وَاللَّهُ غَفُورٌ رَّحِيمٌ﴾.' },
+{ "type": 'text', "text": 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to all who invoke blessings upon him: “Indeed, Allah shows His blessings upon the Prophet, and His angels pray for him. O believers! Invoke Allah’s blessings upon him and salute him with worthy greetings of peace;” “and He will grant you a double share of His mercy, provide you with a light to help you walk, and forgive you; for Allah is All-Forgiving, Most Merciful.”' },
+
+{ "type": 'arabic', "text": 'اللَّهُمَّ صَلِّ وَسَلَّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْبَشِيرِ الْمُبَشِّرِ لِلصَّالِحِينَ بِمَا قَالَ اللَّهُ الْعَظِيمُ: ﴿أَنَّ الْأَرْضَ يَرِثُهَا عِبَادِيَ الصَّالِحُونَ﴾ ﴿أُولَٰئِكَ هُمُ الْوَارِثُونَ﴾ ﴿الَّذِينَ يَرِثُونَ الْفِرْدَوْسَ هُمْ فِيهَا خَالِدُونَ﴾.' },
+{ "type": 'text', "text": 'O Allah, send mercy and peace upon our master Muhammad, the bearer of good news, who conveys Your joyous tidings to the righteous: “My righteous servants shall inherit the earth;” “these are the ones who will be awarded Paradise as their own. They will be there forever.”' }
             ]
         }
     ]
@@ -16173,6 +16191,75 @@ content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
 
     { type: 'arabic', text: '20. ٱلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، وَٱلصَّلَّاةُ وَٱلسَّلَامُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ' },
    { "type": "text", "text": "20. Closing praise: All praise is due to Allah, Lord of the worlds, and may peace and blessings be upon our master Muhammad, and upon his family and all his companions." }
+       ]
+      },
+      {
+         "variant": "default",
+    "content": [
+      { "type": "section-title", "text": "Prayers for Forgiveness By Imam Hassan Al-Basri" },
+      { "type": "arabic", "text": "1. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ قَوِيَ عَلَيْهِ بَدَنِي بِعَافِيَتِكَ، وَنَالَتْهُ قُدْرَتِي بِفَضْلِ نِعْمَتِكَ، وَانْبَسَطَتْ إِلَيْهِ يَدِي بِسَعَةِ رِزْقِكَ، وَاحْتَجَبْتُ عَنِ النَّاسِ بِسِتْرِكَ، وَاتَّكَلْتُ فِيهِ عِنْدَ خَوْفِي مِنْكَ عَلَىٰ أَمَانِكَ، وَوَثِقْتُ مِنْ سَطْوَتِكَ عَلَيَّ بِحِلْمِكَ، وَعَوَّلْتُ فِيهِ عَلَىٰ كَرَمِ وَجْهِكَ وَعَفْوِكَ." },
+      { "type": "text", "style": "dua-style", "text": "1. O Allah, I seek Your forgiveness for every sin that my body, empowered by the good health that You had granted, was able to commit; every sin that came within the reaches of my power only due to the grace of Your bounties; every sin to which my hand, nourished by Your ample sustenance, extended. And while sinning, I hid myself behind Your veil from the people; and when fearing You, while engrossed in my sin, I relied on Your assurance of safety and forgiveness; and I took refuge in You, with Your clemency, not to smite me, and I depended on You, with Your noble countenance and pardon, to forgive me." },
+      { "type": "arabic", "text": "2. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ يَدْعُو إِلَىٰ غَضَبِكَ، أَوْ يُدْنِي مِنْ سَخَطِكَ، أَوْ يُمِيلُ بِي إِلَىٰ مَا نَهَيْتَنِي عَنْهُ، أَوْ يُبَاعِدُنِي عَمَّا دَعَوْتَنِي إِلَيْهِ." },
+      { "type": "text", "style": "dua-style", "text": "2. O Allah, I seek Your forgiveness for every sin that invites me to Your anger, or draws me near Your displeasure, or makes me inclined to that which You have prohibited, or distances me from [the bliss and success] to which You have invited me." },
+      { "type": "arabic", "text": "3. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ أَسْلَمْتُ إِلَيْهِ أَحَدًا مِنْ خَلْقِكَ بِغَوَايَتِي، أَوْ خَدَعْتُهُ بِحِيلَتِي، فَعَلَّمْتُهُ مِنْهُ مَا جَهِلَ، وَزَيَّنْتُ لَهُ مَا قَدْ عَلِمَ، وَلَقَيْتُكَ غَدًا بِأَوْزَارِي وَأَوْزَارِي وَأَوْزَارٍ مَعَ أَوْزَارِي." },
+      { "type": "text", "style": "dua-style", "text": "3. O Allah, I seek Your forgiveness for every sin into which I, in my deviance, lured one of Your creation, or which I, with my cunning, deceived him into doing—hence teaching him such wicked deeds that he was previously unaware of, and making attractive to him those that he was aware of. Now I am to meet You tomorrow, with my burden of sins along with the burdens of others' sins." },
+      { "type": "arabic", "text": "4. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ يَدْعُو إِلَىٰ الْغَيِّ، وَيُضِلُّ عَنِ الرُّشْدِ، وَيُقِلُّ الْوَفْرَ، وَيَمْحَقُ التَّالِدَةَ، وَيُخْبِلُ الذِّكْرَ، وَيُقِلُّ الْعَدَدَ." },
+      { "type": "text", "style": "dua-style", "text": "4. O Allah, I seek Your forgiveness for every sin that calls to deviance; for every sin that leads from the path of guidance; for every sin that diminishes abundant wealth; for every sin that obliterates long-possessed property and inherited family wealth; for every sin that deprives me of honorable repute; and for every sin that drives away my friends and family." },
+      { "type": "arabic", "text": "5. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ أَتْعَبْتُ فِيهِ جَوَارِحِي فِي لَيْلِي وَنَهَارِي، وَقَدِ اسْتَتَرْتُ حَيَاءً مِنْ عِبَادِكَ بِسِتْرِكَ، وَلَا سِتْرَ إِلَّا مَا سَتَرْتَنِي بِهِ." },
+      { "type": "text", "style": "dua-style", "text": "5. O Allah, I seek Your forgiveness for every sin in which I exhausted my limbs, by day and by night—all the while keeping myself hidden, out of shame from Your servants, with Your covering over me; and indeed, there is nothing to cover my sins but what You cover me with." },
+      { "type": "arabic", "text": "6. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ قَصَدَنِي بِهِ أَعْدَائِي لِهَتْكِي، فَصَرَفْتَ كَيْدَهُمْ عَنِّي، وَلَمْ تُعِنْهُمْ عَلَىٰ فَضِيحَتِي كَأَنِّي لَكَ مُطِيعٌ، وَنَصَرْتَنِي حَتَّىٰ كَأَنِّي لَكَ وَلِيٌّ، وَإِلَىٰ مَتَىٰ يَا رَبِّ أَعْصِي فَتُمْهِلُنِي؟ وَطَالَمَا عَصَيْتُكَ فَلَمْ تُؤَاخِذْنِي، وَسَأَلْتُكَ عَلَىٰ سُوءِ فِعْلِي فَأَعْطَيْتَنِي، فَأَيُّ شُكْرٍ يَقُومُ عِنْدَكَ بِنِعْمَةٍ مِنْ نِعَمِكَ عَلَيَّ؟" },
+      { "type": "text", "style": "dua-style", "text": "6. O Allah, I seek Your forgiveness for every sin with which my enemies intended to disgrace me, but You turned their plotting away from me and did not assist them in disgracing me, as though I were Your obedient servant; and You sustained me until it seemed as though I were Your friend. Until when, O my Lord, will I disobey You and You continue giving me respite? Long indeed have I disobeyed You and You have not punished me; and long indeed have I, with all my evil deeds, beseeched You and You have granted me my requests. What meager thanks of mine can measure up, in Your sight, to even one of Your many blessings upon me?" },
+      { "type": "arabic", "text": "8. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ سَهِرْتُ فِيهِ لَيْلَتِي فِي اللَّذَّتِي لِإِتْيَانِهِ، وَالتَّخَلُّصِ إِلَىٰ وُجُودِهِ وَتَحْصِيلِهِ، حَتَّىٰ إِذَا أَصْبَحْتُ حَضَرْتُ إِلَيْكَ بِحِلْيَةِ الصَّالِحِينَ، وَأَنَا مُضْمِرٌ خِلَافَ رِضَاكَ، يَا رَبَّ الْعَالَمِينَ." },
+      { "type": "text", "style": "dua-style", "text": "8. O Allah, I seek Your forgiveness for every sin for which I spent the night in sleeplessness, savoring the pleasure of soon committing it and waiting in eager anticipation of its realization and fulfillment—until when morning came, I presented myself before You in the guise of the pious, while concealing in my heart what was against Your pleasure. [Forgive me,] O Lord of the Worlds!" },
+      { "type": "arabic", "text": "9. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ ظَلَمْتُ بِسَبَبِهِ وَلِيًّا مِنْ أَوْلِيَائِكَ، وَنَصَرْتُ بِهِ عَدُوًّا مِنْ أَعْدَائِكَ، أَوْ تَكَلَّمْتُ فِيهِ لِغَيْرِ مَحَبَّتِكَ، أَوْ نَهَضْتُ فِيهِ إِلَىٰ غَيْرِ طَاعَتِكَ، أَوْ ذَهَبْتُ فِيهِ إِلَىٰ غَيْرِ أَمْرِكَ." },
+      { "type": "text", "style": "dua-style", "text": "9. O Allah, I seek Your forgiveness for every sin by which I wronged one of Your friends and assisted one of Your enemies; or of which I spoke favorably against Your liking, or upon which I rode away from Your obedience; or to which I advanced in open defiance of Your command." },
+      { "type": "arabic", "text": "10. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ يُورِثُ الضَّغْنَاءَ، وَيُحِلُّ الْبَلَاءَ، وَيُشْمِتُ الْأَعْدَاءَ، وَيَكْشِفُ الْغِطَاءَ، وَيَحْبِسُ الْقَطْرَ مِنَ السَّمَاءِ." },
+      { "type": "text", "style": "dua-style", "text": "10. O Allah, I seek Your forgiveness for every sin that breeds rancor, for every sin that causes calamity to strike, for every sin that makes my enemies to rejoice at my misfortune, for every sin that removes the coverings [from my faults and the faults of others], and for every sin that withholds rain from the heavens." },
+      { "type": "arabic", "text": "11. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ أَلْهَانِي عَمَّا هَدَيْتَنِي إِلَيْهِ، وَأَمَرْتَنِي بِهِ أَوْ نَهَيْتَنِي عَنْهُ، أَوْ دَلَلْتَنِي عَلَيْهِ مِمَّا فِيهِ الْحَظُّ لِي، وَالْبُلُوغُ إِلَىٰ رِضَاكَ وَاتِّبَاعِ مَحَبَّتِكَ وَإِيثَارِ الْقُرْبِ مِنْكَ." },
+      { "type": "text", "style": "dua-style", "text": "11. O Allah, I seek Your forgiveness for every sin that diverted me from the way to which You had guided me; or from doing what You had commanded me and avoiding what You had forbidden me; or from doing anything to which You had directed me, in which there would have been for me prosperity and attainment of Your pleasure, Your love, and Your nearness." },
+      { "type": "arabic", "text": "12. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ نَسِيتُهُ فَأَحْصَيْتَهُ، وَتَهَاوَنْتُ بِهِ فَأَثْبَتَّهُ، وَجَاهَرْتُكَ بِهِ فَسَتَرْتَهُ عَلَيَّ، وَلَوْ تُبْتُ إِلَيْكَ مِنْهُ لَغَفَرْتَهُ." },
+      { "type": "text", "style": "dua-style", "text": "12. O Allah, I seek Your forgiveness for every sin that I forgot but You recorded; that I made little of but You noted; that I openly committed but You quietly concealed—and if I were to repent to You for it, You would surely forgive it." },
+      { "type": "arabic", "text": "13. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ تَوَقَّعْتُ مِنْكَ قَبْلَ انْقِضَائِهِ تَعْجِيلَ الْعُقُوبَةِ، فَأَمْهَلْتَنِي وَأَسْبَلْتَ عَلَيَّ سِتْرًا، فَلَمْ آلُ فِي هَتْكِهِ عَنِّي جُهْدًا." },
+      { "type": "text", "style": "dua-style", "text": "13. O Allah, I seek Your forgiveness for every sin for which, even before its completion, I anticipated Your swift punishment, but You granted me respite and draped over me a covering, yet I spared no effort in trying to tear it away from myself." },
+      { "type": "arabic", "text": "14. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ نَهَيْتَنِي عَنْهُ فَخَالَفْتُكَ إِلَيْهِ، وَحَذَّرْتَنِي إِيَّاهُ فَأَقَمْتُ عَلَيْهِ، وَقَبَّحْتُهُ عَلَيَّ فَزَيَّنْتُهُ لِي نَفْسِي." },
+      { "type": "text", "style": "dua-style", "text": "14. O Allah, I seek Your forgiveness for every sin that You prohibited to me but I opposed You by committing; and every sin that You forewarned me of but I remained firm in committing; and every sin that You deemed abominable but my lower self-made attractive to me." },
+      { "type": "arabic", "text": "15. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ يَصْرِفُ عَنِّي رَحْمَتَكَ، أَوْ يُحِلُّ بِي نِقْمَتَكَ، أَوْ يُحْرِمُنِي كَرَامَتَكَ، أَوْ يُزِيلُ عَنِّي نِعْمَتَكَ." },
+      { "type": "text", "style": "dua-style", "text": "15. O Allah, I seek Your forgiveness for every sin that turns away from me Your mercy or causes Your vengeance to befall me, or deprives me of Your generosity, or takes away from me Your blessings." },
+      { "type": "arabic", "text": "16. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ عَيَّرْتُ بِهِ أَحَدًا مِنْ خَلْقِكَ، أَوْ قَبَّحْتُ مِنْ فِعْلِ أَحَدٍ مِنْ بَرِيَّتِكَ، ثُمَّ تَقَحَّمْتُ عَلَيْهِ وَانْتَهَكْتُهُ جَرَاءَةً مِنِّي عَلَيْكَ." },
+      { "type": "text", "style": "dua-style", "text": "16. O Allah, I seek Your forgiveness for every sin that I reproached or condemned one of Your creation for committing, but then myself plunged into and brazenly committed before You." },
+      { "type": "arabic", "text": "17. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ تُبْتُ إِلَيْكَ مِنْهُ وَأَقْدَمْتُ عَلَىٰ فِعْلِهِ، فَاسْتَحْيَيْتُ مِنْكَ وَأَنَا عَلَيْهِ، وَرَهِبْتُكَ وَأَنَا فِيهِ، ثُمَّ اسْتَقْلَلْتُكَ مِنْهُ وَعُدْتُ إِلَيْهِ." },
+      { "type": "text", "style": "dua-style", "text": "17. O Allah, I seek Your forgiveness for every sin for which I repented to You and then embarked on committing again; but then I felt ashamed before You and fearful of You while engrossed in it, so I invoked Your forgiveness for it once more, but [in my weakness] returned to it yet again." },
+      { "type": "arabic", "text": "18. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ تَوَرَّكَ عَلَيَّ وَوَجَبَ عَلَيَّ فِي شَيْءٍ فَعَلْتُهُ، بِسَبَبِ عَهْدٍ عَاهَدْتُكَ عَلَيْهِ، أَوْ عَقْدٍ عَقَدْتُهُ لَكَ، أَوْ ذِمَّةٍ آلَيْتُ بِهَا مِنْ أَجْلِكَ لِأَحَدٍ مِنْ خَلْقِكَ، ثُمَّ نَقَضْتُ ذَلِكَ مِنْ غَيْرِ ضَرُورَةٍ لَزِمَتْنِي فِيهِ، بَلِ اسْتَزَلَّنِي عَنِ الْوَفَاءِ بِهِ الْبَطَرُ، وَأَسْخَطَنِي عَنْ رِعَايَتِهِ الْأَشَرُ." },
+      { "type": "text", "style": "dua-style", "text": "18. O Allah, I seek Your forgiveness for every sin that overtook me and became unavoidable for me when I took a covenant with You, or made a promise to You, or took an oath by You in regard to a responsibility to one of Your creation, and then I broke it without any excuse; it was in fact my arrogance that made me step down from fulfilling it and my insolence that made me reject observing it." },
+      { "type": "arabic", "text": "19. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ لَحِقَنِي بِسَبَبِ نِعْمَةٍ أَنْعَمْتَ بِهَا عَلَيَّ، فَتَقَوَّيْتُ بِهَا عَلَىٰ مَعَاصِيكَ، وَخَالَفْتُ فِيهَا أَمْرَكَ، وَأَقْدَمْتُ بِهَا عَلَىٰ وَعِيدِكَ." },
+      { "type": "text", "style": "dua-style", "text": "19. O Allah, I seek Your forgiveness for every sin that overcame me [when I abused] a bounty You had bestowed upon me, using it to embolden myself in disobeying You, opposing Your command, and insolently advancing toward sin despite Your warnings [of punishment]." },
+      { "type": "arabic", "text": "20. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ قَدَّمْتُ فِيهِ شَهْوَتِي عَلَىٰ طَاعَتِكَ، وَآثَرْتُ فِيهِ مَحَبَّتِي عَلَىٰ أَمْرِكَ، فَأَرْضَيْتُ نَفْسِي بِغَضَبِكَ، وَعَرَّضْتُهَا لِسَخَطِكَ، إِذْ نَهَيْتَنِي وَقَدَّمْتَ إِلَيَّ فِيهِ إِذَارَكَ وَتَحَجَّجْتَ عَلَيَّ فِيهِ بِوَعِيدِكَ، وَأَسْتَغْفِرُكَ اَللَّهُمَّ وَأَتُوبُ إِلَيْكَ." },
+      { "type": "text", "style": "dua-style", "text": "20. O Allah, I seek Your forgiveness for every sin in which I gave preference to my base desire over Your obedience and my passion over Your command—thus I contented myself with Your wrath and subjected myself to Your displeasure, though You had forbidden me, presented Your admonition to me, and established the proof of it to me through Your warnings [of punishment in Your revelations]. I seek Your forgiveness, O Allah, and repent to You." },
+      { "type": "arabic", "text": "21. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ عَلِمْتُهُ مِنْ نَفْسِي فَأَنْسَيْتُهُ أَوْ ذَكَرْتُهُ، أَوْ تَعَمَّدْتُهُ أَوْ أَخْطَأْتُ فِيهِ، وَهُوَ مِمَّا لَا أَشُكُّ أَنَّكَ مُسَائِلِي عَنْهُ، وَأَنَّ نَفْسِي بِهِ مُرْتَهَنَةٌ لَدَيْكَ، وَإِنْ كُنْتُ قَدْ نَسِيتُهُ وَغَفَلْتُ عَنْهُ نَفْسِي." },
+      { "type": "text", "style": "dua-style", "text": "21. O Allah, I seek Your forgiveness for every sin that I knew myself to have committed, then forgot about or remembered, or that I had committed intentionally or unintentionally; and I have no doubt that it is a sin about which You will question me and for which my soul is held captive to You, even if I have become forgetful and heedless of it." },
+      { "type": "arabic", "text": "22. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ وَاجَهْتُكَ فِيهِ وَقَدْ أَيْقَنْتُ أَنَّكَ تَرَانِي عَلَيْهِ، فَنَوَيْتُ أَنْ أَتُوبَ إِلَيْكَ مِنْهُ، وَأُنْسِيَتُ أَنْ أَسْتَغْفِرَكَ مِنْهُ، أَنْسَانِيْهِ الشَّيْطَانُ." },
+      { "type": "text", "style": "dua-style", "text": "22. O Allah, I seek Your forgiveness for every sin that I committed in front of You knowing full well that You were watching me. I intended to turn to You in repentance for it, but I was made to forget to invoke Your forgiveness-it was Satan that made me forget." },
+      { "type": "arabic", "text": "23. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ دَخَلْتُ فِيهِ بِحُسْنِ ظَنِّي فِيكَ أَنَّكَ لَا تُعَذِّبُنِي عَلَيْهِ، وَرَجَوْتُكَ لِمَغْفِرَتِهِ فَأَقْدَمْتُ عَلَيْهِ، وَقَدْ عَوَّلْتُ نَفْسِي عَلَىٰ مَعْرِفَتِي بِكَرَمِكَ أَنْ لَا تَفْضَحَنِي بِهِ بَعْدَ إِذْ سَتَرْتَهُ عَلَيَّ." },
+      { "type": "text", "style": "dua-style", "text": "23. O Allah, I seek Your forgiveness for every sin upon which I embarked, thinking well of You—that You would forgive me for it and not punish me. I thus audaciously continued in committing it while relying, with my knowledge of Your generosity on You not to disgrace me after having concealed it for me." },
+      { "type": "arabic", "text": "24. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ اسْتَوْجَبْتُ بِهِ مِنْكَ رَدَّ الدُّعَاءِ، وَخَيْبَةَ الطَّمَعِ، وَانْقِطَاعَ الرَّجَاءِ." },
+      { "type": "text", "style": "dua-style", "text": "24. O Allah, I seek Your forgiveness for every sin by which I deserved rejection of my prayers, and refusal of their acceptance, and failure in my hopes being fulfilled, and severance of hope in Your mercy." },
+      { "type": "arabic", "text": "25. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ يُورِثُ الْأَسْقَامَ وَالضَّنَىٰ، وَيُوجِبُ النِّقَمَ وَالْبَلَاءَ، وَيَكُونُ يَوْمَ الْقِيَامَةِ حَسْرَةً وَنَدَامَةً." },
+      { "type": "text", "style": "dua-style", "text": "25. O Allah, I seek Your forgiveness for every sin that brings about illnesses and emaciating diseases, and warrants punishments and misery and will be a cause of grief and remorse on judgment Day." },
+      { "type": "arabic", "text": "26. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ يَعْقُبُ الْحَسْرَةَ، وَيُورِثُ النَّدَامَةَ، وَيَحْبِسُ الرِّزْقَ، وَيَرُدُّ الدُّعَاءَ." },
+      { "type": "text", "style": "dua-style", "text": "26. O Allah, I seek Your forgiveness for every sin that leaves grief on its heel, that causes remorse, that holds back sustenance, and that prevents acceptance of [my] prayers." },
+      { "type": "arabic", "text": "27. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ مَدَحْتُهُ بِلِسَانِي، أَوْ أَضْمَرْتُهُ بِجَنَانِي، أَوْ هَشَّتْ إِلَيْهِ نَفْسِي، أَوْ أَثْبَتُّهُ بِلِسَانِي، أَوْ أَتَيْتُهُ بِفِعَالِي، أَوْ كَتَبْتُهُ بِيَدِي، أَوْ ارْتَكَبْتُهُ أَوْ أَرْكَبْتُ فِيهِ عِبَادَكَ." },
+      { "type": "text", "style": "dua-style", "text": "27. O Allah, I seek Your forgiveness for every sin that I praised with my tongue, or that I resolved upon in my heart, or that my soul took pleasure in, or that my tongue endorsed, or that I effected with my actions, or that I wrote with my hand, or that I committed in any way or caused one of Your servants to commit." },
+      { "type": "arabic", "text": "28. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ خَلَوْتُ بِهِ فِي لَيْلِي وَنَهَارِي، وَأَرْخَيْتُ فِيهِ عَلَيَّ السِّتَارَ حَيْثُ لَا يَرَانِي فِيهِ إِلَّا أَنْتَ يَا جَبَّارُ، فَارْتَابَتْ نَفْسِي فِيهِ، وَتَحَيَّرْتُ بَيْنَ تَرْكِي لَهُ بِخَوْفِكَ وَانْتِهَاكِي لَهُ بِحُسْنِ الظَّنِّ فِيكَ، فَسَوَّلَتْ لِي نَفْسِي الْإِقْدَامَ عَلَيْهِ، وَأَنَا عَارِفٌ بِمَعْصِيَتِي فِيهِ لَكَ." },
+      { "type": "text", "style": "dua-style", "text": "28. O Allah, I seek Your forgiveness for every sin that I committed in solitude during my night and my day yet You lowered over me a covering so that none besides You—O All Compelling One—could see me engaged in it. My soul thus fell into confusion, and I wavered between abandoning it out of fear of You and committing it out of good hopes in Your mercy; but my lower self-adorned it for me such that I boldly committed it, though being aware that, in doing so, I was disobeying You." },
+      { "type": "arabic", "text": "29. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ اسْتَقْلَلْتُهُ فَاسْتَعْظَمْتُهُ، وَاسْتَصْغَرْتُهُ فَاسْتَكْبَرْتُهُ، وَوَرَّطَنِي فِيهِ جَهْلِي بِهِ." },
+      { "type": "text", "style": "dua-style", "text": "29. O Allah, I seek Your forgiveness for every sin that I took to be petty but You took to be grave, that I deemed to be small but You deemed to be great, and in which my own ignorance embroiled me." },
+      { "type": "arabic", "text": "30. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ أَضْلَلْتُ بِهِ أَحَدًا مِنْ خَلْقِكَ، أَوْ أَسَأْتُ بِهِ إِلَىٰ أَحَدٍ مِنْ بَرِيَّتِكَ، أَوْ زَيَّنْتُهُ لِي نَفْسِي، أَوْ أَشَرْتُ بِهِ إِلَىٰ غَيْرِي، أَوْ دَلَلْتُ عَلَيْهِ سِوَايَ، وَأَصْرَرْتُ عَلَيْهِ بِعَمْدِي، أَوْ أَقَمْتُ عَلَيْهِ بِجَهْلِي." },
+      { "type": "text", "style": "dua-style", "text": "30. O Allah, I seek Your forgiveness for every sin by which I misguided one of Your creation, or through which I mistreated one of them, or which my lower self-made seemingly attractive to me, or which I pointed out to another person, or to which I steered someone besides myself or in which I intentionally persisted, or to which I remained stubbornly attached out of my foolishness." },
+      { "type": "arabic", "text": "31. اَللَّهُمَّ إِنِّي أَسْتَغْفِرُكَ لِكُلِّ ذَنْبٍ خُنْتُ بِهِ أَمَانَتِي، أَوْ أَحْسَنْتُ لِي نَفْسِي فِعْلَهُ، أَوْ أَخْطَأْتُ بِهِ عَلَىٰ بَدَنِي، أَوْ قَدَّمْتُ فِيهِ عَلَيْكَ شَهْوَتِي، أَوْ آثَرْتُ فِيهِ لِذَّتِي، أَوْ سَعَيْتُ فِيهِ لِغَيْرِي، أَوْ اسْتَغْوَيْتُ إِلَيْهِ مَنْ" },
+      { "type": "text", "style": "dua-style", "text": "31. O Allah, I seek Your forgiveness for every sin that I betrayed my trust with, or that my soul made look good for me to do, or by which I harmed my body, or in which I gave preference to my desire over You, or in which I preferred my pleasure, or in which I strove for others, or led others to it." },
+      { "type": "arabic", "text": "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، وَٱلصَّلَّاةُ وَٱلسَّلَامُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ" },
+      { "type": "text", "text": " All praise is due to Allah, Lord of the worlds, and may peace and blessings be upon our master Muhammad, and upon his family and all his companions." }
+
        ]
       },
       {
@@ -16969,14 +17056,14 @@ content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
       variant: 'default',
       content: [
         { type: 'section-title', text: '67. Salawat (The Ibrahimic Prayer)' },
-        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ. وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ. إِنَّكَ حَمِيدٌ مَجِيدٌ.' },
+        { type: 'arabic', text: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ، إِنَّكَ حَمِيدٌ مَجِيدٌ.' },
         { type: 'text', text: 'O Allah, send Your blessings upon Muhammad and the family of Muhammad, as You sent blessings upon the family of Ibrahim. And bless Muhammad and the family of Muhammad, as You blessed the family of Ibrahim among all creation. Indeed, You are Praiseworthy, Glorious.' }
       ]
     },
     {
       variant: 'default',
       content: [
-        { type: 'section-title', text: '68. Dua for Intercession for Believers' },
+         { type: 'section-title', text: '68. Dua for Intercession for Believers' },
         { type: 'arabic', text: 'اللَّهُمَّ فَأَيُّمَا مُؤْمِنٍ سَبَبْتُهُ فَاجْعَلْ ذَلِكَ لَهُ قُرْبَةً إِلَيْكَ يَوْمَ الْقِيَامَةِ.' },
         { type: 'text', text: '“O my Lord! If I have ever insulted or said anything that grieved any believer, then make that a means for him to draw closer to You on the Day of Resurrection.” (Buhârî, Deavât, 34)' }
       ]
@@ -16987,7 +17074,7 @@ content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
       variant: 'default',
       content: [
         { type: 'section-title', text: '69. Asking for all good & protection from all evil' },
-        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ' },
+        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ.' },
         { type: 'text', text: 'O Allah, I ask You for all good — immediate and delayed, what I know and what I do not know. And I seek refuge with You from all evil — immediate and delayed, what I know and what I do not know.' }
       ]
     },
@@ -16995,7 +17082,7 @@ content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
       variant: 'default',
       content: [
         { type: 'section-title', text: '70. Dua for Good and Protection' },
-        { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ عَبْدُكَ وَنَبِيُّكَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا عَاذَ بِهِ عَبْدُكَ وَنَبِيُّكَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَسْأَلُكَ أَنْ تَجْعَلَ كُلَّ قَضَاءٍ قَضَيْت' },
+         { type: 'arabic', text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ، عَاجِلِهِ وَآجِلِهِ، مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ. اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ عَبْدُكَ وَنَبِيُّكَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا عَاذَ بِهِ عَبْدُكَ وَنَبِيُّكَ. اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَسْأَلُكَ أَنْ تَجْعَلَ كُلَّ قَضَاءٍ قَضَيْتَهُ لِي خَيْرًا.' },
         { type: 'text', text: 'O Allah, I ask You for all good, the immediate and the delayed, what I know of it and what I do not know. And I seek refuge with You from all evil, the immediate and the delayed, what I know of it and what I do not know. O Allah, I ask You for the good that Your slave and Prophet asked You for, and I seek refuge with You from the evil that Your slave and Prophet sought refuge from. O Allah, I ask You for Paradise and whatever brings one closer to it of word or deed, and I seek refuge with You from the Fire and whatever brings one closer to it of word or deed. And I ask You to make every decree You have decreed for me good.' }
       ]
     },
@@ -17124,80 +17211,73 @@ content: [ { type: 'section-title', text: 'AL WAQIA`H (THE EVENT)' },
     }, // This closes the 'A prayer to be recited when ill' card
     // --- NEW DU'A SECTIONS START HERE ---
     {
-        variant: 'image', // Assuming image variant for these Du'as
-        image: 'Dua_of_Gratitude.jpg', // Placeholder, replace with actual image path
-        content: [
-            { type: 'section-title', text: "87. Du'a of Gratitude" }, // Numbered
-            { type: 'text', text: 'of Prophet Sulayman عليه السلام' },
-            { type: 'arabic', text: 'رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ' },
-            { type: 'text', text: 'Rabbi awziʿnī an ashkura niʿmataka-llatī\nanʿamta ʿalayya wa ʿalā wālidayya' },
-            { type: 'text', text: 'My Lord! Inspire me to give thanks for Your blessing\nwith which You have blessed me and my parents' },
-            { type: 'text', text: '[Al Naml : 19]', style: 'text-xs opacity-60 mt-1' }
+       variant: 'default',
+      content: [
+        { type: 'section-title', text: "87. Du'a of Gratitude" },
+        { type: 'text', text: 'of Prophet Sulayman عليه السلام' },
+        { type: 'arabic', text: 'رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ' },
+        { type: 'text', text: 'Rabbi awziʿnī an ashkura niʿmataka-llatī anʿamta ʿalayya wa ʿalā wālidayya' },
+        { type: 'text', text: 'My Lord! Inspire me to give thanks for Your blessing with which You have blessed me and my parents' },
+        { type: 'text', text: '[Al Naml : 19]', style: 'text-xs opacity-60 mt-1' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: "88. Du'a for Acceptance" },
+        { type: 'text', text: 'of Prophet Ibrahim and Prophet Ismael عليه السلام' },
+        { type: 'arabic', text: 'رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ' },
+        { type: 'text', text: 'Rabbanā taqabbal minnā innaka antas-samīʿul ʿalīm' },
+        { type: 'text', text: 'Our Lord! Accept (this service) from us. Verily! You are the All-Hearer, the All-Knower' },
+        { type: 'text', text: '[Baqarah : 127]', style: 'text-xs opacity-60 mt-1' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: "89. Du'a in Sadness" },
+        { type: 'text', text: 'of Prophet Yaqub عليه السلام' },
+        { type: 'arabic', text: 'إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ وَأَعْلَمُ مِنَ اللَّهِ مَا لَا تَعْلَمُونَ' },
+        { type: 'text', text: 'Innamā ashkū baththī wa ḥuznī ilallāhi wa aʿlamu minallāhi mā lā taʿlamūn' },
+        { type: 'text', text: 'I present my case of my anguish and grief only to Allah. I know from Allah what you do not know.' },
+        { type: 'text', text: '[Yusuf : 86]', style: 'text-xs opacity-60 mt-1' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: "90. Du'a for Forgiveness" },
+        { type: 'text', text: 'of Prophet Ibrāhīm عليه السلام' },
+        { type: 'arabic', text: 'رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ' },
+        { type: 'text', text: 'Rabbana-ghfir lī wa li wālidayya wa lil mu’minīna yawma yaqūmul ḥisāb' },
+        { type: 'text', text: 'Our Lord! Forgive me and my parents, and all the faithful, on the day when the reckoning is held.' },
+        { type: 'text', text: '[Ibrahim : 41]', style: 'text-xs opacity-60 mt-1' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: "91. Du'a for Parents" },
+        { type: 'text', text: 'of Prophet Ibrāhīm عليه السلام' },
+        { type: 'arabic', text: 'رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا' },
+        { type: 'text', text: 'Rabbi-rḥamhumā kamā Rabbayānī ṣaghīrā' },
+        { type: 'text', text: 'My Lord! Bestow on them Your Mercy as they did bring me up when I was small.' },
+        { type: 'text', text: '[Al-Isra : 24]', style: 'text-xs opacity-60 mt-1' }
+      ]
+    },
+    {
+      variant: 'default',
+      content: [
+        { type: 'section-title', text: "92. Du'a of Hope" },
+        { type: 'text', text: 'of Prophet Zakariya عليه السلام' },
+        { type: 'arabic', text: 'وَلَمْ أَكُنْ بِدُعَائِكَ رَبِّ شَقِيًّا' },
+        { type: 'text', text: 'Wa lam akum bi duʿāʾika rabbi shaqiyya' },
+        { type: 'text', text: 'Never have I, my Lord, been disappointed in supplicating You!' },
+        { type: 'text', text: '[Maryam : 4]', style: 'text-xs opacity-60 mt-1' }
         ]
     },
     {
-        variant: 'image',
-        image: 'Dua_for_Acceptance.jpg', // Placeholder, replace with actual image path
-        content: [
-            { type: 'section-title', text: "88. Du'a for Acceptance" }, // Numbered
-            { type: 'text', text: 'of Prophet Ibrahim and Prophet Ismael عليه السلام' },
-            { type: 'arabic', text: 'رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ' },
-            { type: 'text', text: 'Rabbanā taqabbal minnā innaka\nantas-samīʿul ʿalīm' },
-            { type: 'text', text: 'Our Lord! Accept (this service) from us.\nVerily! You are the All-Hearer, the All-Knower' },
-            { type: 'text', text: '[Baqarah : 127]', style: 'text-xs opacity-60 mt-1' }
-        ]
-    },
-    {
-        variant: 'image',
-        image: 'Dua_in_Sadness.jpg', // Placeholder, replace with actual image path
-        content: [
-            { type: 'section-title', text: "89. Du'a in Sadness" }, // Numbered
-            { type: 'text', text: 'of Prophet Yaqub عليه السلام' },
-            { type: 'arabic', text: 'إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ\nوَأَعْلَمُ مِنَ اللَّهِ مَا لَا تَعْلَمُونَ' },
-            { type: 'text', text: 'Innamā ashkū baththī wa ḥuznī ilallāhi\nwa aʿlamu minallāhi mā lā taʿlamūn' },
-            { type: 'text', text: 'I present my case of my anguish and grief only to\nAllah. I know from Allah what you do not know.' },
-            { type: 'text', text: '[Yusuf : 86]', style: 'text-xs opacity-60 mt-1' }
-        ]
-    },
-    {
-        variant: 'image',
-        image: 'Dua_for_Forgiveness.jpg', // Placeholder, replace with actual image path
-        content: [
-            { type: 'section-title', text: "90. Du'a for Forgiveness" }, // Numbered
-            { type: 'text', text: 'of Prophet Ibrāhīm عليه السلام' },
-            { type: 'arabic', text: 'رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ\nوَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ' },
-            { type: 'text', text: 'Rabbana-ghfir lī wa li wālidayya\nwa lil mu’minīna yawma yaqūmul ḥisāb' },
-            { type: 'text', text: 'Our Lord! Forgive me and my parents, and all\nthe faithful, on the day when the reckoning is held.' },
-            { type: 'text', text: '[Ibrahim : 41]', style: 'text-xs opacity-60 mt-1' }
-        ]
-    },
-    {
-        variant: 'image',
-        image: 'Dua_for_Parents.jpg', // Placeholder, replace with actual image path
-        content: [
-            { type: 'section-title', text: "91. Du'a for Parents" }, // Numbered
-            { type: 'text', text: 'of Prophet Ibrāhīm عليه السلام' },
-            { type: 'arabic', text: 'رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا' },
-            { type: 'text', text: 'Rabbi-rḥamhumā kamā Rabbayānī ṣaghīrā' },
-            { type: 'text', text: 'My Lord! Bestow on them Your Mercy as\nthey did bring me up when I was small.' },
-            { type: 'text', text: '[Al-Isra : 24]', style: 'text-xs opacity-60 mt-1' }
-        ]
-    },
-    {
-        variant: 'image',
-        image: 'Dua_of_Hope.jpg', // Placeholder, replace with actual image path
-        content: [
-            { type: 'section-title', text: "92. Du'a of Hope" }, // Numbered
-            { type: 'text', text: 'of Prophet Zakariya عليه السلام' },
-            { type: 'arabic', text: 'وَلَمْ أَكُنْ بِدُعَائِكَ رَبِّ شَقِيًّا' },
-            { type: 'text', text: 'Wa lam akum bi duʿāʾika rabbi shaqiyya' },
-            { type: 'text', text: 'Never have I, my Lord, been disappointed\nin supplicating You!' },
-            { type: 'text', text: '[Maryam : 4]', style: 'text-xs opacity-60 mt-1' }
-        ]
-    },
-    {
-        variant: 'image',
-        image: 'Dua_for_Guidance.jpg', // Placeholder, replace with actual image path
+        variant: 'default',
         content: [
             { type: 'section-title', text: "93. Du'a for Guidance" }, // Numbered
             { type: 'text', text: 'of Prophet Ibrahim and Prophet Ismael عليه السلام' },
@@ -19396,3 +19476,4 @@ root.render(<App />);
     </script>
 </body>
 </html>
+
